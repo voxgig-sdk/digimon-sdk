@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "API Support"
+        url: "https://digi-api.com"
+      }
+      description: "Free Digimon API using data from official and fan-based sources like Wikimon.net. Not affiliated with Bandai."
+      license: {
+        name: "Data owned by Bandai"
+        url: "https://digi-api.com"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://digi-api.com/api/v1"
+        }
+      ]
+      title: "Digimon API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

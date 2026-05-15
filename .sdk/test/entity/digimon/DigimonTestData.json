@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "digimon": {
+      "DIGIMON00": {
+        "attribute": [],
+        "description": [],
+        "field": [],
+        "href": "s8f",
+        "id": "DIGIMON00",
+        "image": [],
+        "level": [],
+        "name": "s93",
+        "next_evolution": [],
+        "prior_evolution": [],
+        "release_date": "s96",
+        "skill": [],
+        "type": [],
+        "x_antibody": false
+      },
+      "DIGIMON01": {
+        "attribute": [],
+        "description": [],
+        "field": [],
+        "href": "s11b",
+        "id": "DIGIMON01",
+        "image": [],
+        "level": [],
+        "name": "s11f",
+        "next_evolution": [],
+        "prior_evolution": [],
+        "release_date": "s122",
+        "skill": [],
+        "type": [],
+        "x_antibody": false
+      },
+      "DIGIMON02": {
+        "attribute": [],
+        "description": [],
+        "field": [],
+        "href": "s1a7",
+        "id": "DIGIMON02",
+        "image": [],
+        "level": [],
+        "name": "s1ab",
+        "next_evolution": [],
+        "prior_evolution": [],
+        "release_date": "s1ae",
+        "skill": [],
+        "type": [],
+        "x_antibody": false
+      }
+    }
+  },
+  "new": {
+    "digimon": {
+      "digimon_ref01": {
+        "attribute": [],
+        "description": [],
+        "field": [],
+        "href": "s233",
+        "image": [],
+        "level": [],
+        "name": "s237",
+        "next_evolution": [],
+        "prior_evolution": [],
+        "release_date": "s23a",
+        "skill": [],
+        "type": [],
+        "x_antibody": false
+      }
+    }
+  }
+}

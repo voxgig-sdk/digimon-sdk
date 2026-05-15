@@ -1,0 +1,44 @@
+# BasicSkillFlow
+
+main: kit: flow: BasicSkillFlow:
+{
+  entity: "skill",
+  kind: "basic",
+  name: "BasicSkillFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "skill_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "skill_ref01",
+        srcdatavar: "skill_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "skill01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-skill_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSkillFlow"
+}

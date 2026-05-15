@@ -1,0 +1,73 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 12
+  metrics: count: method: 12
+
+  entity: attribute: {
+    path: "/attribute": {
+      op: list: method: *GET
+    }
+    path: "/attribute/{idOrName}": {
+      rename: param: "idOrName": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.attribute`")|top
+    }
+  }
+
+  entity: digimon: {
+    path: "/digimon": {
+      op: list: method: *GET
+    }
+    path: "/digimon/{idOrName}": {
+      rename: param: "idOrName": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: field: {
+    path: "/field": {
+      op: list: method: *GET
+    }
+    path: "/field/{idOrName}": {
+      rename: param: "idOrName": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.field`")|top
+    }
+  }
+
+  entity: level: {
+    path: "/level": {
+      op: list: method: *GET
+    }
+    path: "/level/{idOrName}": {
+      rename: param: "idOrName": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.level`")|top
+    }
+  }
+
+  entity: skill: {
+    path: "/skill": {
+      op: list: method: *GET
+    }
+    path: "/skill/{idOrName}": {
+      rename: param: "idOrName": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.skill`")|top
+    }
+  }
+
+  entity: type: {
+    path: "/type": {
+      op: list: method: *GET
+    }
+    path: "/type/{idOrName}": {
+      rename: param: "idOrName": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.type`")|top
+    }
+  }
+
+}

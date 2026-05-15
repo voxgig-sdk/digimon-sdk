@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "skill": {
+      "SKILL00": {
+        "description": "s32",
+        "href": "s33",
+        "id": "SKILL00",
+        "skill": "s35",
+        "translation": "s36"
+      },
+      "SKILL01": {
+        "description": "s64",
+        "href": "s65",
+        "id": "SKILL01",
+        "skill": "s67",
+        "translation": "s68"
+      },
+      "SKILL02": {
+        "description": "s96",
+        "href": "s97",
+        "id": "SKILL02",
+        "skill": "s99",
+        "translation": "s9a"
+      }
+    }
+  },
+  "new": {
+    "skill": {
+      "skill_ref01": {
+        "description": "sc8",
+        "href": "sc9",
+        "skill": "scb",
+        "translation": "scc"
+      }
+    }
+  }
+}

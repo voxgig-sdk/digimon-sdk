@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "field": {
+      "FIELD00": {
+        "description": "s32",
+        "field": "s33",
+        "href": "s34",
+        "id": "FIELD00",
+        "image": "s36"
+      },
+      "FIELD01": {
+        "description": "s64",
+        "field": "s65",
+        "href": "s66",
+        "id": "FIELD01",
+        "image": "s68"
+      },
+      "FIELD02": {
+        "description": "s96",
+        "field": "s97",
+        "href": "s98",
+        "id": "FIELD02",
+        "image": "s9a"
+      }
+    }
+  },
+  "new": {
+    "field": {
+      "field_ref01": {
+        "description": "sc8",
+        "field": "sc9",
+        "href": "sca",
+        "image": "scc"
+      }
+    }
+  }
+}

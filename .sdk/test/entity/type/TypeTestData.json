@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "type": {
+      "TYPE00": {
+        "href": "s1e",
+        "id": "TYPE00",
+        "type": "s20"
+      },
+      "TYPE01": {
+        "href": "s3c",
+        "id": "TYPE01",
+        "type": "s3e"
+      },
+      "TYPE02": {
+        "href": "s5a",
+        "id": "TYPE02",
+        "type": "s5c"
+      }
+    }
+  },
+  "new": {
+    "type": {
+      "type_ref01": {
+        "href": "s78",
+        "type": "s7a"
+      }
+    }
+  }
+}

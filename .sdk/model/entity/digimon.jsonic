@@ -1,0 +1,211 @@
+# Entity: digimon
+
+main: kit: entity: digimon: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "attribute"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "description"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "field"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "href"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "image"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "level"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "next_evolution"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "prior_evolution"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "release_date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "skill"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "x_antibody"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "digimon"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "attribute"
+                orig: "attribute"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "exact"
+                orig: "exact"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "level"
+                orig: "level"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "name"
+                orig: "name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 20
+                kind: "query"
+                name: "page_size"
+                orig: "page_size"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "x_antibody"
+                orig: "x_antibody"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/digimon"
+          parts: [
+            "digimon"
+          ]
+          select: {
+            exist: [
+              "attribute"
+              "exact"
+              "level"
+              "name"
+              "page"
+              "page_size"
+              "x_antibody"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id_or_name"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/digimon/{idOrName}"
+          parts: [
+            "digimon"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

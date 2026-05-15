@@ -1,0 +1,44 @@
+# BasicTypeFlow
+
+main: kit: flow: BasicTypeFlow:
+{
+  entity: "type",
+  kind: "basic",
+  name: "BasicTypeFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "type_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "type_ref01",
+        srcdatavar: "type_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "type01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-type_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTypeFlow"
+}

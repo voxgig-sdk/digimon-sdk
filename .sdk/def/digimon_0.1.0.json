@@ -1,0 +1,1017 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Digimon API",
+    "description": "Free Digimon API using data from official and fan-based sources like Wikimon.net. Not affiliated with Bandai.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support",
+      "url": "https://digi-api.com"
+    },
+    "license": {
+      "name": "Data owned by Bandai",
+      "url": "https://digi-api.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://digi-api.com/api/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/digimon/{idOrName}": {
+      "get": {
+        "summary": "Get Digimon by ID or Name",
+        "description": "Returns a digimon and all its information by ID or name",
+        "operationId": "getDigimon",
+        "tags": [
+          "Digimon"
+        ],
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "description": "Digimon unique ID or name",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digimon"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Digimon not found"
+          }
+        }
+      }
+    },
+    "/digimon": {
+      "get": {
+        "summary": "Get Digimon List",
+        "description": "Returns a paged list of digimons in this API",
+        "operationId": "getDigimonList",
+        "tags": [
+          "Digimon"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Returns a list of digimons that have a similar name to the value",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exact",
+            "in": "query",
+            "description": "Will search for the exact string passed in the 'name' parameter",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "attribute",
+            "in": "query",
+            "description": "Returns a list of digimons with the attribute equal to value (Case Insensitive)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xAntibody",
+            "in": "query",
+            "description": "Returns a list of digimons with the xAntibody equal to value",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "description": "Returns a list of digimons with the level equal to value (Case Insensitive)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Used to navigate to a specific page",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Changes the quantity of rows returned for each page",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DigimonList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attribute/{idOrName}": {
+      "get": {
+        "summary": "Get Attribute by ID or Name",
+        "description": "Returns an attribute and all its information",
+        "operationId": "getAttribute",
+        "tags": [
+          "Attribute"
+        ],
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "description": "Attribute unique ID or name",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attribute"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Attribute not found"
+          }
+        }
+      }
+    },
+    "/attribute": {
+      "get": {
+        "summary": "Get Attribute List",
+        "description": "Returns a paged list of attributes in this API",
+        "operationId": "getAttributeList",
+        "tags": [
+          "Attribute"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Used to navigate to a specific page",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Returns a list of attributes that have a similar name to the value",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttributeList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/field/{idOrName}": {
+      "get": {
+        "summary": "Get Field by ID or Name",
+        "description": "Returns a field and all its information",
+        "operationId": "getField",
+        "tags": [
+          "Field"
+        ],
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "description": "Field unique ID or name",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Field"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Field not found"
+          }
+        }
+      }
+    },
+    "/field": {
+      "get": {
+        "summary": "Get Field List",
+        "description": "Returns a paged list of fields in this API",
+        "operationId": "getFieldList",
+        "tags": [
+          "Field"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Used to navigate to a specific page",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Returns a list of fields that have a similar name to the value",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/level/{idOrName}": {
+      "get": {
+        "summary": "Get Level by ID or Name",
+        "description": "Returns a level and all its information",
+        "operationId": "getLevel",
+        "tags": [
+          "Level"
+        ],
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "description": "Level unique ID or name",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Level"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Level not found"
+          }
+        }
+      }
+    },
+    "/level": {
+      "get": {
+        "summary": "Get Level List",
+        "description": "Returns a paged list of levels in this API",
+        "operationId": "getLevelList",
+        "tags": [
+          "Level"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Used to navigate to a specific page",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Returns a list of levels that have a similar name to the value",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/type/{idOrName}": {
+      "get": {
+        "summary": "Get Type by ID or Name",
+        "description": "Returns a type and all its information",
+        "operationId": "getType",
+        "tags": [
+          "Type"
+        ],
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "description": "Type unique ID or name",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Type"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Type not found"
+          }
+        }
+      }
+    },
+    "/type": {
+      "get": {
+        "summary": "Get Type List",
+        "description": "Returns a paged list of types in this API",
+        "operationId": "getTypeList",
+        "tags": [
+          "Type"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Used to navigate to a specific page",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Returns a list of types that have a similar name to the value",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TypeList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skill/{idOrName}": {
+      "get": {
+        "summary": "Get Skill by ID or Name",
+        "description": "Returns a skill and all its information",
+        "operationId": "getSkill",
+        "tags": [
+          "Skill"
+        ],
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "description": "Skill unique ID or name",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Skill"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Skill not found"
+          }
+        }
+      }
+    },
+    "/skill": {
+      "get": {
+        "summary": "Get Skill List",
+        "description": "Returns a paged list of skills in this API",
+        "operationId": "getSkillList",
+        "tags": [
+          "Skill"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Used to navigate to a specific page",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Returns a list of skills that have a similar name to the value",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillList"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Digimon": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the Digimon"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Digimon"
+          },
+          "xAntibody": {
+            "type": "boolean",
+            "description": "Indicates if the Digimon has X-Antibody"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "transparent": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelReference"
+            }
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeReference"
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeReference"
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldReference"
+            }
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "descriptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "origin": {
+                  "type": "string"
+                },
+                "language": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillReference"
+            }
+          },
+          "priorEvolutions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvolutionReference"
+            }
+          },
+          "nextEvolutions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvolutionReference"
+            }
+          }
+        }
+      },
+      "DigimonList": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DigimonSummary"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          }
+        }
+      },
+      "DigimonSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Attribute": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the attribute"
+          },
+          "attribute": {
+            "type": "string",
+            "description": "Name of the attribute"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the attribute"
+          }
+        }
+      },
+      "AttributeList": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeReference"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          }
+        }
+      },
+      "AttributeReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "attribute": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Field": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the field"
+          },
+          "field": {
+            "type": "string",
+            "description": "Name of the field"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "description": "Image URL for the field"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the field"
+          }
+        }
+      },
+      "FieldList": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldReference"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          }
+        }
+      },
+      "FieldReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "field": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Level": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the level"
+          },
+          "level": {
+            "type": "string",
+            "description": "Name of the level"
+          }
+        }
+      },
+      "LevelList": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelReference"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          }
+        }
+      },
+      "LevelReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "level": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Type": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the type"
+          },
+          "type": {
+            "type": "string",
+            "description": "Name of the type"
+          }
+        }
+      },
+      "TypeList": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeReference"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          }
+        }
+      },
+      "TypeReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the skill"
+          },
+          "skill": {
+            "type": "string",
+            "description": "Name of the skill"
+          },
+          "translation": {
+            "type": "string",
+            "description": "Translation of the skill name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the skill"
+          }
+        }
+      },
+      "SkillList": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillReference"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          }
+        }
+      },
+      "SkillReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "skill": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "EvolutionReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "digimon": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer"
+          },
+          "elementsOnPage": {
+            "type": "integer"
+          },
+          "totalElements": {
+            "type": "integer"
+          },
+          "totalPages": {
+            "type": "integer"
+          },
+          "previousPage": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Digimon",
+      "description": "Operations related to Digimon entities"
+    },
+    {
+      "name": "Attribute",
+      "description": "Operations related to Digimon attributes"
+    },
+    {
+      "name": "Field",
+      "description": "Operations related to Digimon fields"
+    },
+    {
+      "name": "Level",
+      "description": "Operations related to Digimon levels"
+    },
+    {
+      "name": "Type",
+      "description": "Operations related to Digimon types"
+    },
+    {
+      "name": "Skill",
+      "description": "Operations related to Digimon skills"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+# BasicLevelFlow
+
+main: kit: flow: BasicLevelFlow:
+{
+  entity: "level",
+  kind: "basic",
+  name: "BasicLevelFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "level_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "level_ref01",
+        srcdatavar: "level_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "level01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-level_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLevelFlow"
+}

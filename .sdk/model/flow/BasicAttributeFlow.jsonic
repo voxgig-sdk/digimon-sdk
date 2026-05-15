@@ -1,0 +1,44 @@
+# BasicAttributeFlow
+
+main: kit: flow: BasicAttributeFlow:
+{
+  entity: "attribute",
+  kind: "basic",
+  name: "BasicAttributeFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "attribute_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "attribute_ref01",
+        srcdatavar: "attribute_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "attribute01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-attribute_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAttributeFlow"
+}

@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "attribute": {
+      "ATTRIBUTE00": {
+        "attribute": "s28",
+        "description": "s29",
+        "href": "s2a",
+        "id": "ATTRIBUTE00"
+      },
+      "ATTRIBUTE01": {
+        "attribute": "s50",
+        "description": "s51",
+        "href": "s52",
+        "id": "ATTRIBUTE01"
+      },
+      "ATTRIBUTE02": {
+        "attribute": "s78",
+        "description": "s79",
+        "href": "s7a",
+        "id": "ATTRIBUTE02"
+      }
+    }
+  },
+  "new": {
+    "attribute": {
+      "attribute_ref01": {
+        "attribute": "sa0",
+        "description": "sa1",
+        "href": "sa2"
+      }
+    }
+  }
+}

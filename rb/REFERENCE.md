@@ -1,0 +1,509 @@
+# Digimon Ruby SDK Reference
+
+Complete API reference for the Digimon Ruby SDK.
+
+
+## DigimonSDK
+
+### Constructor
+
+```ruby
+require_relative 'digimon_sdk'
+
+client = DigimonSDK.new(options)
+```
+
+Create a new SDK client instance.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `options` | `Hash` | SDK configuration options. |
+| `options["apikey"]` | `String` | API key for authentication. |
+| `options["base"]` | `String` | Base URL for API requests. |
+| `options["prefix"]` | `String` | URL prefix appended after base. |
+| `options["suffix"]` | `String` | URL suffix appended after path. |
+| `options["headers"]` | `Hash` | Custom headers for all requests. |
+| `options["feature"]` | `Hash` | Feature configuration. |
+| `options["system"]` | `Hash` | System overrides (e.g. custom fetch). |
+
+
+### Static Methods
+
+#### `DigimonSDK.test(testopts = nil, sdkopts = nil)`
+
+Create a test client with mock features active. Both arguments may be `nil`.
+
+```ruby
+client = DigimonSDK.test
+```
+
+
+### Instance Methods
+
+#### `Attribute(data = nil)`
+
+Create a new `Attribute` entity instance. Pass `nil` for no initial data.
+
+#### `Digimon(data = nil)`
+
+Create a new `Digimon` entity instance. Pass `nil` for no initial data.
+
+#### `Field(data = nil)`
+
+Create a new `Field` entity instance. Pass `nil` for no initial data.
+
+#### `Level(data = nil)`
+
+Create a new `Level` entity instance. Pass `nil` for no initial data.
+
+#### `Skill(data = nil)`
+
+Create a new `Skill` entity instance. Pass `nil` for no initial data.
+
+#### `Type(data = nil)`
+
+Create a new `Type` entity instance. Pass `nil` for no initial data.
+
+#### `options_map -> Hash`
+
+Return a deep copy of the current SDK options.
+
+#### `get_utility -> Utility`
+
+Return a copy of the SDK utility object.
+
+#### `direct(fetchargs = {}) -> Hash, err`
+
+Make a direct HTTP request to any API endpoint.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `fetchargs["path"]` | `String` | URL path with optional `{param}` placeholders. |
+| `fetchargs["method"]` | `String` | HTTP method (default: `"GET"`). |
+| `fetchargs["params"]` | `Hash` | Path parameter values for `{param}` substitution. |
+| `fetchargs["query"]` | `Hash` | Query string parameters. |
+| `fetchargs["headers"]` | `Hash` | Request headers (merged with defaults). |
+| `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
+| `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
+
+**Returns:** `Hash, err`
+
+#### `prepare(fetchargs = {}) -> Hash, err`
+
+Prepare a fetch definition without sending the request. Accepts the
+same parameters as `direct()`.
+
+**Returns:** `Hash, err`
+
+
+---
+
+## AttributeEntity
+
+```ruby
+attribute = client.Attribute
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `attribute` | ``$STRING`` | No |  |
+| `description` | ``$STRING`` | No |  |
+| `href` | ``$STRING`` | No |  |
+| `id` | ``$INTEGER`` | No |  |
+
+### Operations
+
+#### `list(reqmatch, ctrl = nil) -> result, err`
+
+List entities matching the given criteria. Returns an array.
+
+```ruby
+results, err = client.Attribute.list(nil)
+```
+
+#### `load(reqmatch, ctrl = nil) -> result, err`
+
+Load a single entity matching the given criteria.
+
+```ruby
+result, err = client.Attribute.load({ "id" => "attribute_id" })
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `AttributeEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## DigimonEntity
+
+```ruby
+digimon = client.Digimon
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `attribute` | ``$ARRAY`` | No |  |
+| `description` | ``$ARRAY`` | No |  |
+| `field` | ``$ARRAY`` | No |  |
+| `href` | ``$STRING`` | No |  |
+| `id` | ``$INTEGER`` | No |  |
+| `image` | ``$ARRAY`` | No |  |
+| `level` | ``$ARRAY`` | No |  |
+| `name` | ``$STRING`` | No |  |
+| `next_evolution` | ``$ARRAY`` | No |  |
+| `prior_evolution` | ``$ARRAY`` | No |  |
+| `release_date` | ``$STRING`` | No |  |
+| `skill` | ``$ARRAY`` | No |  |
+| `type` | ``$ARRAY`` | No |  |
+| `x_antibody` | ``$BOOLEAN`` | No |  |
+
+### Operations
+
+#### `list(reqmatch, ctrl = nil) -> result, err`
+
+List entities matching the given criteria. Returns an array.
+
+```ruby
+results, err = client.Digimon.list(nil)
+```
+
+#### `load(reqmatch, ctrl = nil) -> result, err`
+
+Load a single entity matching the given criteria.
+
+```ruby
+result, err = client.Digimon.load({ "id" => "digimon_id" })
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `DigimonEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## FieldEntity
+
+```ruby
+field = client.Field
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `description` | ``$STRING`` | No |  |
+| `field` | ``$STRING`` | No |  |
+| `href` | ``$STRING`` | No |  |
+| `id` | ``$INTEGER`` | No |  |
+| `image` | ``$STRING`` | No |  |
+
+### Operations
+
+#### `list(reqmatch, ctrl = nil) -> result, err`
+
+List entities matching the given criteria. Returns an array.
+
+```ruby
+results, err = client.Field.list(nil)
+```
+
+#### `load(reqmatch, ctrl = nil) -> result, err`
+
+Load a single entity matching the given criteria.
+
+```ruby
+result, err = client.Field.load({ "id" => "field_id" })
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `FieldEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## LevelEntity
+
+```ruby
+level = client.Level
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `href` | ``$STRING`` | No |  |
+| `id` | ``$INTEGER`` | No |  |
+| `level` | ``$STRING`` | No |  |
+
+### Operations
+
+#### `list(reqmatch, ctrl = nil) -> result, err`
+
+List entities matching the given criteria. Returns an array.
+
+```ruby
+results, err = client.Level.list(nil)
+```
+
+#### `load(reqmatch, ctrl = nil) -> result, err`
+
+Load a single entity matching the given criteria.
+
+```ruby
+result, err = client.Level.load({ "id" => "level_id" })
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `LevelEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## SkillEntity
+
+```ruby
+skill = client.Skill
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `description` | ``$STRING`` | No |  |
+| `href` | ``$STRING`` | No |  |
+| `id` | ``$INTEGER`` | No |  |
+| `skill` | ``$STRING`` | No |  |
+| `translation` | ``$STRING`` | No |  |
+
+### Operations
+
+#### `list(reqmatch, ctrl = nil) -> result, err`
+
+List entities matching the given criteria. Returns an array.
+
+```ruby
+results, err = client.Skill.list(nil)
+```
+
+#### `load(reqmatch, ctrl = nil) -> result, err`
+
+Load a single entity matching the given criteria.
+
+```ruby
+result, err = client.Skill.load({ "id" => "skill_id" })
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `SkillEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## TypeEntity
+
+```ruby
+type = client.Type
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `href` | ``$STRING`` | No |  |
+| `id` | ``$INTEGER`` | No |  |
+| `type` | ``$STRING`` | No |  |
+
+### Operations
+
+#### `list(reqmatch, ctrl = nil) -> result, err`
+
+List entities matching the given criteria. Returns an array.
+
+```ruby
+results, err = client.Type.list(nil)
+```
+
+#### `load(reqmatch, ctrl = nil) -> result, err`
+
+Load a single entity matching the given criteria.
+
+```ruby
+result, err = client.Type.load({ "id" => "type_id" })
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `TypeEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## Features
+
+| Feature | Version | Description |
+| --- | --- | --- |
+| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
+
+
+Features are activated via the `feature` option:
+
+```ruby
+client = DigimonSDK.new({
+  "feature" => {
+    "test" => { "active" => true },
+  },
+})
+```
+

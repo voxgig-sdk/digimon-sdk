@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "level": {
+      "LEVEL00": {
+        "href": "s1e",
+        "id": "LEVEL00",
+        "level": "s20"
+      },
+      "LEVEL01": {
+        "href": "s3c",
+        "id": "LEVEL01",
+        "level": "s3e"
+      },
+      "LEVEL02": {
+        "href": "s5a",
+        "id": "LEVEL02",
+        "level": "s5c"
+      }
+    }
+  },
+  "new": {
+    "level": {
+      "level_ref01": {
+        "href": "s78",
+        "level": "s7a"
+      }
+    }
+  }
+}

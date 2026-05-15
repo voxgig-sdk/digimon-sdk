@@ -1,0 +1,8 @@
+# Entity Models
+
+@"attribute.jsonic"
+@"digimon.jsonic"
+@"field.jsonic"
+@"level.jsonic"
+@"skill.jsonic"
+@"type.jsonic"

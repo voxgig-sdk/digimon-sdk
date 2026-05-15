@@ -1,0 +1,44 @@
+# BasicDigimonFlow
+
+main: kit: flow: BasicDigimonFlow:
+{
+  entity: "digimon",
+  kind: "basic",
+  name: "BasicDigimonFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "digimon_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "digimon_ref01",
+        srcdatavar: "digimon_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "digimon01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-digimon_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDigimonFlow"
+}

@@ -1,0 +1,44 @@
+# BasicFieldFlow
+
+main: kit: flow: BasicFieldFlow:
+{
+  entity: "field",
+  kind: "basic",
+  name: "BasicFieldFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "field_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "field_ref01",
+        srcdatavar: "field_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "field01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-field_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFieldFlow"
+}
