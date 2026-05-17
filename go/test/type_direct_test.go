@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/digimon-sdk"
-	"github.com/voxgig-sdk/digimon-sdk/core"
+	sdk "github.com/voxgig-sdk/digimon-sdk/go"
+	"github.com/voxgig-sdk/digimon-sdk/go/core"
 )
 
 func TestTypeDirect(t *testing.T) {

@@ -1,10 +1,10 @@
 package voxgigdigimonsdk
 
 import (
-	"github.com/voxgig-sdk/digimon-sdk/core"
-	"github.com/voxgig-sdk/digimon-sdk/entity"
-	"github.com/voxgig-sdk/digimon-sdk/feature"
-	_ "github.com/voxgig-sdk/digimon-sdk/utility"
+	"github.com/voxgig-sdk/digimon-sdk/go/core"
+	"github.com/voxgig-sdk/digimon-sdk/go/entity"
+	"github.com/voxgig-sdk/digimon-sdk/go/feature"
+	_ "github.com/voxgig-sdk/digimon-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

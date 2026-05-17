@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/digimon-sdk"
-	"github.com/voxgig-sdk/digimon-sdk/core"
+	sdk "github.com/voxgig-sdk/digimon-sdk/go"
+	"github.com/voxgig-sdk/digimon-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/digimon-sdk/go/utility/struct"
 )
 
 func TestTypeEntity(t *testing.T) {
