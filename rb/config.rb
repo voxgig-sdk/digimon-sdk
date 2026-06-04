@@ -15,9 +15,6 @@ module DigimonConfig
       },
       "options" => {
         "base" => "https://digi-api.com/api/v1",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },

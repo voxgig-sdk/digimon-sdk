@@ -21,7 +21,22 @@
           }
         ],
         "title": "Digimon API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Look up Digimon, attributes, levels, fields, types and skills sourced from Wikimon.net",
+        "homepage": "https://digi-api.com/",
+        "docs_url": "https://digi-api.com/",
+        "license_short": "Data sourced from Wikimon.net under Creative Commons CC-BY-SA 3.0; not affiliated with Bandai.",
+        "license_md": "- Data is drawn from official and fan-based sources, primarily [Wikimon.net](https://wikimon.net/), and made available under Creative Commons CC-BY-SA 3.0.\n- Digimon is a registered trademark of Bandai. DAPI is an unofficial project and is not affiliated with, endorsed by, or sponsored by Bandai.\n- Attribution to Wikimon.net and the DAPI project is expected when redistributing data.\n- No franchise materials are claimed as the project's own.",
+        "about_md": "DAPI (the [Digimon API](https://digi-api.com/)) is a free, community-run REST API that exposes information about the Digimon franchise. It is maintained independently and is not affiliated with Bandai; the underlying data is drawn mainly from [Wikimon.net](https://wikimon.net/).\n\nWhat you get from the API:\n\n- Paginated listings and detail lookups for individual Digimon by ID or name.\n- Reference data for the supporting taxonomy: attributes, fields, levels, types and skills.\n- Lookups by either numeric ID or canonical name on every collection.\n\nThe service is served from `https://digi-api.com/api/v1` over HTTPS with CORS enabled and does not require authentication or an API key. No formal rate limits are published.",
+        "entity_desc": {
+          "attribute": "An attribute classification used by Digimon (e.g. Vaccine, Virus, Data), exposed under `/attribute` and `/attribute/{id-or-name}`.",
+          "digimon": "A single Digimon creature with its profile data, exposed under `/digimon` (paginated list) and `/digimon/{id-or-name}`.",
+          "field": "A field grouping that Digimon belong to (in-universe factions), exposed under `/field` and `/field/{id-or-name}`.",
+          "level": "An evolution level such as Rookie, Champion, Ultimate or Mega, exposed under `/level` and `/level/{id-or-name}`.",
+          "skill": "A named skill or technique that Digimon can use, exposed under `/skill` and `/skill/{id-or-name}`.",
+          "type": "A creature type classification (e.g. Dragon, Beast, Holy), exposed under `/type` and `/type/{id-or-name}`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -29,7 +44,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "attribute": {

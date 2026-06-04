@@ -102,7 +102,6 @@ function field_basic_setup(extra)
     ["DIGIMON_TEST_FIELD_ENTID"] = idmap,
     ["DIGIMON_TEST_LIVE"] = "FALSE",
     ["DIGIMON_TEST_EXPLAIN"] = "FALSE",
-    ["DIGIMON_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -114,7 +113,6 @@ function field_basic_setup(extra)
   if env["DIGIMON_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["DIGIMON_APIKEY"],
       },
       extra or {},
     })
