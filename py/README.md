@@ -10,7 +10,7 @@ The Python SDK for the Digimon API — an entity-oriented client following Pytho
 
 ## Install
 ```bash
-pip install digimon-sdk
+pip install voxgig-sdk-digimon
 ```
 
 Or install from source:

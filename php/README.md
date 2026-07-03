@@ -10,7 +10,7 @@ The PHP SDK for the Digimon API — an entity-oriented client using PHP conventi
 
 ## Install
 ```bash
-composer require voxgig/digimon-sdk
+composer require voxgig-sdk/digimon
 ```
 
 

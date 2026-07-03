@@ -10,13 +10,13 @@ The Ruby SDK for the Digimon API — an entity-oriented client using idiomatic R
 
 ## Install
 ```bash
-gem install digimon-sdk
+gem install voxgig-sdk-digimon
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "digimon-sdk"
+gem "voxgig-sdk-digimon"
 ```
 
 Then run:

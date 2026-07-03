@@ -10,7 +10,7 @@ The TypeScript SDK for the Digimon API — a type-safe, entity-oriented client w
 
 ## Install
 ```bash
-npm install digimon
+npm install @voxgig-sdk/digimon
 ```
 ## Tutorial: your first API call
 
