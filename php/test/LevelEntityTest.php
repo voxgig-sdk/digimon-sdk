@@ -96,6 +96,7 @@ function level_basic_setup($extra)
         "DIGIMON_TEST_LEVEL_ENTID" => $idmap,
         "DIGIMON_TEST_LIVE" => "FALSE",
         "DIGIMON_TEST_EXPLAIN" => "FALSE",
+        "DIGIMON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -107,6 +108,7 @@ function level_basic_setup($extra)
     if ($env["DIGIMON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["DIGIMON_APIKEY"],
             ],
             $extra ?? [],
         ]);

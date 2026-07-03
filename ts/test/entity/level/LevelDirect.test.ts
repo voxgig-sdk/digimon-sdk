@@ -136,12 +136,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'DIGIMON_TEST_LEVEL_ENTID': {},
     'DIGIMON_TEST_LIVE': 'FALSE',
+    'DIGIMON_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.DIGIMON_TEST_LIVE
 
   if (live) {
     const client = new DigimonSDK({
+      apikey: env.DIGIMON_APIKEY,
     })
 
     let idmap: any = env['DIGIMON_TEST_LEVEL_ENTID']

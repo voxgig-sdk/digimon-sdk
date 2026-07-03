@@ -117,12 +117,14 @@ function skill_direct_setup(mockres)
   local env = runner.env_override({
     ["DIGIMON_TEST_SKILL_ENTID"] = {},
     ["DIGIMON_TEST_LIVE"] = "FALSE",
+    ["DIGIMON_APIKEY"] = "NONE",
   })
 
   local live = env["DIGIMON_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["DIGIMON_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

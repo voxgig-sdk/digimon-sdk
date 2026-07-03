@@ -135,6 +135,7 @@ func levelBasicSetup(extra map[string]any) *entityTestSetup {
 		"DIGIMON_TEST_LEVEL_ENTID": idmap,
 		"DIGIMON_TEST_LIVE":      "FALSE",
 		"DIGIMON_TEST_EXPLAIN":   "FALSE",
+		"DIGIMON_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["DIGIMON_TEST_LEVEL_ENTID"])
@@ -145,6 +146,7 @@ func levelBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["DIGIMON_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["DIGIMON_APIKEY"],
 			},
 			extra,
 		})

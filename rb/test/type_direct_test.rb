@@ -116,12 +116,14 @@ def type_direct_setup(mockres)
   env = Runner.env_override({
     "DIGIMON_TEST_TYPE_ENTID" => {},
     "DIGIMON_TEST_LIVE" => "FALSE",
+    "DIGIMON_APIKEY" => "NONE",
   })
 
   live = env["DIGIMON_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["DIGIMON_APIKEY"],
     }
     client = DigimonSDK.new(merged_opts)
     return {

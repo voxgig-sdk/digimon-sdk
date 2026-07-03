@@ -113,7 +113,7 @@ main: kit: entity: skill: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.skill`"
           }
         }
       ]

@@ -1,20 +1,8 @@
 # Digimon SDK
 
-Look up Digimon, attributes, levels, fields, types and skills sourced from Wikimon.net
+Digimon API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Digimon API
-
-DAPI (the [Digimon API](https://digi-api.com/)) is a free, community-run REST API that exposes information about the Digimon franchise. It is maintained independently and is not affiliated with Bandai; the underlying data is drawn mainly from [Wikimon.net](https://wikimon.net/).
-
-What you get from the API:
-
-- Paginated listings and detail lookups for individual Digimon by ID or name.
-- Reference data for the supporting taxonomy: attributes, fields, levels, types and skills.
-- Lookups by either numeric ID or canonical name on every collection.
-
-The service is served from `https://digi-api.com/api/v1` over HTTPS with CORS enabled and does not require authentication or an API key. No formal rate limits are published.
 
 ## Try it
 
@@ -48,29 +36,31 @@ gem install digimon-sdk
 luarocks install digimon-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { DigimonSDK } from 'digimon'
 
-const client = new DigimonSDK({})
+const client = new DigimonSDK({
+  apikey: process.env.DIGIMON_APIKEY,
+})
 
 // List all attributes
 const attributes = await client.Attribute().list()
+console.log(attributes.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,12 +90,12 @@ The API exposes 6 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Attribute** | An attribute classification used by Digimon (e.g. Vaccine, Virus, Data), exposed under `/attribute` and `/attribute/{id-or-name}`. | `/attribute` |
-| **Digimon** | A single Digimon creature with its profile data, exposed under `/digimon` (paginated list) and `/digimon/{id-or-name}`. | `/digimon` |
-| **Field** | A field grouping that Digimon belong to (in-universe factions), exposed under `/field` and `/field/{id-or-name}`. | `/field` |
-| **Level** | An evolution level such as Rookie, Champion, Ultimate or Mega, exposed under `/level` and `/level/{id-or-name}`. | `/level` |
-| **Skill** | A named skill or technique that Digimon can use, exposed under `/skill` and `/skill/{id-or-name}`. | `/skill` |
-| **Type** | A creature type classification (e.g. Dragon, Beast, Holy), exposed under `/type` and `/type/{id-or-name}`. | `/type` |
+| **Attribute** |  | `/attribute` |
+| **Digimon** |  | `/digimon` |
+| **Field** |  | `/field` |
+| **Level** |  | `/level` |
+| **Skill** |  | `/skill` |
+| **Type** |  | `/type` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -115,17 +105,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from digimon_sdk import DigimonSDK
 
-client = DigimonSDK({})
+client = DigimonSDK({
+    "apikey": os.environ.get("DIGIMON_APIKEY"),
+})
 
 # List all attributes
-attributes, err = client.Attribute(None).list(None, None)
+attributes, err = client.Attribute().list()
+print(attributes)
 
 # Load a specific attribute
-attribute, err = client.Attribute(None).load(
-    {"id": "example_id"}, None
-)
+attribute, err = client.Attribute().load({"id": "example_id"})
+print(attribute)
 ```
 
 ### PHP
@@ -134,15 +127,17 @@ attribute, err = client.Attribute(None).load(
 <?php
 require_once 'digimon_sdk.php';
 
-$client = new DigimonSDK([]);
+$client = new DigimonSDK([
+    "apikey" => getenv("DIGIMON_APIKEY"),
+]);
 
 // List all attributes
-[$attributes, $err] = $client->Attribute(null)->list(null, null);
+[$attributes, $err] = $client->Attribute()->list();
+print_r($attributes);
 
 // Load a specific attribute
-[$attribute, $err] = $client->Attribute(null)->load(
-    ["id" => "example_id"], null
-);
+[$attribute, $err] = $client->Attribute()->load(["id" => "example_id"]);
+print_r($attribute);
 ```
 
 ### Golang
@@ -150,10 +145,13 @@ $client = new DigimonSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/digimon-sdk/go"
 
-client := sdk.NewDigimonSDK(map[string]any{})
+client := sdk.NewDigimonSDK(map[string]any{
+    "apikey": os.Getenv("DIGIMON_APIKEY"),
+})
 
 // List all attributes
 attributes, err := client.Attribute(nil).List(nil, nil)
+fmt.Println(attributes)
 ```
 
 ### Ruby
@@ -161,15 +159,17 @@ attributes, err := client.Attribute(nil).List(nil, nil)
 ```ruby
 require_relative "Digimon_sdk"
 
-client = DigimonSDK.new({})
+client = DigimonSDK.new({
+  "apikey" => ENV["DIGIMON_APIKEY"],
+})
 
 # List all attributes
-attributes, err = client.Attribute(nil).list(nil, nil)
+attributes, err = client.Attribute().list
+puts attributes
 
 # Load a specific attribute
-attribute, err = client.Attribute(nil).load(
-  { "id" => "example_id" }, nil
-)
+attribute, err = client.Attribute().load({ "id" => "example_id" })
+puts attribute
 ```
 
 ### Lua
@@ -177,15 +177,17 @@ attribute, err = client.Attribute(nil).load(
 ```lua
 local sdk = require("digimon_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("DIGIMON_APIKEY"),
+})
 
 -- List all attributes
-local attributes, err = client:Attribute(nil):list(nil, nil)
+local attributes, err = client:Attribute():list()
+print(attributes)
 
 -- Load a specific attribute
-local attribute, err = client:Attribute(nil):load(
-  { id = "example_id" }, nil
-)
+local attribute, err = client:Attribute():load({ id = "example_id" })
+print(attribute)
 ```
 
 ## Unit testing in offline mode
@@ -204,25 +206,21 @@ const result = await client.Attribute().load({ id: 'test01' })
 ### Python
 
 ```python
-client = DigimonSDK.test(None, None)
-result, err = client.Attribute(None).load(
-    {"id": "test01"}, None
-)
+client = DigimonSDK.test()
+result, err = client.Attribute().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = DigimonSDK::test(null, null);
-[$result, $err] = $client->Attribute(null)->load(
-    ["id" => "test01"], null
-);
+$client = DigimonSDK::test();
+[$result, $err] = $client->Attribute()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Attribute(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -231,19 +229,15 @@ result, err := client.Attribute(nil).Load(
 ### Ruby
 
 ```ruby
-client = DigimonSDK.test(nil, nil)
-result, err = client.Attribute(nil).load(
-  { "id" => "test01" }, nil
-)
+client = DigimonSDK.test
+result, err = client.Attribute().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Attribute(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Attribute():load({ id = "test01" })
 ```
 
 ## How it works
@@ -347,15 +341,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Digimon API
-
-- Upstream: [https://digi-api.com/](https://digi-api.com/)
-
-- Data is drawn from official and fan-based sources, primarily [Wikimon.net](https://wikimon.net/), and made available under Creative Commons CC-BY-SA 3.0.
-- Digimon is a registered trademark of Bandai. DAPI is an unofficial project and is not affiliated with, endorsed by, or sponsored by Bandai.
-- Attribution to Wikimon.net and the DAPI project is expected when redistributing data.
-- No franchise materials are claimed as the project's own.
 
 ---
 
