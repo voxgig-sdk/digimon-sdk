@@ -12,7 +12,6 @@ guide: {
     path: "/attribute/{idOrName}": {
       rename: param: "idOrName": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.attribute`")|top
     }
   }
 
@@ -33,7 +32,6 @@ guide: {
     path: "/field/{idOrName}": {
       rename: param: "idOrName": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.field`")|top
     }
   }
 
@@ -44,7 +42,6 @@ guide: {
     path: "/level/{idOrName}": {
       rename: param: "idOrName": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.level`")|top
     }
   }
 
@@ -55,7 +52,6 @@ guide: {
     path: "/skill/{idOrName}": {
       rename: param: "idOrName": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.skill`")|top
     }
   }
 
@@ -66,7 +62,6 @@ guide: {
     path: "/type/{idOrName}": {
       rename: param: "idOrName": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.type`")|top
     }
   }
 

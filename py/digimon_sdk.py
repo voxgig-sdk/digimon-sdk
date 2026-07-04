@@ -220,105 +220,45 @@ class DigimonSDK:
         }
 
 
-    @property
-    def attribute(self):
-        """Idiomatic facade: client.attribute.list() / client.attribute.load({"id": ...})."""
-        from entity.attribute_entity import AttributeEntity
-        cached = getattr(self, "_attribute", None)
-        if cached is None:
-            cached = AttributeEntity(self, None)
-            self._attribute = cached
-        return cached
-
-    def Attribute(self, data=None):
-        # Deprecated: use client.attribute instead.
+    def Attribute(self, data=None) -> "AttributeEntity":
+        """Entity factory: client.Attribute().list({}) / client.Attribute().load({"id": ...})."""
         from entity.attribute_entity import AttributeEntity
         return AttributeEntity(self, data)
 
 
-    @property
-    def digimon(self):
-        """Idiomatic facade: client.digimon.list() / client.digimon.load({"id": ...})."""
-        from entity.digimon_entity import DigimonEntity
-        cached = getattr(self, "_digimon", None)
-        if cached is None:
-            cached = DigimonEntity(self, None)
-            self._digimon = cached
-        return cached
-
-    def Digimon(self, data=None):
-        # Deprecated: use client.digimon instead.
+    def Digimon(self, data=None) -> "DigimonEntity":
+        """Entity factory: client.Digimon().list({}) / client.Digimon().load({"id": ...})."""
         from entity.digimon_entity import DigimonEntity
         return DigimonEntity(self, data)
 
 
-    @property
-    def field(self):
-        """Idiomatic facade: client.field.list() / client.field.load({"id": ...})."""
-        from entity.field_entity import FieldEntity
-        cached = getattr(self, "_field", None)
-        if cached is None:
-            cached = FieldEntity(self, None)
-            self._field = cached
-        return cached
-
-    def Field(self, data=None):
-        # Deprecated: use client.field instead.
+    def Field(self, data=None) -> "FieldEntity":
+        """Entity factory: client.Field().list({}) / client.Field().load({"id": ...})."""
         from entity.field_entity import FieldEntity
         return FieldEntity(self, data)
 
 
-    @property
-    def level(self):
-        """Idiomatic facade: client.level.list() / client.level.load({"id": ...})."""
-        from entity.level_entity import LevelEntity
-        cached = getattr(self, "_level", None)
-        if cached is None:
-            cached = LevelEntity(self, None)
-            self._level = cached
-        return cached
-
-    def Level(self, data=None):
-        # Deprecated: use client.level instead.
+    def Level(self, data=None) -> "LevelEntity":
+        """Entity factory: client.Level().list({}) / client.Level().load({"id": ...})."""
         from entity.level_entity import LevelEntity
         return LevelEntity(self, data)
 
 
-    @property
-    def skill(self):
-        """Idiomatic facade: client.skill.list() / client.skill.load({"id": ...})."""
-        from entity.skill_entity import SkillEntity
-        cached = getattr(self, "_skill", None)
-        if cached is None:
-            cached = SkillEntity(self, None)
-            self._skill = cached
-        return cached
-
-    def Skill(self, data=None):
-        # Deprecated: use client.skill instead.
+    def Skill(self, data=None) -> "SkillEntity":
+        """Entity factory: client.Skill().list({}) / client.Skill().load({"id": ...})."""
         from entity.skill_entity import SkillEntity
         return SkillEntity(self, data)
 
 
-    @property
-    def type(self):
-        """Idiomatic facade: client.type.list() / client.type.load({"id": ...})."""
-        from entity.type_entity import TypeEntity
-        cached = getattr(self, "_type", None)
-        if cached is None:
-            cached = TypeEntity(self, None)
-            self._type = cached
-        return cached
-
-    def Type(self, data=None):
-        # Deprecated: use client.type instead.
+    def Type(self, data=None) -> "TypeEntity":
+        """Entity factory: client.Type().list({}) / client.Type().load({"id": ...})."""
         from entity.type_entity import TypeEntity
         return TypeEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "DigimonSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -338,3 +278,14 @@ class DigimonSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.attribute_entity import AttributeEntity
+    from entity.digimon_entity import DigimonEntity
+    from entity.field_entity import FieldEntity
+    from entity.level_entity import LevelEntity
+    from entity.skill_entity import SkillEntity
+    from entity.type_entity import TypeEntity

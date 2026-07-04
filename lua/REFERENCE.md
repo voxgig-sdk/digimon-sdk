@@ -103,7 +103,7 @@ same parameters as `direct()`.
 ## AttributeEntity
 
 ```lua
-local attribute = client:attribute(nil)
+local attribute = client:Attribute(nil)
 ```
 
 ### Fields
@@ -122,7 +122,7 @@ local attribute = client:attribute(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:attribute():list()
+local results, err = client:Attribute():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -130,7 +130,7 @@ local results, err = client:attribute():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:attribute():load({ id = "attribute_id" })
+local result, err = client:Attribute():load({ id = "attribute_id" })
 ```
 
 ### Common Methods
@@ -166,7 +166,7 @@ Return the entity name.
 ## DigimonEntity
 
 ```lua
-local digimon = client:digimon(nil)
+local digimon = client:Digimon(nil)
 ```
 
 ### Fields
@@ -195,7 +195,7 @@ local digimon = client:digimon(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:digimon():list()
+local results, err = client:Digimon():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -203,7 +203,7 @@ local results, err = client:digimon():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:digimon():load({ id = "digimon_id" })
+local result, err = client:Digimon():load({ id = "digimon_id" })
 ```
 
 ### Common Methods
@@ -239,7 +239,7 @@ Return the entity name.
 ## FieldEntity
 
 ```lua
-local field = client:field(nil)
+local field = client:Field(nil)
 ```
 
 ### Fields
@@ -259,7 +259,7 @@ local field = client:field(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:field():list()
+local results, err = client:Field():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -267,7 +267,7 @@ local results, err = client:field():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:field():load({ id = "field_id" })
+local result, err = client:Field():load({ id = "field_id" })
 ```
 
 ### Common Methods
@@ -303,7 +303,7 @@ Return the entity name.
 ## LevelEntity
 
 ```lua
-local level = client:level(nil)
+local level = client:Level(nil)
 ```
 
 ### Fields
@@ -321,7 +321,7 @@ local level = client:level(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:level():list()
+local results, err = client:Level():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -329,7 +329,7 @@ local results, err = client:level():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:level():load({ id = "level_id" })
+local result, err = client:Level():load({ id = "level_id" })
 ```
 
 ### Common Methods
@@ -365,7 +365,7 @@ Return the entity name.
 ## SkillEntity
 
 ```lua
-local skill = client:skill(nil)
+local skill = client:Skill(nil)
 ```
 
 ### Fields
@@ -385,7 +385,7 @@ local skill = client:skill(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:skill():list()
+local results, err = client:Skill():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -393,7 +393,7 @@ local results, err = client:skill():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:skill():load({ id = "skill_id" })
+local result, err = client:Skill():load({ id = "skill_id" })
 ```
 
 ### Common Methods
@@ -429,7 +429,7 @@ Return the entity name.
 ## TypeEntity
 
 ```lua
-local type = client:type(nil)
+local type = client:Type(nil)
 ```
 
 ### Fields
@@ -447,7 +447,7 @@ local type = client:type(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:type():list()
+local results, err = client:Type():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -455,7 +455,7 @@ local results, err = client:type():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:type():load({ id = "type_id" })
+local result, err = client:Type():load({ id = "type_id" })
 ```
 
 ### Common Methods

@@ -31,26 +31,26 @@ local sdk = require("digimon_sdk")
 local client = sdk.new()
 ```
 
-### 2. List attributes
+### 2. List attribute records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:attribute():list()
+local attributes, err = client:Attribute():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(attributes) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load an attribute
 
 ```lua
-local result, err = client:attribute():load({ id = "example_id" })
+local attribute, err = client:Attribute():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(attribute)
 ```
 
 
@@ -96,8 +96,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:attribute():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Attribute():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -175,7 +175,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Attribute` | `(data) -> AttributeEntity` | Create a Attribute entity instance. |
+| `Attribute` | `(data) -> AttributeEntity` | Create an Attribute entity instance. |
 | `Digimon` | `(data) -> DigimonEntity` | Create a Digimon entity instance. |
 | `Field` | `(data) -> FieldEntity` | Create a Field entity instance. |
 | `Level` | `(data) -> LevelEntity` | Create a Level entity instance. |
@@ -202,17 +202,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local attribute, err = client:Attribute():load({ id = "example_id" })
+    if err then error(err) end
+    -- attribute is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -311,7 +316,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.attribute`
+Create an instance: `local attribute = client:Attribute(nil)`
 
 #### Operations
 
@@ -331,20 +336,20 @@ Create an instance: `const attribute = client.attribute`
 
 #### Example: Load
 
-```ts
-const attribute = await client.attribute.load({ id: 'attribute_id' })
+```lua
+local attribute, err = client:Attribute():load({ id = "attribute_id" })
 ```
 
 #### Example: List
 
-```ts
-const attributes = await client.attribute.list()
+```lua
+local attributes, err = client:Attribute():list()
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.digimon`
+Create an instance: `local digimon = client:Digimon(nil)`
 
 #### Operations
 
@@ -374,20 +379,20 @@ Create an instance: `const digimon = client.digimon`
 
 #### Example: Load
 
-```ts
-const digimon = await client.digimon.load({ id: 'digimon_id' })
+```lua
+local digimon, err = client:Digimon():load({ id = "digimon_id" })
 ```
 
 #### Example: List
 
-```ts
-const digimons = await client.digimon.list()
+```lua
+local digimons, err = client:Digimon():list()
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.field`
+Create an instance: `local field = client:Field(nil)`
 
 #### Operations
 
@@ -408,20 +413,20 @@ Create an instance: `const field = client.field`
 
 #### Example: Load
 
-```ts
-const field = await client.field.load({ id: 'field_id' })
+```lua
+local field, err = client:Field():load({ id = "field_id" })
 ```
 
 #### Example: List
 
-```ts
-const fields = await client.field.list()
+```lua
+local fields, err = client:Field():list()
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.level`
+Create an instance: `local level = client:Level(nil)`
 
 #### Operations
 
@@ -440,20 +445,20 @@ Create an instance: `const level = client.level`
 
 #### Example: Load
 
-```ts
-const level = await client.level.load({ id: 'level_id' })
+```lua
+local level, err = client:Level():load({ id = "level_id" })
 ```
 
 #### Example: List
 
-```ts
-const levels = await client.level.list()
+```lua
+local levels, err = client:Level():list()
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.skill`
+Create an instance: `local skill = client:Skill(nil)`
 
 #### Operations
 
@@ -474,20 +479,20 @@ Create an instance: `const skill = client.skill`
 
 #### Example: Load
 
-```ts
-const skill = await client.skill.load({ id: 'skill_id' })
+```lua
+local skill, err = client:Skill():load({ id = "skill_id" })
 ```
 
 #### Example: List
 
-```ts
-const skills = await client.skill.list()
+```lua
+local skills, err = client:Skill():list()
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.type`
+Create an instance: `local type = client:Type(nil)`
 
 #### Operations
 
@@ -506,14 +511,14 @@ Create an instance: `const type = client.type`
 
 #### Example: Load
 
-```ts
-const type = await client.type.load({ id: 'type_id' })
+```lua
+local type, err = client:Type():load({ id = "type_id" })
 ```
 
 #### Example: List
 
-```ts
-const types = await client.type.list()
+```lua
+local types, err = client:Type():list()
 ```
 
 
@@ -588,7 +593,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local attribute = client:attribute()
+local attribute = client:Attribute()
 attribute:load({ id = "example_id" })
 
 -- attribute:data_get() now returns the loaded attribute data

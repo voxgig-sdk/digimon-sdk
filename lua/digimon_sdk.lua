@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:attribute():list() / client:attribute():load({ id = ... })
-function DigimonSDK:attribute(data)
+-- Idiomatic facade: client:Attribute():list() / client:Attribute():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function DigimonSDK:Attribute(data)
   local EntityMod = require("entity.attribute_entity")
   if data == nil then
     if self._attribute == nil then
@@ -256,15 +257,10 @@ function DigimonSDK:attribute(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:attribute() instead.
-function DigimonSDK:Attribute(data)
-  local EntityMod = require("entity.attribute_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:digimon():list() / client:digimon():load({ id = ... })
-function DigimonSDK:digimon(data)
+-- Idiomatic facade: client:Digimon():list() / client:Digimon():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function DigimonSDK:Digimon(data)
   local EntityMod = require("entity.digimon_entity")
   if data == nil then
     if self._digimon == nil then
@@ -275,15 +271,10 @@ function DigimonSDK:digimon(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:digimon() instead.
-function DigimonSDK:Digimon(data)
-  local EntityMod = require("entity.digimon_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:field():list() / client:field():load({ id = ... })
-function DigimonSDK:field(data)
+-- Idiomatic facade: client:Field():list() / client:Field():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function DigimonSDK:Field(data)
   local EntityMod = require("entity.field_entity")
   if data == nil then
     if self._field == nil then
@@ -294,15 +285,10 @@ function DigimonSDK:field(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:field() instead.
-function DigimonSDK:Field(data)
-  local EntityMod = require("entity.field_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:level():list() / client:level():load({ id = ... })
-function DigimonSDK:level(data)
+-- Idiomatic facade: client:Level():list() / client:Level():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function DigimonSDK:Level(data)
   local EntityMod = require("entity.level_entity")
   if data == nil then
     if self._level == nil then
@@ -313,15 +299,10 @@ function DigimonSDK:level(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:level() instead.
-function DigimonSDK:Level(data)
-  local EntityMod = require("entity.level_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:skill():list() / client:skill():load({ id = ... })
-function DigimonSDK:skill(data)
+-- Idiomatic facade: client:Skill():list() / client:Skill():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function DigimonSDK:Skill(data)
   local EntityMod = require("entity.skill_entity")
   if data == nil then
     if self._skill == nil then
@@ -332,15 +313,10 @@ function DigimonSDK:skill(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:skill() instead.
-function DigimonSDK:Skill(data)
-  local EntityMod = require("entity.skill_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:type():list() / client:type():load({ id = ... })
-function DigimonSDK:type(data)
+-- Idiomatic facade: client:Type():list() / client:Type():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function DigimonSDK:Type(data)
   local EntityMod = require("entity.type_entity")
   if data == nil then
     if self._type == nil then
@@ -348,12 +324,6 @@ function DigimonSDK:type(data)
     end
     return self._type
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:type() instead.
-function DigimonSDK:Type(data)
-  local EntityMod = require("entity.type_entity")
   return EntityMod.new(self, data)
 end
 

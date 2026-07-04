@@ -208,78 +208,42 @@ class DigimonSDK
   end
 
 
-  # Idiomatic facade: client.attribute.list / client.attribute.load({ "id" => ... })
-  def attribute
-    require_relative 'entity/attribute_entity'
-    @attribute ||= AttributeEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.attribute instead.
+  # Canonical facade: client.Attribute.list / client.Attribute.load({ "id" => ... })
   def Attribute(data = nil)
     require_relative 'entity/attribute_entity'
     AttributeEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.digimon.list / client.digimon.load({ "id" => ... })
-  def digimon
-    require_relative 'entity/digimon_entity'
-    @digimon ||= DigimonEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.digimon instead.
+  # Canonical facade: client.Digimon.list / client.Digimon.load({ "id" => ... })
   def Digimon(data = nil)
     require_relative 'entity/digimon_entity'
     DigimonEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.field.list / client.field.load({ "id" => ... })
-  def field
-    require_relative 'entity/field_entity'
-    @field ||= FieldEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.field instead.
+  # Canonical facade: client.Field.list / client.Field.load({ "id" => ... })
   def Field(data = nil)
     require_relative 'entity/field_entity'
     FieldEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.level.list / client.level.load({ "id" => ... })
-  def level
-    require_relative 'entity/level_entity'
-    @level ||= LevelEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.level instead.
+  # Canonical facade: client.Level.list / client.Level.load({ "id" => ... })
   def Level(data = nil)
     require_relative 'entity/level_entity'
     LevelEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.skill.list / client.skill.load({ "id" => ... })
-  def skill
-    require_relative 'entity/skill_entity'
-    @skill ||= SkillEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.skill instead.
+  # Canonical facade: client.Skill.list / client.Skill.load({ "id" => ... })
   def Skill(data = nil)
     require_relative 'entity/skill_entity'
     SkillEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.type.list / client.type.load({ "id" => ... })
-  def type
-    require_relative 'entity/type_entity'
-    @type ||= TypeEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.type instead.
+  # Canonical facade: client.Type.list / client.Type.load({ "id" => ... })
   def Type(data = nil)
     require_relative 'entity/type_entity'
     TypeEntity.new(self, data)

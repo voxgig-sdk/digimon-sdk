@@ -31,24 +31,28 @@ from digimon_sdk import DigimonSDK
 client = DigimonSDK()
 ```
 
-### 2. List attributes
+### 2. List attribute records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.attribute.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    attributes = client.Attribute().list({})
+    for attribute in attributes:
+        print(attribute)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load an attribute
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.attribute.load({"id": "example_id"})
-    print(result)
+    attribute = client.Attribute().load({"id": "example_id"})
+    print(attribute)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = DigimonSDK.test()
 
-result = client.attribute.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+attribute = client.Attribute().load({"id": "test01"})
+# attribute contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -173,7 +178,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Attribute` | `(data) -> AttributeEntity` | Create a Attribute entity instance. |
+| `Attribute` | `(data) -> AttributeEntity` | Create an Attribute entity instance. |
 | `Digimon` | `(data) -> DigimonEntity` | Create a Digimon entity instance. |
 | `Field` | `(data) -> FieldEntity` | Create a Field entity instance. |
 | `Level` | `(data) -> LevelEntity` | Create a Level entity instance. |
@@ -313,7 +318,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.attribute`
+Create an instance: `attribute = client.Attribute()`
 
 #### Operations
 
@@ -333,20 +338,20 @@ Create an instance: `const attribute = client.attribute`
 
 #### Example: Load
 
-```ts
-const attribute = await client.attribute.load({ id: 'attribute_id' })
+```python
+attribute = client.Attribute().load({"id": "attribute_id"})
 ```
 
 #### Example: List
 
-```ts
-const attributes = await client.attribute.list()
+```python
+attributes = client.Attribute().list({})
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.digimon`
+Create an instance: `digimon = client.Digimon()`
 
 #### Operations
 
@@ -376,20 +381,20 @@ Create an instance: `const digimon = client.digimon`
 
 #### Example: Load
 
-```ts
-const digimon = await client.digimon.load({ id: 'digimon_id' })
+```python
+digimon = client.Digimon().load({"id": "digimon_id"})
 ```
 
 #### Example: List
 
-```ts
-const digimons = await client.digimon.list()
+```python
+digimons = client.Digimon().list({})
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.field`
+Create an instance: `field = client.Field()`
 
 #### Operations
 
@@ -410,20 +415,20 @@ Create an instance: `const field = client.field`
 
 #### Example: Load
 
-```ts
-const field = await client.field.load({ id: 'field_id' })
+```python
+field = client.Field().load({"id": "field_id"})
 ```
 
 #### Example: List
 
-```ts
-const fields = await client.field.list()
+```python
+fields = client.Field().list({})
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.level`
+Create an instance: `level = client.Level()`
 
 #### Operations
 
@@ -442,20 +447,20 @@ Create an instance: `const level = client.level`
 
 #### Example: Load
 
-```ts
-const level = await client.level.load({ id: 'level_id' })
+```python
+level = client.Level().load({"id": "level_id"})
 ```
 
 #### Example: List
 
-```ts
-const levels = await client.level.list()
+```python
+levels = client.Level().list({})
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.skill`
+Create an instance: `skill = client.Skill()`
 
 #### Operations
 
@@ -476,20 +481,20 @@ Create an instance: `const skill = client.skill`
 
 #### Example: Load
 
-```ts
-const skill = await client.skill.load({ id: 'skill_id' })
+```python
+skill = client.Skill().load({"id": "skill_id"})
 ```
 
 #### Example: List
 
-```ts
-const skills = await client.skill.list()
+```python
+skills = client.Skill().list({})
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.type`
+Create an instance: `type = client.Type()`
 
 #### Operations
 
@@ -508,14 +513,14 @@ Create an instance: `const type = client.type`
 
 #### Example: Load
 
-```ts
-const type = await client.type.load({ id: 'type_id' })
+```python
+type = client.Type().load({"id": "type_id"})
 ```
 
 #### Example: List
 
-```ts
-const types = await client.type.list()
+```python
+types = client.Type().list({})
 ```
 
 
@@ -589,7 +594,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-attribute = client.attribute
+attribute = client.Attribute()
 attribute.load({"id": "example_id"})
 
 # attribute.data_get() now returns the loaded attribute data

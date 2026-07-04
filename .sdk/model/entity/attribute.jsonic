@@ -108,7 +108,7 @@ main: kit: entity: attribute: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body.attribute`"
+            res: "`body`"
           }
         }
       ]

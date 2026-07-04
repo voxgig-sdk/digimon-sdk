@@ -100,7 +100,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AttributeEntity
 
 ```python
-attribute = client.attribute
+attribute = client.Attribute()
 ```
 
 ### Fields
@@ -119,7 +119,9 @@ attribute = client.attribute
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.attribute.list({})
+results = client.Attribute().list({})
+for attribute in results:
+    print(attribute)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -127,7 +129,7 @@ results = client.attribute.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.attribute.load({"id": "attribute_id"})
+result = client.Attribute().load({"id": "attribute_id"})
 ```
 
 ### Common Methods
@@ -162,7 +164,7 @@ Return the entity name.
 ## DigimonEntity
 
 ```python
-digimon = client.digimon
+digimon = client.Digimon()
 ```
 
 ### Fields
@@ -191,7 +193,9 @@ digimon = client.digimon
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.digimon.list({})
+results = client.Digimon().list({})
+for digimon in results:
+    print(digimon)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -199,7 +203,7 @@ results = client.digimon.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.digimon.load({"id": "digimon_id"})
+result = client.Digimon().load({"id": "digimon_id"})
 ```
 
 ### Common Methods
@@ -234,7 +238,7 @@ Return the entity name.
 ## FieldEntity
 
 ```python
-field = client.field
+field = client.Field()
 ```
 
 ### Fields
@@ -254,7 +258,9 @@ field = client.field
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.field.list({})
+results = client.Field().list({})
+for field in results:
+    print(field)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -262,7 +268,7 @@ results = client.field.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.field.load({"id": "field_id"})
+result = client.Field().load({"id": "field_id"})
 ```
 
 ### Common Methods
@@ -297,7 +303,7 @@ Return the entity name.
 ## LevelEntity
 
 ```python
-level = client.level
+level = client.Level()
 ```
 
 ### Fields
@@ -315,7 +321,9 @@ level = client.level
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.level.list({})
+results = client.Level().list({})
+for level in results:
+    print(level)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -323,7 +331,7 @@ results = client.level.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.level.load({"id": "level_id"})
+result = client.Level().load({"id": "level_id"})
 ```
 
 ### Common Methods
@@ -358,7 +366,7 @@ Return the entity name.
 ## SkillEntity
 
 ```python
-skill = client.skill
+skill = client.Skill()
 ```
 
 ### Fields
@@ -378,7 +386,9 @@ skill = client.skill
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.skill.list({})
+results = client.Skill().list({})
+for skill in results:
+    print(skill)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -386,7 +396,7 @@ results = client.skill.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.skill.load({"id": "skill_id"})
+result = client.Skill().load({"id": "skill_id"})
 ```
 
 ### Common Methods
@@ -421,7 +431,7 @@ Return the entity name.
 ## TypeEntity
 
 ```python
-type = client.type
+type = client.Type()
 ```
 
 ### Fields
@@ -439,7 +449,9 @@ type = client.type
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.type.list({})
+results = client.Type().list({})
+for type in results:
+    print(type)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -447,7 +459,7 @@ results = client.type.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.type.load({"id": "type_id"})
+result = client.Type().load({"id": "type_id"})
 ```
 
 ### Common Methods

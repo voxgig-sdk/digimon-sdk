@@ -103,7 +103,7 @@ main: kit: entity: type: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body.type`"
+            res: "`body`"
           }
         }
       ]

@@ -145,7 +145,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.attribute`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -526,7 +526,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.field`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -648,7 +648,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.level`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -784,7 +784,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.skill`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -906,7 +906,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.type`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },

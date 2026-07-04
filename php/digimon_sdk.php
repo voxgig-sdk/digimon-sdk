@@ -233,10 +233,10 @@ class DigimonSDK
 
     private $_attribute = null;
 
-    // Idiomatic facade: $client->attribute()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Attribute() (PHP method
-    // names are case-insensitive).
-    public function attribute($data = null)
+    // Canonical facade: $client->Attribute()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->attribute()
+    // resolves here too.
+    public function Attribute($data = null)
     {
         require_once __DIR__ . '/entity/attribute_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class DigimonSDK
 
     private $_digimon = null;
 
-    // Idiomatic facade: $client->digimon()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Digimon() (PHP method
-    // names are case-insensitive).
-    public function digimon($data = null)
+    // Canonical facade: $client->Digimon()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->digimon()
+    // resolves here too.
+    public function Digimon($data = null)
     {
         require_once __DIR__ . '/entity/digimon_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class DigimonSDK
 
     private $_field = null;
 
-    // Idiomatic facade: $client->field()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Field() (PHP method
-    // names are case-insensitive).
-    public function field($data = null)
+    // Canonical facade: $client->Field()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->field()
+    // resolves here too.
+    public function Field($data = null)
     {
         require_once __DIR__ . '/entity/field_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class DigimonSDK
 
     private $_level = null;
 
-    // Idiomatic facade: $client->level()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Level() (PHP method
-    // names are case-insensitive).
-    public function level($data = null)
+    // Canonical facade: $client->Level()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->level()
+    // resolves here too.
+    public function Level($data = null)
     {
         require_once __DIR__ . '/entity/level_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class DigimonSDK
 
     private $_skill = null;
 
-    // Idiomatic facade: $client->skill()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Skill() (PHP method
-    // names are case-insensitive).
-    public function skill($data = null)
+    // Canonical facade: $client->Skill()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->skill()
+    // resolves here too.
+    public function Skill($data = null)
     {
         require_once __DIR__ . '/entity/skill_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class DigimonSDK
 
     private $_type = null;
 
-    // Idiomatic facade: $client->type()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Type() (PHP method
-    // names are case-insensitive).
-    public function type($data = null)
+    // Canonical facade: $client->Type()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->type()
+    // resolves here too.
+    public function Type($data = null)
     {
         require_once __DIR__ . '/entity/type_entity.php';
         if ($data === null) {

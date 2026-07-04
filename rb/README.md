@@ -28,16 +28,14 @@ require_relative "Digimon_sdk"
 client = DigimonSDK.new
 ```
 
-### 2. List attributes
+### 2. List attribute records
 
 ```ruby
 begin
-  result = client.attribute.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Attribute records — iterate directly.
+  attributes = client.Attribute.list
+  attributes.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.attribute.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Attribute record (raises on error).
+  attribute = client.Attribute.load({ "id" => "example_id" })
+  puts attribute
 rescue => err
   warn "load failed: #{err}"
 end
@@ -96,13 +95,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = DigimonSDK.test
+client = DigimonSDK.test({
+  "entity" => { "attribute" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.attribute.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+attribute = client.Attribute.load({ "id" => "test01" })
+puts attribute
 ```
 
 ### Use a custom fetch function
@@ -178,7 +181,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Attribute` | `(data) -> AttributeEntity` | Create a Attribute entity instance. |
+| `Attribute` | `(data) -> AttributeEntity` | Create an Attribute entity instance. |
 | `Digimon` | `(data) -> DigimonEntity` | Create a Digimon entity instance. |
 | `Field` | `(data) -> FieldEntity` | Create a Field entity instance. |
 | `Level` | `(data) -> LevelEntity` | Create a Level entity instance. |
@@ -317,7 +320,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.attribute`
+Create an instance: `attribute = client.Attribute`
 
 #### Operations
 
@@ -337,20 +340,22 @@ Create an instance: `const attribute = client.attribute`
 
 #### Example: Load
 
-```ts
-const attribute = await client.attribute.load({ id: 'attribute_id' })
+```ruby
+# load returns the bare Attribute record (raises on error).
+attribute = client.Attribute.load({ "id" => "attribute_id" })
 ```
 
 #### Example: List
 
-```ts
-const attributes = await client.attribute.list()
+```ruby
+# list returns an Array of Attribute records (raises on error).
+attributes = client.Attribute.list
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.digimon`
+Create an instance: `digimon = client.Digimon`
 
 #### Operations
 
@@ -380,20 +385,22 @@ Create an instance: `const digimon = client.digimon`
 
 #### Example: Load
 
-```ts
-const digimon = await client.digimon.load({ id: 'digimon_id' })
+```ruby
+# load returns the bare Digimon record (raises on error).
+digimon = client.Digimon.load({ "id" => "digimon_id" })
 ```
 
 #### Example: List
 
-```ts
-const digimons = await client.digimon.list()
+```ruby
+# list returns an Array of Digimon records (raises on error).
+digimons = client.Digimon.list
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.field`
+Create an instance: `field = client.Field`
 
 #### Operations
 
@@ -414,20 +421,22 @@ Create an instance: `const field = client.field`
 
 #### Example: Load
 
-```ts
-const field = await client.field.load({ id: 'field_id' })
+```ruby
+# load returns the bare Field record (raises on error).
+field = client.Field.load({ "id" => "field_id" })
 ```
 
 #### Example: List
 
-```ts
-const fields = await client.field.list()
+```ruby
+# list returns an Array of Field records (raises on error).
+fields = client.Field.list
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.level`
+Create an instance: `level = client.Level`
 
 #### Operations
 
@@ -446,20 +455,22 @@ Create an instance: `const level = client.level`
 
 #### Example: Load
 
-```ts
-const level = await client.level.load({ id: 'level_id' })
+```ruby
+# load returns the bare Level record (raises on error).
+level = client.Level.load({ "id" => "level_id" })
 ```
 
 #### Example: List
 
-```ts
-const levels = await client.level.list()
+```ruby
+# list returns an Array of Level records (raises on error).
+levels = client.Level.list
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.skill`
+Create an instance: `skill = client.Skill`
 
 #### Operations
 
@@ -480,20 +491,22 @@ Create an instance: `const skill = client.skill`
 
 #### Example: Load
 
-```ts
-const skill = await client.skill.load({ id: 'skill_id' })
+```ruby
+# load returns the bare Skill record (raises on error).
+skill = client.Skill.load({ "id" => "skill_id" })
 ```
 
 #### Example: List
 
-```ts
-const skills = await client.skill.list()
+```ruby
+# list returns an Array of Skill records (raises on error).
+skills = client.Skill.list
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.type`
+Create an instance: `type = client.Type`
 
 #### Operations
 
@@ -512,14 +525,16 @@ Create an instance: `const type = client.type`
 
 #### Example: Load
 
-```ts
-const type = await client.type.load({ id: 'type_id' })
+```ruby
+# load returns the bare Type record (raises on error).
+type = client.Type.load({ "id" => "type_id" })
 ```
 
 #### Example: List
 
-```ts
-const types = await client.type.list()
+```ruby
+# list returns an Array of Type records (raises on error).
+types = client.Type.list
 ```
 
 
@@ -594,7 +609,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-attribute = client.attribute
+attribute = client.Attribute
 attribute.load({ "id" => "example_id" })
 
 # attribute.data_get now returns the loaded attribute data

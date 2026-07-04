@@ -30,53 +30,39 @@ go mod edit -replace github.com/voxgig-sdk/digimon-sdk/go=../digimon-sdk/go
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/digimon-sdk/go"
-    "github.com/voxgig-sdk/digimon-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List attributes
-
-```go
-    result, err := client.Attribute(nil).List(nil, nil)
+    // List attribute records — the value is the array of records itself.
+    attributes, err := client.Attribute(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range attributes.([]any) {
+        fmt.Println(item)
     }
-```
 
-### 3. Load an attribute
-
-```go
-    result, err = client.Attribute(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single attribute — the value is the loaded record.
+    attribute, err := client.Attribute(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(attribute)
 }
 ```
 
@@ -127,10 +113,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Attribute(nil).Load(
+attribute, err := client.Attribute(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(attribute) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -207,7 +196,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Attribute` | `(data map[string]any) DigimonEntity` | Create a Attribute entity instance. |
+| `Attribute` | `(data map[string]any) DigimonEntity` | Create an Attribute entity instance. |
 | `Digimon` | `(data map[string]any) DigimonEntity` | Create a Digimon entity instance. |
 | `Field` | `(data map[string]any) DigimonEntity` | Create a Field entity instance. |
 | `Level` | `(data map[string]any) DigimonEntity` | Create a Level entity instance. |
@@ -232,17 +221,24 @@ All entities implement the `DigimonEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    attribute, err := client.Attribute(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // attribute is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -362,13 +358,21 @@ Create an instance: `attribute := client.Attribute(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Attribute(nil).Load(map[string]any{"id": "attribute_id"}, nil)
+attribute, err := client.Attribute(nil).Load(map[string]any{"id": "attribute_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(attribute) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Attribute(nil).List(nil, nil)
+attributes, err := client.Attribute(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(attributes) // the array of records
 ```
 
 
@@ -405,13 +409,21 @@ Create an instance: `digimon := client.Digimon(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Digimon(nil).Load(map[string]any{"id": "digimon_id"}, nil)
+digimon, err := client.Digimon(nil).Load(map[string]any{"id": "digimon_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(digimon) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Digimon(nil).List(nil, nil)
+digimons, err := client.Digimon(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(digimons) // the array of records
 ```
 
 
@@ -439,13 +451,21 @@ Create an instance: `field := client.Field(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Field(nil).Load(map[string]any{"id": "field_id"}, nil)
+field, err := client.Field(nil).Load(map[string]any{"id": "field_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(field) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Field(nil).List(nil, nil)
+fields, err := client.Field(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(fields) // the array of records
 ```
 
 
@@ -471,13 +491,21 @@ Create an instance: `level := client.Level(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Level(nil).Load(map[string]any{"id": "level_id"}, nil)
+level, err := client.Level(nil).Load(map[string]any{"id": "level_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(level) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Level(nil).List(nil, nil)
+levels, err := client.Level(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(levels) // the array of records
 ```
 
 
@@ -505,13 +533,21 @@ Create an instance: `skill := client.Skill(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Skill(nil).Load(map[string]any{"id": "skill_id"}, nil)
+skill, err := client.Skill(nil).Load(map[string]any{"id": "skill_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(skill) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Skill(nil).List(nil, nil)
+skills, err := client.Skill(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(skills) // the array of records
 ```
 
 
@@ -537,13 +573,21 @@ Create an instance: `type := client.Type(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Type(nil).Load(map[string]any{"id": "type_id"}, nil)
+type, err := client.Type(nil).Load(map[string]any{"id": "type_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(type) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Type(nil).List(nil, nil)
+types, err := client.Type(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(types) // the array of records
 ```
 
 

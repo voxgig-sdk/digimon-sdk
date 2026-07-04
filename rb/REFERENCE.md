@@ -106,7 +106,7 @@ same parameters as `direct()`. Raises on error.
 ## AttributeEntity
 
 ```ruby
-attribute = client.attribute
+attribute = client.Attribute
 ```
 
 ### Fields
@@ -125,7 +125,7 @@ attribute = client.attribute
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.attribute.list(nil)
+results = client.Attribute.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -133,7 +133,7 @@ results = client.attribute.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.attribute.load({ "id" => "attribute_id" })
+result = client.Attribute.load({ "id" => "attribute_id" })
 ```
 
 ### Common Methods
@@ -169,7 +169,7 @@ Return the entity name.
 ## DigimonEntity
 
 ```ruby
-digimon = client.digimon
+digimon = client.Digimon
 ```
 
 ### Fields
@@ -198,7 +198,7 @@ digimon = client.digimon
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.digimon.list(nil)
+results = client.Digimon.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -206,7 +206,7 @@ results = client.digimon.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.digimon.load({ "id" => "digimon_id" })
+result = client.Digimon.load({ "id" => "digimon_id" })
 ```
 
 ### Common Methods
@@ -242,7 +242,7 @@ Return the entity name.
 ## FieldEntity
 
 ```ruby
-field = client.field
+field = client.Field
 ```
 
 ### Fields
@@ -262,7 +262,7 @@ field = client.field
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.field.list(nil)
+results = client.Field.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -270,7 +270,7 @@ results = client.field.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.field.load({ "id" => "field_id" })
+result = client.Field.load({ "id" => "field_id" })
 ```
 
 ### Common Methods
@@ -306,7 +306,7 @@ Return the entity name.
 ## LevelEntity
 
 ```ruby
-level = client.level
+level = client.Level
 ```
 
 ### Fields
@@ -324,7 +324,7 @@ level = client.level
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.level.list(nil)
+results = client.Level.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -332,7 +332,7 @@ results = client.level.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.level.load({ "id" => "level_id" })
+result = client.Level.load({ "id" => "level_id" })
 ```
 
 ### Common Methods
@@ -368,7 +368,7 @@ Return the entity name.
 ## SkillEntity
 
 ```ruby
-skill = client.skill
+skill = client.Skill
 ```
 
 ### Fields
@@ -388,7 +388,7 @@ skill = client.skill
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.skill.list(nil)
+results = client.Skill.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -396,7 +396,7 @@ results = client.skill.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.skill.load({ "id" => "skill_id" })
+result = client.Skill.load({ "id" => "skill_id" })
 ```
 
 ### Common Methods
@@ -432,7 +432,7 @@ Return the entity name.
 ## TypeEntity
 
 ```ruby
-type = client.type
+type = client.Type
 ```
 
 ### Fields
@@ -450,7 +450,7 @@ type = client.type
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.type.list(nil)
+results = client.Type.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -458,7 +458,7 @@ results = client.type.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.type.load({ "id" => "type_id" })
+result = client.Type.load({ "id" => "type_id" })
 ```
 
 ### Common Methods

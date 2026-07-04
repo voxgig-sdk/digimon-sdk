@@ -26,9 +26,11 @@ import { DigimonSDK } from '@voxgig-sdk/digimon'
 
 const client = new DigimonSDK()
 
-// List all attributes
-const attributes = await client.attribute.list()
-console.log(attributes.data)
+// List all attributes (returns Attribute[])
+const attributes = await client.Attribute().list()
+for (const attribute of attributes) {
+  console.log(attribute)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -88,12 +90,13 @@ from digimon_sdk import DigimonSDK
 
 client = DigimonSDK()
 
-# List all attributes
-attributes = client.attribute.list()
-print(attributes)
+# List all attributes (returns a list, raises on error)
+attributes = client.Attribute().list({})
+for attribute in attributes:
+    print(attribute)
 
-# Load a specific attribute
-attribute = client.attribute.load({"id": "example_id"})
+# Load a specific attribute (returns the record, raises on error)
+attribute = client.Attribute().load({"id": "example_id"})
 print(attribute)
 ```
 
@@ -105,12 +108,12 @@ require_once 'digimon_sdk.php';
 
 $client = new DigimonSDK();
 
-// List all attributes (throws on error)
-$attributes = $client->attribute()->list();
+// List all attributes (returns an array; throws on error)
+$attributes = $client->Attribute()->list();
 print_r($attributes);
 
-// Load a specific attribute
-$attribute = $client->attribute()->load(["id" => "example_id"]);
+// Load a specific attribute (returns the bare record; throws on error)
+$attribute = $client->Attribute()->load(["id" => "example_id"]);
 print_r($attribute);
 ```
 
@@ -133,12 +136,12 @@ require_relative "Digimon_sdk"
 
 client = DigimonSDK.new
 
-# List all attributes
-attributes = client.attribute.list
+# List all attributes (returns an Array; raises on error)
+attributes = client.Attribute.list
 puts attributes
 
-# Load a specific attribute
-attribute = client.attribute.load({ "id" => "example_id" })
+# Load a specific attribute (returns the bare record; raises on error)
+attribute = client.Attribute.load({ "id" => "example_id" })
 puts attribute
 ```
 
@@ -150,11 +153,11 @@ local sdk = require("digimon_sdk")
 local client = sdk.new()
 
 -- List all attributes
-local attributes, err = client:attribute():list()
+local attributes, err = client:Attribute():list()
 print(attributes)
 
 -- Load a specific attribute
-local attribute, err = client:attribute():load({ id = "example_id" })
+local attribute, err = client:Attribute():load({ id = "example_id" })
 print(attribute)
 ```
 
@@ -167,22 +170,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = DigimonSDK.test()
-const result = await client.attribute.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const attribute = await client.Attribute().load({ id: 1 })
+// attribute is a bare Attribute populated with mock data
+console.log(attribute)
 ```
 
 ### Python
 
 ```python
 client = DigimonSDK.test()
-result = client.attribute.load({"id": "test01"})
+attribute = client.Attribute().load({"id": "test01"})
+print(attribute)
 ```
 
 ### PHP
 
 ```php
-$client = DigimonSDK::test();
-$result = $client->attribute()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = DigimonSDK::test([
+    "entity" => ["attribute" => ["test01" => ["id" => "test01"]]],
+]);
+$attribute = $client->Attribute()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -197,15 +205,18 @@ result, err := client.Attribute(nil).Load(
 ### Ruby
 
 ```ruby
-client = DigimonSDK.test
-result = client.attribute.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = DigimonSDK.test({
+  "entity" => { "attribute" => { "test01" => { "id" => "test01" } } },
+})
+attribute = client.Attribute.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:attribute():load({ id = "test01" })
+local result, err = client:Attribute():load({ id = "test01" })
 ```
 
 ## How it works
@@ -253,6 +264,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

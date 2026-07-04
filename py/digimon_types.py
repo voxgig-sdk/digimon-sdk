@@ -4,155 +4,141 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Attribute:
-    attribute: Optional[str] = None
-    description: Optional[str] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
+class Attribute(TypedDict, total=False):
+    attribute: str
+    description: str
+    href: str
+    id: int
 
 
-@dataclass
-class AttributeLoadMatch:
+class AttributeLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class AttributeListMatch:
-    attribute: Optional[str] = None
-    description: Optional[str] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
+class AttributeListMatch(TypedDict, total=False):
+    attribute: str
+    description: str
+    href: str
+    id: int
 
 
-@dataclass
-class Digimon:
-    attribute: Optional[list] = None
-    description: Optional[list] = None
-    field: Optional[list] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
-    image: Optional[list] = None
-    level: Optional[list] = None
-    name: Optional[str] = None
-    next_evolution: Optional[list] = None
-    prior_evolution: Optional[list] = None
-    release_date: Optional[str] = None
-    skill: Optional[list] = None
-    type: Optional[list] = None
-    x_antibody: Optional[bool] = None
+class Digimon(TypedDict, total=False):
+    attribute: list
+    description: list
+    field: list
+    href: str
+    id: int
+    image: list
+    level: list
+    name: str
+    next_evolution: list
+    prior_evolution: list
+    release_date: str
+    skill: list
+    type: list
+    x_antibody: bool
 
 
-@dataclass
-class DigimonLoadMatch:
+class DigimonLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class DigimonListMatch:
-    attribute: Optional[list] = None
-    description: Optional[list] = None
-    field: Optional[list] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
-    image: Optional[list] = None
-    level: Optional[list] = None
-    name: Optional[str] = None
-    next_evolution: Optional[list] = None
-    prior_evolution: Optional[list] = None
-    release_date: Optional[str] = None
-    skill: Optional[list] = None
-    type: Optional[list] = None
-    x_antibody: Optional[bool] = None
+class DigimonListMatch(TypedDict, total=False):
+    attribute: list
+    description: list
+    field: list
+    href: str
+    id: int
+    image: list
+    level: list
+    name: str
+    next_evolution: list
+    prior_evolution: list
+    release_date: str
+    skill: list
+    type: list
+    x_antibody: bool
 
 
-@dataclass
-class Field:
-    description: Optional[str] = None
-    field: Optional[str] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
-    image: Optional[str] = None
+class Field(TypedDict, total=False):
+    description: str
+    field: str
+    href: str
+    id: int
+    image: str
 
 
-@dataclass
-class FieldLoadMatch:
+class FieldLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class FieldListMatch:
-    description: Optional[str] = None
-    field: Optional[str] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
-    image: Optional[str] = None
+class FieldListMatch(TypedDict, total=False):
+    description: str
+    field: str
+    href: str
+    id: int
+    image: str
 
 
-@dataclass
-class Level:
-    href: Optional[str] = None
-    id: Optional[int] = None
-    level: Optional[str] = None
+class Level(TypedDict, total=False):
+    href: str
+    id: int
+    level: str
 
 
-@dataclass
-class LevelLoadMatch:
+class LevelLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class LevelListMatch:
-    href: Optional[str] = None
-    id: Optional[int] = None
-    level: Optional[str] = None
+class LevelListMatch(TypedDict, total=False):
+    href: str
+    id: int
+    level: str
 
 
-@dataclass
-class Skill:
-    description: Optional[str] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
-    skill: Optional[str] = None
-    translation: Optional[str] = None
+class Skill(TypedDict, total=False):
+    description: str
+    href: str
+    id: int
+    skill: str
+    translation: str
 
 
-@dataclass
-class SkillLoadMatch:
+class SkillLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class SkillListMatch:
-    description: Optional[str] = None
-    href: Optional[str] = None
-    id: Optional[int] = None
-    skill: Optional[str] = None
-    translation: Optional[str] = None
+class SkillListMatch(TypedDict, total=False):
+    description: str
+    href: str
+    id: int
+    skill: str
+    translation: str
 
 
-@dataclass
-class Type:
-    href: Optional[str] = None
-    id: Optional[int] = None
-    type: Optional[str] = None
+class Type(TypedDict, total=False):
+    href: str
+    id: int
+    type: str
 
 
-@dataclass
-class TypeLoadMatch:
+class TypeLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class TypeListMatch:
-    href: Optional[str] = None
-    id: Optional[int] = None
-    type: Optional[str] = None
-
+class TypeListMatch(TypedDict, total=False):
+    href: str
+    id: int
+    type: str

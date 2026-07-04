@@ -28,25 +28,28 @@ import { DigimonSDK } from '@voxgig-sdk/digimon'
 const client = new DigimonSDK()
 ```
 
-### 2. List attributes
+### 2. List attribute records
+
+`list()` resolves to an array of Attribute objects — iterate it directly:
 
 ```ts
-const result = await client.attribute.list()
+const attributes = await client.Attribute().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const attribute of attributes) {
+  console.log(attribute)
 }
 ```
 
 ### 3. Load an attribute
 
-```ts
-const result = await client.attribute.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const attribute = await client.Attribute().load({ id: 'example_id' })
+  console.log(attribute)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -64,6 +67,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -92,9 +98,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = DigimonSDK.test()
 
-const result = await client.attribute.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const attribute = await client.Attribute().load({ id: 'test01' })
+// attribute is a bare entity populated with mock response data
+console.log(attribute)
 ```
 
 You can also use the instance method:
@@ -109,7 +115,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.attribute
+const entity = client.Attribute()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -187,7 +193,7 @@ new DigimonSDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `Attribute(data?)` | `AttributeEntity` | Create a Attribute entity instance. |
+| `Attribute(data?)` | `AttributeEntity` | Create an Attribute entity instance. |
 | `Digimon(data?)` | `DigimonEntity` | Create a Digimon entity instance. |
 | `Field(data?)` | `FieldEntity` | Create a Field entity instance. |
 | `Level(data?)` | `LevelEntity` | Create a Level entity instance. |
@@ -209,29 +215,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): DigimonSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -358,7 +365,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.attribute`
+Create an instance: `const attribute = client.Attribute()`
 
 #### Operations
 
@@ -379,19 +386,19 @@ Create an instance: `const attribute = client.attribute`
 #### Example: Load
 
 ```ts
-const attribute = await client.attribute.load({ id: 'attribute_id' })
+const attribute = await client.Attribute().load({ id: 'attribute_id' })
 ```
 
 #### Example: List
 
 ```ts
-const attributes = await client.attribute.list()
+const attributes = await client.Attribute().list()
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.digimon`
+Create an instance: `const digimon = client.Digimon()`
 
 #### Operations
 
@@ -422,19 +429,19 @@ Create an instance: `const digimon = client.digimon`
 #### Example: Load
 
 ```ts
-const digimon = await client.digimon.load({ id: 'digimon_id' })
+const digimon = await client.Digimon().load({ id: 'digimon_id' })
 ```
 
 #### Example: List
 
 ```ts
-const digimons = await client.digimon.list()
+const digimons = await client.Digimon().list()
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.field`
+Create an instance: `const field = client.Field()`
 
 #### Operations
 
@@ -456,19 +463,19 @@ Create an instance: `const field = client.field`
 #### Example: Load
 
 ```ts
-const field = await client.field.load({ id: 'field_id' })
+const field = await client.Field().load({ id: 'field_id' })
 ```
 
 #### Example: List
 
 ```ts
-const fields = await client.field.list()
+const fields = await client.Field().list()
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.level`
+Create an instance: `const level = client.Level()`
 
 #### Operations
 
@@ -488,19 +495,19 @@ Create an instance: `const level = client.level`
 #### Example: Load
 
 ```ts
-const level = await client.level.load({ id: 'level_id' })
+const level = await client.Level().load({ id: 'level_id' })
 ```
 
 #### Example: List
 
 ```ts
-const levels = await client.level.list()
+const levels = await client.Level().list()
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.skill`
+Create an instance: `const skill = client.Skill()`
 
 #### Operations
 
@@ -522,19 +529,19 @@ Create an instance: `const skill = client.skill`
 #### Example: Load
 
 ```ts
-const skill = await client.skill.load({ id: 'skill_id' })
+const skill = await client.Skill().load({ id: 'skill_id' })
 ```
 
 #### Example: List
 
 ```ts
-const skills = await client.skill.list()
+const skills = await client.Skill().list()
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.type`
+Create an instance: `const type = client.Type()`
 
 #### Operations
 
@@ -554,13 +561,13 @@ Create an instance: `const type = client.type`
 #### Example: Load
 
 ```ts
-const type = await client.type.load({ id: 'type_id' })
+const type = await client.Type().load({ id: 'type_id' })
 ```
 
 #### Example: List
 
 ```ts
-const types = await client.type.list()
+const types = await client.Type().list()
 ```
 
 
@@ -631,7 +638,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const attribute = client.attribute
+const attribute = client.Attribute()
 await attribute.load({ id: "example_id" })
 
 // attribute.data() now returns the loaded attribute data

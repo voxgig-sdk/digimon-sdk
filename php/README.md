@@ -29,18 +29,16 @@ require_once 'digimon_sdk.php';
 $client = new DigimonSDK();
 ```
 
-### 2. List attributes
+### 2. List attribute records
 
 ```php
 try {
-    $result = $client->attribute()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Attribute records — iterate directly.
+    $attributes = $client->Attribute()->list();
+    foreach ($attributes as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->attribute()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Attribute record (throws on error).
+    $attribute = $client->Attribute()->load(["id" => "example_id"]);
+    print_r($attribute);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = DigimonSDK::test();
+$client = DigimonSDK::test([
+    "entity" => ["attribute" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->attribute()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$attribute = $client->Attribute()->load(["id" => "test01"]);
+print_r($attribute);
 ```
 
 ### Use a custom fetch function
@@ -182,7 +185,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `Attribute` | `($data): AttributeEntity` | Create a Attribute entity instance. |
+| `Attribute` | `($data): AttributeEntity` | Create an Attribute entity instance. |
 | `Digimon` | `($data): DigimonEntity` | Create a Digimon entity instance. |
 | `Field` | `($data): FieldEntity` | Create a Field entity instance. |
 | `Level` | `($data): LevelEntity` | Create a Level entity instance. |
@@ -322,7 +325,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.attribute`
+Create an instance: `$attribute = $client->Attribute();`
 
 #### Operations
 
@@ -342,20 +345,22 @@ Create an instance: `const attribute = client.attribute`
 
 #### Example: Load
 
-```ts
-const attribute = await client.attribute.load({ id: 'attribute_id' })
+```php
+// load() returns the bare Attribute record (throws on error).
+$attribute = $client->Attribute()->load(["id" => "attribute_id"]);
 ```
 
 #### Example: List
 
-```ts
-const attributes = await client.attribute.list()
+```php
+// list() returns an array of Attribute records (throws on error).
+$attributes = $client->Attribute()->list();
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.digimon`
+Create an instance: `$digimon = $client->Digimon();`
 
 #### Operations
 
@@ -385,20 +390,22 @@ Create an instance: `const digimon = client.digimon`
 
 #### Example: Load
 
-```ts
-const digimon = await client.digimon.load({ id: 'digimon_id' })
+```php
+// load() returns the bare Digimon record (throws on error).
+$digimon = $client->Digimon()->load(["id" => "digimon_id"]);
 ```
 
 #### Example: List
 
-```ts
-const digimons = await client.digimon.list()
+```php
+// list() returns an array of Digimon records (throws on error).
+$digimons = $client->Digimon()->list();
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.field`
+Create an instance: `$field = $client->Field();`
 
 #### Operations
 
@@ -419,20 +426,22 @@ Create an instance: `const field = client.field`
 
 #### Example: Load
 
-```ts
-const field = await client.field.load({ id: 'field_id' })
+```php
+// load() returns the bare Field record (throws on error).
+$field = $client->Field()->load(["id" => "field_id"]);
 ```
 
 #### Example: List
 
-```ts
-const fields = await client.field.list()
+```php
+// list() returns an array of Field records (throws on error).
+$fields = $client->Field()->list();
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.level`
+Create an instance: `$level = $client->Level();`
 
 #### Operations
 
@@ -451,20 +460,22 @@ Create an instance: `const level = client.level`
 
 #### Example: Load
 
-```ts
-const level = await client.level.load({ id: 'level_id' })
+```php
+// load() returns the bare Level record (throws on error).
+$level = $client->Level()->load(["id" => "level_id"]);
 ```
 
 #### Example: List
 
-```ts
-const levels = await client.level.list()
+```php
+// list() returns an array of Level records (throws on error).
+$levels = $client->Level()->list();
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.skill`
+Create an instance: `$skill = $client->Skill();`
 
 #### Operations
 
@@ -485,20 +496,22 @@ Create an instance: `const skill = client.skill`
 
 #### Example: Load
 
-```ts
-const skill = await client.skill.load({ id: 'skill_id' })
+```php
+// load() returns the bare Skill record (throws on error).
+$skill = $client->Skill()->load(["id" => "skill_id"]);
 ```
 
 #### Example: List
 
-```ts
-const skills = await client.skill.list()
+```php
+// list() returns an array of Skill records (throws on error).
+$skills = $client->Skill()->list();
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.type`
+Create an instance: `$type = $client->Type();`
 
 #### Operations
 
@@ -517,14 +530,16 @@ Create an instance: `const type = client.type`
 
 #### Example: Load
 
-```ts
-const type = await client.type.load({ id: 'type_id' })
+```php
+// load() returns the bare Type record (throws on error).
+$type = $client->Type()->load(["id" => "type_id"]);
 ```
 
 #### Example: List
 
-```ts
-const types = await client.type.list()
+```php
+// list() returns an array of Type records (throws on error).
+$types = $client->Type()->list();
 ```
 
 
@@ -599,7 +614,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$attribute = $client->attribute();
+$attribute = $client->Attribute();
 $attribute->load(["id" => "example_id"]);
 
 // $attribute->dataGet() now returns the loaded attribute data
