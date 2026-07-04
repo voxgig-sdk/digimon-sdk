@@ -50,16 +50,14 @@ class SkillEntityTest extends TestCase
         $skill_ref01_ent = $client->Skill(null);
         $skill_ref01_match = [];
 
-        [$skill_ref01_list_result, $err] = $skill_ref01_ent->list($skill_ref01_match, null);
-        $this->assertNull($err);
+        $skill_ref01_list_result = $skill_ref01_ent->list($skill_ref01_match, null);
         $this->assertIsArray($skill_ref01_list_result);
 
         // LOAD
         $skill_ref01_match_dt0 = [
             "id" => $skill_ref01_data["id"],
         ];
-        [$skill_ref01_data_dt0_loaded, $err] = $skill_ref01_ent->load($skill_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $skill_ref01_data_dt0_loaded = $skill_ref01_ent->load($skill_ref01_match_dt0, null);
         $skill_ref01_data_dt0_load_result = Helpers::to_map($skill_ref01_data_dt0_loaded);
         $this->assertNotNull($skill_ref01_data_dt0_load_result);
         $this->assertEquals($skill_ref01_data_dt0_load_result["id"], $skill_ref01_data["id"]);
@@ -96,7 +94,6 @@ function skill_basic_setup($extra)
         "DIGIMON_TEST_SKILL_ENTID" => $idmap,
         "DIGIMON_TEST_LIVE" => "FALSE",
         "DIGIMON_TEST_EXPLAIN" => "FALSE",
-        "DIGIMON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function skill_basic_setup($extra)
     if ($env["DIGIMON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["DIGIMON_APIKEY"],
             ],
             $extra ?? [],
         ]);

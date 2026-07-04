@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch TypeLoadMatch
+---@param ctrl? table
+---@return Type
+---@return string? err
 function TypeEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch TypeListMatch
+---@param ctrl? table
+---@return Type[]
+---@return string? err
 function TypeEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

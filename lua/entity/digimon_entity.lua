@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch DigimonLoadMatch
+---@param ctrl? table
+---@return Digimon
+---@return string? err
 function DigimonEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch DigimonListMatch
+---@param ctrl? table
+---@return Digimon[]
+---@return string? err
 function DigimonEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

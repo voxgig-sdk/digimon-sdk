@@ -50,16 +50,14 @@ class TestDigimonEntity:
         digimon_ref01_ent = client.Digimon(None)
         digimon_ref01_match = {}
 
-        digimon_ref01_list_result, err = digimon_ref01_ent.list(digimon_ref01_match, None)
-        assert err is None
+        digimon_ref01_list_result = digimon_ref01_ent.list(digimon_ref01_match, None)
         assert isinstance(digimon_ref01_list_result, list)
 
         # LOAD
         digimon_ref01_match_dt0 = {
             "id": digimon_ref01_data["id"],
         }
-        digimon_ref01_data_dt0_loaded, err = digimon_ref01_ent.load(digimon_ref01_match_dt0, None)
-        assert err is None
+        digimon_ref01_data_dt0_loaded = digimon_ref01_ent.load(digimon_ref01_match_dt0, None)
         digimon_ref01_data_dt0_load_result = helpers.to_map(digimon_ref01_data_dt0_loaded)
         assert digimon_ref01_data_dt0_load_result is not None
         assert digimon_ref01_data_dt0_load_result["id"] == digimon_ref01_data["id"]
@@ -102,7 +100,6 @@ def _digimon_basic_setup(extra):
         "DIGIMON_TEST_DIGIMON_ENTID": idmap,
         "DIGIMON_TEST_LIVE": "FALSE",
         "DIGIMON_TEST_EXPLAIN": "FALSE",
-        "DIGIMON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _digimon_basic_setup(extra):
     if env.get("DIGIMON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("DIGIMON_APIKEY"),
             },
             extra or {},
         ])

@@ -50,16 +50,14 @@ class TestSkillEntity:
         skill_ref01_ent = client.Skill(None)
         skill_ref01_match = {}
 
-        skill_ref01_list_result, err = skill_ref01_ent.list(skill_ref01_match, None)
-        assert err is None
+        skill_ref01_list_result = skill_ref01_ent.list(skill_ref01_match, None)
         assert isinstance(skill_ref01_list_result, list)
 
         # LOAD
         skill_ref01_match_dt0 = {
             "id": skill_ref01_data["id"],
         }
-        skill_ref01_data_dt0_loaded, err = skill_ref01_ent.load(skill_ref01_match_dt0, None)
-        assert err is None
+        skill_ref01_data_dt0_loaded = skill_ref01_ent.load(skill_ref01_match_dt0, None)
         skill_ref01_data_dt0_load_result = helpers.to_map(skill_ref01_data_dt0_loaded)
         assert skill_ref01_data_dt0_load_result is not None
         assert skill_ref01_data_dt0_load_result["id"] == skill_ref01_data["id"]
@@ -102,7 +100,6 @@ def _skill_basic_setup(extra):
         "DIGIMON_TEST_SKILL_ENTID": idmap,
         "DIGIMON_TEST_LIVE": "FALSE",
         "DIGIMON_TEST_EXPLAIN": "FALSE",
-        "DIGIMON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _skill_basic_setup(extra):
     if env.get("DIGIMON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("DIGIMON_APIKEY"),
             },
             extra or {},
         ])

@@ -9,9 +9,12 @@ The TypeScript SDK for the Digimon API — a type-safe, entity-oriented client w
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/digimon
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/digimon-sdk/releases](https://github.com/voxgig-sdk/digimon-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { DigimonSDK } from 'digimon'
+import { DigimonSDK } from '@voxgig-sdk/digimon'
 
-const client = new DigimonSDK({
-  apikey: process.env.DIGIMON_APIKEY,
-})
+const client = new DigimonSDK()
 ```
 
 ### 2. List attributes
 
 ```ts
-const result = await client.Attribute().list()
+const result = await client.attribute.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -39,10 +40,10 @@ if (result.ok) {
 }
 ```
 
-### 3. Load a attribute
+### 3. Load an attribute
 
 ```ts
-const result = await client.Attribute().load({ id: 'example_id' })
+const result = await client.attribute.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -91,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = DigimonSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.attribute.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -99,7 +100,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new DigimonSDK({ apikey: '...' })
+const client = new DigimonSDK()
 const testClient = client.tester()
 ```
 
@@ -108,7 +109,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.attribute
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,7 +136,6 @@ const logger = {
 }
 
 const client = new DigimonSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -146,7 +146,6 @@ Create a `.env.local` file at the project root:
 
 ```
 DIGIMON_TEST_LIVE=TRUE
-DIGIMON_APIKEY=<your-key>
 ```
 
 Then run:
@@ -164,7 +163,6 @@ cd ts && npm test
 
 ```ts
 new DigimonSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -175,7 +173,6 @@ new DigimonSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -361,7 +358,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.Attribute()`
+Create an instance: `const attribute = client.attribute`
 
 #### Operations
 
@@ -382,19 +379,19 @@ Create an instance: `const attribute = client.Attribute()`
 #### Example: Load
 
 ```ts
-const attribute = await client.Attribute().load({ id: 'attribute_id' })
+const attribute = await client.attribute.load({ id: 'attribute_id' })
 ```
 
 #### Example: List
 
 ```ts
-const attributes = await client.Attribute().list()
+const attributes = await client.attribute.list()
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.Digimon()`
+Create an instance: `const digimon = client.digimon`
 
 #### Operations
 
@@ -425,19 +422,19 @@ Create an instance: `const digimon = client.Digimon()`
 #### Example: Load
 
 ```ts
-const digimon = await client.Digimon().load({ id: 'digimon_id' })
+const digimon = await client.digimon.load({ id: 'digimon_id' })
 ```
 
 #### Example: List
 
 ```ts
-const digimons = await client.Digimon().list()
+const digimons = await client.digimon.list()
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.Field()`
+Create an instance: `const field = client.field`
 
 #### Operations
 
@@ -459,19 +456,19 @@ Create an instance: `const field = client.Field()`
 #### Example: Load
 
 ```ts
-const field = await client.Field().load({ id: 'field_id' })
+const field = await client.field.load({ id: 'field_id' })
 ```
 
 #### Example: List
 
 ```ts
-const fields = await client.Field().list()
+const fields = await client.field.list()
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.Level()`
+Create an instance: `const level = client.level`
 
 #### Operations
 
@@ -491,19 +488,19 @@ Create an instance: `const level = client.Level()`
 #### Example: Load
 
 ```ts
-const level = await client.Level().load({ id: 'level_id' })
+const level = await client.level.load({ id: 'level_id' })
 ```
 
 #### Example: List
 
 ```ts
-const levels = await client.Level().list()
+const levels = await client.level.list()
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.Skill()`
+Create an instance: `const skill = client.skill`
 
 #### Operations
 
@@ -525,19 +522,19 @@ Create an instance: `const skill = client.Skill()`
 #### Example: Load
 
 ```ts
-const skill = await client.Skill().load({ id: 'skill_id' })
+const skill = await client.skill.load({ id: 'skill_id' })
 ```
 
 #### Example: List
 
 ```ts
-const skills = await client.Skill().list()
+const skills = await client.skill.list()
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.Type()`
+Create an instance: `const type = client.type`
 
 #### Operations
 
@@ -557,13 +554,13 @@ Create an instance: `const type = client.Type()`
 #### Example: Load
 
 ```ts
-const type = await client.Type().load({ id: 'type_id' })
+const type = await client.type.load({ id: 'type_id' })
 ```
 
 #### Example: List
 
 ```ts
-const types = await client.Type().list()
+const types = await client.type.list()
 ```
 
 
@@ -624,7 +621,7 @@ digimon/
 Import the SDK from the package root:
 
 ```ts
-import { DigimonSDK } from 'digimon'
+import { DigimonSDK } from '@voxgig-sdk/digimon'
 ```
 
 ### Entity state
@@ -634,11 +631,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const attribute = client.attribute
+await attribute.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// attribute.data() now returns the loaded attribute data
+// attribute.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

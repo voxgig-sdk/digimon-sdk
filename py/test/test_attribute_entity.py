@@ -50,16 +50,14 @@ class TestAttributeEntity:
         attribute_ref01_ent = client.Attribute(None)
         attribute_ref01_match = {}
 
-        attribute_ref01_list_result, err = attribute_ref01_ent.list(attribute_ref01_match, None)
-        assert err is None
+        attribute_ref01_list_result = attribute_ref01_ent.list(attribute_ref01_match, None)
         assert isinstance(attribute_ref01_list_result, list)
 
         # LOAD
         attribute_ref01_match_dt0 = {
             "id": attribute_ref01_data["id"],
         }
-        attribute_ref01_data_dt0_loaded, err = attribute_ref01_ent.load(attribute_ref01_match_dt0, None)
-        assert err is None
+        attribute_ref01_data_dt0_loaded = attribute_ref01_ent.load(attribute_ref01_match_dt0, None)
         attribute_ref01_data_dt0_load_result = helpers.to_map(attribute_ref01_data_dt0_loaded)
         assert attribute_ref01_data_dt0_load_result is not None
         assert attribute_ref01_data_dt0_load_result["id"] == attribute_ref01_data["id"]
@@ -102,7 +100,6 @@ def _attribute_basic_setup(extra):
         "DIGIMON_TEST_ATTRIBUTE_ENTID": idmap,
         "DIGIMON_TEST_LIVE": "FALSE",
         "DIGIMON_TEST_EXPLAIN": "FALSE",
-        "DIGIMON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _attribute_basic_setup(extra):
     if env.get("DIGIMON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("DIGIMON_APIKEY"),
             },
             extra or {},
         ])

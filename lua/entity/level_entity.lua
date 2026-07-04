@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch LevelLoadMatch
+---@param ctrl? table
+---@return Level
+---@return string? err
 function LevelEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch LevelListMatch
+---@param ctrl? table
+---@return Level[]
+---@return string? err
 function LevelEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

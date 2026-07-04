@@ -194,14 +194,12 @@ func attributeDirectSetup(mockres any) *attributeDirectSetupResult {
 	env := envOverride(map[string]any{
 		"DIGIMON_TEST_ATTRIBUTE_ENTID": map[string]any{},
 		"DIGIMON_TEST_LIVE":    "FALSE",
-		"DIGIMON_APIKEY":       "NONE",
 	})
 
 	live := env["DIGIMON_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["DIGIMON_APIKEY"],
 		}
 		client := sdk.NewDigimonSDK(mergedOpts)
 

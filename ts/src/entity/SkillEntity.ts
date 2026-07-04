@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Skill,
+  SkillLoadMatch,
+  SkillListMatch,
+} from '../DigimonTypes'
 
 // TODO: needs Entity superclass
-class SkillEntity extends DigimonEntityBase {
+class SkillEntity extends DigimonEntityBase<Skill> {
 
   constructor(client: DigimonSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class SkillEntity extends DigimonEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: SkillLoadMatch, ctrl?: Control): Promise<Skill> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class SkillEntity extends DigimonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Skill> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: SkillListMatch, ctrl?: Control): Promise<Skill[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class SkillEntity extends DigimonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Skill[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

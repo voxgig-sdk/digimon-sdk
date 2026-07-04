@@ -43,16 +43,14 @@ class TypeEntityTest < Minitest::Test
     type_ref01_ent = client.Type(nil)
     type_ref01_match = {}
 
-    type_ref01_list_result, err = type_ref01_ent.list(type_ref01_match, nil)
-    assert_nil err
+    type_ref01_list_result = type_ref01_ent.list(type_ref01_match, nil)
     assert type_ref01_list_result.is_a?(Array)
 
     # LOAD
     type_ref01_match_dt0 = {
       "id" => type_ref01_data["id"],
     }
-    type_ref01_data_dt0_loaded, err = type_ref01_ent.load(type_ref01_match_dt0, nil)
-    assert_nil err
+    type_ref01_data_dt0_loaded = type_ref01_ent.load(type_ref01_match_dt0, nil)
     type_ref01_data_dt0_load_result = Helpers.to_map(type_ref01_data_dt0_loaded)
     assert !type_ref01_data_dt0_load_result.nil?
     assert_equal type_ref01_data_dt0_load_result["id"], type_ref01_data["id"]
@@ -93,7 +91,6 @@ def type_basic_setup(extra)
     "DIGIMON_TEST_TYPE_ENTID" => idmap,
     "DIGIMON_TEST_LIVE" => "FALSE",
     "DIGIMON_TEST_EXPLAIN" => "FALSE",
-    "DIGIMON_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def type_basic_setup(extra)
   if env["DIGIMON_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["DIGIMON_APIKEY"],
       },
       extra || {},
     ])

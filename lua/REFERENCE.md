@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -104,7 +103,7 @@ same parameters as `direct()`.
 ## AttributeEntity
 
 ```lua
-local attribute = client:Attribute(nil)
+local attribute = client:attribute(nil)
 ```
 
 ### Fields
@@ -123,7 +122,7 @@ local attribute = client:Attribute(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Attribute():list()
+local results, err = client:attribute():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -131,7 +130,7 @@ local results, err = client:Attribute():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Attribute():load({ id = "attribute_id" })
+local result, err = client:attribute():load({ id = "attribute_id" })
 ```
 
 ### Common Methods
@@ -167,7 +166,7 @@ Return the entity name.
 ## DigimonEntity
 
 ```lua
-local digimon = client:Digimon(nil)
+local digimon = client:digimon(nil)
 ```
 
 ### Fields
@@ -196,7 +195,7 @@ local digimon = client:Digimon(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Digimon():list()
+local results, err = client:digimon():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -204,7 +203,7 @@ local results, err = client:Digimon():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Digimon():load({ id = "digimon_id" })
+local result, err = client:digimon():load({ id = "digimon_id" })
 ```
 
 ### Common Methods
@@ -240,7 +239,7 @@ Return the entity name.
 ## FieldEntity
 
 ```lua
-local field = client:Field(nil)
+local field = client:field(nil)
 ```
 
 ### Fields
@@ -260,7 +259,7 @@ local field = client:Field(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Field():list()
+local results, err = client:field():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -268,7 +267,7 @@ local results, err = client:Field():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Field():load({ id = "field_id" })
+local result, err = client:field():load({ id = "field_id" })
 ```
 
 ### Common Methods
@@ -304,7 +303,7 @@ Return the entity name.
 ## LevelEntity
 
 ```lua
-local level = client:Level(nil)
+local level = client:level(nil)
 ```
 
 ### Fields
@@ -322,7 +321,7 @@ local level = client:Level(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Level():list()
+local results, err = client:level():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -330,7 +329,7 @@ local results, err = client:Level():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Level():load({ id = "level_id" })
+local result, err = client:level():load({ id = "level_id" })
 ```
 
 ### Common Methods
@@ -366,7 +365,7 @@ Return the entity name.
 ## SkillEntity
 
 ```lua
-local skill = client:Skill(nil)
+local skill = client:skill(nil)
 ```
 
 ### Fields
@@ -386,7 +385,7 @@ local skill = client:Skill(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Skill():list()
+local results, err = client:skill():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -394,7 +393,7 @@ local results, err = client:Skill():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Skill():load({ id = "skill_id" })
+local result, err = client:skill():load({ id = "skill_id" })
 ```
 
 ### Common Methods
@@ -430,7 +429,7 @@ Return the entity name.
 ## TypeEntity
 
 ```lua
-local type = client:Type(nil)
+local type = client:type(nil)
 ```
 
 ### Fields
@@ -448,7 +447,7 @@ local type = client:Type(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Type():list()
+local results, err = client:type():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -456,7 +455,7 @@ local results, err = client:Type():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Type():load({ id = "type_id" })
+local result, err = client:type():load({ id = "type_id" })
 ```
 
 ### Common Methods

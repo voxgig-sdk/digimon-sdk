@@ -245,31 +245,49 @@ func (sdk *DigimonSDK) Direct(fetchargs map[string]any) (map[string]any, error) 
 }
 
 
+// Attribute returns a Attribute entity bound to this client.
+// Idiomatic usage: client.Attribute(nil).List(nil, nil) or
+// client.Attribute(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *DigimonSDK) Attribute(data map[string]any) DigimonEntity {
 	return NewAttributeEntityFunc(sdk, data)
 }
 
 
+// Digimon returns a Digimon entity bound to this client.
+// Idiomatic usage: client.Digimon(nil).List(nil, nil) or
+// client.Digimon(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *DigimonSDK) Digimon(data map[string]any) DigimonEntity {
 	return NewDigimonEntityFunc(sdk, data)
 }
 
 
+// Field returns a Field entity bound to this client.
+// Idiomatic usage: client.Field(nil).List(nil, nil) or
+// client.Field(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *DigimonSDK) Field(data map[string]any) DigimonEntity {
 	return NewFieldEntityFunc(sdk, data)
 }
 
 
+// Level returns a Level entity bound to this client.
+// Idiomatic usage: client.Level(nil).List(nil, nil) or
+// client.Level(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *DigimonSDK) Level(data map[string]any) DigimonEntity {
 	return NewLevelEntityFunc(sdk, data)
 }
 
 
+// Skill returns a Skill entity bound to this client.
+// Idiomatic usage: client.Skill(nil).List(nil, nil) or
+// client.Skill(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *DigimonSDK) Skill(data map[string]any) DigimonEntity {
 	return NewSkillEntityFunc(sdk, data)
 }
 
 
+// Type returns a Type entity bound to this client.
+// Idiomatic usage: client.Type(nil).List(nil, nil) or
+// client.Type(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *DigimonSDK) Type(data map[string]any) DigimonEntity {
 	return NewTypeEntityFunc(sdk, data)
 }

@@ -120,7 +120,6 @@ function basicSetup(extra?: any) {
     'DIGIMON_TEST_ATTRIBUTE_ENTID': idmap,
     'DIGIMON_TEST_LIVE': 'FALSE',
     'DIGIMON_TEST_EXPLAIN': 'FALSE',
-    'DIGIMON_APIKEY': 'NONE',
   })
 
   idmap = env['DIGIMON_TEST_ATTRIBUTE_ENTID']
@@ -130,7 +129,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new DigimonSDK(merge([
       {
-        apikey: env.DIGIMON_APIKEY,
       },
       extra
     ]))

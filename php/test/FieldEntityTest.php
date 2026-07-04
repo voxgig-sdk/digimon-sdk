@@ -50,16 +50,14 @@ class FieldEntityTest extends TestCase
         $field_ref01_ent = $client->Field(null);
         $field_ref01_match = [];
 
-        [$field_ref01_list_result, $err] = $field_ref01_ent->list($field_ref01_match, null);
-        $this->assertNull($err);
+        $field_ref01_list_result = $field_ref01_ent->list($field_ref01_match, null);
         $this->assertIsArray($field_ref01_list_result);
 
         // LOAD
         $field_ref01_match_dt0 = [
             "id" => $field_ref01_data["id"],
         ];
-        [$field_ref01_data_dt0_loaded, $err] = $field_ref01_ent->load($field_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $field_ref01_data_dt0_loaded = $field_ref01_ent->load($field_ref01_match_dt0, null);
         $field_ref01_data_dt0_load_result = Helpers::to_map($field_ref01_data_dt0_loaded);
         $this->assertNotNull($field_ref01_data_dt0_load_result);
         $this->assertEquals($field_ref01_data_dt0_load_result["id"], $field_ref01_data["id"]);
@@ -96,7 +94,6 @@ function field_basic_setup($extra)
         "DIGIMON_TEST_FIELD_ENTID" => $idmap,
         "DIGIMON_TEST_LIVE" => "FALSE",
         "DIGIMON_TEST_EXPLAIN" => "FALSE",
-        "DIGIMON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function field_basic_setup($extra)
     if ($env["DIGIMON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["DIGIMON_APIKEY"],
             ],
             $extra ?? [],
         ]);

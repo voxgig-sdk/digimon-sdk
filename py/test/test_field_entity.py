@@ -50,16 +50,14 @@ class TestFieldEntity:
         field_ref01_ent = client.Field(None)
         field_ref01_match = {}
 
-        field_ref01_list_result, err = field_ref01_ent.list(field_ref01_match, None)
-        assert err is None
+        field_ref01_list_result = field_ref01_ent.list(field_ref01_match, None)
         assert isinstance(field_ref01_list_result, list)
 
         # LOAD
         field_ref01_match_dt0 = {
             "id": field_ref01_data["id"],
         }
-        field_ref01_data_dt0_loaded, err = field_ref01_ent.load(field_ref01_match_dt0, None)
-        assert err is None
+        field_ref01_data_dt0_loaded = field_ref01_ent.load(field_ref01_match_dt0, None)
         field_ref01_data_dt0_load_result = helpers.to_map(field_ref01_data_dt0_loaded)
         assert field_ref01_data_dt0_load_result is not None
         assert field_ref01_data_dt0_load_result["id"] == field_ref01_data["id"]
@@ -102,7 +100,6 @@ def _field_basic_setup(extra):
         "DIGIMON_TEST_FIELD_ENTID": idmap,
         "DIGIMON_TEST_LIVE": "FALSE",
         "DIGIMON_TEST_EXPLAIN": "FALSE",
-        "DIGIMON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _field_basic_setup(extra):
     if env.get("DIGIMON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("DIGIMON_APIKEY"),
             },
             extra or {},
         ])

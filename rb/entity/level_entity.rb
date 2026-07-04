@@ -45,6 +45,7 @@ class LevelEntity
     end
   end
 
+  # @return [Level, Hash] the current Level data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class LevelEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Level fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Level.
+  #
+  # @param reqmatch [LevelLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Level, Hash] the loaded Level; raises DigimonError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class LevelEntity
 
 
   
+  # List Level items matching the given filter.
+  #
+  # @param reqmatch [LevelListMatch, Hash, nil] match filter (any subset of Level fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Level>, Array] the matching Level items; raises DigimonError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

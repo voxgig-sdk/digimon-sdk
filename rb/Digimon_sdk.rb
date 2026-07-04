@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Digimon_types'
+
 
 class DigimonSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class DigimonSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class DigimonSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue DigimonError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = DigimonHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class DigimonSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,46 +198,88 @@ class DigimonSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.attribute.list / client.attribute.load({ "id" => ... })
+  def attribute
+    require_relative 'entity/attribute_entity'
+    @attribute ||= AttributeEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.attribute instead.
   def Attribute(data = nil)
     require_relative 'entity/attribute_entity'
     AttributeEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.digimon.list / client.digimon.load({ "id" => ... })
+  def digimon
+    require_relative 'entity/digimon_entity'
+    @digimon ||= DigimonEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.digimon instead.
   def Digimon(data = nil)
     require_relative 'entity/digimon_entity'
     DigimonEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.field.list / client.field.load({ "id" => ... })
+  def field
+    require_relative 'entity/field_entity'
+    @field ||= FieldEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.field instead.
   def Field(data = nil)
     require_relative 'entity/field_entity'
     FieldEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.level.list / client.level.load({ "id" => ... })
+  def level
+    require_relative 'entity/level_entity'
+    @level ||= LevelEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.level instead.
   def Level(data = nil)
     require_relative 'entity/level_entity'
     LevelEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.skill.list / client.skill.load({ "id" => ... })
+  def skill
+    require_relative 'entity/skill_entity'
+    @skill ||= SkillEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.skill instead.
   def Skill(data = nil)
     require_relative 'entity/skill_entity'
     SkillEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.type.list / client.type.load({ "id" => ... })
+  def type
+    require_relative 'entity/type_entity'
+    @type ||= TypeEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.type instead.
   def Type(data = nil)
     require_relative 'entity/type_entity'
     TypeEntity.new(self, data)

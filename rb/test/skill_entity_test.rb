@@ -43,16 +43,14 @@ class SkillEntityTest < Minitest::Test
     skill_ref01_ent = client.Skill(nil)
     skill_ref01_match = {}
 
-    skill_ref01_list_result, err = skill_ref01_ent.list(skill_ref01_match, nil)
-    assert_nil err
+    skill_ref01_list_result = skill_ref01_ent.list(skill_ref01_match, nil)
     assert skill_ref01_list_result.is_a?(Array)
 
     # LOAD
     skill_ref01_match_dt0 = {
       "id" => skill_ref01_data["id"],
     }
-    skill_ref01_data_dt0_loaded, err = skill_ref01_ent.load(skill_ref01_match_dt0, nil)
-    assert_nil err
+    skill_ref01_data_dt0_loaded = skill_ref01_ent.load(skill_ref01_match_dt0, nil)
     skill_ref01_data_dt0_load_result = Helpers.to_map(skill_ref01_data_dt0_loaded)
     assert !skill_ref01_data_dt0_load_result.nil?
     assert_equal skill_ref01_data_dt0_load_result["id"], skill_ref01_data["id"]
@@ -93,7 +91,6 @@ def skill_basic_setup(extra)
     "DIGIMON_TEST_SKILL_ENTID" => idmap,
     "DIGIMON_TEST_LIVE" => "FALSE",
     "DIGIMON_TEST_EXPLAIN" => "FALSE",
-    "DIGIMON_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def skill_basic_setup(extra)
   if env["DIGIMON_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["DIGIMON_APIKEY"],
       },
       extra || {},
     ])

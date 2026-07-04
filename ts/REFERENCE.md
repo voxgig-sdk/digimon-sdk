@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -170,7 +169,7 @@ Alias for `DigimonSDK.test()`.
 ## AttributeEntity
 
 ```ts
-const attribute = client.Attribute()
+const attribute = client.attribute
 ```
 
 ### Fields
@@ -189,7 +188,7 @@ const attribute = client.Attribute()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Attribute().list()
+const results = await client.attribute.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -197,7 +196,7 @@ const results = await client.Attribute().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Attribute().load({ id: 'attribute_id' })
+const result = await client.attribute.load({ id: 'attribute_id' })
 ```
 
 ### Common Methods
@@ -231,7 +230,7 @@ Return a copy of the entity options.
 ## DigimonEntity
 
 ```ts
-const digimon = client.Digimon()
+const digimon = client.digimon
 ```
 
 ### Fields
@@ -260,7 +259,7 @@ const digimon = client.Digimon()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Digimon().list()
+const results = await client.digimon.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -268,7 +267,7 @@ const results = await client.Digimon().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Digimon().load({ id: 'digimon_id' })
+const result = await client.digimon.load({ id: 'digimon_id' })
 ```
 
 ### Common Methods
@@ -302,7 +301,7 @@ Return a copy of the entity options.
 ## FieldEntity
 
 ```ts
-const field = client.Field()
+const field = client.field
 ```
 
 ### Fields
@@ -322,7 +321,7 @@ const field = client.Field()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Field().list()
+const results = await client.field.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -330,7 +329,7 @@ const results = await client.Field().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Field().load({ id: 'field_id' })
+const result = await client.field.load({ id: 'field_id' })
 ```
 
 ### Common Methods
@@ -364,7 +363,7 @@ Return a copy of the entity options.
 ## LevelEntity
 
 ```ts
-const level = client.Level()
+const level = client.level
 ```
 
 ### Fields
@@ -382,7 +381,7 @@ const level = client.Level()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Level().list()
+const results = await client.level.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -390,7 +389,7 @@ const results = await client.Level().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Level().load({ id: 'level_id' })
+const result = await client.level.load({ id: 'level_id' })
 ```
 
 ### Common Methods
@@ -424,7 +423,7 @@ Return a copy of the entity options.
 ## SkillEntity
 
 ```ts
-const skill = client.Skill()
+const skill = client.skill
 ```
 
 ### Fields
@@ -444,7 +443,7 @@ const skill = client.Skill()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Skill().list()
+const results = await client.skill.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -452,7 +451,7 @@ const results = await client.Skill().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Skill().load({ id: 'skill_id' })
+const result = await client.skill.load({ id: 'skill_id' })
 ```
 
 ### Common Methods
@@ -486,7 +485,7 @@ Return a copy of the entity options.
 ## TypeEntity
 
 ```ts
-const type = client.Type()
+const type = client.type
 ```
 
 ### Fields
@@ -504,7 +503,7 @@ const type = client.Type()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Type().list()
+const results = await client.type.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -512,7 +511,7 @@ const results = await client.Type().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Type().load({ id: 'type_id' })
+const result = await client.type.load({ id: 'type_id' })
 ```
 
 ### Common Methods

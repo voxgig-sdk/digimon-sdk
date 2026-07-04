@@ -50,16 +50,14 @@ class TestLevelEntity:
         level_ref01_ent = client.Level(None)
         level_ref01_match = {}
 
-        level_ref01_list_result, err = level_ref01_ent.list(level_ref01_match, None)
-        assert err is None
+        level_ref01_list_result = level_ref01_ent.list(level_ref01_match, None)
         assert isinstance(level_ref01_list_result, list)
 
         # LOAD
         level_ref01_match_dt0 = {
             "id": level_ref01_data["id"],
         }
-        level_ref01_data_dt0_loaded, err = level_ref01_ent.load(level_ref01_match_dt0, None)
-        assert err is None
+        level_ref01_data_dt0_loaded = level_ref01_ent.load(level_ref01_match_dt0, None)
         level_ref01_data_dt0_load_result = helpers.to_map(level_ref01_data_dt0_loaded)
         assert level_ref01_data_dt0_load_result is not None
         assert level_ref01_data_dt0_load_result["id"] == level_ref01_data["id"]
@@ -102,7 +100,6 @@ def _level_basic_setup(extra):
         "DIGIMON_TEST_LEVEL_ENTID": idmap,
         "DIGIMON_TEST_LIVE": "FALSE",
         "DIGIMON_TEST_EXPLAIN": "FALSE",
-        "DIGIMON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _level_basic_setup(extra):
     if env.get("DIGIMON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("DIGIMON_APIKEY"),
             },
             extra or {},
         ])

@@ -9,21 +9,10 @@ The Ruby SDK for the Digimon API — an entity-oriented client using idiomatic R
 
 
 ## Install
-```bash
-gem install voxgig-sdk-digimon
-```
+This package is not yet published to RubyGems. Install it from the
+GitHub release tag (`rb/vX.Y.Z`):
 
-Or add to your `Gemfile`:
-
-```ruby
-gem "voxgig-sdk-digimon"
-```
-
-Then run:
-
-```bash
-bundle install
-```
+- Releases: [https://github.com/voxgig-sdk/digimon-sdk/releases](https://github.com/voxgig-sdk/digimon-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -36,31 +25,34 @@ loading a specific record.
 ```ruby
 require_relative "Digimon_sdk"
 
-client = DigimonSDK.new({
-  "apikey" => ENV["DIGIMON_APIKEY"],
-})
+client = DigimonSDK.new
 ```
 
 ### 2. List attributes
 
 ```ruby
-result, err = client.Attribute().list
-raise err if err
-
-if result.is_a?(Array)
-  result.each do |item|
-    d = item.data_get
-    puts "#{d["id"]} #{d["name"]}"
+begin
+  result = client.attribute.list
+  if result.is_a?(Array)
+    result.each do |item|
+      d = item.data_get
+      puts "#{d["id"]} #{d["name"]}"
+    end
   end
+rescue => err
+  warn "list failed: #{err}"
 end
 ```
 
-### 3. Load a attribute
+### 3. Load an attribute
 
 ```ruby
-result, err = client.Attribute().load({ "id" => "example_id" })
-raise err if err
-puts result
+begin
+  result = client.attribute.load({ "id" => "example_id" })
+  puts result
+rescue => err
+  warn "load failed: #{err}"
+end
 ```
 
 
@@ -71,32 +63,35 @@ puts result
 For endpoints not covered by entity methods:
 
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },
 })
-raise err if err
 
 if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
+else
+  warn result["err"]
 end
 ```
 
 ### Prepare a request without sending it
 
 ```ruby
-fetchdef, err = client.prepare({
-  "path" => "/api/resource/{id}",
-  "method" => "DELETE",
-  "params" => { "id" => "example" },
-})
-raise err if err
-
-puts fetchdef["url"]
-puts fetchdef["method"]
-puts fetchdef["headers"]
+begin
+  fetchdef = client.prepare({
+    "path" => "/api/resource/{id}",
+    "method" => "DELETE",
+    "params" => { "id" => "example" },
+  })
+  puts fetchdef["url"]
+  puts fetchdef["method"]
+  puts fetchdef["headers"]
+rescue => err
+  warn "prepare failed: #{err}"
+end
 ```
 
 ### Use test mode
@@ -106,7 +101,7 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = DigimonSDK.test
 
-result, err = client.Digimon().load({ "id" => "test01" })
+result = client.attribute.load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -138,7 +133,6 @@ Create a `.env.local` file at the project root:
 
 ```
 DIGIMON_TEST_LIVE=TRUE
-DIGIMON_APIKEY=<your-key>
 ```
 
 Then run:
@@ -161,7 +155,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |
@@ -183,8 +176,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | --- | --- | --- |
 | `options_map` | `() -> Hash` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> [Hash, err]` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> [Hash, err]` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `Attribute` | `(data) -> AttributeEntity` | Create a Attribute entity instance. |
 | `Digimon` | `(data) -> DigimonEntity` | Create a Digimon entity instance. |
 | `Field` | `(data) -> FieldEntity` | Create a Field entity instance. |
@@ -198,11 +191,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> [any, err]` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> [any, err]` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> [any, err]` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> [any, err]` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> [any, err]` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -212,8 +205,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[any, err]`. The first value is a
-`Hash` with these keys:
+Entity operations return the result data directly. On failure they
+raise a `DigimonError` (a `StandardError` subclass), so wrap
+calls in `begin`/`rescue` where you need to handle errors.
+
+The `direct` escape hatch is the exception: it never raises and instead
+returns a result `Hash` with these keys:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -221,8 +218,7 @@ Entity operations return `[any, err]`. The first value is a
 | `status` | `Integer` | HTTP status code. |
 | `headers` | `Hash` | Response headers. |
 | `data` | `any` | Parsed JSON response body. |
-
-On error, `ok` is `false` and `err` contains the error value.
+| `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
 
@@ -321,7 +317,7 @@ API path: `/type`
 
 ### Attribute
 
-Create an instance: `const attribute = client.Attribute()`
+Create an instance: `const attribute = client.attribute`
 
 #### Operations
 
@@ -342,19 +338,19 @@ Create an instance: `const attribute = client.Attribute()`
 #### Example: Load
 
 ```ts
-const attribute = await client.Attribute().load({ id: 'attribute_id' })
+const attribute = await client.attribute.load({ id: 'attribute_id' })
 ```
 
 #### Example: List
 
 ```ts
-const attributes = await client.Attribute().list()
+const attributes = await client.attribute.list()
 ```
 
 
 ### Digimon
 
-Create an instance: `const digimon = client.Digimon()`
+Create an instance: `const digimon = client.digimon`
 
 #### Operations
 
@@ -385,19 +381,19 @@ Create an instance: `const digimon = client.Digimon()`
 #### Example: Load
 
 ```ts
-const digimon = await client.Digimon().load({ id: 'digimon_id' })
+const digimon = await client.digimon.load({ id: 'digimon_id' })
 ```
 
 #### Example: List
 
 ```ts
-const digimons = await client.Digimon().list()
+const digimons = await client.digimon.list()
 ```
 
 
 ### Field
 
-Create an instance: `const field = client.Field()`
+Create an instance: `const field = client.field`
 
 #### Operations
 
@@ -419,19 +415,19 @@ Create an instance: `const field = client.Field()`
 #### Example: Load
 
 ```ts
-const field = await client.Field().load({ id: 'field_id' })
+const field = await client.field.load({ id: 'field_id' })
 ```
 
 #### Example: List
 
 ```ts
-const fields = await client.Field().list()
+const fields = await client.field.list()
 ```
 
 
 ### Level
 
-Create an instance: `const level = client.Level()`
+Create an instance: `const level = client.level`
 
 #### Operations
 
@@ -451,19 +447,19 @@ Create an instance: `const level = client.Level()`
 #### Example: Load
 
 ```ts
-const level = await client.Level().load({ id: 'level_id' })
+const level = await client.level.load({ id: 'level_id' })
 ```
 
 #### Example: List
 
 ```ts
-const levels = await client.Level().list()
+const levels = await client.level.list()
 ```
 
 
 ### Skill
 
-Create an instance: `const skill = client.Skill()`
+Create an instance: `const skill = client.skill`
 
 #### Operations
 
@@ -485,19 +481,19 @@ Create an instance: `const skill = client.Skill()`
 #### Example: Load
 
 ```ts
-const skill = await client.Skill().load({ id: 'skill_id' })
+const skill = await client.skill.load({ id: 'skill_id' })
 ```
 
 #### Example: List
 
 ```ts
-const skills = await client.Skill().list()
+const skills = await client.skill.list()
 ```
 
 
 ### Type
 
-Create an instance: `const type = client.Type()`
+Create an instance: `const type = client.type`
 
 #### Operations
 
@@ -517,13 +513,13 @@ Create an instance: `const type = client.Type()`
 #### Example: Load
 
 ```ts
-const type = await client.Type().load({ id: 'type_id' })
+const type = await client.type.load({ id: 'type_id' })
 ```
 
 #### Example: List
 
 ```ts
-const types = await client.Type().list()
+const types = await client.type.list()
 ```
 
 
@@ -598,11 +594,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-moon = client.Moon
-moon.load({ "planet_id" => "earth", "id" => "luna" })
+attribute = client.attribute
+attribute.load({ "id" => "example_id" })
 
-# moon.data_get now returns the loaded moon data
-# moon.match_get returns the last match criteria
+# attribute.data_get now returns the loaded attribute data
+# attribute.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

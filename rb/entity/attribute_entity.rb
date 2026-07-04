@@ -45,6 +45,7 @@ class AttributeEntity
     end
   end
 
+  # @return [Attribute, Hash] the current Attribute data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class AttributeEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Attribute fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Attribute.
+  #
+  # @param reqmatch [AttributeLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Attribute, Hash] the loaded Attribute; raises DigimonError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class AttributeEntity
 
 
   
+  # List Attribute items matching the given filter.
+  #
+  # @param reqmatch [AttributeListMatch, Hash, nil] match filter (any subset of Attribute fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Attribute>, Array] the matching Attribute items; raises DigimonError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

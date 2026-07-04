@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Field,
+  FieldLoadMatch,
+  FieldListMatch,
+} from '../DigimonTypes'
 
 // TODO: needs Entity superclass
-class FieldEntity extends DigimonEntityBase {
+class FieldEntity extends DigimonEntityBase<Field> {
 
   constructor(client: DigimonSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class FieldEntity extends DigimonEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: FieldLoadMatch, ctrl?: Control): Promise<Field> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class FieldEntity extends DigimonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Field> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: FieldListMatch, ctrl?: Control): Promise<Field[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class FieldEntity extends DigimonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Field[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -85,6 +85,27 @@ func (e *FieldEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Field; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *FieldEntity) DataTyped(data ...Field) Field {
+	if len(data) > 0 {
+		return typedFrom[Field](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Field](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Field (all fields
+// optional at the wire level).
+func (e *FieldEntity) MatchTyped(match ...Field) Field {
+	if len(match) > 0 {
+		return typedFrom[Field](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Field](e.Match())
+}
+
 
 func (e *FieldEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *FieldEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, e
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// FieldLoadMatch and returns an Field. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *FieldEntity) LoadTyped(reqmatch FieldLoadMatch, ctrl map[string]any) (Field, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Field{}, err
+	}
+	return typedFrom[Field](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *FieldEntity) List(reqmatch map[string]any, ctrl map[string]any) (any, e
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// FieldListMatch and returns []Field. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *FieldEntity) ListTyped(reqmatch FieldListMatch, ctrl map[string]any) ([]Field, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Field](res), nil
 }
 
 

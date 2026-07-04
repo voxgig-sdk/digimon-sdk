@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://digi-api.com/api/v1',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -165,7 +161,8 @@ class Config {
                     "name": "id",
                     "orig": "id_or_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -409,7 +406,8 @@ class Config {
                     "name": "id",
                     "orig": "id_or_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -544,7 +542,8 @@ class Config {
                     "name": "id",
                     "orig": "id_or_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -665,7 +664,8 @@ class Config {
                     "name": "id",
                     "orig": "id_or_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -800,7 +800,8 @@ class Config {
                     "name": "id",
                     "orig": "id_or_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -921,7 +922,8 @@ class Config {
                     "name": "id",
                     "orig": "id_or_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

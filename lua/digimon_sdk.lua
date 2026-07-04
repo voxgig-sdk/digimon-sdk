@@ -244,36 +244,114 @@ end
 
 
 
+-- Idiomatic facade: client:attribute():list() / client:attribute():load({ id = ... })
+function DigimonSDK:attribute(data)
+  local EntityMod = require("entity.attribute_entity")
+  if data == nil then
+    if self._attribute == nil then
+      self._attribute = EntityMod.new(self, nil)
+    end
+    return self._attribute
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:attribute() instead.
 function DigimonSDK:Attribute(data)
   local EntityMod = require("entity.attribute_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:digimon():list() / client:digimon():load({ id = ... })
+function DigimonSDK:digimon(data)
+  local EntityMod = require("entity.digimon_entity")
+  if data == nil then
+    if self._digimon == nil then
+      self._digimon = EntityMod.new(self, nil)
+    end
+    return self._digimon
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:digimon() instead.
 function DigimonSDK:Digimon(data)
   local EntityMod = require("entity.digimon_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:field():list() / client:field():load({ id = ... })
+function DigimonSDK:field(data)
+  local EntityMod = require("entity.field_entity")
+  if data == nil then
+    if self._field == nil then
+      self._field = EntityMod.new(self, nil)
+    end
+    return self._field
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:field() instead.
 function DigimonSDK:Field(data)
   local EntityMod = require("entity.field_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:level():list() / client:level():load({ id = ... })
+function DigimonSDK:level(data)
+  local EntityMod = require("entity.level_entity")
+  if data == nil then
+    if self._level == nil then
+      self._level = EntityMod.new(self, nil)
+    end
+    return self._level
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:level() instead.
 function DigimonSDK:Level(data)
   local EntityMod = require("entity.level_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:skill():list() / client:skill():load({ id = ... })
+function DigimonSDK:skill(data)
+  local EntityMod = require("entity.skill_entity")
+  if data == nil then
+    if self._skill == nil then
+      self._skill = EntityMod.new(self, nil)
+    end
+    return self._skill
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:skill() instead.
 function DigimonSDK:Skill(data)
   local EntityMod = require("entity.skill_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:type():list() / client:type():load({ id = ... })
+function DigimonSDK:type(data)
+  local EntityMod = require("entity.type_entity")
+  if data == nil then
+    if self._type == nil then
+      self._type = EntityMod.new(self, nil)
+    end
+    return self._type
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:type() instead.
 function DigimonSDK:Type(data)
   local EntityMod = require("entity.type_entity")
   return EntityMod.new(self, data)

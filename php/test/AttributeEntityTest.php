@@ -50,16 +50,14 @@ class AttributeEntityTest extends TestCase
         $attribute_ref01_ent = $client->Attribute(null);
         $attribute_ref01_match = [];
 
-        [$attribute_ref01_list_result, $err] = $attribute_ref01_ent->list($attribute_ref01_match, null);
-        $this->assertNull($err);
+        $attribute_ref01_list_result = $attribute_ref01_ent->list($attribute_ref01_match, null);
         $this->assertIsArray($attribute_ref01_list_result);
 
         // LOAD
         $attribute_ref01_match_dt0 = [
             "id" => $attribute_ref01_data["id"],
         ];
-        [$attribute_ref01_data_dt0_loaded, $err] = $attribute_ref01_ent->load($attribute_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $attribute_ref01_data_dt0_loaded = $attribute_ref01_ent->load($attribute_ref01_match_dt0, null);
         $attribute_ref01_data_dt0_load_result = Helpers::to_map($attribute_ref01_data_dt0_loaded);
         $this->assertNotNull($attribute_ref01_data_dt0_load_result);
         $this->assertEquals($attribute_ref01_data_dt0_load_result["id"], $attribute_ref01_data["id"]);
@@ -96,7 +94,6 @@ function attribute_basic_setup($extra)
         "DIGIMON_TEST_ATTRIBUTE_ENTID" => $idmap,
         "DIGIMON_TEST_LIVE" => "FALSE",
         "DIGIMON_TEST_EXPLAIN" => "FALSE",
-        "DIGIMON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function attribute_basic_setup($extra)
     if ($env["DIGIMON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["DIGIMON_APIKEY"],
             ],
             $extra ?? [],
         ]);

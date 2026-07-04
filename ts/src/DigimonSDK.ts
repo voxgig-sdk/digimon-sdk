@@ -7,6 +7,8 @@ import { LevelEntity } from './entity/LevelEntity'
 import { SkillEntity } from './entity/SkillEntity'
 import { TypeEntity } from './entity/TypeEntity'
 
+export type * from './DigimonTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -207,36 +209,84 @@ class DigimonSDK {
 
 
 
+  _attribute?: AttributeEntity
+
+  // Idiomatic facade: `client.attribute.list()` / `client.attribute.load({ id })`.
+  get attribute(): AttributeEntity {
+    return (this._attribute ??= new AttributeEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.attribute` instead. */
   Attribute(data?: any) {
     const self = this
     return new AttributeEntity(self,data)
   }
 
 
+  _digimon?: DigimonEntity
+
+  // Idiomatic facade: `client.digimon.list()` / `client.digimon.load({ id })`.
+  get digimon(): DigimonEntity {
+    return (this._digimon ??= new DigimonEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.digimon` instead. */
   Digimon(data?: any) {
     const self = this
     return new DigimonEntity(self,data)
   }
 
 
+  _field?: FieldEntity
+
+  // Idiomatic facade: `client.field.list()` / `client.field.load({ id })`.
+  get field(): FieldEntity {
+    return (this._field ??= new FieldEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.field` instead. */
   Field(data?: any) {
     const self = this
     return new FieldEntity(self,data)
   }
 
 
+  _level?: LevelEntity
+
+  // Idiomatic facade: `client.level.list()` / `client.level.load({ id })`.
+  get level(): LevelEntity {
+    return (this._level ??= new LevelEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.level` instead. */
   Level(data?: any) {
     const self = this
     return new LevelEntity(self,data)
   }
 
 
+  _skill?: SkillEntity
+
+  // Idiomatic facade: `client.skill.list()` / `client.skill.load({ id })`.
+  get skill(): SkillEntity {
+    return (this._skill ??= new SkillEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.skill` instead. */
   Skill(data?: any) {
     const self = this
     return new SkillEntity(self,data)
   }
 
 
+  _type?: TypeEntity
+
+  // Idiomatic facade: `client.type.list()` / `client.type.load({ id })`.
+  get type(): TypeEntity {
+    return (this._type ??= new TypeEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.type` instead. */
   Type(data?: any) {
     const self = this
     return new TypeEntity(self,data)

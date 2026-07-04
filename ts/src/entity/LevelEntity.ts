@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Level,
+  LevelLoadMatch,
+  LevelListMatch,
+} from '../DigimonTypes'
 
 // TODO: needs Entity superclass
-class LevelEntity extends DigimonEntityBase {
+class LevelEntity extends DigimonEntityBase<Level> {
 
   constructor(client: DigimonSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class LevelEntity extends DigimonEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: LevelLoadMatch, ctrl?: Control): Promise<Level> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class LevelEntity extends DigimonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Level> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: LevelListMatch, ctrl?: Control): Promise<Level[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class LevelEntity extends DigimonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Level[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -45,6 +45,7 @@ class SkillEntity
     end
   end
 
+  # @return [Skill, Hash] the current Skill data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class SkillEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Skill fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Skill.
+  #
+  # @param reqmatch [SkillLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Skill, Hash] the loaded Skill; raises DigimonError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class SkillEntity
 
 
   
+  # List Skill items matching the given filter.
+  #
+  # @param reqmatch [SkillListMatch, Hash, nil] match filter (any subset of Skill fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Skill>, Array] the matching Skill items; raises DigimonError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

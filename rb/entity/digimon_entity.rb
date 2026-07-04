@@ -45,6 +45,7 @@ class DigimonEntity
     end
   end
 
+  # @return [Digimon, Hash] the current Digimon data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class DigimonEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Digimon fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Digimon.
+  #
+  # @param reqmatch [DigimonLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Digimon, Hash] the loaded Digimon; raises DigimonError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class DigimonEntity
 
 
   
+  # List Digimon items matching the given filter.
+  #
+  # @param reqmatch [DigimonListMatch, Hash, nil] match filter (any subset of Digimon fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Digimon>, Array] the matching Digimon items; raises DigimonError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

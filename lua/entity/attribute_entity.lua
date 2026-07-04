@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch AttributeLoadMatch
+---@param ctrl? table
+---@return Attribute
+---@return string? err
 function AttributeEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch AttributeListMatch
+---@param ctrl? table
+---@return Attribute[]
+---@return string? err
 function AttributeEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

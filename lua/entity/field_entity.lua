@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch FieldLoadMatch
+---@param ctrl? table
+---@return Field
+---@return string? err
 function FieldEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch FieldListMatch
+---@param ctrl? table
+---@return Field[]
+---@return string? err
 function FieldEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

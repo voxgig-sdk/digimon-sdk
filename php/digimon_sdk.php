@@ -103,7 +103,7 @@ class DigimonSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class DigimonSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class DigimonSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,59 +216,125 @@ class DigimonSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Attribute($data = null)
+    private $_attribute = null;
+
+    // Idiomatic facade: $client->attribute()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Attribute() (PHP method
+    // names are case-insensitive).
+    public function attribute($data = null)
     {
         require_once __DIR__ . '/entity/attribute_entity.php';
+        if ($data === null) {
+            if ($this->_attribute === null) {
+                $this->_attribute = new AttributeEntity($this, null);
+            }
+            return $this->_attribute;
+        }
         return new AttributeEntity($this, $data);
     }
 
 
-    public function Digimon($data = null)
+    private $_digimon = null;
+
+    // Idiomatic facade: $client->digimon()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Digimon() (PHP method
+    // names are case-insensitive).
+    public function digimon($data = null)
     {
         require_once __DIR__ . '/entity/digimon_entity.php';
+        if ($data === null) {
+            if ($this->_digimon === null) {
+                $this->_digimon = new DigimonEntity($this, null);
+            }
+            return $this->_digimon;
+        }
         return new DigimonEntity($this, $data);
     }
 
 
-    public function Field($data = null)
+    private $_field = null;
+
+    // Idiomatic facade: $client->field()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Field() (PHP method
+    // names are case-insensitive).
+    public function field($data = null)
     {
         require_once __DIR__ . '/entity/field_entity.php';
+        if ($data === null) {
+            if ($this->_field === null) {
+                $this->_field = new FieldEntity($this, null);
+            }
+            return $this->_field;
+        }
         return new FieldEntity($this, $data);
     }
 
 
-    public function Level($data = null)
+    private $_level = null;
+
+    // Idiomatic facade: $client->level()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Level() (PHP method
+    // names are case-insensitive).
+    public function level($data = null)
     {
         require_once __DIR__ . '/entity/level_entity.php';
+        if ($data === null) {
+            if ($this->_level === null) {
+                $this->_level = new LevelEntity($this, null);
+            }
+            return $this->_level;
+        }
         return new LevelEntity($this, $data);
     }
 
 
-    public function Skill($data = null)
+    private $_skill = null;
+
+    // Idiomatic facade: $client->skill()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Skill() (PHP method
+    // names are case-insensitive).
+    public function skill($data = null)
     {
         require_once __DIR__ . '/entity/skill_entity.php';
+        if ($data === null) {
+            if ($this->_skill === null) {
+                $this->_skill = new SkillEntity($this, null);
+            }
+            return $this->_skill;
+        }
         return new SkillEntity($this, $data);
     }
 
 
-    public function Type($data = null)
+    private $_type = null;
+
+    // Idiomatic facade: $client->type()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Type() (PHP method
+    // names are case-insensitive).
+    public function type($data = null)
     {
         require_once __DIR__ . '/entity/type_entity.php';
+        if ($data === null) {
+            if ($this->_type === null) {
+                $this->_type = new TypeEntity($this, null);
+            }
+            return $this->_type;
+        }
         return new TypeEntity($this, $data);
     }
 

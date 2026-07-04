@@ -144,16 +144,23 @@ class DigimonSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class DigimonSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,40 +212,106 @@ class DigimonSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def attribute(self):
+        """Idiomatic facade: client.attribute.list() / client.attribute.load({"id": ...})."""
+        from entity.attribute_entity import AttributeEntity
+        cached = getattr(self, "_attribute", None)
+        if cached is None:
+            cached = AttributeEntity(self, None)
+            self._attribute = cached
+        return cached
 
     def Attribute(self, data=None):
+        # Deprecated: use client.attribute instead.
         from entity.attribute_entity import AttributeEntity
         return AttributeEntity(self, data)
 
 
+    @property
+    def digimon(self):
+        """Idiomatic facade: client.digimon.list() / client.digimon.load({"id": ...})."""
+        from entity.digimon_entity import DigimonEntity
+        cached = getattr(self, "_digimon", None)
+        if cached is None:
+            cached = DigimonEntity(self, None)
+            self._digimon = cached
+        return cached
+
     def Digimon(self, data=None):
+        # Deprecated: use client.digimon instead.
         from entity.digimon_entity import DigimonEntity
         return DigimonEntity(self, data)
 
 
+    @property
+    def field(self):
+        """Idiomatic facade: client.field.list() / client.field.load({"id": ...})."""
+        from entity.field_entity import FieldEntity
+        cached = getattr(self, "_field", None)
+        if cached is None:
+            cached = FieldEntity(self, None)
+            self._field = cached
+        return cached
+
     def Field(self, data=None):
+        # Deprecated: use client.field instead.
         from entity.field_entity import FieldEntity
         return FieldEntity(self, data)
 
 
+    @property
+    def level(self):
+        """Idiomatic facade: client.level.list() / client.level.load({"id": ...})."""
+        from entity.level_entity import LevelEntity
+        cached = getattr(self, "_level", None)
+        if cached is None:
+            cached = LevelEntity(self, None)
+            self._level = cached
+        return cached
+
     def Level(self, data=None):
+        # Deprecated: use client.level instead.
         from entity.level_entity import LevelEntity
         return LevelEntity(self, data)
 
 
+    @property
+    def skill(self):
+        """Idiomatic facade: client.skill.list() / client.skill.load({"id": ...})."""
+        from entity.skill_entity import SkillEntity
+        cached = getattr(self, "_skill", None)
+        if cached is None:
+            cached = SkillEntity(self, None)
+            self._skill = cached
+        return cached
+
     def Skill(self, data=None):
+        # Deprecated: use client.skill instead.
         from entity.skill_entity import SkillEntity
         return SkillEntity(self, data)
 
 
+    @property
+    def type(self):
+        """Idiomatic facade: client.type.list() / client.type.load({"id": ...})."""
+        from entity.type_entity import TypeEntity
+        cached = getattr(self, "_type", None)
+        if cached is None:
+            cached = TypeEntity(self, None)
+            self._type = cached
+        return cached
+
     def Type(self, data=None):
+        # Deprecated: use client.type instead.
         from entity.type_entity import TypeEntity
         return TypeEntity(self, data)
 

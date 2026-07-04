@@ -43,16 +43,14 @@ class AttributeEntityTest < Minitest::Test
     attribute_ref01_ent = client.Attribute(nil)
     attribute_ref01_match = {}
 
-    attribute_ref01_list_result, err = attribute_ref01_ent.list(attribute_ref01_match, nil)
-    assert_nil err
+    attribute_ref01_list_result = attribute_ref01_ent.list(attribute_ref01_match, nil)
     assert attribute_ref01_list_result.is_a?(Array)
 
     # LOAD
     attribute_ref01_match_dt0 = {
       "id" => attribute_ref01_data["id"],
     }
-    attribute_ref01_data_dt0_loaded, err = attribute_ref01_ent.load(attribute_ref01_match_dt0, nil)
-    assert_nil err
+    attribute_ref01_data_dt0_loaded = attribute_ref01_ent.load(attribute_ref01_match_dt0, nil)
     attribute_ref01_data_dt0_load_result = Helpers.to_map(attribute_ref01_data_dt0_loaded)
     assert !attribute_ref01_data_dt0_load_result.nil?
     assert_equal attribute_ref01_data_dt0_load_result["id"], attribute_ref01_data["id"]
@@ -93,7 +91,6 @@ def attribute_basic_setup(extra)
     "DIGIMON_TEST_ATTRIBUTE_ENTID" => idmap,
     "DIGIMON_TEST_LIVE" => "FALSE",
     "DIGIMON_TEST_EXPLAIN" => "FALSE",
-    "DIGIMON_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def attribute_basic_setup(extra)
   if env["DIGIMON_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["DIGIMON_APIKEY"],
       },
       extra || {},
     ])
