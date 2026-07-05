@@ -27,7 +27,7 @@ class AttributeLoadMatch
     public string $id;
 }
 
-/** Match filter for Attribute#list (any subset of Attribute fields). */
+/** Request payload for Attribute#list. */
 class AttributeListMatch
 {
     public ?string $attribute = null;
@@ -61,7 +61,7 @@ class DigimonLoadMatch
     public string $id;
 }
 
-/** Match filter for Digimon#list (any subset of Digimon fields). */
+/** Request payload for Digimon#list. */
 class DigimonListMatch
 {
     public ?array $attribute = null;
@@ -96,7 +96,7 @@ class FieldLoadMatch
     public string $id;
 }
 
-/** Match filter for Field#list (any subset of Field fields). */
+/** Request payload for Field#list. */
 class FieldListMatch
 {
     public ?string $description = null;
@@ -120,7 +120,7 @@ class LevelLoadMatch
     public string $id;
 }
 
-/** Match filter for Level#list (any subset of Level fields). */
+/** Request payload for Level#list. */
 class LevelListMatch
 {
     public ?string $href = null;
@@ -144,7 +144,7 @@ class SkillLoadMatch
     public string $id;
 }
 
-/** Match filter for Skill#list (any subset of Skill fields). */
+/** Request payload for Skill#list. */
 class SkillListMatch
 {
     public ?string $description = null;
@@ -168,7 +168,7 @@ class TypeLoadMatch
     public string $id;
 }
 
-/** Match filter for Type#list (any subset of Type fields). */
+/** Request payload for Type#list. */
 class TypeListMatch
 {
     public ?string $href = null;

@@ -8,7 +8,7 @@ Complete API reference for the Digimon Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'digimon_sdk'
+require_relative 'Digimon_sdk'
 
 client = DigimonSDK.new(options)
 ```
@@ -113,19 +113,19 @@ attribute = client.Attribute
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
+| `attribute` | `String` | No |  |
+| `description` | `String` | No |  |
+| `href` | `String` | No |  |
+| `id` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Attribute.list(nil)
+results = client.Attribute.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -176,29 +176,29 @@ digimon = client.Digimon
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$ARRAY`` | No |  |
-| `description` | ``$ARRAY`` | No |  |
-| `field` | ``$ARRAY`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$ARRAY`` | No |  |
-| `level` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `next_evolution` | ``$ARRAY`` | No |  |
-| `prior_evolution` | ``$ARRAY`` | No |  |
-| `release_date` | ``$STRING`` | No |  |
-| `skill` | ``$ARRAY`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
-| `x_antibody` | ``$BOOLEAN`` | No |  |
+| `attribute` | `Array` | No |  |
+| `description` | `Array` | No |  |
+| `field` | `Array` | No |  |
+| `href` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `image` | `Array` | No |  |
+| `level` | `Array` | No |  |
+| `name` | `String` | No |  |
+| `next_evolution` | `Array` | No |  |
+| `prior_evolution` | `Array` | No |  |
+| `release_date` | `String` | No |  |
+| `skill` | `Array` | No |  |
+| `type` | `Array` | No |  |
+| `x_antibody` | `Boolean` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Digimon.list(nil)
+results = client.Digimon.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -249,20 +249,20 @@ field = client.Field
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `field` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$STRING`` | No |  |
+| `description` | `String` | No |  |
+| `field` | `String` | No |  |
+| `href` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `image` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Field.list(nil)
+results = client.Field.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -313,18 +313,18 @@ level = client.Level
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `level` | ``$STRING`` | No |  |
+| `href` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `level` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Level.list(nil)
+results = client.Level.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -375,20 +375,20 @@ skill = client.Skill
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `skill` | ``$STRING`` | No |  |
-| `translation` | ``$STRING`` | No |  |
+| `description` | `String` | No |  |
+| `href` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `skill` | `String` | No |  |
+| `translation` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Skill.list(nil)
+results = client.Skill.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -439,18 +439,18 @@ type = client.Type
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `href` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `type` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Type.list(nil)
+results = client.Type.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

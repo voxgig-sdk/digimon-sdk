@@ -110,10 +110,10 @@ local attribute = client:Attribute(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
+| `attribute` | `string` | No |  |
+| `description` | `string` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
 
 ### Operations
 
@@ -173,20 +173,20 @@ local digimon = client:Digimon(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$ARRAY`` | No |  |
-| `description` | ``$ARRAY`` | No |  |
-| `field` | ``$ARRAY`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$ARRAY`` | No |  |
-| `level` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `next_evolution` | ``$ARRAY`` | No |  |
-| `prior_evolution` | ``$ARRAY`` | No |  |
-| `release_date` | ``$STRING`` | No |  |
-| `skill` | ``$ARRAY`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
-| `x_antibody` | ``$BOOLEAN`` | No |  |
+| `attribute` | `table` | No |  |
+| `description` | `table` | No |  |
+| `field` | `table` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `image` | `table` | No |  |
+| `level` | `table` | No |  |
+| `name` | `string` | No |  |
+| `next_evolution` | `table` | No |  |
+| `prior_evolution` | `table` | No |  |
+| `release_date` | `string` | No |  |
+| `skill` | `table` | No |  |
+| `type` | `table` | No |  |
+| `x_antibody` | `boolean` | No |  |
 
 ### Operations
 
@@ -246,11 +246,11 @@ local field = client:Field(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `field` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$STRING`` | No |  |
+| `description` | `string` | No |  |
+| `field` | `string` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `image` | `string` | No |  |
 
 ### Operations
 
@@ -310,9 +310,9 @@ local level = client:Level(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `level` | ``$STRING`` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `level` | `string` | No |  |
 
 ### Operations
 
@@ -372,11 +372,11 @@ local skill = client:Skill(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `skill` | ``$STRING`` | No |  |
-| `translation` | ``$STRING`` | No |  |
+| `description` | `string` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `skill` | `string` | No |  |
+| `translation` | `string` | No |  |
 
 ### Operations
 
@@ -436,9 +436,9 @@ local type = client:Type(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 

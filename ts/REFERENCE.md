@@ -176,10 +176,10 @@ const attribute = client.Attribute()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
+| `attribute` | `string` | No |  |
+| `description` | `string` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
 
 ### Operations
 
@@ -237,20 +237,20 @@ const digimon = client.Digimon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$ARRAY`` | No |  |
-| `description` | ``$ARRAY`` | No |  |
-| `field` | ``$ARRAY`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$ARRAY`` | No |  |
-| `level` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `next_evolution` | ``$ARRAY`` | No |  |
-| `prior_evolution` | ``$ARRAY`` | No |  |
-| `release_date` | ``$STRING`` | No |  |
-| `skill` | ``$ARRAY`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
-| `x_antibody` | ``$BOOLEAN`` | No |  |
+| `attribute` | `any[]` | No |  |
+| `description` | `any[]` | No |  |
+| `field` | `any[]` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `image` | `any[]` | No |  |
+| `level` | `any[]` | No |  |
+| `name` | `string` | No |  |
+| `next_evolution` | `any[]` | No |  |
+| `prior_evolution` | `any[]` | No |  |
+| `release_date` | `string` | No |  |
+| `skill` | `any[]` | No |  |
+| `type` | `any[]` | No |  |
+| `x_antibody` | `boolean` | No |  |
 
 ### Operations
 
@@ -308,11 +308,11 @@ const field = client.Field()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `field` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$STRING`` | No |  |
+| `description` | `string` | No |  |
+| `field` | `string` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `image` | `string` | No |  |
 
 ### Operations
 
@@ -370,9 +370,9 @@ const level = client.Level()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `level` | ``$STRING`` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `level` | `string` | No |  |
 
 ### Operations
 
@@ -430,11 +430,11 @@ const skill = client.Skill()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `skill` | ``$STRING`` | No |  |
-| `translation` | ``$STRING`` | No |  |
+| `description` | `string` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `skill` | `string` | No |  |
+| `translation` | `string` | No |  |
 
 ### Operations
 
@@ -492,9 +492,9 @@ const type = client.Type()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `href` | `string` | No |  |
+| `id` | `number` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 

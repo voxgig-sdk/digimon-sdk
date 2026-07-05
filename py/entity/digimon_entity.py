@@ -65,8 +65,13 @@ class DigimonEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: DigimonLoadMatch, ctrl=None) -> Digimon:
+    def load(self, reqmatch=None, ctrl=None) -> Digimon:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.Digimon().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,
@@ -87,8 +92,12 @@ class DigimonEntity:
 
 
     
-    def list(self, reqmatch: DigimonListMatch, ctrl=None) -> list[Digimon]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Digimon]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Digimon().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,

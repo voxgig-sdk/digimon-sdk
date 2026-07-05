@@ -221,37 +221,37 @@ class DigimonSDK:
 
 
     def Attribute(self, data=None) -> "AttributeEntity":
-        """Entity factory: client.Attribute().list({}) / client.Attribute().load({"id": ...})."""
+        """Entity factory: client.Attribute().list() / client.Attribute().load({"id": ...})."""
         from entity.attribute_entity import AttributeEntity
         return AttributeEntity(self, data)
 
 
     def Digimon(self, data=None) -> "DigimonEntity":
-        """Entity factory: client.Digimon().list({}) / client.Digimon().load({"id": ...})."""
+        """Entity factory: client.Digimon().list() / client.Digimon().load({"id": ...})."""
         from entity.digimon_entity import DigimonEntity
         return DigimonEntity(self, data)
 
 
     def Field(self, data=None) -> "FieldEntity":
-        """Entity factory: client.Field().list({}) / client.Field().load({"id": ...})."""
+        """Entity factory: client.Field().list() / client.Field().load({"id": ...})."""
         from entity.field_entity import FieldEntity
         return FieldEntity(self, data)
 
 
     def Level(self, data=None) -> "LevelEntity":
-        """Entity factory: client.Level().list({}) / client.Level().load({"id": ...})."""
+        """Entity factory: client.Level().list() / client.Level().load({"id": ...})."""
         from entity.level_entity import LevelEntity
         return LevelEntity(self, data)
 
 
     def Skill(self, data=None) -> "SkillEntity":
-        """Entity factory: client.Skill().list({}) / client.Skill().load({"id": ...})."""
+        """Entity factory: client.Skill().list() / client.Skill().load({"id": ...})."""
         from entity.skill_entity import SkillEntity
         return SkillEntity(self, data)
 
 
     def Type(self, data=None) -> "TypeEntity":
-        """Entity factory: client.Type().list({}) / client.Type().load({"id": ...})."""
+        """Entity factory: client.Type().list() / client.Type().load({"id": ...})."""
         from entity.type_entity import TypeEntity
         return TypeEntity(self, data)
 

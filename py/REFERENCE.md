@@ -107,19 +107,19 @@ attribute = client.Attribute()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
+| `attribute` | `str` | No |  |
+| `description` | `str` | No |  |
+| `href` | `str` | No |  |
+| `id` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Attribute().list({})
+results = client.Attribute().list()
 for attribute in results:
     print(attribute)
 ```
@@ -171,29 +171,29 @@ digimon = client.Digimon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | ``$ARRAY`` | No |  |
-| `description` | ``$ARRAY`` | No |  |
-| `field` | ``$ARRAY`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$ARRAY`` | No |  |
-| `level` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `next_evolution` | ``$ARRAY`` | No |  |
-| `prior_evolution` | ``$ARRAY`` | No |  |
-| `release_date` | ``$STRING`` | No |  |
-| `skill` | ``$ARRAY`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
-| `x_antibody` | ``$BOOLEAN`` | No |  |
+| `attribute` | `list` | No |  |
+| `description` | `list` | No |  |
+| `field` | `list` | No |  |
+| `href` | `str` | No |  |
+| `id` | `int` | No |  |
+| `image` | `list` | No |  |
+| `level` | `list` | No |  |
+| `name` | `str` | No |  |
+| `next_evolution` | `list` | No |  |
+| `prior_evolution` | `list` | No |  |
+| `release_date` | `str` | No |  |
+| `skill` | `list` | No |  |
+| `type` | `list` | No |  |
+| `x_antibody` | `bool` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Digimon().list({})
+results = client.Digimon().list()
 for digimon in results:
     print(digimon)
 ```
@@ -245,20 +245,20 @@ field = client.Field()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `field` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image` | ``$STRING`` | No |  |
+| `description` | `str` | No |  |
+| `field` | `str` | No |  |
+| `href` | `str` | No |  |
+| `id` | `int` | No |  |
+| `image` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Field().list({})
+results = client.Field().list()
 for field in results:
     print(field)
 ```
@@ -310,18 +310,18 @@ level = client.Level()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `level` | ``$STRING`` | No |  |
+| `href` | `str` | No |  |
+| `id` | `int` | No |  |
+| `level` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Level().list({})
+results = client.Level().list()
 for level in results:
     print(level)
 ```
@@ -373,20 +373,20 @@ skill = client.Skill()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `skill` | ``$STRING`` | No |  |
-| `translation` | ``$STRING`` | No |  |
+| `description` | `str` | No |  |
+| `href` | `str` | No |  |
+| `id` | `int` | No |  |
+| `skill` | `str` | No |  |
+| `translation` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Skill().list({})
+results = client.Skill().list()
 for skill in results:
     print(skill)
 ```
@@ -438,18 +438,18 @@ type = client.Type()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `href` | `str` | No |  |
+| `id` | `int` | No |  |
+| `type` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Type().list({})
+results = client.Type().list()
 for type in results:
     print(type)
 ```

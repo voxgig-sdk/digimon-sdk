@@ -21,8 +21,7 @@ type AttributeLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// AttributeListMatch mirrors the attribute fields as an all-optional match
-// filter (Go analog of Partial<Attribute>).
+// AttributeListMatch is the typed request payload for Attribute.ListTyped.
 type AttributeListMatch struct {
 	Attribute *string `json:"attribute,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -53,8 +52,7 @@ type DigimonLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// DigimonListMatch mirrors the digimon fields as an all-optional match
-// filter (Go analog of Partial<Digimon>).
+// DigimonListMatch is the typed request payload for Digimon.ListTyped.
 type DigimonListMatch struct {
 	Attribute *[]any `json:"attribute,omitempty"`
 	Description *[]any `json:"description,omitempty"`
@@ -86,8 +84,7 @@ type FieldLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// FieldListMatch mirrors the field fields as an all-optional match
-// filter (Go analog of Partial<Field>).
+// FieldListMatch is the typed request payload for Field.ListTyped.
 type FieldListMatch struct {
 	Description *string `json:"description,omitempty"`
 	Field *string `json:"field,omitempty"`
@@ -108,8 +105,7 @@ type LevelLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// LevelListMatch mirrors the level fields as an all-optional match
-// filter (Go analog of Partial<Level>).
+// LevelListMatch is the typed request payload for Level.ListTyped.
 type LevelListMatch struct {
 	Href *string `json:"href,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -130,8 +126,7 @@ type SkillLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// SkillListMatch mirrors the skill fields as an all-optional match
-// filter (Go analog of Partial<Skill>).
+// SkillListMatch is the typed request payload for Skill.ListTyped.
 type SkillListMatch struct {
 	Description *string `json:"description,omitempty"`
 	Href *string `json:"href,omitempty"`
@@ -152,8 +147,7 @@ type TypeLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// TypeListMatch mirrors the type fields as an all-optional match
-// filter (Go analog of Partial<Type>).
+// TypeListMatch is the typed request payload for Type.ListTyped.
 type TypeListMatch struct {
 	Href *string `json:"href,omitempty"`
 	Id *int `json:"id,omitempty"`

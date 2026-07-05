@@ -65,8 +65,13 @@ class LevelEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: LevelLoadMatch, ctrl=None) -> Level:
+    def load(self, reqmatch=None, ctrl=None) -> Level:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.Level().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,
@@ -87,8 +92,12 @@ class LevelEntity:
 
 
     
-    def list(self, reqmatch: LevelListMatch, ctrl=None) -> list[Level]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Level]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Level().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,

@@ -4,6 +4,8 @@
 
 The Ruby SDK for the Digimon API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Attribute` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -35,7 +37,7 @@ begin
   # list returns an Array of Attribute records — iterate directly.
   attributes = client.Attribute.list
   attributes.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["id"]} #{item["attribute"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -52,6 +54,33 @@ begin
 rescue => err
   warn "load failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  attributes = client.Attribute.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -72,7 +101,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -103,8 +134,8 @@ client = DigimonSDK.test({
   "entity" => { "attribute" => { "test01" => { "id" => "test01" } } },
 })
 
-# load returns the bare mock record (raises on error).
-attribute = client.Attribute.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+attribute = client.Attribute.list()
 puts attribute
 ```
 
@@ -195,10 +226,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -333,10 +361,10 @@ Create an instance: `attribute = client.Attribute`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
+| `attribute` | `String` |  |
+| `description` | `String` |  |
+| `href` | `String` |  |
+| `id` | `Integer` |  |
 
 #### Example: Load
 
@@ -368,20 +396,20 @@ Create an instance: `digimon = client.Digimon`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | ``$ARRAY`` |  |
-| `description` | ``$ARRAY`` |  |
-| `field` | ``$ARRAY`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image` | ``$ARRAY`` |  |
-| `level` | ``$ARRAY`` |  |
-| `name` | ``$STRING`` |  |
-| `next_evolution` | ``$ARRAY`` |  |
-| `prior_evolution` | ``$ARRAY`` |  |
-| `release_date` | ``$STRING`` |  |
-| `skill` | ``$ARRAY`` |  |
-| `type` | ``$ARRAY`` |  |
-| `x_antibody` | ``$BOOLEAN`` |  |
+| `attribute` | `Array` |  |
+| `description` | `Array` |  |
+| `field` | `Array` |  |
+| `href` | `String` |  |
+| `id` | `Integer` |  |
+| `image` | `Array` |  |
+| `level` | `Array` |  |
+| `name` | `String` |  |
+| `next_evolution` | `Array` |  |
+| `prior_evolution` | `Array` |  |
+| `release_date` | `String` |  |
+| `skill` | `Array` |  |
+| `type` | `Array` |  |
+| `x_antibody` | `Boolean` |  |
 
 #### Example: Load
 
@@ -413,11 +441,11 @@ Create an instance: `field = client.Field`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | ``$STRING`` |  |
-| `field` | ``$STRING`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image` | ``$STRING`` |  |
+| `description` | `String` |  |
+| `field` | `String` |  |
+| `href` | `String` |  |
+| `id` | `Integer` |  |
+| `image` | `String` |  |
 
 #### Example: Load
 
@@ -449,9 +477,9 @@ Create an instance: `level = client.Level`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `level` | ``$STRING`` |  |
+| `href` | `String` |  |
+| `id` | `Integer` |  |
+| `level` | `String` |  |
 
 #### Example: Load
 
@@ -483,11 +511,11 @@ Create an instance: `skill = client.Skill`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | ``$STRING`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `skill` | ``$STRING`` |  |
-| `translation` | ``$STRING`` |  |
+| `description` | `String` |  |
+| `href` | `String` |  |
+| `id` | `Integer` |  |
+| `skill` | `String` |  |
+| `translation` | `String` |  |
 
 #### Example: Load
 
@@ -519,9 +547,9 @@ Create an instance: `type = client.Type`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `type` | ``$STRING`` |  |
+| `href` | `String` |  |
+| `id` | `Integer` |  |
+| `type` | `String` |  |
 
 #### Example: Load
 
@@ -538,12 +566,16 @@ types = client.Type.list
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -560,8 +592,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -605,14 +638,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 attribute = client.Attribute
-attribute.load({ "id" => "example_id" })
+attribute.list()
 
-# attribute.data_get now returns the loaded attribute data
+# attribute.data_get now returns the attribute data from the last list
 # attribute.match_get returns the last match criteria
 ```
 

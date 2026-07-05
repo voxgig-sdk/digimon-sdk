@@ -38,7 +38,7 @@ AttributeLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Attribute#list (any subset of Attribute fields).
+# Request payload for Attribute#list.
 #
 # @!attribute [rw] attribute
 #   @return [String, nil]
@@ -129,7 +129,7 @@ DigimonLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Digimon#list (any subset of Digimon fields).
+# Request payload for Digimon#list.
 #
 # @!attribute [rw] attribute
 #   @return [Array, nil]
@@ -224,7 +224,7 @@ FieldLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Field#list (any subset of Field fields).
+# Request payload for Field#list.
 #
 # @!attribute [rw] description
 #   @return [String, nil]
@@ -275,7 +275,7 @@ LevelLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Level#list (any subset of Level fields).
+# Request payload for Level#list.
 #
 # @!attribute [rw] href
 #   @return [String, nil]
@@ -326,7 +326,7 @@ SkillLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Skill#list (any subset of Skill fields).
+# Request payload for Skill#list.
 #
 # @!attribute [rw] description
 #   @return [String, nil]
@@ -377,7 +377,7 @@ TypeLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Type#list (any subset of Type fields).
+# Request payload for Type#list.
 #
 # @!attribute [rw] href
 #   @return [String, nil]

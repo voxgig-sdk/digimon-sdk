@@ -4,6 +4,11 @@
 
 The Python SDK for the Digimon API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Attribute()` — each
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    attributes = client.Attribute().list({})
+    attributes = client.Attribute().list()
     for attribute in attributes:
         print(attribute)
 except Exception as err:
@@ -55,6 +60,34 @@ try:
     print(attribute)
 except Exception as err:
     print(f"load failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    attributes = client.Attribute().list()
+    print(attributes)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -75,7 +108,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -101,7 +137,7 @@ Create a mock client for unit testing — no server required:
 client = DigimonSDK.test()
 
 # Entity ops return the bare record and raise on error.
-attribute = client.Attribute().load({"id": "test01"})
+attribute = client.Attribute().list()
 # attribute contains the mock response record
 ```
 
@@ -193,9 +229,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -324,17 +357,17 @@ Create an instance: `attribute = client.Attribute()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
+| `attribute` | `str` |  |
+| `description` | `str` |  |
+| `href` | `str` |  |
+| `id` | `int` |  |
 
 #### Example: Load
 
@@ -345,7 +378,7 @@ attribute = client.Attribute().load({"id": "attribute_id"})
 #### Example: List
 
 ```python
-attributes = client.Attribute().list({})
+attributes = client.Attribute().list()
 ```
 
 
@@ -357,27 +390,27 @@ Create an instance: `digimon = client.Digimon()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | ``$ARRAY`` |  |
-| `description` | ``$ARRAY`` |  |
-| `field` | ``$ARRAY`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image` | ``$ARRAY`` |  |
-| `level` | ``$ARRAY`` |  |
-| `name` | ``$STRING`` |  |
-| `next_evolution` | ``$ARRAY`` |  |
-| `prior_evolution` | ``$ARRAY`` |  |
-| `release_date` | ``$STRING`` |  |
-| `skill` | ``$ARRAY`` |  |
-| `type` | ``$ARRAY`` |  |
-| `x_antibody` | ``$BOOLEAN`` |  |
+| `attribute` | `list` |  |
+| `description` | `list` |  |
+| `field` | `list` |  |
+| `href` | `str` |  |
+| `id` | `int` |  |
+| `image` | `list` |  |
+| `level` | `list` |  |
+| `name` | `str` |  |
+| `next_evolution` | `list` |  |
+| `prior_evolution` | `list` |  |
+| `release_date` | `str` |  |
+| `skill` | `list` |  |
+| `type` | `list` |  |
+| `x_antibody` | `bool` |  |
 
 #### Example: Load
 
@@ -388,7 +421,7 @@ digimon = client.Digimon().load({"id": "digimon_id"})
 #### Example: List
 
 ```python
-digimons = client.Digimon().list({})
+digimons = client.Digimon().list()
 ```
 
 
@@ -400,18 +433,18 @@ Create an instance: `field = client.Field()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | ``$STRING`` |  |
-| `field` | ``$STRING`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image` | ``$STRING`` |  |
+| `description` | `str` |  |
+| `field` | `str` |  |
+| `href` | `str` |  |
+| `id` | `int` |  |
+| `image` | `str` |  |
 
 #### Example: Load
 
@@ -422,7 +455,7 @@ field = client.Field().load({"id": "field_id"})
 #### Example: List
 
 ```python
-fields = client.Field().list({})
+fields = client.Field().list()
 ```
 
 
@@ -434,16 +467,16 @@ Create an instance: `level = client.Level()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `level` | ``$STRING`` |  |
+| `href` | `str` |  |
+| `id` | `int` |  |
+| `level` | `str` |  |
 
 #### Example: Load
 
@@ -454,7 +487,7 @@ level = client.Level().load({"id": "level_id"})
 #### Example: List
 
 ```python
-levels = client.Level().list({})
+levels = client.Level().list()
 ```
 
 
@@ -466,18 +499,18 @@ Create an instance: `skill = client.Skill()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | ``$STRING`` |  |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `skill` | ``$STRING`` |  |
-| `translation` | ``$STRING`` |  |
+| `description` | `str` |  |
+| `href` | `str` |  |
+| `id` | `int` |  |
+| `skill` | `str` |  |
+| `translation` | `str` |  |
 
 #### Example: Load
 
@@ -488,7 +521,7 @@ skill = client.Skill().load({"id": "skill_id"})
 #### Example: List
 
 ```python
-skills = client.Skill().list({})
+skills = client.Skill().list()
 ```
 
 
@@ -500,16 +533,16 @@ Create an instance: `type = client.Type()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `type` | ``$STRING`` |  |
+| `href` | `str` |  |
+| `id` | `int` |  |
+| `type` | `str` |  |
 
 #### Example: Load
 
@@ -520,16 +553,20 @@ type = client.Type().load({"id": "type_id"})
 #### Example: List
 
 ```python
-types = client.Type().list({})
+types = client.Type().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -546,8 +583,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -590,14 +628,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 attribute = client.Attribute()
-attribute.load({"id": "example_id"})
+attribute.list()
 
-# attribute.data_get() now returns the loaded attribute data
+# attribute.data_get() now returns the attribute data from the last list
 # attribute.match_get() returns the last match criteria
 ```
 
