@@ -20,9 +20,9 @@ main: {
           url: "https://digi-api.com/api/v1"
         }
       ]
+      summary: "Free Digimon API using data from official and fan-based sources like Wikimon.net."
       title: "Digimon API"
       version: "1.0.0"
+      website: "https://digi-api.com"
     }
   }
-}
-

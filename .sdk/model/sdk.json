@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -1291,14 +1288,17 @@
           "name": "Data owned by Bandai",
           "url": "https://digi-api.com"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://digi-api.com/api/v1"
           }
         ],
+        "summary": "Free Digimon API using data from official and fan-based sources like Wikimon.net.",
         "title": "Digimon API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://digi-api.com"
       },
       "option": {},
       "target": {
@@ -1351,6 +1351,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -1401,6 +1404,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

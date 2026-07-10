@@ -60,7 +60,7 @@ func main() {
     }
 
     // Load a single attribute — the value is the loaded record.
-    attribute, err := client.Attribute(nil).Load(map[string]any{"id": "example"}, nil)
+    attribute, err := client.Attribute(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
