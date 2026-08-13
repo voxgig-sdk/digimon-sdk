@@ -63,13 +63,13 @@ describe('DigimonEntity', async () => {
     const digimon_ref01_ent = client.Digimon()
     const digimon_ref01_match: any = {}
 
-    const digimon_ref01_list = await digimon_ref01_ent.list(digimon_ref01_match)
+    const digimon_ref01_list = (await digimon_ref01_ent.list(digimon_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const digimon_ref01_match_dt0: any = {}
     digimon_ref01_match_dt0.id = digimon_ref01_data.id
-    const digimon_ref01_data_dt0 = await digimon_ref01_ent.load(digimon_ref01_match_dt0)
+    const digimon_ref01_data_dt0 = (await digimon_ref01_ent.load(digimon_ref01_match_dt0)).data()
     assert(digimon_ref01_data_dt0.id === digimon_ref01_data.id)
 
 

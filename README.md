@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = DigimonSDK.test()
-const attributes = await client.Attribute().list()
-// attributes is an array of bare Attribute records populated with mock data
-console.log(attributes)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = DigimonSDK.test({
+  entity: {
+    field: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const fields = await client.Field().list()
+// fields is an array of Field entities, populated with mock data
+// — call fields[0].data() for the record itself
+console.log(fields)
 ```
 
 ### Python
 
 ```python
 client = DigimonSDK.test()
-attributes = client.Attribute().list()
-print(attributes)
+fields = client.Field().list()
+print(fields)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(attributes)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = DigimonSDK::test([
-    "entity" => ["attribute" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["field" => ["test01" => ["id" => "test01"]]],
 ]);
-$attributes = $client->Attribute()->list();
+$fields = $client->Field()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Attribute(nil).List(
+result, err := client.Field(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Attribute(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = DigimonSDK.test({
-  "entity" => { "attribute" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "field" => { "test01" => { "id" => "test01" } } },
 })
-attributes = client.Attribute.list()
+fields = client.Field.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Attribute():list()
+local results, err = client:Field():list()
 ```
 
 ## Packages
@@ -110,7 +119,7 @@ import { DigimonSDK } from '@voxgig-sdk/digimon'
 
 const client = new DigimonSDK()
 
-// List all attributes (returns Attribute[])
+// List all attributes (returns AttributeEntity[] — .data() for the record)
 const attributes = await client.Attribute().list()
 for (const attribute of attributes) {
   console.log(attribute)
@@ -196,7 +205,7 @@ $client = new DigimonSDK();
 $attributes = $client->Attribute()->list();
 print_r($attributes);
 
-// Load a specific attribute (returns the bare record; throws on error)
+// Load a specific attribute (returns the ENTITY; call data_get() for the record; throws on error)
 $attribute = $client->Attribute()->load(["id" => "example_id"]);
 print_r($attribute);
 ```
@@ -227,7 +236,7 @@ client = DigimonSDK.new
 attributes = client.Attribute.list
 puts attributes
 
-# Load a specific attribute (returns the bare record; raises on error)
+# Load a specific attribute (returns the ENTITY; call data_get for the record)
 attribute = client.Attribute.load({ "id" => "example_id" })
 puts attribute
 ```
@@ -364,6 +373,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://digi-api.com](https://digi-api.com)
 

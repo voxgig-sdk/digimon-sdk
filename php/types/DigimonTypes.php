@@ -39,20 +39,21 @@ class AttributeListMatch
 /** Digimon entity data model. */
 class Digimon
 {
-    public ?array $attribute = null;
-    public ?array $description = null;
-    public ?array $field = null;
+    public ?array $attributes = null;
+    public ?array $descriptions = null;
+    public ?array $fields = null;
     public ?string $href = null;
     public ?int $id = null;
-    public ?array $image = null;
-    public ?array $level = null;
+    public ?string $image = null;
+    public ?array $images = null;
+    public ?array $levels = null;
     public ?string $name = null;
-    public ?array $next_evolution = null;
-    public ?array $prior_evolution = null;
-    public ?string $release_date = null;
-    public ?array $skill = null;
-    public ?array $type = null;
-    public ?bool $x_antibody = null;
+    public ?array $nextEvolutions = null;
+    public ?array $priorEvolutions = null;
+    public ?string $releaseDate = null;
+    public ?array $skills = null;
+    public ?array $types = null;
+    public ?bool $xAntibody = null;
 }
 
 /** Request payload for Digimon#load. */
@@ -64,20 +65,21 @@ class DigimonLoadMatch
 /** Request payload for Digimon#list. */
 class DigimonListMatch
 {
-    public ?array $attribute = null;
-    public ?array $description = null;
-    public ?array $field = null;
+    public ?array $attributes = null;
+    public ?array $descriptions = null;
+    public ?array $fields = null;
     public ?string $href = null;
     public ?int $id = null;
-    public ?array $image = null;
-    public ?array $level = null;
+    public ?string $image = null;
+    public ?array $images = null;
+    public ?array $levels = null;
     public ?string $name = null;
-    public ?array $next_evolution = null;
-    public ?array $prior_evolution = null;
-    public ?string $release_date = null;
-    public ?array $skill = null;
-    public ?array $type = null;
-    public ?bool $x_antibody = null;
+    public ?array $nextEvolutions = null;
+    public ?array $priorEvolutions = null;
+    public ?string $releaseDate = null;
+    public ?array $skills = null;
+    public ?array $types = null;
+    public ?bool $xAntibody = null;
 }
 
 /** Field entity data model. */

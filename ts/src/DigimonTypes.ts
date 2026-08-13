@@ -24,20 +24,21 @@ export interface AttributeListMatch {
 }
 
 export interface Digimon {
-  attribute?: any[]
-  description?: any[]
-  field?: any[]
+  attributes?: any[]
+  descriptions?: any[]
+  fields?: any[]
   href?: string
   id?: number
-  image?: any[]
-  level?: any[]
+  image?: string
+  images?: any[]
+  levels?: any[]
   name?: string
-  next_evolution?: any[]
-  prior_evolution?: any[]
-  release_date?: string
-  skill?: any[]
-  type?: any[]
-  x_antibody?: boolean
+  nextEvolutions?: any[]
+  priorEvolutions?: any[]
+  releaseDate?: string
+  skills?: any[]
+  types?: any[]
+  xAntibody?: boolean
 }
 
 export interface DigimonLoadMatch {
@@ -45,20 +46,21 @@ export interface DigimonLoadMatch {
 }
 
 export interface DigimonListMatch {
-  attribute?: any[]
-  description?: any[]
-  field?: any[]
+  attributes?: any[]
+  descriptions?: any[]
+  fields?: any[]
   href?: string
   id?: number
-  image?: any[]
-  level?: any[]
+  image?: string
+  images?: any[]
+  levels?: any[]
   name?: string
-  next_evolution?: any[]
-  prior_evolution?: any[]
-  release_date?: string
-  skill?: any[]
-  type?: any[]
-  x_antibody?: boolean
+  nextEvolutions?: any[]
+  priorEvolutions?: any[]
+  releaseDate?: string
+  skills?: any[]
+  types?: any[]
+  xAntibody?: boolean
 }
 
 export interface Field {

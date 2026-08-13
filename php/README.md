@@ -49,7 +49,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Attribute record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Attribute record (throws on error).
     $attribute = $client->Attribute()->load(["id" => "example_id"]);
     print_r($attribute);
 } catch (\Throwable $err) {
@@ -65,7 +65,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $attributes = $client->Attribute()->list();
+    $fields = $client->Field()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -137,12 +137,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = DigimonSDK::test([
-    "entity" => ["attribute" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["field" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
-$attribute = $client->Attribute()->list();
-print_r($attribute);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$field = $client->Field()->list();
+print_r($field);
 ```
 
 ### Use a custom fetch function
@@ -245,7 +246,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -280,20 +281,21 @@ API path: `/attribute`
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
-| `field` |  |
+| `attributes` |  |
+| `descriptions` |  |
+| `fields` |  |
 | `href` |  |
 | `id` |  |
 | `image` |  |
-| `level` |  |
+| `images` |  |
+| `levels` |  |
 | `name` |  |
-| `next_evolution` |  |
-| `prior_evolution` |  |
-| `release_date` |  |
-| `skill` |  |
-| `type` |  |
-| `x_antibody` |  |
+| `nextEvolutions` |  |
+| `priorEvolutions` |  |
+| `releaseDate` |  |
+| `skills` |  |
+| `types` |  |
+| `xAntibody` |  |
 
 Operations: List, Load.
 
@@ -379,7 +381,7 @@ Create an instance: `$attribute = $client->Attribute();`
 #### Example: Load
 
 ```php
-// load() returns the bare Attribute record (throws on error).
+// load() returns the ENTITY — call data_get() for the Attribute record (throws on error).
 $attribute = $client->Attribute()->load(["id" => "attribute_id"]);
 ```
 
@@ -406,25 +408,26 @@ Create an instance: `$digimon = $client->Digimon();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `array` |  |
-| `description` | `array` |  |
-| `field` | `array` |  |
+| `attributes` | `array` |  |
+| `descriptions` | `array` |  |
+| `fields` | `array` |  |
 | `href` | `string` |  |
 | `id` | `int` |  |
-| `image` | `array` |  |
-| `level` | `array` |  |
+| `image` | `string` |  |
+| `images` | `array` |  |
+| `levels` | `array` |  |
 | `name` | `string` |  |
-| `next_evolution` | `array` |  |
-| `prior_evolution` | `array` |  |
-| `release_date` | `string` |  |
-| `skill` | `array` |  |
-| `type` | `array` |  |
-| `x_antibody` | `bool` |  |
+| `nextEvolutions` | `array` |  |
+| `priorEvolutions` | `array` |  |
+| `releaseDate` | `string` |  |
+| `skills` | `array` |  |
+| `types` | `array` |  |
+| `xAntibody` | `bool` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Digimon record (throws on error).
+// load() returns the ENTITY — call data_get() for the Digimon record (throws on error).
 $digimon = $client->Digimon()->load(["id" => "digimon_id"]);
 ```
 
@@ -460,7 +463,7 @@ Create an instance: `$field = $client->Field();`
 #### Example: Load
 
 ```php
-// load() returns the bare Field record (throws on error).
+// load() returns the ENTITY — call data_get() for the Field record (throws on error).
 $field = $client->Field()->load(["id" => "field_id"]);
 ```
 
@@ -494,7 +497,7 @@ Create an instance: `$level = $client->Level();`
 #### Example: Load
 
 ```php
-// load() returns the bare Level record (throws on error).
+// load() returns the ENTITY — call data_get() for the Level record (throws on error).
 $level = $client->Level()->load(["id" => "level_id"]);
 ```
 
@@ -530,7 +533,7 @@ Create an instance: `$skill = $client->Skill();`
 #### Example: Load
 
 ```php
-// load() returns the bare Skill record (throws on error).
+// load() returns the ENTITY — call data_get() for the Skill record (throws on error).
 $skill = $client->Skill()->load(["id" => "skill_id"]);
 ```
 
@@ -564,7 +567,7 @@ Create an instance: `$type = $client->Type();`
 #### Example: Load
 
 ```php
-// load() returns the bare Type record (throws on error).
+// load() returns the ENTITY — call data_get() for the Type record (throws on error).
 $type = $client->Type()->load(["id" => "type_id"]);
 ```
 
@@ -652,11 +655,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$attribute = $client->Attribute();
-$attribute->list();
+$field = $client->Field();
+$field->list();
 
-// $attribute->data_get() now returns the attribute data from the last list
-// $attribute->match_get() returns the last match criteria
+// $field->data_get() now returns the field data from the last list
+// $field->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

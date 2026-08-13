@@ -52,7 +52,7 @@ except Exception as err:
 
 ### 3. Load an attribute
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -69,8 +69,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    attributes = client.Attribute().list()
-    print(attributes)
+    fields = client.Field().list()
+    print(fields)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -136,9 +136,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = DigimonSDK.test()
 
-# Entity ops return the bare record and raise on error.
-attribute = client.Attribute().list()
-# attribute contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+field = client.Field().list()
+# field contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -238,7 +239,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -273,20 +274,21 @@ API path: `/attribute`
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
-| `field` |  |
+| `attributes` |  |
+| `descriptions` |  |
+| `fields` |  |
 | `href` |  |
 | `id` |  |
 | `image` |  |
-| `level` |  |
+| `images` |  |
+| `levels` |  |
 | `name` |  |
-| `next_evolution` |  |
-| `prior_evolution` |  |
-| `release_date` |  |
-| `skill` |  |
-| `type` |  |
-| `x_antibody` |  |
+| `nextEvolutions` |  |
+| `priorEvolutions` |  |
+| `releaseDate` |  |
+| `skills` |  |
+| `types` |  |
+| `xAntibody` |  |
 
 Operations: List, Load.
 
@@ -397,20 +399,21 @@ Create an instance: `digimon = client.Digimon()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `list` |  |
-| `description` | `list` |  |
-| `field` | `list` |  |
+| `attributes` | `list` |  |
+| `descriptions` | `list` |  |
+| `fields` | `list` |  |
 | `href` | `str` |  |
 | `id` | `int` |  |
-| `image` | `list` |  |
-| `level` | `list` |  |
+| `image` | `str` |  |
+| `images` | `list` |  |
+| `levels` | `list` |  |
 | `name` | `str` |  |
-| `next_evolution` | `list` |  |
-| `prior_evolution` | `list` |  |
-| `release_date` | `str` |  |
-| `skill` | `list` |  |
-| `type` | `list` |  |
-| `x_antibody` | `bool` |  |
+| `nextEvolutions` | `list` |  |
+| `priorEvolutions` | `list` |  |
+| `releaseDate` | `str` |  |
+| `skills` | `list` |  |
+| `types` | `list` |  |
+| `xAntibody` | `bool` |  |
 
 #### Example: Load
 
@@ -632,11 +635,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-attribute = client.Attribute()
-attribute.list()
+field = client.Field()
+field.list()
 
-# attribute.data_get() now returns the attribute data from the last list
-# attribute.match_get() returns the last match criteria
+# field.data_get() now returns the field data from the last list
+# field.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

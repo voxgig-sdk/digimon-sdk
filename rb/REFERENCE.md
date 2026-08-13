@@ -176,20 +176,21 @@ digimon = client.Digimon
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `Array` | No |  |
-| `description` | `Array` | No |  |
-| `field` | `Array` | No |  |
+| `attributes` | `Array` | No |  |
+| `descriptions` | `Array` | No |  |
+| `fields` | `Array` | No |  |
 | `href` | `String` | No |  |
 | `id` | `Integer` | No |  |
-| `image` | `Array` | No |  |
-| `level` | `Array` | No |  |
+| `image` | `String` | No |  |
+| `images` | `Array` | No |  |
+| `levels` | `Array` | No |  |
 | `name` | `String` | No |  |
-| `next_evolution` | `Array` | No |  |
-| `prior_evolution` | `Array` | No |  |
-| `release_date` | `String` | No |  |
-| `skill` | `Array` | No |  |
-| `type` | `Array` | No |  |
-| `x_antibody` | `Boolean` | No |  |
+| `nextEvolutions` | `Array` | No |  |
+| `priorEvolutions` | `Array` | No |  |
+| `releaseDate` | `String` | No |  |
+| `skills` | `Array` | No |  |
+| `types` | `Array` | No |  |
+| `xAntibody` | `Boolean` | No |  |
 
 ### Operations
 

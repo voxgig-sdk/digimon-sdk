@@ -87,7 +87,7 @@ class TypeEntityTest < Minitest::Test
       "id" => type_ref01_data["id"],
     }
     type_ref01_data_dt0_loaded = type_ref01_ent.load(type_ref01_match_dt0, nil)
-    type_ref01_data_dt0_load_result = Helpers.to_map(type_ref01_data_dt0_loaded)
+    type_ref01_data_dt0_load_result = Helpers.to_map(type_ref01_data_dt0_loaded.respond_to?(:data_get) ? type_ref01_data_dt0_loaded.data_get : type_ref01_data_dt0_loaded)
     assert !type_ref01_data_dt0_load_result.nil?
     assert_equal type_ref01_data_dt0_load_result["id"], type_ref01_data["id"]
 

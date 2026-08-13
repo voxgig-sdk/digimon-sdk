@@ -63,13 +63,13 @@ describe('AttributeEntity', async () => {
     const attribute_ref01_ent = client.Attribute()
     const attribute_ref01_match: any = {}
 
-    const attribute_ref01_list = await attribute_ref01_ent.list(attribute_ref01_match)
+    const attribute_ref01_list = (await attribute_ref01_ent.list(attribute_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const attribute_ref01_match_dt0: any = {}
     attribute_ref01_match_dt0.id = attribute_ref01_data.id
-    const attribute_ref01_data_dt0 = await attribute_ref01_ent.load(attribute_ref01_match_dt0)
+    const attribute_ref01_data_dt0 = (await attribute_ref01_ent.load(attribute_ref01_match_dt0)).data()
     assert(attribute_ref01_data_dt0.id === attribute_ref01_data.id)
 
 

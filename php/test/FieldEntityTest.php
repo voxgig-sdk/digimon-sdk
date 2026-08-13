@@ -97,7 +97,7 @@ class FieldEntityTest extends TestCase
             "id" => $field_ref01_data["id"],
         ];
         $field_ref01_data_dt0_loaded = $field_ref01_ent->load($field_ref01_match_dt0, null);
-        $field_ref01_data_dt0_load_result = Helpers::to_map($field_ref01_data_dt0_loaded);
+        $field_ref01_data_dt0_load_result = Helpers::to_map(is_object($field_ref01_data_dt0_loaded) && method_exists($field_ref01_data_dt0_loaded, 'data_get') ? $field_ref01_data_dt0_loaded->data_get() : $field_ref01_data_dt0_loaded);
         $this->assertNotNull($field_ref01_data_dt0_load_result);
         $this->assertEquals($field_ref01_data_dt0_load_result["id"], $field_ref01_data["id"]);
 

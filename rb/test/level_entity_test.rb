@@ -87,7 +87,7 @@ class LevelEntityTest < Minitest::Test
       "id" => level_ref01_data["id"],
     }
     level_ref01_data_dt0_loaded = level_ref01_ent.load(level_ref01_match_dt0, nil)
-    level_ref01_data_dt0_load_result = Helpers.to_map(level_ref01_data_dt0_loaded)
+    level_ref01_data_dt0_load_result = Helpers.to_map(level_ref01_data_dt0_loaded.respond_to?(:data_get) ? level_ref01_data_dt0_loaded.data_get : level_ref01_data_dt0_loaded)
     assert !level_ref01_data_dt0_load_result.nil?
     assert_equal level_ref01_data_dt0_load_result["id"], level_ref01_data["id"]
 

@@ -63,13 +63,13 @@ describe('TypeEntity', async () => {
     const type_ref01_ent = client.Type()
     const type_ref01_match: any = {}
 
-    const type_ref01_list = await type_ref01_ent.list(type_ref01_match)
+    const type_ref01_list = (await type_ref01_ent.list(type_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const type_ref01_match_dt0: any = {}
     type_ref01_match_dt0.id = type_ref01_data.id
-    const type_ref01_data_dt0 = await type_ref01_ent.load(type_ref01_match_dt0)
+    const type_ref01_data_dt0 = (await type_ref01_ent.load(type_ref01_match_dt0)).data()
     assert(type_ref01_data_dt0.id === type_ref01_data.id)
 
 

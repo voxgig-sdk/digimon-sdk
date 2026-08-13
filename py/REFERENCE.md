@@ -171,20 +171,21 @@ digimon = client.Digimon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `list` | No |  |
-| `description` | `list` | No |  |
-| `field` | `list` | No |  |
+| `attributes` | `list` | No |  |
+| `descriptions` | `list` | No |  |
+| `fields` | `list` | No |  |
 | `href` | `str` | No |  |
 | `id` | `int` | No |  |
-| `image` | `list` | No |  |
-| `level` | `list` | No |  |
+| `image` | `str` | No |  |
+| `images` | `list` | No |  |
+| `levels` | `list` | No |  |
 | `name` | `str` | No |  |
-| `next_evolution` | `list` | No |  |
-| `prior_evolution` | `list` | No |  |
-| `release_date` | `str` | No |  |
-| `skill` | `list` | No |  |
-| `type` | `list` | No |  |
-| `x_antibody` | `bool` | No |  |
+| `nextEvolutions` | `list` | No |  |
+| `priorEvolutions` | `list` | No |  |
+| `releaseDate` | `str` | No |  |
+| `skills` | `list` | No |  |
+| `types` | `list` | No |  |
+| `xAntibody` | `bool` | No |  |
 
 ### Operations
 

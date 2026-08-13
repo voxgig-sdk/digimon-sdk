@@ -237,20 +237,21 @@ const digimon = client.Digimon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `any[]` | No |  |
-| `description` | `any[]` | No |  |
-| `field` | `any[]` | No |  |
+| `attributes` | `any[]` | No |  |
+| `descriptions` | `any[]` | No |  |
+| `fields` | `any[]` | No |  |
 | `href` | `string` | No |  |
 | `id` | `number` | No |  |
-| `image` | `any[]` | No |  |
-| `level` | `any[]` | No |  |
+| `image` | `string` | No |  |
+| `images` | `any[]` | No |  |
+| `levels` | `any[]` | No |  |
 | `name` | `string` | No |  |
-| `next_evolution` | `any[]` | No |  |
-| `prior_evolution` | `any[]` | No |  |
-| `release_date` | `string` | No |  |
-| `skill` | `any[]` | No |  |
-| `type` | `any[]` | No |  |
-| `x_antibody` | `boolean` | No |  |
+| `nextEvolutions` | `any[]` | No |  |
+| `priorEvolutions` | `any[]` | No |  |
+| `releaseDate` | `string` | No |  |
+| `skills` | `any[]` | No |  |
+| `types` | `any[]` | No |  |
+| `xAntibody` | `boolean` | No |  |
 
 ### Operations
 

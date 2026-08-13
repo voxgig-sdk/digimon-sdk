@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Attribute record (raises on error).
+  # load returns the ENTITY — call data_get for the Attribute record (raises on error).
   attribute = client.Attribute.load({ "id" => "example_id" })
   puts attribute
 rescue => err
@@ -63,7 +63,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  attributes = client.Attribute.list()
+  fields = client.Field.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -131,12 +131,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = DigimonSDK.test({
-  "entity" => { "attribute" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "field" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
-attribute = client.Attribute.list()
-puts attribute
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+field = client.Field.list()
+puts field
 ```
 
 ### Use a custom fetch function
@@ -270,20 +271,21 @@ API path: `/attribute`
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
-| `field` |  |
+| `attributes` |  |
+| `descriptions` |  |
+| `fields` |  |
 | `href` |  |
 | `id` |  |
 | `image` |  |
-| `level` |  |
+| `images` |  |
+| `levels` |  |
 | `name` |  |
-| `next_evolution` |  |
-| `prior_evolution` |  |
-| `release_date` |  |
-| `skill` |  |
-| `type` |  |
-| `x_antibody` |  |
+| `nextEvolutions` |  |
+| `priorEvolutions` |  |
+| `releaseDate` |  |
+| `skills` |  |
+| `types` |  |
+| `xAntibody` |  |
 
 Operations: List, Load.
 
@@ -369,7 +371,7 @@ Create an instance: `attribute = client.Attribute`
 #### Example: Load
 
 ```ruby
-# load returns the bare Attribute record (raises on error).
+# load returns the ENTITY — call data_get for the Attribute record (raises on error).
 attribute = client.Attribute.load({ "id" => "attribute_id" })
 ```
 
@@ -396,25 +398,26 @@ Create an instance: `digimon = client.Digimon`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `Array` |  |
-| `description` | `Array` |  |
-| `field` | `Array` |  |
+| `attributes` | `Array` |  |
+| `descriptions` | `Array` |  |
+| `fields` | `Array` |  |
 | `href` | `String` |  |
 | `id` | `Integer` |  |
-| `image` | `Array` |  |
-| `level` | `Array` |  |
+| `image` | `String` |  |
+| `images` | `Array` |  |
+| `levels` | `Array` |  |
 | `name` | `String` |  |
-| `next_evolution` | `Array` |  |
-| `prior_evolution` | `Array` |  |
-| `release_date` | `String` |  |
-| `skill` | `Array` |  |
-| `type` | `Array` |  |
-| `x_antibody` | `Boolean` |  |
+| `nextEvolutions` | `Array` |  |
+| `priorEvolutions` | `Array` |  |
+| `releaseDate` | `String` |  |
+| `skills` | `Array` |  |
+| `types` | `Array` |  |
+| `xAntibody` | `Boolean` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Digimon record (raises on error).
+# load returns the ENTITY — call data_get for the Digimon record (raises on error).
 digimon = client.Digimon.load({ "id" => "digimon_id" })
 ```
 
@@ -450,7 +453,7 @@ Create an instance: `field = client.Field`
 #### Example: Load
 
 ```ruby
-# load returns the bare Field record (raises on error).
+# load returns the ENTITY — call data_get for the Field record (raises on error).
 field = client.Field.load({ "id" => "field_id" })
 ```
 
@@ -484,7 +487,7 @@ Create an instance: `level = client.Level`
 #### Example: Load
 
 ```ruby
-# load returns the bare Level record (raises on error).
+# load returns the ENTITY — call data_get for the Level record (raises on error).
 level = client.Level.load({ "id" => "level_id" })
 ```
 
@@ -520,7 +523,7 @@ Create an instance: `skill = client.Skill`
 #### Example: Load
 
 ```ruby
-# load returns the bare Skill record (raises on error).
+# load returns the ENTITY — call data_get for the Skill record (raises on error).
 skill = client.Skill.load({ "id" => "skill_id" })
 ```
 
@@ -554,7 +557,7 @@ Create an instance: `type = client.Type`
 #### Example: Load
 
 ```ruby
-# load returns the bare Type record (raises on error).
+# load returns the ENTITY — call data_get for the Type record (raises on error).
 type = client.Type.load({ "id" => "type_id" })
 ```
 
@@ -642,11 +645,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-attribute = client.Attribute
-attribute.list()
+field = client.Field
+field.list()
 
-# attribute.data_get now returns the attribute data from the last list
-# attribute.match_get returns the last match criteria
+# field.data_get now returns the field data from the last list
+# field.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

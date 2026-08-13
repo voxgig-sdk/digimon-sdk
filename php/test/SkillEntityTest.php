@@ -97,7 +97,7 @@ class SkillEntityTest extends TestCase
             "id" => $skill_ref01_data["id"],
         ];
         $skill_ref01_data_dt0_loaded = $skill_ref01_ent->load($skill_ref01_match_dt0, null);
-        $skill_ref01_data_dt0_load_result = Helpers::to_map($skill_ref01_data_dt0_loaded);
+        $skill_ref01_data_dt0_load_result = Helpers::to_map(is_object($skill_ref01_data_dt0_loaded) && method_exists($skill_ref01_data_dt0_loaded, 'data_get') ? $skill_ref01_data_dt0_loaded->data_get() : $skill_ref01_data_dt0_loaded);
         $this->assertNotNull($skill_ref01_data_dt0_load_result);
         $this->assertEquals($skill_ref01_data_dt0_load_result["id"], $skill_ref01_data["id"]);
 

@@ -61,13 +61,13 @@ AttributeListMatch = Struct.new(
 
 # Digimon entity data model.
 #
-# @!attribute [rw] attribute
+# @!attribute [rw] attributes
 #   @return [Array, nil]
 #
-# @!attribute [rw] description
+# @!attribute [rw] descriptions
 #   @return [Array, nil]
 #
-# @!attribute [rw] field
+# @!attribute [rw] fields
 #   @return [Array, nil]
 #
 # @!attribute [rw] href
@@ -77,46 +77,50 @@ AttributeListMatch = Struct.new(
 #   @return [Integer, nil]
 #
 # @!attribute [rw] image
+#   @return [String, nil]
+#
+# @!attribute [rw] images
 #   @return [Array, nil]
 #
-# @!attribute [rw] level
+# @!attribute [rw] levels
 #   @return [Array, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] next_evolution
+# @!attribute [rw] nextEvolutions
 #   @return [Array, nil]
 #
-# @!attribute [rw] prior_evolution
+# @!attribute [rw] priorEvolutions
 #   @return [Array, nil]
 #
-# @!attribute [rw] release_date
+# @!attribute [rw] releaseDate
 #   @return [String, nil]
 #
-# @!attribute [rw] skill
+# @!attribute [rw] skills
 #   @return [Array, nil]
 #
-# @!attribute [rw] type
+# @!attribute [rw] types
 #   @return [Array, nil]
 #
-# @!attribute [rw] x_antibody
+# @!attribute [rw] xAntibody
 #   @return [Boolean, nil]
 Digimon = Struct.new(
-  :attribute,
-  :description,
-  :field,
+  :attributes,
+  :descriptions,
+  :fields,
   :href,
   :id,
   :image,
-  :level,
+  :images,
+  :levels,
   :name,
-  :next_evolution,
-  :prior_evolution,
-  :release_date,
-  :skill,
-  :type,
-  :x_antibody,
+  :nextEvolutions,
+  :priorEvolutions,
+  :releaseDate,
+  :skills,
+  :types,
+  :xAntibody,
   keyword_init: true
 )
 
@@ -131,13 +135,13 @@ DigimonLoadMatch = Struct.new(
 
 # Request payload for Digimon#list.
 #
-# @!attribute [rw] attribute
+# @!attribute [rw] attributes
 #   @return [Array, nil]
 #
-# @!attribute [rw] description
+# @!attribute [rw] descriptions
 #   @return [Array, nil]
 #
-# @!attribute [rw] field
+# @!attribute [rw] fields
 #   @return [Array, nil]
 #
 # @!attribute [rw] href
@@ -147,46 +151,50 @@ DigimonLoadMatch = Struct.new(
 #   @return [Integer, nil]
 #
 # @!attribute [rw] image
+#   @return [String, nil]
+#
+# @!attribute [rw] images
 #   @return [Array, nil]
 #
-# @!attribute [rw] level
+# @!attribute [rw] levels
 #   @return [Array, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] next_evolution
+# @!attribute [rw] nextEvolutions
 #   @return [Array, nil]
 #
-# @!attribute [rw] prior_evolution
+# @!attribute [rw] priorEvolutions
 #   @return [Array, nil]
 #
-# @!attribute [rw] release_date
+# @!attribute [rw] releaseDate
 #   @return [String, nil]
 #
-# @!attribute [rw] skill
+# @!attribute [rw] skills
 #   @return [Array, nil]
 #
-# @!attribute [rw] type
+# @!attribute [rw] types
 #   @return [Array, nil]
 #
-# @!attribute [rw] x_antibody
+# @!attribute [rw] xAntibody
 #   @return [Boolean, nil]
 DigimonListMatch = Struct.new(
-  :attribute,
-  :description,
-  :field,
+  :attributes,
+  :descriptions,
+  :fields,
   :href,
   :id,
   :image,
-  :level,
+  :images,
+  :levels,
   :name,
-  :next_evolution,
-  :prior_evolution,
-  :release_date,
-  :skill,
-  :type,
-  :x_antibody,
+  :nextEvolutions,
+  :priorEvolutions,
+  :releaseDate,
+  :skills,
+  :types,
+  :xAntibody,
   keyword_init: true
 )
 

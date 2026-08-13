@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from digimon_sdk.utility.voxgig_struct import voxgig_struct as vs
 from digimon_sdk import DigimonSDK
-from core import helpers
+from digimon_sdk.core import helpers
 from test import runner
 
 

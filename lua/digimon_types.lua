@@ -22,39 +22,41 @@
 ---@field id? number
 
 ---@class Digimon
----@field attribute? table
----@field description? table
----@field field? table
+---@field attributes? table
+---@field descriptions? table
+---@field fields? table
 ---@field href? string
 ---@field id? number
----@field image? table
----@field level? table
+---@field image? string
+---@field images? table
+---@field levels? table
 ---@field name? string
----@field next_evolution? table
----@field prior_evolution? table
----@field release_date? string
----@field skill? table
----@field type? table
----@field x_antibody? boolean
+---@field nextEvolutions? table
+---@field priorEvolutions? table
+---@field releaseDate? string
+---@field skills? table
+---@field types? table
+---@field xAntibody? boolean
 
 ---@class DigimonLoadMatch
 ---@field id string
 
 ---@class DigimonListMatch
----@field attribute? table
----@field description? table
----@field field? table
+---@field attributes? table
+---@field descriptions? table
+---@field fields? table
 ---@field href? string
 ---@field id? number
----@field image? table
----@field level? table
+---@field image? string
+---@field images? table
+---@field levels? table
 ---@field name? string
----@field next_evolution? table
----@field prior_evolution? table
----@field release_date? string
----@field skill? table
----@field type? table
----@field x_antibody? boolean
+---@field nextEvolutions? table
+---@field priorEvolutions? table
+---@field releaseDate? string
+---@field skills? table
+---@field types? table
+---@field xAntibody? boolean
 
 ---@class Field
 ---@field description? string

@@ -97,7 +97,7 @@ describe("FieldEntity", function()
     }
     local field_ref01_data_dt0_loaded, err = field_ref01_ent:load(field_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local field_ref01_data_dt0_load_result = helpers.to_map(field_ref01_data_dt0_loaded)
+    local field_ref01_data_dt0_load_result = helpers.to_map(type(field_ref01_data_dt0_loaded) == 'table' and field_ref01_data_dt0_loaded.data_get and field_ref01_data_dt0_loaded:data_get() or field_ref01_data_dt0_loaded)
     assert.is_not_nil(field_ref01_data_dt0_load_result)
     assert.are.equal(field_ref01_data_dt0_load_result["id"], field_ref01_data["id"])
 

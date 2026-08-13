@@ -97,7 +97,7 @@ describe("AttributeEntity", function()
     }
     local attribute_ref01_data_dt0_loaded, err = attribute_ref01_ent:load(attribute_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local attribute_ref01_data_dt0_load_result = helpers.to_map(attribute_ref01_data_dt0_loaded)
+    local attribute_ref01_data_dt0_load_result = helpers.to_map(type(attribute_ref01_data_dt0_loaded) == 'table' and attribute_ref01_data_dt0_loaded.data_get and attribute_ref01_data_dt0_loaded:data_get() or attribute_ref01_data_dt0_loaded)
     assert.is_not_nil(attribute_ref01_data_dt0_load_result)
     assert.are.equal(attribute_ref01_data_dt0_load_result["id"], attribute_ref01_data["id"])
 

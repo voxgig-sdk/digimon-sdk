@@ -175,20 +175,21 @@ $digimon = $client->Digimon();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `array` | No |  |
-| `description` | `array` | No |  |
-| `field` | `array` | No |  |
+| `attributes` | `array` | No |  |
+| `descriptions` | `array` | No |  |
+| `fields` | `array` | No |  |
 | `href` | `string` | No |  |
 | `id` | `int` | No |  |
-| `image` | `array` | No |  |
-| `level` | `array` | No |  |
+| `image` | `string` | No |  |
+| `images` | `array` | No |  |
+| `levels` | `array` | No |  |
 | `name` | `string` | No |  |
-| `next_evolution` | `array` | No |  |
-| `prior_evolution` | `array` | No |  |
-| `release_date` | `string` | No |  |
-| `skill` | `array` | No |  |
-| `type` | `array` | No |  |
-| `x_antibody` | `bool` | No |  |
+| `nextEvolutions` | `array` | No |  |
+| `priorEvolutions` | `array` | No |  |
+| `releaseDate` | `string` | No |  |
+| `skills` | `array` | No |  |
+| `types` | `array` | No |  |
+| `xAntibody` | `bool` | No |  |
 
 ### Operations
 

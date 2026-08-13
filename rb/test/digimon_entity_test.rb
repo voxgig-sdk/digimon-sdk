@@ -87,7 +87,7 @@ class DigimonEntityTest < Minitest::Test
       "id" => digimon_ref01_data["id"],
     }
     digimon_ref01_data_dt0_loaded = digimon_ref01_ent.load(digimon_ref01_match_dt0, nil)
-    digimon_ref01_data_dt0_load_result = Helpers.to_map(digimon_ref01_data_dt0_loaded)
+    digimon_ref01_data_dt0_load_result = Helpers.to_map(digimon_ref01_data_dt0_loaded.respond_to?(:data_get) ? digimon_ref01_data_dt0_loaded.data_get : digimon_ref01_data_dt0_loaded)
     assert !digimon_ref01_data_dt0_load_result.nil?
     assert_equal digimon_ref01_data_dt0_load_result["id"], digimon_ref01_data["id"]
 

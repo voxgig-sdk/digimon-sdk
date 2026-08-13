@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Digimon SDK exists test
 
 import pytest
 from digimon_sdk import DigimonSDK

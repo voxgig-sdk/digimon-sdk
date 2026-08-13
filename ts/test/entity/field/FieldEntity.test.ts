@@ -63,13 +63,13 @@ describe('FieldEntity', async () => {
     const field_ref01_ent = client.Field()
     const field_ref01_match: any = {}
 
-    const field_ref01_list = await field_ref01_ent.list(field_ref01_match)
+    const field_ref01_list = (await field_ref01_ent.list(field_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const field_ref01_match_dt0: any = {}
     field_ref01_match_dt0.id = field_ref01_data.id
-    const field_ref01_data_dt0 = await field_ref01_ent.load(field_ref01_match_dt0)
+    const field_ref01_data_dt0 = (await field_ref01_ent.load(field_ref01_match_dt0)).data()
     assert(field_ref01_data_dt0.id === field_ref01_data.id)
 
 

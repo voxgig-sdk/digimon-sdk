@@ -97,7 +97,7 @@ class AttributeEntityTest extends TestCase
             "id" => $attribute_ref01_data["id"],
         ];
         $attribute_ref01_data_dt0_loaded = $attribute_ref01_ent->load($attribute_ref01_match_dt0, null);
-        $attribute_ref01_data_dt0_load_result = Helpers::to_map($attribute_ref01_data_dt0_loaded);
+        $attribute_ref01_data_dt0_load_result = Helpers::to_map(is_object($attribute_ref01_data_dt0_loaded) && method_exists($attribute_ref01_data_dt0_loaded, 'data_get') ? $attribute_ref01_data_dt0_loaded->data_get() : $attribute_ref01_data_dt0_loaded);
         $this->assertNotNull($attribute_ref01_data_dt0_load_result);
         $this->assertEquals($attribute_ref01_data_dt0_load_result["id"], $attribute_ref01_data["id"]);
 

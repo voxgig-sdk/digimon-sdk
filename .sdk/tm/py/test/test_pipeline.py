@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import DigimonSDK
-from core.error import DigimonError
-from core.result import DigimonResult
-from core.response import DigimonResponse
-from core.spec import DigimonSpec
-from feature.base_feature import DigimonBaseFeature
+from projectname_sdk.core.error import DigimonError
+from projectname_sdk.core.result import DigimonResult
+from projectname_sdk.core.response import DigimonResponse
+from projectname_sdk.core.spec import DigimonSpec
+from projectname_sdk.feature.base_feature import DigimonBaseFeature
 
 
 def _client():

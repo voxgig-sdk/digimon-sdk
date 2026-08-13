@@ -97,7 +97,7 @@ describe("DigimonEntity", function()
     }
     local digimon_ref01_data_dt0_loaded, err = digimon_ref01_ent:load(digimon_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local digimon_ref01_data_dt0_load_result = helpers.to_map(digimon_ref01_data_dt0_loaded)
+    local digimon_ref01_data_dt0_load_result = helpers.to_map(type(digimon_ref01_data_dt0_loaded) == 'table' and digimon_ref01_data_dt0_loaded.data_get and digimon_ref01_data_dt0_loaded:data_get() or digimon_ref01_data_dt0_loaded)
     assert.is_not_nil(digimon_ref01_data_dt0_load_result)
     assert.are.equal(digimon_ref01_data_dt0_load_result["id"], digimon_ref01_data["id"])
 

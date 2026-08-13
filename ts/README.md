@@ -35,7 +35,9 @@ const client = new DigimonSDK()
 
 ### 2. List attribute records
 
-`list()` resolves to an array of Attribute objects — iterate it directly:
+`list()` resolves to an array of Attribute ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const attributes = await client.Attribute().list()
@@ -65,8 +67,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const attributes = await client.Attribute().list()
-  console.log(attributes)
+  const fields = await client.Field().list()
+  console.log(fields)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -132,9 +134,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = DigimonSDK.test()
 
-const attribute = await client.Attribute().list()
-// attribute is a bare entity populated with mock response data
-console.log(attribute)
+const field = await client.Field().list()
+// field is the entity, populated with mock response data
+// — call field.data() for the record itself
+console.log(field)
 ```
 
 You can also use the instance method:
@@ -149,7 +152,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Attribute()
+const entity = client.Field()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -317,20 +320,21 @@ API path: `/attribute`
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
-| `field` |  |
+| `attributes` |  |
+| `descriptions` |  |
+| `fields` |  |
 | `href` |  |
 | `id` |  |
 | `image` |  |
-| `level` |  |
+| `images` |  |
+| `levels` |  |
 | `name` |  |
-| `next_evolution` |  |
-| `prior_evolution` |  |
-| `release_date` |  |
-| `skill` |  |
-| `type` |  |
-| `x_antibody` |  |
+| `nextEvolutions` |  |
+| `priorEvolutions` |  |
+| `releaseDate` |  |
+| `skills` |  |
+| `types` |  |
+| `xAntibody` |  |
 
 Operations: list, load.
 
@@ -441,20 +445,21 @@ Create an instance: `const digimon = client.Digimon()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `any[]` |  |
-| `description` | `any[]` |  |
-| `field` | `any[]` |  |
+| `attributes` | `any[]` |  |
+| `descriptions` | `any[]` |  |
+| `fields` | `any[]` |  |
 | `href` | `string` |  |
 | `id` | `number` |  |
-| `image` | `any[]` |  |
-| `level` | `any[]` |  |
+| `image` | `string` |  |
+| `images` | `any[]` |  |
+| `levels` | `any[]` |  |
 | `name` | `string` |  |
-| `next_evolution` | `any[]` |  |
-| `prior_evolution` | `any[]` |  |
-| `release_date` | `string` |  |
-| `skill` | `any[]` |  |
-| `type` | `any[]` |  |
-| `x_antibody` | `boolean` |  |
+| `nextEvolutions` | `any[]` |  |
+| `priorEvolutions` | `any[]` |  |
+| `releaseDate` | `string` |  |
+| `skills` | `any[]` |  |
+| `types` | `any[]` |  |
+| `xAntibody` | `boolean` |  |
 
 #### Example: Load
 
@@ -670,11 +675,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const attribute = client.Attribute()
-await attribute.list()
+const field = client.Field()
+await field.list()
 
-// attribute.data() now returns the attribute data from the last `list`
-// attribute.match() returns the last match criteria
+// field.data() now returns the field data from the last `list`
+// field.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from digimon_sdk.utility.voxgig_struct import voxgig_struct as vs
 from digimon_sdk import DigimonSDK
-from core import helpers
+from digimon_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -42,7 +42,7 @@ class TestDigimonEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from config import make_config
+        from digimon_sdk.config import make_config
         cfg = make_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = DigimonSDK.test(
@@ -92,7 +92,7 @@ class TestDigimonEntity:
             "id": digimon_ref01_data["id"],
         }
         digimon_ref01_data_dt0_loaded = digimon_ref01_ent.load(digimon_ref01_match_dt0, None)
-        digimon_ref01_data_dt0_load_result = helpers.to_map(digimon_ref01_data_dt0_loaded)
+        digimon_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(digimon_ref01_data_dt0_loaded))
         assert digimon_ref01_data_dt0_load_result is not None
         assert digimon_ref01_data_dt0_load_result["id"] == digimon_ref01_data["id"]
 

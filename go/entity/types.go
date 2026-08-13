@@ -6,7 +6,11 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/digimon-sdk/go/core"
+)
 
 // Attribute is the typed data model for the attribute entity.
 type Attribute struct {
@@ -31,20 +35,21 @@ type AttributeListMatch struct {
 
 // Digimon is the typed data model for the digimon entity.
 type Digimon struct {
-	Attribute *[]any `json:"attribute,omitempty"`
-	Description *[]any `json:"description,omitempty"`
-	Field *[]any `json:"field,omitempty"`
+	Attributes *[]any `json:"attributes,omitempty"`
+	Descriptions *[]any `json:"descriptions,omitempty"`
+	Fields *[]any `json:"fields,omitempty"`
 	Href *string `json:"href,omitempty"`
 	Id *int `json:"id,omitempty"`
-	Image *[]any `json:"image,omitempty"`
-	Level *[]any `json:"level,omitempty"`
+	Image *string `json:"image,omitempty"`
+	Images *[]any `json:"images,omitempty"`
+	Levels *[]any `json:"levels,omitempty"`
 	Name *string `json:"name,omitempty"`
-	NextEvolution *[]any `json:"next_evolution,omitempty"`
-	PriorEvolution *[]any `json:"prior_evolution,omitempty"`
-	ReleaseDate *string `json:"release_date,omitempty"`
-	Skill *[]any `json:"skill,omitempty"`
-	Type *[]any `json:"type,omitempty"`
-	XAntibody *bool `json:"x_antibody,omitempty"`
+	NextEvolutions *[]any `json:"nextEvolutions,omitempty"`
+	PriorEvolutions *[]any `json:"priorEvolutions,omitempty"`
+	ReleaseDate *string `json:"releaseDate,omitempty"`
+	Skills *[]any `json:"skills,omitempty"`
+	Types *[]any `json:"types,omitempty"`
+	XAntibody *bool `json:"xAntibody,omitempty"`
 }
 
 // DigimonLoadMatch is the typed request payload for Digimon.LoadTyped.
@@ -54,20 +59,21 @@ type DigimonLoadMatch struct {
 
 // DigimonListMatch is the typed request payload for Digimon.ListTyped.
 type DigimonListMatch struct {
-	Attribute *[]any `json:"attribute,omitempty"`
-	Description *[]any `json:"description,omitempty"`
-	Field *[]any `json:"field,omitempty"`
+	Attributes *[]any `json:"attributes,omitempty"`
+	Descriptions *[]any `json:"descriptions,omitempty"`
+	Fields *[]any `json:"fields,omitempty"`
 	Href *string `json:"href,omitempty"`
 	Id *int `json:"id,omitempty"`
-	Image *[]any `json:"image,omitempty"`
-	Level *[]any `json:"level,omitempty"`
+	Image *string `json:"image,omitempty"`
+	Images *[]any `json:"images,omitempty"`
+	Levels *[]any `json:"levels,omitempty"`
 	Name *string `json:"name,omitempty"`
-	NextEvolution *[]any `json:"next_evolution,omitempty"`
-	PriorEvolution *[]any `json:"prior_evolution,omitempty"`
-	ReleaseDate *string `json:"release_date,omitempty"`
-	Skill *[]any `json:"skill,omitempty"`
-	Type *[]any `json:"type,omitempty"`
-	XAntibody *bool `json:"x_antibody,omitempty"`
+	NextEvolutions *[]any `json:"nextEvolutions,omitempty"`
+	PriorEvolutions *[]any `json:"priorEvolutions,omitempty"`
+	ReleaseDate *string `json:"releaseDate,omitempty"`
+	Skills *[]any `json:"skills,omitempty"`
+	Types *[]any `json:"types,omitempty"`
+	XAntibody *bool `json:"xAntibody,omitempty"`
 }
 
 // Field is the typed data model for the field entity.
@@ -166,12 +172,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -183,12 +203,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

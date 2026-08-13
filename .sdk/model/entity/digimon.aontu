@@ -6,17 +6,17 @@ main: kit: entity: digimon: {
 
   fields: [
     {
-      name: "attribute"
+      name: "attributes"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "description"
+      name: "descriptions"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "field"
+      name: "fields"
       req: false
       type: "`$ARRAY`"
     }
@@ -33,10 +33,15 @@ main: kit: entity: digimon: {
     {
       name: "image"
       req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "images"
+      req: false
       type: "`$ARRAY`"
     }
     {
-      name: "level"
+      name: "levels"
       req: false
       type: "`$ARRAY`"
     }
@@ -46,32 +51,32 @@ main: kit: entity: digimon: {
       type: "`$STRING`"
     }
     {
-      name: "next_evolution"
+      name: "nextEvolutions"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "prior_evolution"
+      name: "priorEvolutions"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "release_date"
+      name: "releaseDate"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "skill"
+      name: "skills"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "type"
+      name: "types"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "x_antibody"
+      name: "xAntibody"
       req: false
       type: "`$BOOLEAN`"
     }

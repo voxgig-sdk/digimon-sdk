@@ -97,7 +97,7 @@ class LevelEntityTest extends TestCase
             "id" => $level_ref01_data["id"],
         ];
         $level_ref01_data_dt0_loaded = $level_ref01_ent->load($level_ref01_match_dt0, null);
-        $level_ref01_data_dt0_load_result = Helpers::to_map($level_ref01_data_dt0_loaded);
+        $level_ref01_data_dt0_load_result = Helpers::to_map(is_object($level_ref01_data_dt0_loaded) && method_exists($level_ref01_data_dt0_loaded, 'data_get') ? $level_ref01_data_dt0_loaded->data_get() : $level_ref01_data_dt0_loaded);
         $this->assertNotNull($level_ref01_data_dt0_load_result);
         $this->assertEquals($level_ref01_data_dt0_load_result["id"], $level_ref01_data["id"]);
 

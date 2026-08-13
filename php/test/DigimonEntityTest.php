@@ -97,7 +97,7 @@ class DigimonEntityTest extends TestCase
             "id" => $digimon_ref01_data["id"],
         ];
         $digimon_ref01_data_dt0_loaded = $digimon_ref01_ent->load($digimon_ref01_match_dt0, null);
-        $digimon_ref01_data_dt0_load_result = Helpers::to_map($digimon_ref01_data_dt0_loaded);
+        $digimon_ref01_data_dt0_load_result = Helpers::to_map(is_object($digimon_ref01_data_dt0_loaded) && method_exists($digimon_ref01_data_dt0_loaded, 'data_get') ? $digimon_ref01_data_dt0_loaded->data_get() : $digimon_ref01_data_dt0_loaded);
         $this->assertNotNull($digimon_ref01_data_dt0_load_result);
         $this->assertEquals($digimon_ref01_data_dt0_load_result["id"], $digimon_ref01_data["id"]);
 

@@ -128,7 +128,7 @@ func TestDigimonEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		digimonRef01DataDt0LoadResult := core.ToMapAny(digimonRef01DataDt0Loaded)
+		digimonRef01DataDt0LoadResult := core.ToMapAny(entityData(digimonRef01DataDt0Loaded))
 		if digimonRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

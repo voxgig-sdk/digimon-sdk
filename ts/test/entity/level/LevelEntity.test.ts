@@ -63,13 +63,13 @@ describe('LevelEntity', async () => {
     const level_ref01_ent = client.Level()
     const level_ref01_match: any = {}
 
-    const level_ref01_list = await level_ref01_ent.list(level_ref01_match)
+    const level_ref01_list = (await level_ref01_ent.list(level_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const level_ref01_match_dt0: any = {}
     level_ref01_match_dt0.id = level_ref01_data.id
-    const level_ref01_data_dt0 = await level_ref01_ent.load(level_ref01_match_dt0)
+    const level_ref01_data_dt0 = (await level_ref01_ent.load(level_ref01_match_dt0)).data()
     assert(level_ref01_data_dt0.id === level_ref01_data.id)
 
 

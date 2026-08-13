@@ -87,7 +87,7 @@ class SkillEntityTest < Minitest::Test
       "id" => skill_ref01_data["id"],
     }
     skill_ref01_data_dt0_loaded = skill_ref01_ent.load(skill_ref01_match_dt0, nil)
-    skill_ref01_data_dt0_load_result = Helpers.to_map(skill_ref01_data_dt0_loaded)
+    skill_ref01_data_dt0_load_result = Helpers.to_map(skill_ref01_data_dt0_loaded.respond_to?(:data_get) ? skill_ref01_data_dt0_loaded.data_get : skill_ref01_data_dt0_loaded)
     assert !skill_ref01_data_dt0_load_result.nil?
     assert_equal skill_ref01_data_dt0_load_result["id"], skill_ref01_data["id"]
 

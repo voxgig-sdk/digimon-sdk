@@ -97,7 +97,7 @@ class TypeEntityTest extends TestCase
             "id" => $type_ref01_data["id"],
         ];
         $type_ref01_data_dt0_loaded = $type_ref01_ent->load($type_ref01_match_dt0, null);
-        $type_ref01_data_dt0_load_result = Helpers::to_map($type_ref01_data_dt0_loaded);
+        $type_ref01_data_dt0_load_result = Helpers::to_map(is_object($type_ref01_data_dt0_loaded) && method_exists($type_ref01_data_dt0_loaded, 'data_get') ? $type_ref01_data_dt0_loaded->data_get() : $type_ref01_data_dt0_loaded);
         $this->assertNotNull($type_ref01_data_dt0_load_result);
         $this->assertEquals($type_ref01_data_dt0_load_result["id"], $type_ref01_data["id"]);
 

@@ -75,12 +75,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-attributes, err := client.Attribute(nil).List(nil, nil)
+fields, err := client.Field(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = attributes
+_ = fields
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -144,13 +144,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-attribute, err := client.Attribute(nil).List(
+field, err := client.Field(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(attribute) // the returned mock data
+fmt.Println(field) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -287,20 +287,21 @@ API path: `/attribute`
 
 | Field | Description |
 | --- | --- |
-| `"attribute"` |  |
-| `"description"` |  |
-| `"field"` |  |
+| `"attributes"` |  |
+| `"descriptions"` |  |
+| `"fields"` |  |
 | `"href"` |  |
 | `"id"` |  |
 | `"image"` |  |
-| `"level"` |  |
+| `"images"` |  |
+| `"levels"` |  |
 | `"name"` |  |
-| `"next_evolution"` |  |
-| `"prior_evolution"` |  |
-| `"release_date"` |  |
-| `"skill"` |  |
-| `"type"` |  |
-| `"x_antibody"` |  |
+| `"nextEvolutions"` |  |
+| `"priorEvolutions"` |  |
+| `"releaseDate"` |  |
+| `"skills"` |  |
+| `"types"` |  |
+| `"xAntibody"` |  |
 
 Operations: List, Load.
 
@@ -419,20 +420,21 @@ Create an instance: `digimon := client.Digimon(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `[]any` |  |
-| `description` | `[]any` |  |
-| `field` | `[]any` |  |
+| `attributes` | `[]any` |  |
+| `descriptions` | `[]any` |  |
+| `fields` | `[]any` |  |
 | `href` | `string` |  |
 | `id` | `int` |  |
-| `image` | `[]any` |  |
-| `level` | `[]any` |  |
+| `image` | `string` |  |
+| `images` | `[]any` |  |
+| `levels` | `[]any` |  |
 | `name` | `string` |  |
-| `next_evolution` | `[]any` |  |
-| `prior_evolution` | `[]any` |  |
-| `release_date` | `string` |  |
-| `skill` | `[]any` |  |
-| `type` | `[]any` |  |
-| `x_antibody` | `bool` |  |
+| `nextEvolutions` | `[]any` |  |
+| `priorEvolutions` | `[]any` |  |
+| `releaseDate` | `string` |  |
+| `skills` | `[]any` |  |
+| `types` | `[]any` |  |
+| `xAntibody` | `bool` |  |
 
 #### Example: Load
 
@@ -692,11 +694,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-attribute := client.Attribute(nil)
-attribute.List(nil, nil)
+field := client.Field(nil)
+field.List(nil, nil)
 
-// attribute.Data() now returns the attribute data from the last list
-// attribute.Match() returns the last match criteria
+// field.Data() now returns the field data from the last list
+// field.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

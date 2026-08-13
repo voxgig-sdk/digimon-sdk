@@ -63,13 +63,13 @@ describe('SkillEntity', async () => {
     const skill_ref01_ent = client.Skill()
     const skill_ref01_match: any = {}
 
-    const skill_ref01_list = await skill_ref01_ent.list(skill_ref01_match)
+    const skill_ref01_list = (await skill_ref01_ent.list(skill_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const skill_ref01_match_dt0: any = {}
     skill_ref01_match_dt0.id = skill_ref01_data.id
-    const skill_ref01_data_dt0 = await skill_ref01_ent.load(skill_ref01_match_dt0)
+    const skill_ref01_data_dt0 = (await skill_ref01_ent.load(skill_ref01_match_dt0)).data()
     assert(skill_ref01_data_dt0.id === skill_ref01_data.id)
 
 

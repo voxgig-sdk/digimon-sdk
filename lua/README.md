@@ -62,7 +62,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local attributes, err = client:Attribute():list()
+local fields, err = client:Field():list()
 if err then error(err) end
 ```
 
@@ -120,7 +120,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Attribute():list()
+local result, err = client:Field():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -259,20 +259,21 @@ API path: `/attribute`
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
-| `field` |  |
+| `attributes` |  |
+| `descriptions` |  |
+| `fields` |  |
 | `href` |  |
 | `id` |  |
 | `image` |  |
-| `level` |  |
+| `images` |  |
+| `levels` |  |
 | `name` |  |
-| `next_evolution` |  |
-| `prior_evolution` |  |
-| `release_date` |  |
-| `skill` |  |
-| `type` |  |
-| `x_antibody` |  |
+| `nextEvolutions` |  |
+| `priorEvolutions` |  |
+| `releaseDate` |  |
+| `skills` |  |
+| `types` |  |
+| `xAntibody` |  |
 
 Operations: List, Load.
 
@@ -383,20 +384,21 @@ Create an instance: `local digimon = client:Digimon(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `table` |  |
-| `description` | `table` |  |
-| `field` | `table` |  |
+| `attributes` | `table` |  |
+| `descriptions` | `table` |  |
+| `fields` | `table` |  |
 | `href` | `string` |  |
 | `id` | `number` |  |
-| `image` | `table` |  |
-| `level` | `table` |  |
+| `image` | `string` |  |
+| `images` | `table` |  |
+| `levels` | `table` |  |
 | `name` | `string` |  |
-| `next_evolution` | `table` |  |
-| `prior_evolution` | `table` |  |
-| `release_date` | `string` |  |
-| `skill` | `table` |  |
-| `type` | `table` |  |
-| `x_antibody` | `boolean` |  |
+| `nextEvolutions` | `table` |  |
+| `priorEvolutions` | `table` |  |
+| `releaseDate` | `string` |  |
+| `skills` | `table` |  |
+| `types` | `table` |  |
+| `xAntibody` | `boolean` |  |
 
 #### Example: Load
 
@@ -619,11 +621,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local attribute = client:Attribute()
-attribute:list()
+local field = client:Field()
+field:list()
 
--- attribute:data_get() now returns the attribute data from the last list
--- attribute:match_get() returns the last match criteria
+-- field:data_get() now returns the field data from the last list
+-- field:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

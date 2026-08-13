@@ -87,7 +87,7 @@ class FieldEntityTest < Minitest::Test
       "id" => field_ref01_data["id"],
     }
     field_ref01_data_dt0_loaded = field_ref01_ent.load(field_ref01_match_dt0, nil)
-    field_ref01_data_dt0_load_result = Helpers.to_map(field_ref01_data_dt0_loaded)
+    field_ref01_data_dt0_load_result = Helpers.to_map(field_ref01_data_dt0_loaded.respond_to?(:data_get) ? field_ref01_data_dt0_loaded.data_get : field_ref01_data_dt0_loaded)
     assert !field_ref01_data_dt0_load_result.nil?
     assert_equal field_ref01_data_dt0_load_result["id"], field_ref01_data["id"]
 

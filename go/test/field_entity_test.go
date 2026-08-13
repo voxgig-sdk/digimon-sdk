@@ -128,7 +128,7 @@ func TestFieldEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		fieldRef01DataDt0LoadResult := core.ToMapAny(fieldRef01DataDt0Loaded)
+		fieldRef01DataDt0LoadResult := core.ToMapAny(entityData(fieldRef01DataDt0Loaded))
 		if fieldRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

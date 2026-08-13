@@ -173,20 +173,21 @@ local digimon = client:Digimon(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `table` | No |  |
-| `description` | `table` | No |  |
-| `field` | `table` | No |  |
+| `attributes` | `table` | No |  |
+| `descriptions` | `table` | No |  |
+| `fields` | `table` | No |  |
 | `href` | `string` | No |  |
 | `id` | `number` | No |  |
-| `image` | `table` | No |  |
-| `level` | `table` | No |  |
+| `image` | `string` | No |  |
+| `images` | `table` | No |  |
+| `levels` | `table` | No |  |
 | `name` | `string` | No |  |
-| `next_evolution` | `table` | No |  |
-| `prior_evolution` | `table` | No |  |
-| `release_date` | `string` | No |  |
-| `skill` | `table` | No |  |
-| `type` | `table` | No |  |
-| `x_antibody` | `boolean` | No |  |
+| `nextEvolutions` | `table` | No |  |
+| `priorEvolutions` | `table` | No |  |
+| `releaseDate` | `string` | No |  |
+| `skills` | `table` | No |  |
+| `types` | `table` | No |  |
+| `xAntibody` | `boolean` | No |  |
 
 ### Operations
 

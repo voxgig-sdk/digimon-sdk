@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'Digimon',
   }
 
 
@@ -127,6 +127,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/attribute",
               "parts": [
@@ -166,6 +167,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/attribute/{idOrName}",
               "parts": [
@@ -200,21 +202,21 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "attribute",
+          "name": "attributes",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "description",
+          "name": "descriptions",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "field",
+          "name": "fields",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 2
@@ -237,64 +239,71 @@ class Config {
           "active": true,
           "name": "image",
           "req": false,
-          "type": "`$ARRAY`",
+          "type": "`$STRING`",
           "index$": 5
         },
         {
           "active": true,
-          "name": "level",
+          "name": "images",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 6
         },
         {
           "active": true,
-          "name": "name",
+          "name": "levels",
           "req": false,
-          "type": "`$STRING`",
+          "type": "`$ARRAY`",
           "index$": 7
         },
         {
           "active": true,
-          "name": "next_evolution",
+          "name": "name",
           "req": false,
-          "type": "`$ARRAY`",
+          "type": "`$STRING`",
           "index$": 8
         },
         {
           "active": true,
-          "name": "prior_evolution",
+          "name": "nextEvolutions",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 9
         },
         {
           "active": true,
-          "name": "release_date",
+          "name": "priorEvolutions",
           "req": false,
-          "type": "`$STRING`",
+          "type": "`$ARRAY`",
           "index$": 10
         },
         {
           "active": true,
-          "name": "skill",
+          "name": "releaseDate",
           "req": false,
-          "type": "`$ARRAY`",
+          "type": "`$STRING`",
           "index$": 11
         },
         {
           "active": true,
-          "name": "type",
+          "name": "skills",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 12
         },
         {
           "active": true,
-          "name": "x_antibody",
+          "name": "types",
+          "req": false,
+          "type": "`$ARRAY`",
+          "index$": 13
+        },
+        {
+          "active": true,
+          "name": "xAntibody",
           "req": false,
           "type": "`$BOOLEAN`",
-          "index$": 13
+          "index$": 14
         }
       ],
       "name": "digimon",
@@ -367,6 +376,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/digimon",
               "parts": [
@@ -411,6 +421,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/digimon/{idOrName}",
               "parts": [
@@ -508,6 +519,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/field",
               "parts": [
@@ -547,6 +559,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/field/{idOrName}",
               "parts": [
@@ -630,6 +643,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/level",
               "parts": [
@@ -669,6 +683,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/level/{idOrName}",
               "parts": [
@@ -766,6 +781,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/skill",
               "parts": [
@@ -805,6 +821,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/skill/{idOrName}",
               "parts": [
@@ -888,6 +905,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/type",
               "parts": [
@@ -927,6 +945,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/type/{idOrName}",
               "parts": [
