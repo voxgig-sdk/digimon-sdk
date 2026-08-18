@@ -40,7 +40,7 @@ class DigimonSDK
         $utility = new DigimonUtility();
         $this->_utility = $utility;
 
-        $config = DigimonConfig::make_config();
+        $config = DigimonConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

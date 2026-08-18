@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from digimon_sdk.config import make_config
+from digimon_sdk.config import shared_config
 from digimon_sdk.features import _make_feature
 from digimon_sdk.core.control import DigimonControl
 from digimon_sdk.core.error import DigimonError
@@ -24,7 +24,7 @@ from digimon_sdk.core.spec import DigimonSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

@@ -28,7 +28,7 @@ class DigimonSDK
     utility = DigimonUtility.new
     @_utility = utility
 
-    config = DigimonConfig.make_config
+    config = DigimonConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
