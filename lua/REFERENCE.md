@@ -110,10 +110,10 @@ local attribute = client:Attribute(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `string` | No |  |
-| `description` | `string` | No |  |
+| `attribute` | `string` | No | Name of the attribute |
+| `description` | `string` | No | Description of the attribute |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
+| `id` | `number` | No | Unique identifier for the attribute |
 
 ### Operations
 
@@ -177,17 +177,17 @@ local digimon = client:Digimon(nil)
 | `descriptions` | `table` | No |  |
 | `fields` | `table` | No |  |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
+| `id` | `number` | No | Unique identifier for the Digimon |
 | `image` | `string` | No |  |
 | `images` | `table` | No |  |
 | `levels` | `table` | No |  |
-| `name` | `string` | No |  |
+| `name` | `string` | No | Name of the Digimon |
 | `nextEvolutions` | `table` | No |  |
 | `priorEvolutions` | `table` | No |  |
 | `releaseDate` | `string` | No |  |
 | `skills` | `table` | No |  |
 | `types` | `table` | No |  |
-| `xAntibody` | `boolean` | No |  |
+| `xAntibody` | `boolean` | No | Indicates if the Digimon has X-Antibody |
 
 ### Operations
 
@@ -247,11 +247,11 @@ local field = client:Field(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
-| `field` | `string` | No |  |
+| `description` | `string` | No | Description of the field |
+| `field` | `string` | No | Name of the field |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `image` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the field |
+| `image` | `string` | No | Image URL for the field |
 
 ### Operations
 
@@ -312,8 +312,8 @@ local level = client:Level(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `level` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the level |
+| `level` | `string` | No | Name of the level |
 
 ### Operations
 
@@ -373,11 +373,11 @@ local skill = client:Skill(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
+| `description` | `string` | No | Description of the skill |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `skill` | `string` | No |  |
-| `translation` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the skill |
+| `skill` | `string` | No | Name of the skill |
+| `translation` | `string` | No | Translation of the skill name |
 
 ### Operations
 
@@ -438,8 +438,8 @@ local type = client:Type(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `type` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the type |
+| `type` | `string` | No | Name of the type |
 
 ### Operations
 

@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "Digimon",
+      slug = "digimon",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -34,10 +37,12 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "attribute",
+            ["short"] = "Name of the attribute",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "description",
+            ["short"] = "Description of the attribute",
             ["type"] = "`$STRING`",
           },
           {
@@ -46,6 +51,7 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the attribute",
             ["type"] = "`$INTEGER`",
           },
         },
@@ -157,6 +163,7 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the Digimon",
             ["type"] = "`$INTEGER`",
           },
           {
@@ -173,6 +180,7 @@ local function make_config()
           },
           {
             ["name"] = "name",
+            ["short"] = "Name of the Digimon",
             ["type"] = "`$STRING`",
           },
           {
@@ -197,6 +205,7 @@ local function make_config()
           },
           {
             ["name"] = "xAntibody",
+            ["short"] = "Indicates if the Digimon has X-Antibody",
             ["type"] = "`$BOOLEAN`",
           },
         },
@@ -328,10 +337,12 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "description",
+            ["short"] = "Description of the field",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "field",
+            ["short"] = "Name of the field",
             ["type"] = "`$STRING`",
           },
           {
@@ -340,10 +351,12 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the field",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "image",
+            ["short"] = "Image URL for the field",
             ["type"] = "`$STRING`",
           },
         },
@@ -443,10 +456,12 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the level",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "level",
+            ["short"] = "Name of the level",
             ["type"] = "`$STRING`",
           },
         },
@@ -542,6 +557,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "description",
+            ["short"] = "Description of the skill",
             ["type"] = "`$STRING`",
           },
           {
@@ -550,14 +566,17 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the skill",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "skill",
+            ["short"] = "Name of the skill",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "translation",
+            ["short"] = "Translation of the skill name",
             ["type"] = "`$STRING`",
           },
         },
@@ -657,10 +676,12 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the type",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "type",
+            ["short"] = "Name of the type",
             ["type"] = "`$STRING`",
           },
         },

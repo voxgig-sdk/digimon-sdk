@@ -112,10 +112,10 @@ $attribute = $client->Attribute();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `string` | No |  |
-| `description` | `string` | No |  |
+| `attribute` | `string` | No | Name of the attribute |
+| `description` | `string` | No | Description of the attribute |
 | `href` | `string` | No |  |
-| `id` | `int` | No |  |
+| `id` | `int` | No | Unique identifier for the attribute |
 
 ### Operations
 
@@ -179,17 +179,17 @@ $digimon = $client->Digimon();
 | `descriptions` | `array` | No |  |
 | `fields` | `array` | No |  |
 | `href` | `string` | No |  |
-| `id` | `int` | No |  |
+| `id` | `int` | No | Unique identifier for the Digimon |
 | `image` | `string` | No |  |
 | `images` | `array` | No |  |
 | `levels` | `array` | No |  |
-| `name` | `string` | No |  |
+| `name` | `string` | No | Name of the Digimon |
 | `nextEvolutions` | `array` | No |  |
 | `priorEvolutions` | `array` | No |  |
 | `releaseDate` | `string` | No |  |
 | `skills` | `array` | No |  |
 | `types` | `array` | No |  |
-| `xAntibody` | `bool` | No |  |
+| `xAntibody` | `bool` | No | Indicates if the Digimon has X-Antibody |
 
 ### Operations
 
@@ -249,11 +249,11 @@ $field = $client->Field();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
-| `field` | `string` | No |  |
+| `description` | `string` | No | Description of the field |
+| `field` | `string` | No | Name of the field |
 | `href` | `string` | No |  |
-| `id` | `int` | No |  |
-| `image` | `string` | No |  |
+| `id` | `int` | No | Unique identifier for the field |
+| `image` | `string` | No | Image URL for the field |
 
 ### Operations
 
@@ -314,8 +314,8 @@ $level = $client->Level();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `string` | No |  |
-| `id` | `int` | No |  |
-| `level` | `string` | No |  |
+| `id` | `int` | No | Unique identifier for the level |
+| `level` | `string` | No | Name of the level |
 
 ### Operations
 
@@ -375,11 +375,11 @@ $skill = $client->Skill();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
+| `description` | `string` | No | Description of the skill |
 | `href` | `string` | No |  |
-| `id` | `int` | No |  |
-| `skill` | `string` | No |  |
-| `translation` | `string` | No |  |
+| `id` | `int` | No | Unique identifier for the skill |
+| `skill` | `string` | No | Name of the skill |
+| `translation` | `string` | No | Translation of the skill name |
 
 ### Operations
 
@@ -440,8 +440,8 @@ $type = $client->Type();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `string` | No |  |
-| `id` | `int` | No |  |
-| `type` | `string` | No |  |
+| `id` | `int` | No | Unique identifier for the type |
+| `type` | `string` | No | Name of the type |
 
 ### Operations
 

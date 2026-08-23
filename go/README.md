@@ -6,7 +6,7 @@ The Golang SDK for the Digimon API — an entity-oriented client using standard 
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Attribute(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -274,10 +274,10 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"attribute"` |  |
-| `"description"` |  |
+| `"attribute"` | Name of the attribute |
+| `"description"` | Description of the attribute |
 | `"href"` |  |
-| `"id"` |  |
+| `"id"` | Unique identifier for the attribute |
 
 Operations: List, Load.
 
@@ -291,17 +291,17 @@ API path: `/attribute`
 | `"descriptions"` |  |
 | `"fields"` |  |
 | `"href"` |  |
-| `"id"` |  |
+| `"id"` | Unique identifier for the Digimon |
 | `"image"` |  |
 | `"images"` |  |
 | `"levels"` |  |
-| `"name"` |  |
+| `"name"` | Name of the Digimon |
 | `"nextEvolutions"` |  |
 | `"priorEvolutions"` |  |
 | `"releaseDate"` |  |
 | `"skills"` |  |
 | `"types"` |  |
-| `"xAntibody"` |  |
+| `"xAntibody"` | Indicates if the Digimon has X-Antibody |
 
 Operations: List, Load.
 
@@ -311,11 +311,11 @@ API path: `/digimon`
 
 | Field | Description |
 | --- | --- |
-| `"description"` |  |
-| `"field"` |  |
+| `"description"` | Description of the field |
+| `"field"` | Name of the field |
 | `"href"` |  |
-| `"id"` |  |
-| `"image"` |  |
+| `"id"` | Unique identifier for the field |
+| `"image"` | Image URL for the field |
 
 Operations: List, Load.
 
@@ -326,8 +326,8 @@ API path: `/field`
 | Field | Description |
 | --- | --- |
 | `"href"` |  |
-| `"id"` |  |
-| `"level"` |  |
+| `"id"` | Unique identifier for the level |
+| `"level"` | Name of the level |
 
 Operations: List, Load.
 
@@ -337,11 +337,11 @@ API path: `/level`
 
 | Field | Description |
 | --- | --- |
-| `"description"` |  |
+| `"description"` | Description of the skill |
 | `"href"` |  |
-| `"id"` |  |
-| `"skill"` |  |
-| `"translation"` |  |
+| `"id"` | Unique identifier for the skill |
+| `"skill"` | Name of the skill |
+| `"translation"` | Translation of the skill name |
 
 Operations: List, Load.
 
@@ -352,8 +352,8 @@ API path: `/skill`
 | Field | Description |
 | --- | --- |
 | `"href"` |  |
-| `"id"` |  |
-| `"type"` |  |
+| `"id"` | Unique identifier for the type |
+| `"type"` | Name of the type |
 
 Operations: List, Load.
 
@@ -379,10 +379,10 @@ Create an instance: `attribute := client.Attribute(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `string` |  |
-| `description` | `string` |  |
+| `attribute` | `string` | Name of the attribute |
+| `description` | `string` | Description of the attribute |
 | `href` | `string` |  |
-| `id` | `int` |  |
+| `id` | `int` | Unique identifier for the attribute |
 
 #### Example: Load
 
@@ -424,17 +424,17 @@ Create an instance: `digimon := client.Digimon(nil)`
 | `descriptions` | `[]any` |  |
 | `fields` | `[]any` |  |
 | `href` | `string` |  |
-| `id` | `int` |  |
+| `id` | `int` | Unique identifier for the Digimon |
 | `image` | `string` |  |
 | `images` | `[]any` |  |
 | `levels` | `[]any` |  |
-| `name` | `string` |  |
+| `name` | `string` | Name of the Digimon |
 | `nextEvolutions` | `[]any` |  |
 | `priorEvolutions` | `[]any` |  |
 | `releaseDate` | `string` |  |
 | `skills` | `[]any` |  |
 | `types` | `[]any` |  |
-| `xAntibody` | `bool` |  |
+| `xAntibody` | `bool` | Indicates if the Digimon has X-Antibody |
 
 #### Example: Load
 
@@ -472,11 +472,11 @@ Create an instance: `field := client.Field(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | `string` |  |
-| `field` | `string` |  |
+| `description` | `string` | Description of the field |
+| `field` | `string` | Name of the field |
 | `href` | `string` |  |
-| `id` | `int` |  |
-| `image` | `string` |  |
+| `id` | `int` | Unique identifier for the field |
+| `image` | `string` | Image URL for the field |
 
 #### Example: Load
 
@@ -515,8 +515,8 @@ Create an instance: `level := client.Level(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `href` | `string` |  |
-| `id` | `int` |  |
-| `level` | `string` |  |
+| `id` | `int` | Unique identifier for the level |
+| `level` | `string` | Name of the level |
 
 #### Example: Load
 
@@ -554,11 +554,11 @@ Create an instance: `skill := client.Skill(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | `string` |  |
+| `description` | `string` | Description of the skill |
 | `href` | `string` |  |
-| `id` | `int` |  |
-| `skill` | `string` |  |
-| `translation` | `string` |  |
+| `id` | `int` | Unique identifier for the skill |
+| `skill` | `string` | Name of the skill |
+| `translation` | `string` | Translation of the skill name |
 
 #### Example: Load
 
@@ -597,8 +597,8 @@ Create an instance: `type_ := client.Type(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `href` | `string` |  |
-| `id` | `int` |  |
-| `type` | `string` |  |
+| `id` | `int` | Unique identifier for the type |
+| `type` | `string` | Name of the type |
 
 #### Example: Load
 

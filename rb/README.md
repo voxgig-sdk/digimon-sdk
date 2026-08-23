@@ -258,10 +258,10 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
+| `attribute` | Name of the attribute |
+| `description` | Description of the attribute |
 | `href` |  |
-| `id` |  |
+| `id` | Unique identifier for the attribute |
 
 Operations: List, Load.
 
@@ -275,17 +275,17 @@ API path: `/attribute`
 | `descriptions` |  |
 | `fields` |  |
 | `href` |  |
-| `id` |  |
+| `id` | Unique identifier for the Digimon |
 | `image` |  |
 | `images` |  |
 | `levels` |  |
-| `name` |  |
+| `name` | Name of the Digimon |
 | `nextEvolutions` |  |
 | `priorEvolutions` |  |
 | `releaseDate` |  |
 | `skills` |  |
 | `types` |  |
-| `xAntibody` |  |
+| `xAntibody` | Indicates if the Digimon has X-Antibody |
 
 Operations: List, Load.
 
@@ -295,11 +295,11 @@ API path: `/digimon`
 
 | Field | Description |
 | --- | --- |
-| `description` |  |
-| `field` |  |
+| `description` | Description of the field |
+| `field` | Name of the field |
 | `href` |  |
-| `id` |  |
-| `image` |  |
+| `id` | Unique identifier for the field |
+| `image` | Image URL for the field |
 
 Operations: List, Load.
 
@@ -310,8 +310,8 @@ API path: `/field`
 | Field | Description |
 | --- | --- |
 | `href` |  |
-| `id` |  |
-| `level` |  |
+| `id` | Unique identifier for the level |
+| `level` | Name of the level |
 
 Operations: List, Load.
 
@@ -321,11 +321,11 @@ API path: `/level`
 
 | Field | Description |
 | --- | --- |
-| `description` |  |
+| `description` | Description of the skill |
 | `href` |  |
-| `id` |  |
-| `skill` |  |
-| `translation` |  |
+| `id` | Unique identifier for the skill |
+| `skill` | Name of the skill |
+| `translation` | Translation of the skill name |
 
 Operations: List, Load.
 
@@ -336,8 +336,8 @@ API path: `/skill`
 | Field | Description |
 | --- | --- |
 | `href` |  |
-| `id` |  |
-| `type` |  |
+| `id` | Unique identifier for the type |
+| `type` | Name of the type |
 
 Operations: List, Load.
 
@@ -363,10 +363,10 @@ Create an instance: `attribute = client.Attribute`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `String` |  |
-| `description` | `String` |  |
+| `attribute` | `String` | Name of the attribute |
+| `description` | `String` | Description of the attribute |
 | `href` | `String` |  |
-| `id` | `Integer` |  |
+| `id` | `Integer` | Unique identifier for the attribute |
 
 #### Example: Load
 
@@ -402,17 +402,17 @@ Create an instance: `digimon = client.Digimon`
 | `descriptions` | `Array` |  |
 | `fields` | `Array` |  |
 | `href` | `String` |  |
-| `id` | `Integer` |  |
+| `id` | `Integer` | Unique identifier for the Digimon |
 | `image` | `String` |  |
 | `images` | `Array` |  |
 | `levels` | `Array` |  |
-| `name` | `String` |  |
+| `name` | `String` | Name of the Digimon |
 | `nextEvolutions` | `Array` |  |
 | `priorEvolutions` | `Array` |  |
 | `releaseDate` | `String` |  |
 | `skills` | `Array` |  |
 | `types` | `Array` |  |
-| `xAntibody` | `Boolean` |  |
+| `xAntibody` | `Boolean` | Indicates if the Digimon has X-Antibody |
 
 #### Example: Load
 
@@ -444,11 +444,11 @@ Create an instance: `field = client.Field`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | `String` |  |
-| `field` | `String` |  |
+| `description` | `String` | Description of the field |
+| `field` | `String` | Name of the field |
 | `href` | `String` |  |
-| `id` | `Integer` |  |
-| `image` | `String` |  |
+| `id` | `Integer` | Unique identifier for the field |
+| `image` | `String` | Image URL for the field |
 
 #### Example: Load
 
@@ -481,8 +481,8 @@ Create an instance: `level = client.Level`
 | Field | Type | Description |
 | --- | --- | --- |
 | `href` | `String` |  |
-| `id` | `Integer` |  |
-| `level` | `String` |  |
+| `id` | `Integer` | Unique identifier for the level |
+| `level` | `String` | Name of the level |
 
 #### Example: Load
 
@@ -514,11 +514,11 @@ Create an instance: `skill = client.Skill`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | `String` |  |
+| `description` | `String` | Description of the skill |
 | `href` | `String` |  |
-| `id` | `Integer` |  |
-| `skill` | `String` |  |
-| `translation` | `String` |  |
+| `id` | `Integer` | Unique identifier for the skill |
+| `skill` | `String` | Name of the skill |
+| `translation` | `String` | Translation of the skill name |
 
 #### Example: Load
 
@@ -551,8 +551,8 @@ Create an instance: `type = client.Type`
 | Field | Type | Description |
 | --- | --- | --- |
 | `href` | `String` |  |
-| `id` | `Integer` |  |
-| `type` | `String` |  |
+| `id` | `Integer` | Unique identifier for the type |
+| `type` | `String` | Name of the type |
 
 #### Example: Load
 

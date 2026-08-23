@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "Digimon",
+			"slug": "digimon",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -38,10 +41,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "attribute",
+						"short": "Name of the attribute",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Description of the attribute",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -50,6 +55,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the attribute",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -161,6 +167,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the Digimon",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -177,6 +184,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the Digimon",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -201,6 +209,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "xAntibody",
+						"short": "Indicates if the Digimon has X-Antibody",
 						"type": "`$BOOLEAN`",
 					},
 				},
@@ -332,10 +341,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "description",
+						"short": "Description of the field",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "field",
+						"short": "Name of the field",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -344,10 +355,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the field",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "image",
+						"short": "Image URL for the field",
 						"type": "`$STRING`",
 					},
 				},
@@ -447,10 +460,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the level",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "level",
+						"short": "Name of the level",
 						"type": "`$STRING`",
 					},
 				},
@@ -546,6 +561,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "description",
+						"short": "Description of the skill",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -554,14 +570,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the skill",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "skill",
+						"short": "Name of the skill",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "translation",
+						"short": "Translation of the skill name",
 						"type": "`$STRING`",
 					},
 				},
@@ -661,10 +680,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the type",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Name of the type",
 						"type": "`$STRING`",
 					},
 				},

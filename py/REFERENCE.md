@@ -107,10 +107,10 @@ attribute = client.Attribute()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `str` | No |  |
-| `description` | `str` | No |  |
+| `attribute` | `str` | No | Name of the attribute |
+| `description` | `str` | No | Description of the attribute |
 | `href` | `str` | No |  |
-| `id` | `int` | No |  |
+| `id` | `int` | No | Unique identifier for the attribute |
 
 ### Operations
 
@@ -175,17 +175,17 @@ digimon = client.Digimon()
 | `descriptions` | `list` | No |  |
 | `fields` | `list` | No |  |
 | `href` | `str` | No |  |
-| `id` | `int` | No |  |
+| `id` | `int` | No | Unique identifier for the Digimon |
 | `image` | `str` | No |  |
 | `images` | `list` | No |  |
 | `levels` | `list` | No |  |
-| `name` | `str` | No |  |
+| `name` | `str` | No | Name of the Digimon |
 | `nextEvolutions` | `list` | No |  |
 | `priorEvolutions` | `list` | No |  |
 | `releaseDate` | `str` | No |  |
 | `skills` | `list` | No |  |
 | `types` | `list` | No |  |
-| `xAntibody` | `bool` | No |  |
+| `xAntibody` | `bool` | No | Indicates if the Digimon has X-Antibody |
 
 ### Operations
 
@@ -246,11 +246,11 @@ field = client.Field()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `str` | No |  |
-| `field` | `str` | No |  |
+| `description` | `str` | No | Description of the field |
+| `field` | `str` | No | Name of the field |
 | `href` | `str` | No |  |
-| `id` | `int` | No |  |
-| `image` | `str` | No |  |
+| `id` | `int` | No | Unique identifier for the field |
+| `image` | `str` | No | Image URL for the field |
 
 ### Operations
 
@@ -312,8 +312,8 @@ level = client.Level()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `str` | No |  |
-| `id` | `int` | No |  |
-| `level` | `str` | No |  |
+| `id` | `int` | No | Unique identifier for the level |
+| `level` | `str` | No | Name of the level |
 
 ### Operations
 
@@ -374,11 +374,11 @@ skill = client.Skill()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `str` | No |  |
+| `description` | `str` | No | Description of the skill |
 | `href` | `str` | No |  |
-| `id` | `int` | No |  |
-| `skill` | `str` | No |  |
-| `translation` | `str` | No |  |
+| `id` | `int` | No | Unique identifier for the skill |
+| `skill` | `str` | No | Name of the skill |
+| `translation` | `str` | No | Translation of the skill name |
 
 ### Operations
 
@@ -440,8 +440,8 @@ type = client.Type()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `str` | No |  |
-| `id` | `int` | No |  |
-| `type` | `str` | No |  |
+| `id` | `int` | No | Unique identifier for the type |
+| `type` | `str` | No | Name of the type |
 
 ### Operations
 

@@ -176,10 +176,10 @@ const attribute = client.Attribute()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `string` | No |  |
-| `description` | `string` | No |  |
+| `attribute` | `string` | No | Name of the attribute |
+| `description` | `string` | No | Description of the attribute |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
+| `id` | `number` | No | Unique identifier for the attribute |
 
 ### Operations
 
@@ -241,17 +241,17 @@ const digimon = client.Digimon()
 | `descriptions` | `any[]` | No |  |
 | `fields` | `any[]` | No |  |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
+| `id` | `number` | No | Unique identifier for the Digimon |
 | `image` | `string` | No |  |
 | `images` | `any[]` | No |  |
 | `levels` | `any[]` | No |  |
-| `name` | `string` | No |  |
+| `name` | `string` | No | Name of the Digimon |
 | `nextEvolutions` | `any[]` | No |  |
 | `priorEvolutions` | `any[]` | No |  |
 | `releaseDate` | `string` | No |  |
 | `skills` | `any[]` | No |  |
 | `types` | `any[]` | No |  |
-| `xAntibody` | `boolean` | No |  |
+| `xAntibody` | `boolean` | No | Indicates if the Digimon has X-Antibody |
 
 ### Operations
 
@@ -309,11 +309,11 @@ const field = client.Field()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
-| `field` | `string` | No |  |
+| `description` | `string` | No | Description of the field |
+| `field` | `string` | No | Name of the field |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `image` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the field |
+| `image` | `string` | No | Image URL for the field |
 
 ### Operations
 
@@ -372,8 +372,8 @@ const level = client.Level()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `level` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the level |
+| `level` | `string` | No | Name of the level |
 
 ### Operations
 
@@ -431,11 +431,11 @@ const skill = client.Skill()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
+| `description` | `string` | No | Description of the skill |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `skill` | `string` | No |  |
-| `translation` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the skill |
+| `skill` | `string` | No | Name of the skill |
+| `translation` | `string` | No | Translation of the skill name |
 
 ### Operations
 
@@ -494,8 +494,8 @@ const type = client.Type()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `string` | No |  |
-| `id` | `number` | No |  |
-| `type` | `string` | No |  |
+| `id` | `number` | No | Unique identifier for the type |
+| `type` | `string` | No | Name of the type |
 
 ### Operations
 

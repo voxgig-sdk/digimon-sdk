@@ -36,12 +36,14 @@
               "active": true,
               "name": "attribute",
               "req": false,
+              "short": "Name of the attribute",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the attribute",
               "type": "`$STRING`"
             },
             {
@@ -54,6 +56,7 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the attribute",
               "type": "`$INTEGER`"
             }
           ],
@@ -190,6 +193,7 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the Digimon",
               "type": "`$INTEGER`"
             },
             {
@@ -214,6 +218,7 @@
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the Digimon",
               "type": "`$STRING`"
             },
             {
@@ -250,6 +255,7 @@
               "active": true,
               "name": "xAntibody",
               "req": false,
+              "short": "Indicates if the Digimon has X-Antibody",
               "type": "`$BOOLEAN`"
             }
           ],
@@ -408,12 +414,14 @@
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the field",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "field",
               "req": false,
+              "short": "Name of the field",
               "type": "`$STRING`"
             },
             {
@@ -426,12 +434,14 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the field",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "image",
               "req": false,
+              "short": "Image URL for the field",
               "type": "`$STRING`"
             }
           ],
@@ -550,12 +560,14 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the level",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "level",
               "req": false,
+              "short": "Name of the level",
               "type": "`$STRING`"
             }
           ],
@@ -668,6 +680,7 @@
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the skill",
               "type": "`$STRING`"
             },
             {
@@ -680,18 +693,21 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the skill",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "skill",
               "req": false,
+              "short": "Name of the skill",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "translation",
               "req": false,
+              "short": "Translation of the skill name",
               "type": "`$STRING`"
             }
           ],
@@ -810,12 +826,14 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the type",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Name of the type",
               "type": "`$STRING`"
             }
           ],

@@ -113,10 +113,10 @@ attribute = client.Attribute
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attribute` | `String` | No |  |
-| `description` | `String` | No |  |
+| `attribute` | `String` | No | Name of the attribute |
+| `description` | `String` | No | Description of the attribute |
 | `href` | `String` | No |  |
-| `id` | `Integer` | No |  |
+| `id` | `Integer` | No | Unique identifier for the attribute |
 
 ### Operations
 
@@ -180,17 +180,17 @@ digimon = client.Digimon
 | `descriptions` | `Array` | No |  |
 | `fields` | `Array` | No |  |
 | `href` | `String` | No |  |
-| `id` | `Integer` | No |  |
+| `id` | `Integer` | No | Unique identifier for the Digimon |
 | `image` | `String` | No |  |
 | `images` | `Array` | No |  |
 | `levels` | `Array` | No |  |
-| `name` | `String` | No |  |
+| `name` | `String` | No | Name of the Digimon |
 | `nextEvolutions` | `Array` | No |  |
 | `priorEvolutions` | `Array` | No |  |
 | `releaseDate` | `String` | No |  |
 | `skills` | `Array` | No |  |
 | `types` | `Array` | No |  |
-| `xAntibody` | `Boolean` | No |  |
+| `xAntibody` | `Boolean` | No | Indicates if the Digimon has X-Antibody |
 
 ### Operations
 
@@ -250,11 +250,11 @@ field = client.Field
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `String` | No |  |
-| `field` | `String` | No |  |
+| `description` | `String` | No | Description of the field |
+| `field` | `String` | No | Name of the field |
 | `href` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `image` | `String` | No |  |
+| `id` | `Integer` | No | Unique identifier for the field |
+| `image` | `String` | No | Image URL for the field |
 
 ### Operations
 
@@ -315,8 +315,8 @@ level = client.Level
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `level` | `String` | No |  |
+| `id` | `Integer` | No | Unique identifier for the level |
+| `level` | `String` | No | Name of the level |
 
 ### Operations
 
@@ -376,11 +376,11 @@ skill = client.Skill
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `String` | No |  |
+| `description` | `String` | No | Description of the skill |
 | `href` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `skill` | `String` | No |  |
-| `translation` | `String` | No |  |
+| `id` | `Integer` | No | Unique identifier for the skill |
+| `skill` | `String` | No | Name of the skill |
+| `translation` | `String` | No | Translation of the skill name |
 
 ### Operations
 
@@ -441,8 +441,8 @@ type = client.Type
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `href` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `type` | `String` | No |  |
+| `id` | `Integer` | No | Unique identifier for the type |
+| `type` | `String` | No | Name of the type |
 
 ### Operations
 

@@ -261,10 +261,10 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `attribute` |  |
-| `description` |  |
+| `attribute` | Name of the attribute |
+| `description` | Description of the attribute |
 | `href` |  |
-| `id` |  |
+| `id` | Unique identifier for the attribute |
 
 Operations: List, Load.
 
@@ -278,17 +278,17 @@ API path: `/attribute`
 | `descriptions` |  |
 | `fields` |  |
 | `href` |  |
-| `id` |  |
+| `id` | Unique identifier for the Digimon |
 | `image` |  |
 | `images` |  |
 | `levels` |  |
-| `name` |  |
+| `name` | Name of the Digimon |
 | `nextEvolutions` |  |
 | `priorEvolutions` |  |
 | `releaseDate` |  |
 | `skills` |  |
 | `types` |  |
-| `xAntibody` |  |
+| `xAntibody` | Indicates if the Digimon has X-Antibody |
 
 Operations: List, Load.
 
@@ -298,11 +298,11 @@ API path: `/digimon`
 
 | Field | Description |
 | --- | --- |
-| `description` |  |
-| `field` |  |
+| `description` | Description of the field |
+| `field` | Name of the field |
 | `href` |  |
-| `id` |  |
-| `image` |  |
+| `id` | Unique identifier for the field |
+| `image` | Image URL for the field |
 
 Operations: List, Load.
 
@@ -313,8 +313,8 @@ API path: `/field`
 | Field | Description |
 | --- | --- |
 | `href` |  |
-| `id` |  |
-| `level` |  |
+| `id` | Unique identifier for the level |
+| `level` | Name of the level |
 
 Operations: List, Load.
 
@@ -324,11 +324,11 @@ API path: `/level`
 
 | Field | Description |
 | --- | --- |
-| `description` |  |
+| `description` | Description of the skill |
 | `href` |  |
-| `id` |  |
-| `skill` |  |
-| `translation` |  |
+| `id` | Unique identifier for the skill |
+| `skill` | Name of the skill |
+| `translation` | Translation of the skill name |
 
 Operations: List, Load.
 
@@ -339,8 +339,8 @@ API path: `/skill`
 | Field | Description |
 | --- | --- |
 | `href` |  |
-| `id` |  |
-| `type` |  |
+| `id` | Unique identifier for the type |
+| `type` | Name of the type |
 
 Operations: List, Load.
 
@@ -366,10 +366,10 @@ Create an instance: `attribute = client.Attribute()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attribute` | `str` |  |
-| `description` | `str` |  |
+| `attribute` | `str` | Name of the attribute |
+| `description` | `str` | Description of the attribute |
 | `href` | `str` |  |
-| `id` | `int` |  |
+| `id` | `int` | Unique identifier for the attribute |
 
 #### Example: Load
 
@@ -403,17 +403,17 @@ Create an instance: `digimon = client.Digimon()`
 | `descriptions` | `list` |  |
 | `fields` | `list` |  |
 | `href` | `str` |  |
-| `id` | `int` |  |
+| `id` | `int` | Unique identifier for the Digimon |
 | `image` | `str` |  |
 | `images` | `list` |  |
 | `levels` | `list` |  |
-| `name` | `str` |  |
+| `name` | `str` | Name of the Digimon |
 | `nextEvolutions` | `list` |  |
 | `priorEvolutions` | `list` |  |
 | `releaseDate` | `str` |  |
 | `skills` | `list` |  |
 | `types` | `list` |  |
-| `xAntibody` | `bool` |  |
+| `xAntibody` | `bool` | Indicates if the Digimon has X-Antibody |
 
 #### Example: Load
 
@@ -443,11 +443,11 @@ Create an instance: `field = client.Field()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | `str` |  |
-| `field` | `str` |  |
+| `description` | `str` | Description of the field |
+| `field` | `str` | Name of the field |
 | `href` | `str` |  |
-| `id` | `int` |  |
-| `image` | `str` |  |
+| `id` | `int` | Unique identifier for the field |
+| `image` | `str` | Image URL for the field |
 
 #### Example: Load
 
@@ -478,8 +478,8 @@ Create an instance: `level = client.Level()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `href` | `str` |  |
-| `id` | `int` |  |
-| `level` | `str` |  |
+| `id` | `int` | Unique identifier for the level |
+| `level` | `str` | Name of the level |
 
 #### Example: Load
 
@@ -509,11 +509,11 @@ Create an instance: `skill = client.Skill()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | `str` |  |
+| `description` | `str` | Description of the skill |
 | `href` | `str` |  |
-| `id` | `int` |  |
-| `skill` | `str` |  |
-| `translation` | `str` |  |
+| `id` | `int` | Unique identifier for the skill |
+| `skill` | `str` | Name of the skill |
+| `translation` | `str` | Translation of the skill name |
 
 #### Example: Load
 
@@ -544,8 +544,8 @@ Create an instance: `type = client.Type()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `href` | `str` |  |
-| `id` | `int` |  |
-| `type` | `str` |  |
+| `id` | `int` | Unique identifier for the type |
+| `type` | `str` | Name of the type |
 
 #### Example: Load
 

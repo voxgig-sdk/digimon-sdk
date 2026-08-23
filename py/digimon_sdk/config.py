@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "Digimon",
+            "slug": "digimon",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -55,10 +58,12 @@ def make_config():
         "fields": [
           {
             "name": "attribute",
+            "short": "Name of the attribute",
             "type": "`$STRING`",
           },
           {
             "name": "description",
+            "short": "Description of the attribute",
             "type": "`$STRING`",
           },
           {
@@ -67,6 +72,7 @@ def make_config():
           },
           {
             "name": "id",
+            "short": "Unique identifier for the attribute",
             "type": "`$INTEGER`",
           },
         ],
@@ -178,6 +184,7 @@ def make_config():
           },
           {
             "name": "id",
+            "short": "Unique identifier for the Digimon",
             "type": "`$INTEGER`",
           },
           {
@@ -194,6 +201,7 @@ def make_config():
           },
           {
             "name": "name",
+            "short": "Name of the Digimon",
             "type": "`$STRING`",
           },
           {
@@ -218,6 +226,7 @@ def make_config():
           },
           {
             "name": "xAntibody",
+            "short": "Indicates if the Digimon has X-Antibody",
             "type": "`$BOOLEAN`",
           },
         ],
@@ -349,10 +358,12 @@ def make_config():
         "fields": [
           {
             "name": "description",
+            "short": "Description of the field",
             "type": "`$STRING`",
           },
           {
             "name": "field",
+            "short": "Name of the field",
             "type": "`$STRING`",
           },
           {
@@ -361,10 +372,12 @@ def make_config():
           },
           {
             "name": "id",
+            "short": "Unique identifier for the field",
             "type": "`$INTEGER`",
           },
           {
             "name": "image",
+            "short": "Image URL for the field",
             "type": "`$STRING`",
           },
         ],
@@ -464,10 +477,12 @@ def make_config():
           },
           {
             "name": "id",
+            "short": "Unique identifier for the level",
             "type": "`$INTEGER`",
           },
           {
             "name": "level",
+            "short": "Name of the level",
             "type": "`$STRING`",
           },
         ],
@@ -563,6 +578,7 @@ def make_config():
         "fields": [
           {
             "name": "description",
+            "short": "Description of the skill",
             "type": "`$STRING`",
           },
           {
@@ -571,14 +587,17 @@ def make_config():
           },
           {
             "name": "id",
+            "short": "Unique identifier for the skill",
             "type": "`$INTEGER`",
           },
           {
             "name": "skill",
+            "short": "Name of the skill",
             "type": "`$STRING`",
           },
           {
             "name": "translation",
+            "short": "Translation of the skill name",
             "type": "`$STRING`",
           },
         ],
@@ -678,10 +697,12 @@ def make_config():
           },
           {
             "name": "id",
+            "short": "Unique identifier for the type",
             "type": "`$INTEGER`",
           },
           {
             "name": "type",
+            "short": "Name of the type",
             "type": "`$STRING`",
           },
         ],

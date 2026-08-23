@@ -33,6 +33,9 @@ class DigimonConfig
         return [
             "main" => [
                 "name" => "Digimon",
+                "slug" => "digimon",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -60,10 +63,12 @@ class DigimonConfig
           'fields' => [
             [
               'name' => 'attribute',
+              'short' => 'Name of the attribute',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'description',
+              'short' => 'Description of the attribute',
               'type' => '`$STRING`',
             ],
             [
@@ -72,6 +77,7 @@ class DigimonConfig
             ],
             [
               'name' => 'id',
+              'short' => 'Unique identifier for the attribute',
               'type' => '`$INTEGER`',
             ],
           ],
@@ -183,6 +189,7 @@ class DigimonConfig
             ],
             [
               'name' => 'id',
+              'short' => 'Unique identifier for the Digimon',
               'type' => '`$INTEGER`',
             ],
             [
@@ -199,6 +206,7 @@ class DigimonConfig
             ],
             [
               'name' => 'name',
+              'short' => 'Name of the Digimon',
               'type' => '`$STRING`',
             ],
             [
@@ -223,6 +231,7 @@ class DigimonConfig
             ],
             [
               'name' => 'xAntibody',
+              'short' => 'Indicates if the Digimon has X-Antibody',
               'type' => '`$BOOLEAN`',
             ],
           ],
@@ -354,10 +363,12 @@ class DigimonConfig
           'fields' => [
             [
               'name' => 'description',
+              'short' => 'Description of the field',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'field',
+              'short' => 'Name of the field',
               'type' => '`$STRING`',
             ],
             [
@@ -366,10 +377,12 @@ class DigimonConfig
             ],
             [
               'name' => 'id',
+              'short' => 'Unique identifier for the field',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'image',
+              'short' => 'Image URL for the field',
               'type' => '`$STRING`',
             ],
           ],
@@ -469,10 +482,12 @@ class DigimonConfig
             ],
             [
               'name' => 'id',
+              'short' => 'Unique identifier for the level',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'level',
+              'short' => 'Name of the level',
               'type' => '`$STRING`',
             ],
           ],
@@ -568,6 +583,7 @@ class DigimonConfig
           'fields' => [
             [
               'name' => 'description',
+              'short' => 'Description of the skill',
               'type' => '`$STRING`',
             ],
             [
@@ -576,14 +592,17 @@ class DigimonConfig
             ],
             [
               'name' => 'id',
+              'short' => 'Unique identifier for the skill',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'skill',
+              'short' => 'Name of the skill',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'translation',
+              'short' => 'Translation of the skill name',
               'type' => '`$STRING`',
             ],
           ],
@@ -683,10 +702,12 @@ class DigimonConfig
             ],
             [
               'name' => 'id',
+              'short' => 'Unique identifier for the type',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'type',
+              'short' => 'Name of the type',
               'type' => '`$STRING`',
             ],
           ],

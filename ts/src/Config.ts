@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'Digimon',
+        slug: "digimon",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -71,10 +82,12 @@ class Config {
       "fields": [
         {
           "name": "attribute",
+          "short": "Name of the attribute",
           "type": "`$STRING`"
         },
         {
           "name": "description",
+          "short": "Description of the attribute",
           "type": "`$STRING`"
         },
         {
@@ -83,6 +96,7 @@ class Config {
         },
         {
           "name": "id",
+          "short": "Unique identifier for the attribute",
           "type": "`$INTEGER`"
         }
       ],
@@ -194,6 +208,7 @@ class Config {
         },
         {
           "name": "id",
+          "short": "Unique identifier for the Digimon",
           "type": "`$INTEGER`"
         },
         {
@@ -210,6 +225,7 @@ class Config {
         },
         {
           "name": "name",
+          "short": "Name of the Digimon",
           "type": "`$STRING`"
         },
         {
@@ -234,6 +250,7 @@ class Config {
         },
         {
           "name": "xAntibody",
+          "short": "Indicates if the Digimon has X-Antibody",
           "type": "`$BOOLEAN`"
         }
       ],
@@ -365,10 +382,12 @@ class Config {
       "fields": [
         {
           "name": "description",
+          "short": "Description of the field",
           "type": "`$STRING`"
         },
         {
           "name": "field",
+          "short": "Name of the field",
           "type": "`$STRING`"
         },
         {
@@ -377,10 +396,12 @@ class Config {
         },
         {
           "name": "id",
+          "short": "Unique identifier for the field",
           "type": "`$INTEGER`"
         },
         {
           "name": "image",
+          "short": "Image URL for the field",
           "type": "`$STRING`"
         }
       ],
@@ -480,10 +501,12 @@ class Config {
         },
         {
           "name": "id",
+          "short": "Unique identifier for the level",
           "type": "`$INTEGER`"
         },
         {
           "name": "level",
+          "short": "Name of the level",
           "type": "`$STRING`"
         }
       ],
@@ -579,6 +602,7 @@ class Config {
       "fields": [
         {
           "name": "description",
+          "short": "Description of the skill",
           "type": "`$STRING`"
         },
         {
@@ -587,14 +611,17 @@ class Config {
         },
         {
           "name": "id",
+          "short": "Unique identifier for the skill",
           "type": "`$INTEGER`"
         },
         {
           "name": "skill",
+          "short": "Name of the skill",
           "type": "`$STRING`"
         },
         {
           "name": "translation",
+          "short": "Translation of the skill name",
           "type": "`$STRING`"
         }
       ],
@@ -694,10 +721,12 @@ class Config {
         },
         {
           "name": "id",
+          "short": "Unique identifier for the type",
           "type": "`$INTEGER`"
         },
         {
           "name": "type",
+          "short": "Name of the type",
           "type": "`$STRING`"
         }
       ],
