@@ -42,6 +42,7 @@ class DigimonConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
