@@ -30,10 +30,8 @@ class AttributeLoadMatch
 /** Request payload for Attribute#list. */
 class AttributeListMatch
 {
-    public ?string $attribute = null;
-    public ?string $description = null;
-    public ?string $href = null;
-    public ?int $id = null;
+    public ?string $name = null;
+    public ?int $page = null;
 }
 
 /** Digimon entity data model. */
@@ -65,21 +63,13 @@ class DigimonLoadMatch
 /** Request payload for Digimon#list. */
 class DigimonListMatch
 {
-    public ?array $attributes = null;
-    public ?array $descriptions = null;
-    public ?array $fields = null;
-    public ?string $href = null;
-    public ?int $id = null;
-    public ?string $image = null;
-    public ?array $images = null;
-    public ?array $levels = null;
+    public ?string $attribute = null;
+    public ?bool $exact = null;
+    public ?string $level = null;
     public ?string $name = null;
-    public ?array $nextEvolutions = null;
-    public ?array $priorEvolutions = null;
-    public ?string $releaseDate = null;
-    public ?array $skills = null;
-    public ?array $types = null;
-    public ?bool $xAntibody = null;
+    public ?int $page = null;
+    public ?int $page_size = null;
+    public ?bool $x_antibody = null;
 }
 
 /** Field entity data model. */
@@ -101,11 +91,8 @@ class FieldLoadMatch
 /** Request payload for Field#list. */
 class FieldListMatch
 {
-    public ?string $description = null;
-    public ?string $field = null;
-    public ?string $href = null;
-    public ?int $id = null;
-    public ?string $image = null;
+    public ?string $name = null;
+    public ?int $page = null;
 }
 
 /** Level entity data model. */
@@ -125,9 +112,8 @@ class LevelLoadMatch
 /** Request payload for Level#list. */
 class LevelListMatch
 {
-    public ?string $href = null;
-    public ?int $id = null;
-    public ?string $level = null;
+    public ?string $name = null;
+    public ?int $page = null;
 }
 
 /** Skill entity data model. */
@@ -149,11 +135,8 @@ class SkillLoadMatch
 /** Request payload for Skill#list. */
 class SkillListMatch
 {
-    public ?string $description = null;
-    public ?string $href = null;
-    public ?int $id = null;
-    public ?string $skill = null;
-    public ?string $translation = null;
+    public ?string $name = null;
+    public ?int $page = null;
 }
 
 /** Type entity data model. */
@@ -173,8 +156,7 @@ class TypeLoadMatch
 /** Request payload for Type#list. */
 class TypeListMatch
 {
-    public ?string $href = null;
-    public ?int $id = null;
-    public ?string $type = null;
+    public ?string $name = null;
+    public ?int $page = null;
 }
 

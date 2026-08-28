@@ -17,10 +17,8 @@ export interface AttributeLoadMatch {
 }
 
 export interface AttributeListMatch {
-  attribute?: string
-  description?: string
-  href?: string
-  id?: number
+  name?: string
+  page?: number
 }
 
 export interface Digimon {
@@ -46,21 +44,13 @@ export interface DigimonLoadMatch {
 }
 
 export interface DigimonListMatch {
-  attributes?: any[]
-  descriptions?: any[]
-  fields?: any[]
-  href?: string
-  id?: number
-  image?: string
-  images?: any[]
-  levels?: any[]
+  attribute?: string
+  exact?: boolean
+  level?: string
   name?: string
-  nextEvolutions?: any[]
-  priorEvolutions?: any[]
-  releaseDate?: string
-  skills?: any[]
-  types?: any[]
-  xAntibody?: boolean
+  page?: number
+  page_size?: number
+  x_antibody?: boolean
 }
 
 export interface Field {
@@ -76,11 +66,8 @@ export interface FieldLoadMatch {
 }
 
 export interface FieldListMatch {
-  description?: string
-  field?: string
-  href?: string
-  id?: number
-  image?: string
+  name?: string
+  page?: number
 }
 
 export interface Level {
@@ -94,9 +81,8 @@ export interface LevelLoadMatch {
 }
 
 export interface LevelListMatch {
-  href?: string
-  id?: number
-  level?: string
+  name?: string
+  page?: number
 }
 
 export interface Skill {
@@ -112,11 +98,8 @@ export interface SkillLoadMatch {
 }
 
 export interface SkillListMatch {
-  description?: string
-  href?: string
-  id?: number
-  skill?: string
-  translation?: string
+  name?: string
+  page?: number
 }
 
 export interface Type {
@@ -130,8 +113,7 @@ export interface TypeLoadMatch {
 }
 
 export interface TypeListMatch {
-  href?: string
-  id?: number
-  type?: string
+  name?: string
+  page?: number
 }
 

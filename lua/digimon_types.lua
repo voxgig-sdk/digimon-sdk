@@ -16,10 +16,8 @@
 ---@field id string
 
 ---@class AttributeListMatch
----@field attribute? string
----@field description? string
----@field href? string
----@field id? number
+---@field name? string
+---@field page? number
 
 ---@class Digimon
 ---@field attributes? table
@@ -42,21 +40,13 @@
 ---@field id string
 
 ---@class DigimonListMatch
----@field attributes? table
----@field descriptions? table
----@field fields? table
----@field href? string
----@field id? number
----@field image? string
----@field images? table
----@field levels? table
+---@field attribute? string
+---@field exact? boolean
+---@field level? string
 ---@field name? string
----@field nextEvolutions? table
----@field priorEvolutions? table
----@field releaseDate? string
----@field skills? table
----@field types? table
----@field xAntibody? boolean
+---@field page? number
+---@field page_size? number
+---@field x_antibody? boolean
 
 ---@class Field
 ---@field description? string
@@ -69,11 +59,8 @@
 ---@field id string
 
 ---@class FieldListMatch
----@field description? string
----@field field? string
----@field href? string
----@field id? number
----@field image? string
+---@field name? string
+---@field page? number
 
 ---@class Level
 ---@field href? string
@@ -84,9 +71,8 @@
 ---@field id string
 
 ---@class LevelListMatch
----@field href? string
----@field id? number
----@field level? string
+---@field name? string
+---@field page? number
 
 ---@class Skill
 ---@field description? string
@@ -99,11 +85,8 @@
 ---@field id string
 
 ---@class SkillListMatch
----@field description? string
----@field href? string
----@field id? number
----@field skill? string
----@field translation? string
+---@field name? string
+---@field page? number
 
 ---@class Type
 ---@field href? string
@@ -114,9 +97,8 @@
 ---@field id string
 
 ---@class TypeListMatch
----@field href? string
----@field id? number
----@field type? string
+---@field name? string
+---@field page? number
 
 local M = {}
 

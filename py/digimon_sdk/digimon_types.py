@@ -28,10 +28,8 @@ class AttributeLoadMatch(TypedDict):
 
 
 class AttributeListMatch(TypedDict, total=False):
-    attribute: str
-    description: str
-    href: str
-    id: int
+    name: str
+    page: int
 
 
 class Digimon(TypedDict, total=False):
@@ -57,21 +55,13 @@ class DigimonLoadMatch(TypedDict):
 
 
 class DigimonListMatch(TypedDict, total=False):
-    attributes: list
-    descriptions: list
-    fields: list
-    href: str
-    id: int
-    image: str
-    images: list
-    levels: list
+    attribute: str
+    exact: bool
+    level: str
     name: str
-    nextEvolutions: list
-    priorEvolutions: list
-    releaseDate: str
-    skills: list
-    types: list
-    xAntibody: bool
+    page: int
+    page_size: int
+    x_antibody: bool
 
 
 class Field(TypedDict, total=False):
@@ -87,11 +77,8 @@ class FieldLoadMatch(TypedDict):
 
 
 class FieldListMatch(TypedDict, total=False):
-    description: str
-    field: str
-    href: str
-    id: int
-    image: str
+    name: str
+    page: int
 
 
 class Level(TypedDict, total=False):
@@ -105,9 +92,8 @@ class LevelLoadMatch(TypedDict):
 
 
 class LevelListMatch(TypedDict, total=False):
-    href: str
-    id: int
-    level: str
+    name: str
+    page: int
 
 
 class Skill(TypedDict, total=False):
@@ -123,11 +109,8 @@ class SkillLoadMatch(TypedDict):
 
 
 class SkillListMatch(TypedDict, total=False):
-    description: str
-    href: str
-    id: int
-    skill: str
-    translation: str
+    name: str
+    page: int
 
 
 class Type(TypedDict, total=False):
@@ -141,6 +124,5 @@ class TypeLoadMatch(TypedDict):
 
 
 class TypeListMatch(TypedDict, total=False):
-    href: str
-    id: int
-    type: str
+    name: str
+    page: int

@@ -27,10 +27,8 @@ type AttributeLoadMatch struct {
 
 // AttributeListMatch is the typed request payload for Attribute.ListTyped.
 type AttributeListMatch struct {
-	Attribute *string `json:"attribute,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // Digimon is the typed data model for the digimon entity.
@@ -59,21 +57,13 @@ type DigimonLoadMatch struct {
 
 // DigimonListMatch is the typed request payload for Digimon.ListTyped.
 type DigimonListMatch struct {
-	Attributes *[]any `json:"attributes,omitempty"`
-	Descriptions *[]any `json:"descriptions,omitempty"`
-	Fields *[]any `json:"fields,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
-	Images *[]any `json:"images,omitempty"`
-	Levels *[]any `json:"levels,omitempty"`
+	Attribute *string `json:"attribute,omitempty"`
+	Exact *bool `json:"exact,omitempty"`
+	Level *string `json:"level,omitempty"`
 	Name *string `json:"name,omitempty"`
-	NextEvolutions *[]any `json:"nextEvolutions,omitempty"`
-	PriorEvolutions *[]any `json:"priorEvolutions,omitempty"`
-	ReleaseDate *string `json:"releaseDate,omitempty"`
-	Skills *[]any `json:"skills,omitempty"`
-	Types *[]any `json:"types,omitempty"`
-	XAntibody *bool `json:"xAntibody,omitempty"`
+	Page *int `json:"page,omitempty"`
+	PageSize *int `json:"page_size,omitempty"`
+	XAntibody *bool `json:"x_antibody,omitempty"`
 }
 
 // Field is the typed data model for the field entity.
@@ -92,11 +82,8 @@ type FieldLoadMatch struct {
 
 // FieldListMatch is the typed request payload for Field.ListTyped.
 type FieldListMatch struct {
-	Description *string `json:"description,omitempty"`
-	Field *string `json:"field,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // Level is the typed data model for the level entity.
@@ -113,9 +100,8 @@ type LevelLoadMatch struct {
 
 // LevelListMatch is the typed request payload for Level.ListTyped.
 type LevelListMatch struct {
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Level *string `json:"level,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // Skill is the typed data model for the skill entity.
@@ -134,11 +120,8 @@ type SkillLoadMatch struct {
 
 // SkillListMatch is the typed request payload for Skill.ListTyped.
 type SkillListMatch struct {
-	Description *string `json:"description,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Skill *string `json:"skill,omitempty"`
-	Translation *string `json:"translation,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // Type is the typed data model for the type entity.
@@ -155,9 +138,8 @@ type TypeLoadMatch struct {
 
 // TypeListMatch is the typed request payload for Type.ListTyped.
 type TypeListMatch struct {
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the
