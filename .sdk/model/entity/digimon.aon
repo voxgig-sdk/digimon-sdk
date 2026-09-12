@@ -21,6 +21,7 @@ main: kit: entity: digimon: {
       type: "`$ARRAY`"
     }
     {
+      format: "uri"
       name: "href"
       req: false
       type: "`$STRING`"
@@ -32,6 +33,7 @@ main: kit: entity: digimon: {
       type: "`$INTEGER`"
     }
     {
+      format: "uri"
       name: "image"
       req: false
       type: "`$STRING`"
@@ -63,6 +65,7 @@ main: kit: entity: digimon: {
       type: "`$ARRAY`"
     }
     {
+      format: "date"
       name: "releaseDate"
       req: false
       type: "`$STRING`"
@@ -153,8 +156,10 @@ main: kit: entity: digimon: {
           }
           method: "GET"
           orig: "/digimon"
-          parts: [
-            "digimon"
+          segments: [
+            {
+              lit: "digimon"
+            }
           ]
           select: {
             exist: [
@@ -191,15 +196,19 @@ main: kit: entity: digimon: {
           }
           method: "GET"
           orig: "/digimon/{idOrName}"
-          parts: [
-            "digimon"
-            "{id}"
-          ]
           rename: {
             param: {
               idOrName: "id"
             }
           }
+          segments: [
+            {
+              lit: "digimon"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

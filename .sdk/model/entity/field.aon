@@ -18,6 +18,7 @@ main: kit: entity: field: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "href"
       req: false
       type: "`$STRING`"
@@ -29,6 +30,7 @@ main: kit: entity: field: {
       type: "`$INTEGER`"
     }
     {
+      format: "uri"
       name: "image"
       req: false
       short: "Image URL for the field"
@@ -68,8 +70,10 @@ main: kit: entity: field: {
           }
           method: "GET"
           orig: "/field"
-          parts: [
-            "field"
+          segments: [
+            {
+              lit: "field"
+            }
           ]
           select: {
             exist: [
@@ -101,15 +105,19 @@ main: kit: entity: field: {
           }
           method: "GET"
           orig: "/field/{idOrName}"
-          parts: [
-            "field"
-            "{id}"
-          ]
           rename: {
             param: {
               idOrName: "id"
             }
           }
+          segments: [
+            {
+              lit: "field"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

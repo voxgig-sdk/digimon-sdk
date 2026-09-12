@@ -12,6 +12,7 @@ main: kit: entity: skill: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "href"
       req: false
       type: "`$STRING`"
@@ -68,8 +69,10 @@ main: kit: entity: skill: {
           }
           method: "GET"
           orig: "/skill"
-          parts: [
-            "skill"
+          segments: [
+            {
+              lit: "skill"
+            }
           ]
           select: {
             exist: [
@@ -101,15 +104,19 @@ main: kit: entity: skill: {
           }
           method: "GET"
           orig: "/skill/{idOrName}"
-          parts: [
-            "skill"
-            "{id}"
-          ]
           rename: {
             param: {
               idOrName: "id"
             }
           }
+          segments: [
+            {
+              lit: "skill"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

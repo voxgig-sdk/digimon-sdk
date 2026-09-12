@@ -47,6 +47,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "href",
             ["type"] = "`$STRING`",
           },
@@ -55,6 +56,10 @@ local function make_config()
             ["short"] = "Unique identifier for the attribute",
             ["type"] = "`$INTEGER`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "attribute",
         ["op"] = {
@@ -83,8 +88,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/attribute",
-                ["parts"] = {
-                  "attribute",
+                ["segments"] = {
+                  {
+                    ["lit"] = "attribute",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -95,6 +102,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "attribute",
                 },
               },
             },
@@ -118,13 +128,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/attribute/{idOrName}",
-                ["parts"] = {
-                  "attribute",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["idOrName"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "attribute",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -135,6 +149,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "attribute",
+                  "{id}",
                 },
               },
             },
@@ -159,6 +177,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "href",
             ["type"] = "`$STRING`",
           },
@@ -168,6 +187,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "image",
             ["type"] = "`$STRING`",
           },
@@ -193,6 +213,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date",
             ["name"] = "releaseDate",
             ["type"] = "`$STRING`",
           },
@@ -209,6 +230,10 @@ local function make_config()
             ["short"] = "Indicates if the Digimon has X-Antibody",
             ["type"] = "`$BOOLEAN`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "digimon",
         ["op"] = {
@@ -268,8 +293,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/digimon",
-                ["parts"] = {
-                  "digimon",
+                ["segments"] = {
+                  {
+                    ["lit"] = "digimon",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -285,6 +312,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "digimon",
                 },
               },
             },
@@ -308,13 +338,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/digimon/{idOrName}",
-                ["parts"] = {
-                  "digimon",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["idOrName"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "digimon",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -325,6 +359,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "digimon",
+                  "{id}",
                 },
               },
             },
@@ -347,6 +385,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "href",
             ["type"] = "`$STRING`",
           },
@@ -356,10 +395,15 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "image",
             ["short"] = "Image URL for the field",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "field",
         ["op"] = {
@@ -388,8 +432,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/field",
-                ["parts"] = {
-                  "field",
+                ["segments"] = {
+                  {
+                    ["lit"] = "field",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -400,6 +446,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "field",
                 },
               },
             },
@@ -423,13 +472,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/field/{idOrName}",
-                ["parts"] = {
-                  "field",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["idOrName"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "field",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -440,6 +493,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "field",
+                  "{id}",
                 },
               },
             },
@@ -452,6 +509,7 @@ local function make_config()
       ["level"] = {
         ["fields"] = {
           {
+            ["format"] = "uri",
             ["name"] = "href",
             ["type"] = "`$STRING`",
           },
@@ -465,6 +523,10 @@ local function make_config()
             ["short"] = "Name of the level",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "level",
         ["op"] = {
@@ -493,8 +555,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/level",
-                ["parts"] = {
-                  "level",
+                ["segments"] = {
+                  {
+                    ["lit"] = "level",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -505,6 +569,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "level",
                 },
               },
             },
@@ -528,13 +595,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/level/{idOrName}",
-                ["parts"] = {
-                  "level",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["idOrName"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "level",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -545,6 +616,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "level",
+                  "{id}",
                 },
               },
             },
@@ -562,6 +637,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "href",
             ["type"] = "`$STRING`",
           },
@@ -580,6 +656,10 @@ local function make_config()
             ["short"] = "Translation of the skill name",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "skill",
         ["op"] = {
@@ -608,8 +688,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/skill",
-                ["parts"] = {
-                  "skill",
+                ["segments"] = {
+                  {
+                    ["lit"] = "skill",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -620,6 +702,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "skill",
                 },
               },
             },
@@ -643,13 +728,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/skill/{idOrName}",
-                ["parts"] = {
-                  "skill",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["idOrName"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "skill",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -660,6 +749,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "skill",
+                  "{id}",
                 },
               },
             },
@@ -672,6 +765,7 @@ local function make_config()
       ["type"] = {
         ["fields"] = {
           {
+            ["format"] = "uri",
             ["name"] = "href",
             ["type"] = "`$STRING`",
           },
@@ -685,6 +779,10 @@ local function make_config()
             ["short"] = "Name of the type",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "type",
         ["op"] = {
@@ -713,8 +811,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/type",
-                ["parts"] = {
-                  "type",
+                ["segments"] = {
+                  {
+                    ["lit"] = "type",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -725,6 +825,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "type",
                 },
               },
             },
@@ -748,13 +851,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/type/{idOrName}",
-                ["parts"] = {
-                  "type",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["idOrName"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "type",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -765,6 +872,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "type",
+                  "{id}",
                 },
               },
             },

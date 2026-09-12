@@ -18,6 +18,7 @@ main: kit: entity: attribute: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "href"
       req: false
       type: "`$STRING`"
@@ -62,8 +63,10 @@ main: kit: entity: attribute: {
           }
           method: "GET"
           orig: "/attribute"
-          parts: [
-            "attribute"
+          segments: [
+            {
+              lit: "attribute"
+            }
           ]
           select: {
             exist: [
@@ -95,15 +98,19 @@ main: kit: entity: attribute: {
           }
           method: "GET"
           orig: "/attribute/{idOrName}"
-          parts: [
-            "attribute"
-            "{id}"
-          ]
           rename: {
             param: {
               idOrName: "id"
             }
           }
+          segments: [
+            {
+              lit: "attribute"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

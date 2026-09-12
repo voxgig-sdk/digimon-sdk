@@ -6,6 +6,7 @@ main: kit: entity: level: {
 
   fields: [
     {
+      format: "uri"
       name: "href"
       req: false
       type: "`$STRING`"
@@ -56,8 +57,10 @@ main: kit: entity: level: {
           }
           method: "GET"
           orig: "/level"
-          parts: [
-            "level"
+          segments: [
+            {
+              lit: "level"
+            }
           ]
           select: {
             exist: [
@@ -89,15 +92,19 @@ main: kit: entity: level: {
           }
           method: "GET"
           orig: "/level/{idOrName}"
-          parts: [
-            "level"
-            "{id}"
-          ]
           rename: {
             param: {
               idOrName: "id"
             }
           }
+          segments: [
+            {
+              lit: "level"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

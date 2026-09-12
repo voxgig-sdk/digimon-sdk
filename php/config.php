@@ -73,6 +73,7 @@ class DigimonConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'uri',
               'name' => 'href',
               'type' => '`$STRING`',
             ],
@@ -81,6 +82,10 @@ class DigimonConfig
               'short' => 'Unique identifier for the attribute',
               'type' => '`$INTEGER`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'attribute',
           'op' => [
@@ -109,8 +114,10 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/attribute',
-                  'parts' => [
-                    'attribute',
+                  'segments' => [
+                    [
+                      'lit' => 'attribute',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -121,6 +128,9 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'attribute',
                   ],
                 ],
               ],
@@ -144,13 +154,17 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/attribute/{idOrName}',
-                  'parts' => [
-                    'attribute',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'idOrName' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'attribute',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -161,6 +175,10 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'attribute',
+                    '{id}',
                   ],
                 ],
               ],
@@ -185,6 +203,7 @@ class DigimonConfig
               'type' => '`$ARRAY`',
             ],
             [
+              'format' => 'uri',
               'name' => 'href',
               'type' => '`$STRING`',
             ],
@@ -194,6 +213,7 @@ class DigimonConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'uri',
               'name' => 'image',
               'type' => '`$STRING`',
             ],
@@ -219,6 +239,7 @@ class DigimonConfig
               'type' => '`$ARRAY`',
             ],
             [
+              'format' => 'date',
               'name' => 'releaseDate',
               'type' => '`$STRING`',
             ],
@@ -235,6 +256,10 @@ class DigimonConfig
               'short' => 'Indicates if the Digimon has X-Antibody',
               'type' => '`$BOOLEAN`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'digimon',
           'op' => [
@@ -294,8 +319,10 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/digimon',
-                  'parts' => [
-                    'digimon',
+                  'segments' => [
+                    [
+                      'lit' => 'digimon',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -311,6 +338,9 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'digimon',
                   ],
                 ],
               ],
@@ -334,13 +364,17 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/digimon/{idOrName}',
-                  'parts' => [
-                    'digimon',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'idOrName' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'digimon',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -351,6 +385,10 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'digimon',
+                    '{id}',
                   ],
                 ],
               ],
@@ -373,6 +411,7 @@ class DigimonConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'uri',
               'name' => 'href',
               'type' => '`$STRING`',
             ],
@@ -382,10 +421,15 @@ class DigimonConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'uri',
               'name' => 'image',
               'short' => 'Image URL for the field',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'field',
           'op' => [
@@ -414,8 +458,10 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/field',
-                  'parts' => [
-                    'field',
+                  'segments' => [
+                    [
+                      'lit' => 'field',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -426,6 +472,9 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'field',
                   ],
                 ],
               ],
@@ -449,13 +498,17 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/field/{idOrName}',
-                  'parts' => [
-                    'field',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'idOrName' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'field',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -466,6 +519,10 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'field',
+                    '{id}',
                   ],
                 ],
               ],
@@ -478,6 +535,7 @@ class DigimonConfig
         'level' => [
           'fields' => [
             [
+              'format' => 'uri',
               'name' => 'href',
               'type' => '`$STRING`',
             ],
@@ -491,6 +549,10 @@ class DigimonConfig
               'short' => 'Name of the level',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'level',
           'op' => [
@@ -519,8 +581,10 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/level',
-                  'parts' => [
-                    'level',
+                  'segments' => [
+                    [
+                      'lit' => 'level',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -531,6 +595,9 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'level',
                   ],
                 ],
               ],
@@ -554,13 +621,17 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/level/{idOrName}',
-                  'parts' => [
-                    'level',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'idOrName' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'level',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -571,6 +642,10 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'level',
+                    '{id}',
                   ],
                 ],
               ],
@@ -588,6 +663,7 @@ class DigimonConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'uri',
               'name' => 'href',
               'type' => '`$STRING`',
             ],
@@ -606,6 +682,10 @@ class DigimonConfig
               'short' => 'Translation of the skill name',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'skill',
           'op' => [
@@ -634,8 +714,10 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/skill',
-                  'parts' => [
-                    'skill',
+                  'segments' => [
+                    [
+                      'lit' => 'skill',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -646,6 +728,9 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'skill',
                   ],
                 ],
               ],
@@ -669,13 +754,17 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/skill/{idOrName}',
-                  'parts' => [
-                    'skill',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'idOrName' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'skill',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -686,6 +775,10 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'skill',
+                    '{id}',
                   ],
                 ],
               ],
@@ -698,6 +791,7 @@ class DigimonConfig
         'type' => [
           'fields' => [
             [
+              'format' => 'uri',
               'name' => 'href',
               'type' => '`$STRING`',
             ],
@@ -711,6 +805,10 @@ class DigimonConfig
               'short' => 'Name of the type',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'type',
           'op' => [
@@ -739,8 +837,10 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/type',
-                  'parts' => [
-                    'type',
+                  'segments' => [
+                    [
+                      'lit' => 'type',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -751,6 +851,9 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'type',
                   ],
                 ],
               ],
@@ -774,13 +877,17 @@ class DigimonConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/type/{idOrName}',
-                  'parts' => [
-                    'type',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'idOrName' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'type',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -791,6 +898,10 @@ class DigimonConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'type',
+                    '{id}',
                   ],
                 ],
               ],
