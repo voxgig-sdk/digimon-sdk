@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { DigimonSDK } from '@voxgig-sdk/digimon'
+import { DigimonSDK } from '@voxgig-sdk/digimon-sdk'
 
 const client = new DigimonSDK()
 ```
@@ -688,7 +688,7 @@ digimon/
 Import the SDK from the package root:
 
 ```ts
-import { DigimonSDK } from '@voxgig-sdk/digimon'
+import { DigimonSDK } from '@voxgig-sdk/digimon-sdk'
 ```
 
 ### Entity state

@@ -105,7 +105,7 @@ local results, err = client:Field():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
+| TypeScript | `@voxgig-sdk/digimon-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
 | Python | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
 | PHP | `voxgig-sdk/digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/digimon-sdk/go` | `go get github.com/voxgig-sdk/digimon-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Field():list()
 ### TypeScript
 
 ```ts
-import { DigimonSDK } from '@voxgig-sdk/digimon'
+import { DigimonSDK } from '@voxgig-sdk/digimon-sdk'
 
 const client = new DigimonSDK()
 
