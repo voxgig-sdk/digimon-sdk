@@ -1,12 +1,18 @@
 # Digimon SDK feature factory
 
 from digimon_sdk.feature.base_feature import DigimonBaseFeature
+from digimon_sdk.feature.ratelimit_feature import DigimonRatelimitFeature
+from digimon_sdk.feature.retry_feature import DigimonRetryFeature
 from digimon_sdk.feature.test_feature import DigimonTestFeature
+from digimon_sdk.feature.timeout_feature import DigimonTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: DigimonBaseFeature(),
+    "ratelimit": lambda: DigimonRatelimitFeature(),
+    "retry": lambda: DigimonRetryFeature(),
     "test": lambda: DigimonTestFeature(),
+    "timeout": lambda: DigimonTimeoutFeature(),
 }
 
 

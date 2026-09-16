@@ -4,7 +4,10 @@ declare(strict_types=1);
 // Digimon SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class DigimonFeatures
@@ -14,8 +17,14 @@ class DigimonFeatures
         switch ($name) {
             case "base":
                 return new DigimonBaseFeature();
+            case "ratelimit":
+                return new DigimonRatelimitFeature();
+            case "retry":
+                return new DigimonRetryFeature();
             case "test":
                 return new DigimonTestFeature();
+            case "timeout":
+                return new DigimonTimeoutFeature();
             default:
                 return new DigimonBaseFeature();
         }
@@ -31,7 +40,10 @@ class DigimonFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

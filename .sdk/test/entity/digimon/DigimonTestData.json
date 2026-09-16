@@ -73,5 +73,379 @@
         "xAntibody": true
       }
     }
+  },
+  "requests": {
+    "GET /digimon": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDigimonList",
+        "parameters": [
+          {
+            "description": "Returns a list of digimons that have a similar name to the value",
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Will search for the exact string passed in the 'name' parameter",
+            "in": "query",
+            "name": "exact",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Returns a list of digimons with the attribute equal to value (Case Insensitive)",
+            "in": "query",
+            "name": "attribute",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns a list of digimons with the xAntibody equal to value",
+            "in": "query",
+            "name": "xAntibody",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Returns a list of digimons with the level equal to value (Case Insensitive)",
+            "in": "query",
+            "name": "level",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Used to navigate to a specific page",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Changes the quantity of rows returned for each page",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "default": 20,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "content": {
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "image": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "pageable": {
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "elementsOnPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "format": "uri",
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "previousPage": {
+                          "format": "uri",
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "totalElements": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /digimon/{idOrName}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDigimon",
+        "parameters": [
+          {
+            "description": "Digimon unique ID or name",
+            "in": "path",
+            "name": "idOrName",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "attributes": {
+                      "items": {
+                        "properties": {
+                          "attribute": {
+                            "type": "string"
+                          },
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "descriptions": {
+                      "items": {
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "language": {
+                            "type": "string"
+                          },
+                          "origin": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "fields": {
+                      "items": {
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "image": {
+                            "format": "uri",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the Digimon",
+                      "type": "integer"
+                    },
+                    "images": {
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "transparent": {
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "levels": {
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "level": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "description": "Name of the Digimon",
+                      "type": "string"
+                    },
+                    "nextEvolutions": {
+                      "items": {
+                        "properties": {
+                          "condition": {
+                            "type": "string"
+                          },
+                          "digimon": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "image": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "url": {
+                            "format": "uri",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "priorEvolutions": {
+                      "items": {
+                        "properties": {
+                          "condition": {
+                            "type": "string"
+                          },
+                          "digimon": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "image": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "url": {
+                            "format": "uri",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "releaseDate": {
+                      "format": "date",
+                      "type": "string"
+                    },
+                    "skills": {
+                      "items": {
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "skill": {
+                            "type": "string"
+                          },
+                          "translation": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "types": {
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "xAntibody": {
+                      "description": "Indicates if the Digimon has X-Antibody",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Digimon not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

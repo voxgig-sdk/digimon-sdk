@@ -25,5 +25,144 @@
         "level": "s7a"
       }
     }
+  },
+  "requests": {
+    "GET /level": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLevelList",
+        "parameters": [
+          {
+            "description": "Used to navigate to a specific page",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Returns a list of levels that have a similar name to the value",
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "content": {
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "level": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "pageable": {
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "elementsOnPage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "format": "uri",
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "previousPage": {
+                          "format": "uri",
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "totalElements": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /level/{idOrName}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLevel",
+        "parameters": [
+          {
+            "description": "Level unique ID or name",
+            "in": "path",
+            "name": "idOrName",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "Unique identifier for the level",
+                      "type": "integer"
+                    },
+                    "level": {
+                      "description": "Name of the level",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Level not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }
