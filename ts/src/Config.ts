@@ -127,24 +127,24 @@ class Config {
 
     entity: {
       
-      attribute: {
-      },
-
-      digimon: {
-      },
-
-      field: {
-      },
-
-      level: {
-      },
-
-      skill: {
-      },
-
-      type: {
-      },
-
+        attribute: {
+        },
+  
+        digimon: {
+        },
+  
+        field: {
+        },
+  
+        level: {
+        },
+  
+        skill: {
+        },
+  
+        type: {
+        },
+  
     }
   }
 

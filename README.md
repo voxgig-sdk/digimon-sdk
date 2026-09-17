@@ -105,12 +105,12 @@ local results, err = client:Field():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/digimon-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
-| Python | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
-| PHP | `voxgig-sdk/digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
+| TypeScript | `@voxgig-sdk/digimon-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/tags) |
+| Python | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/tags) |
+| PHP | `voxgig-sdk/digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/digimon-sdk/go` | `go get github.com/voxgig-sdk/digimon-sdk/go@latest` |
-| Ruby | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
-| Lua | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/releases) |
+| Ruby | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/tags) |
+| Lua | `voxgig-sdk-digimon` | publish pending — [install from git tag](https://github.com/voxgig-sdk/digimon-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/digimon-sdk/go-cli` | `go install github.com/voxgig-sdk/digimon-sdk/go-cli/cmd/digimon@latest` |
 | Go MCP server | `github.com/voxgig-sdk/digimon-sdk/go-mcp` | `go get github.com/voxgig-sdk/digimon-sdk/go-mcp@latest` |
 

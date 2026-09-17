@@ -1,8 +1,8 @@
 # Entity Models
 
-@"attribute.aon"
-@"digimon.aon"
-@"field.aon"
-@"level.aon"
-@"skill.aon"
-@"type.aon"
+@"./attribute.aon"
+@"./digimon.aon"
+@"./field.aon"
+@"./level.aon"
+@"./skill.aon"
+@"./type.aon"
