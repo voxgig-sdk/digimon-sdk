@@ -24,42 +24,112 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "attribute": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "attribute",
-              "req": false,
-              "short": "Name of the attribute",
-              "type": "`$STRING`"
+          "fields": {
+            "attribute": {
+              "a": true,
+              "h": "Attribute",
+              "n": "attribute",
+              "r": false,
+              "sh": "Name of the attribute",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "short": "Description of the attribute",
-              "type": "`$STRING`"
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "sh": "Description of the attribute",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "href",
-              "req": false,
-              "type": "`$STRING`"
+            "href": {
+              "a": true,
+              "fo": "uri",
+              "h": "Href",
+              "n": "href",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the attribute",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the attribute",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -71,49 +141,49 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /attribute",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /attribute",
-                    "json": "{\"operationId\":\"getAttributeList\",\"parameters\":[{\"description\":\"Used to navigate to a specific page\",\"in\":\"query\",\"name\":\"page\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Returns a list of attributes that have a similar name to the value\",\"in\":\"query\",\"name\":\"name\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"content\":{\"items\":{\"properties\":{\"attribute\":{\"type\":\"string\"},\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"pageable\":{\"properties\":{\"currentPage\":{\"type\":\"integer\"},\"elementsOnPage\":{\"type\":\"integer\"},\"nextPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"previousPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"totalElements\":{\"type\":\"integer\"},\"totalPages\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/attribute",
-                  "segments": [
-                    {
-                      "lit": "attribute"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/attribute",
+                  "q": {
                     "exist": [
                       "name",
                       "page"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "attribute"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -125,34 +195,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /attribute/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id_or_name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id_or_name",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /attribute/{idOrName}",
-                    "json": "{\"operationId\":\"getAttribute\",\"parameters\":[{\"description\":\"Attribute unique ID or name\",\"in\":\"path\",\"name\":\"idOrName\",\"required\":true,\"schema\":{\"oneOf\":[{\"type\":\"integer\"},{\"type\":\"string\"}]}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"attribute\":{\"description\":\"Name of the attribute\",\"type\":\"string\"},\"description\":{\"description\":\"Description of the attribute\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the attribute\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Attribute not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/attribute/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/attribute/{idOrName}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "idOrName": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "attribute"
                     },
@@ -160,12 +234,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -182,104 +251,119 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "attributes",
-              "req": false,
-              "type": "`$ARRAY`"
+          "fields": {
+            "attributes": {
+              "a": true,
+              "h": "Attributes",
+              "n": "attributes",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "descriptions",
-              "req": false,
-              "type": "`$ARRAY`"
+            "descriptions": {
+              "a": true,
+              "h": "Descriptions",
+              "n": "descriptions",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "fields",
-              "req": false,
-              "type": "`$ARRAY`"
+            "fields": {
+              "a": true,
+              "h": "Fields",
+              "n": "fields",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "href",
-              "req": false,
-              "type": "`$STRING`"
+            "href": {
+              "a": true,
+              "fo": "uri",
+              "h": "Href",
+              "n": "href",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the Digimon",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the Digimon",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "image",
-              "req": false,
-              "type": "`$STRING`"
+            "image": {
+              "a": true,
+              "fo": "uri",
+              "h": "Image",
+              "n": "image",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "images",
-              "req": false,
-              "type": "`$ARRAY`"
+            "images": {
+              "a": true,
+              "h": "Images",
+              "n": "images",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "levels",
-              "req": false,
-              "type": "`$ARRAY`"
+            "levels": {
+              "a": true,
+              "h": "Levels",
+              "n": "levels",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Name of the Digimon",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Name of the Digimon",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "nextEvolutions",
-              "req": false,
-              "type": "`$ARRAY`"
+            "nextEvolutions": {
+              "a": true,
+              "h": "Next Evolutions",
+              "n": "nextEvolutions",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "priorEvolutions",
-              "req": false,
-              "type": "`$ARRAY`"
+            "priorEvolutions": {
+              "a": true,
+              "h": "Prior Evolutions",
+              "n": "priorEvolutions",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "format": "date",
-              "name": "releaseDate",
-              "req": false,
-              "type": "`$STRING`"
+            "releaseDate": {
+              "a": true,
+              "fo": "date",
+              "h": "Release Date",
+              "n": "releaseDate",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "skills",
-              "req": false,
-              "type": "`$ARRAY`"
+            "skills": {
+              "a": true,
+              "h": "Skills",
+              "n": "skills",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "types",
-              "req": false,
-              "type": "`$ARRAY`"
+            "types": {
+              "a": true,
+              "h": "Types",
+              "n": "types",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "xAntibody",
-              "req": false,
-              "short": "Indicates if the Digimon has X-Antibody",
-              "type": "`$BOOLEAN`"
+            "xAntibody": {
+              "a": true,
+              "h": "X Antibody",
+              "n": "xAntibody",
+              "r": false,
+              "sh": "Indicates if the Digimon has X-Antibody",
+              "t": "`$BOOLEAN`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -291,84 +375,78 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /digimon",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "attribute",
-                        "orig": "attribute",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "attribute",
+                        "or": "attribute",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "exact",
-                        "orig": "exact",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "exact",
+                        "or": "exact",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "level",
-                        "orig": "level",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "level",
+                        "or": "level",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": 20,
-                        "kind": "query",
-                        "name": "page_size",
-                        "orig": "page_size",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 20,
+                        "k": "query",
+                        "n": "page_size",
+                        "or": "page_size",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "x_antibody",
-                        "orig": "x_antibody",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "x_antibody",
+                        "or": "x_antibody",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /digimon",
-                    "json": "{\"operationId\":\"getDigimonList\",\"parameters\":[{\"description\":\"Returns a list of digimons that have a similar name to the value\",\"in\":\"query\",\"name\":\"name\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Will search for the exact string passed in the 'name' parameter\",\"in\":\"query\",\"name\":\"exact\",\"schema\":{\"type\":\"boolean\"}},{\"description\":\"Returns a list of digimons with the attribute equal to value (Case Insensitive)\",\"in\":\"query\",\"name\":\"attribute\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Returns a list of digimons with the xAntibody equal to value\",\"in\":\"query\",\"name\":\"xAntibody\",\"schema\":{\"type\":\"boolean\"}},{\"description\":\"Returns a list of digimons with the level equal to value (Case Insensitive)\",\"in\":\"query\",\"name\":\"level\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Used to navigate to a specific page\",\"in\":\"query\",\"name\":\"page\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Changes the quantity of rows returned for each page\",\"in\":\"query\",\"name\":\"pageSize\",\"schema\":{\"default\":20,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"content\":{\"items\":{\"properties\":{\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"image\":{\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pageable\":{\"properties\":{\"currentPage\":{\"type\":\"integer\"},\"elementsOnPage\":{\"type\":\"integer\"},\"nextPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"previousPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"totalElements\":{\"type\":\"integer\"},\"totalPages\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/digimon",
-                  "segments": [
-                    {
-                      "lit": "digimon"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/digimon",
+                  "q": {
                     "exist": [
                       "attribute",
                       "exact",
@@ -379,7 +457,13 @@
                       "x_antibody"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "digimon"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -391,34 +475,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /digimon/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id_or_name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id_or_name",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /digimon/{idOrName}",
-                    "json": "{\"operationId\":\"getDigimon\",\"parameters\":[{\"description\":\"Digimon unique ID or name\",\"in\":\"path\",\"name\":\"idOrName\",\"required\":true,\"schema\":{\"oneOf\":[{\"type\":\"integer\"},{\"type\":\"string\"}]}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"attributes\":{\"items\":{\"properties\":{\"attribute\":{\"type\":\"string\"},\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"descriptions\":{\"items\":{\"properties\":{\"description\":{\"type\":\"string\"},\"language\":{\"type\":\"string\"},\"origin\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"fields\":{\"items\":{\"properties\":{\"field\":{\"type\":\"string\"},\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"image\":{\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"id\":{\"description\":\"Unique identifier for the Digimon\",\"type\":\"integer\"},\"images\":{\"items\":{\"properties\":{\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"transparent\":{\"type\":\"boolean\"}},\"type\":\"object\"},\"type\":\"array\"},\"levels\":{\"items\":{\"properties\":{\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"level\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"name\":{\"description\":\"Name of the Digimon\",\"type\":\"string\"},\"nextEvolutions\":{\"items\":{\"properties\":{\"condition\":{\"type\":\"string\"},\"digimon\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"image\":{\"format\":\"uri\",\"type\":\"string\"},\"url\":{\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"priorEvolutions\":{\"items\":{\"properties\":{\"condition\":{\"type\":\"string\"},\"digimon\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"image\":{\"format\":\"uri\",\"type\":\"string\"},\"url\":{\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"releaseDate\":{\"format\":\"date\",\"type\":\"string\"},\"skills\":{\"items\":{\"properties\":{\"description\":{\"type\":\"string\"},\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"skill\":{\"type\":\"string\"},\"translation\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"types\":{\"items\":{\"properties\":{\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"xAntibody\":{\"description\":\"Indicates if the Digimon has X-Antibody\",\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Digimon not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/digimon/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/digimon/{idOrName}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "idOrName": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "digimon"
                     },
@@ -426,12 +514,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -448,44 +531,49 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "short": "Description of the field",
-              "type": "`$STRING`"
+          "fields": {
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "sh": "Description of the field",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "field",
-              "req": false,
-              "short": "Name of the field",
-              "type": "`$STRING`"
+            "field": {
+              "a": true,
+              "h": "Field",
+              "n": "field",
+              "r": false,
+              "sh": "Name of the field",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "href",
-              "req": false,
-              "type": "`$STRING`"
+            "href": {
+              "a": true,
+              "fo": "uri",
+              "h": "Href",
+              "n": "href",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the field",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the field",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "image",
-              "req": false,
-              "short": "Image URL for the field",
-              "type": "`$STRING`"
+            "image": {
+              "a": true,
+              "fo": "uri",
+              "h": "Image",
+              "n": "image",
+              "r": false,
+              "sh": "Image URL for the field",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -497,49 +585,49 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /field",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /field",
-                    "json": "{\"operationId\":\"getFieldList\",\"parameters\":[{\"description\":\"Used to navigate to a specific page\",\"in\":\"query\",\"name\":\"page\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Returns a list of fields that have a similar name to the value\",\"in\":\"query\",\"name\":\"name\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"content\":{\"items\":{\"properties\":{\"field\":{\"type\":\"string\"},\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"image\":{\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pageable\":{\"properties\":{\"currentPage\":{\"type\":\"integer\"},\"elementsOnPage\":{\"type\":\"integer\"},\"nextPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"previousPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"totalElements\":{\"type\":\"integer\"},\"totalPages\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/field",
-                  "segments": [
-                    {
-                      "lit": "field"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/field",
+                  "q": {
                     "exist": [
                       "name",
                       "page"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "field"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -551,34 +639,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /field/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id_or_name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id_or_name",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /field/{idOrName}",
-                    "json": "{\"operationId\":\"getField\",\"parameters\":[{\"description\":\"Field unique ID or name\",\"in\":\"path\",\"name\":\"idOrName\",\"required\":true,\"schema\":{\"oneOf\":[{\"type\":\"integer\"},{\"type\":\"string\"}]}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"description\":\"Description of the field\",\"type\":\"string\"},\"field\":{\"description\":\"Name of the field\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the field\",\"type\":\"integer\"},\"image\":{\"description\":\"Image URL for the field\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Field not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/field/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/field/{idOrName}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "idOrName": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "field"
                     },
@@ -586,12 +678,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -608,29 +695,32 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "uri",
-              "name": "href",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "href": {
+              "a": true,
+              "fo": "uri",
+              "h": "Href",
+              "n": "href",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the level",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the level",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "level",
-              "req": false,
-              "short": "Name of the level",
-              "type": "`$STRING`"
+            "level": {
+              "a": true,
+              "h": "Level",
+              "n": "level",
+              "r": false,
+              "sh": "Name of the level",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -642,49 +732,49 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /level",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /level",
-                    "json": "{\"operationId\":\"getLevelList\",\"parameters\":[{\"description\":\"Used to navigate to a specific page\",\"in\":\"query\",\"name\":\"page\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Returns a list of levels that have a similar name to the value\",\"in\":\"query\",\"name\":\"name\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"content\":{\"items\":{\"properties\":{\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"level\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pageable\":{\"properties\":{\"currentPage\":{\"type\":\"integer\"},\"elementsOnPage\":{\"type\":\"integer\"},\"nextPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"previousPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"totalElements\":{\"type\":\"integer\"},\"totalPages\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/level",
-                  "segments": [
-                    {
-                      "lit": "level"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/level",
+                  "q": {
                     "exist": [
                       "name",
                       "page"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "level"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -696,34 +786,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /level/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id_or_name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id_or_name",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /level/{idOrName}",
-                    "json": "{\"operationId\":\"getLevel\",\"parameters\":[{\"description\":\"Level unique ID or name\",\"in\":\"path\",\"name\":\"idOrName\",\"required\":true,\"schema\":{\"oneOf\":[{\"type\":\"integer\"},{\"type\":\"string\"}]}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"id\":{\"description\":\"Unique identifier for the level\",\"type\":\"integer\"},\"level\":{\"description\":\"Name of the level\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Level not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/level/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/level/{idOrName}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "idOrName": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "level"
                     },
@@ -731,12 +825,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -753,43 +842,48 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "short": "Description of the skill",
-              "type": "`$STRING`"
+          "fields": {
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "sh": "Description of the skill",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "href",
-              "req": false,
-              "type": "`$STRING`"
+            "href": {
+              "a": true,
+              "fo": "uri",
+              "h": "Href",
+              "n": "href",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the skill",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the skill",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "skill",
-              "req": false,
-              "short": "Name of the skill",
-              "type": "`$STRING`"
+            "skill": {
+              "a": true,
+              "h": "Skill",
+              "n": "skill",
+              "r": false,
+              "sh": "Name of the skill",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "translation",
-              "req": false,
-              "short": "Translation of the skill name",
-              "type": "`$STRING`"
+            "translation": {
+              "a": true,
+              "h": "Translation",
+              "n": "translation",
+              "r": false,
+              "sh": "Translation of the skill name",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -801,49 +895,49 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /skill",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /skill",
-                    "json": "{\"operationId\":\"getSkillList\",\"parameters\":[{\"description\":\"Used to navigate to a specific page\",\"in\":\"query\",\"name\":\"page\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Returns a list of skills that have a similar name to the value\",\"in\":\"query\",\"name\":\"name\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"content\":{\"items\":{\"properties\":{\"description\":{\"type\":\"string\"},\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"skill\":{\"type\":\"string\"},\"translation\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pageable\":{\"properties\":{\"currentPage\":{\"type\":\"integer\"},\"elementsOnPage\":{\"type\":\"integer\"},\"nextPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"previousPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"totalElements\":{\"type\":\"integer\"},\"totalPages\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/skill",
-                  "segments": [
-                    {
-                      "lit": "skill"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/skill",
+                  "q": {
                     "exist": [
                       "name",
                       "page"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "skill"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -855,34 +949,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /skill/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id_or_name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id_or_name",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /skill/{idOrName}",
-                    "json": "{\"operationId\":\"getSkill\",\"parameters\":[{\"description\":\"Skill unique ID or name\",\"in\":\"path\",\"name\":\"idOrName\",\"required\":true,\"schema\":{\"oneOf\":[{\"type\":\"integer\"},{\"type\":\"string\"}]}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"description\":\"Description of the skill\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the skill\",\"type\":\"integer\"},\"skill\":{\"description\":\"Name of the skill\",\"type\":\"string\"},\"translation\":{\"description\":\"Translation of the skill name\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Skill not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/skill/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/skill/{idOrName}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "idOrName": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "skill"
                     },
@@ -890,12 +988,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -912,29 +1005,32 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "uri",
-              "name": "href",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "href": {
+              "a": true,
+              "fo": "uri",
+              "h": "Href",
+              "n": "href",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the type",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the type",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "type",
-              "req": false,
-              "short": "Name of the type",
-              "type": "`$STRING`"
+            "type": {
+              "a": true,
+              "h": "Type",
+              "n": "type",
+              "r": false,
+              "sh": "Name of the type",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -946,49 +1042,49 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /type",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /type",
-                    "json": "{\"operationId\":\"getTypeList\",\"parameters\":[{\"description\":\"Used to navigate to a specific page\",\"in\":\"query\",\"name\":\"page\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Returns a list of types that have a similar name to the value\",\"in\":\"query\",\"name\":\"name\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"content\":{\"items\":{\"properties\":{\"href\":{\"format\":\"uri\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pageable\":{\"properties\":{\"currentPage\":{\"type\":\"integer\"},\"elementsOnPage\":{\"type\":\"integer\"},\"nextPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"previousPage\":{\"format\":\"uri\",\"nullable\":true,\"type\":\"string\"},\"totalElements\":{\"type\":\"integer\"},\"totalPages\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/type",
-                  "segments": [
-                    {
-                      "lit": "type"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/type",
+                  "q": {
                     "exist": [
                       "name",
                       "page"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "type"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -1000,34 +1096,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /type/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id_or_name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id_or_name",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /type/{idOrName}",
-                    "json": "{\"operationId\":\"getType\",\"parameters\":[{\"description\":\"Type unique ID or name\",\"in\":\"path\",\"name\":\"idOrName\",\"required\":true,\"schema\":{\"oneOf\":[{\"type\":\"integer\"},{\"type\":\"string\"}]}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"id\":{\"description\":\"Unique identifier for the type\",\"type\":\"integer\"},\"type\":{\"description\":\"Name of the type\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Type not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/type/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/type/{idOrName}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "idOrName": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "type"
                     },
@@ -1035,12 +1135,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -1469,13 +1564,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1485,19 +1580,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "attribute_ref01",
                 "srcdatavar": "attribute_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "attribute01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1517,13 +1612,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1533,19 +1628,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "digimon_ref01",
                 "srcdatavar": "digimon_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "digimon01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1565,13 +1660,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1581,19 +1676,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "field_ref01",
                 "srcdatavar": "field_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "field01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1613,13 +1708,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1629,19 +1724,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "level_ref01",
                 "srcdatavar": "level_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "level01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1661,13 +1756,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1677,19 +1772,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "skill_ref01",
                 "srcdatavar": "skill_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "skill01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1709,13 +1804,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1725,19 +1820,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "type_ref01",
                 "srcdatavar": "type_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "type01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

@@ -1,8 +1,0 @@
-# Flows
-
-@"./BasicAttributeFlow.aon"
-@"./BasicDigimonFlow.aon"
-@"./BasicFieldFlow.aon"
-@"./BasicLevelFlow.aon"
-@"./BasicSkillFlow.aon"
-@"./BasicTypeFlow.aon"

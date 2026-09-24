@@ -1,7 +1,7 @@
 // Typed models for the Digimon SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,10 +14,6 @@ import (
 
 // Attribute is the typed data model for the attribute entity.
 type Attribute struct {
-	Attribute *string `json:"attribute,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
 }
 
 // AttributeLoadMatch is the typed request payload for Attribute.LoadTyped.
@@ -33,21 +29,6 @@ type AttributeListMatch struct {
 
 // Digimon is the typed data model for the digimon entity.
 type Digimon struct {
-	Attributes *[]any `json:"attributes,omitempty"`
-	Descriptions *[]any `json:"descriptions,omitempty"`
-	Fields *[]any `json:"fields,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
-	Images *[]any `json:"images,omitempty"`
-	Levels *[]any `json:"levels,omitempty"`
-	Name *string `json:"name,omitempty"`
-	NextEvolutions *[]any `json:"nextEvolutions,omitempty"`
-	PriorEvolutions *[]any `json:"priorEvolutions,omitempty"`
-	ReleaseDate *string `json:"releaseDate,omitempty"`
-	Skills *[]any `json:"skills,omitempty"`
-	Types *[]any `json:"types,omitempty"`
-	XAntibody *bool `json:"xAntibody,omitempty"`
 }
 
 // DigimonLoadMatch is the typed request payload for Digimon.LoadTyped.
@@ -68,11 +49,6 @@ type DigimonListMatch struct {
 
 // Field is the typed data model for the field entity.
 type Field struct {
-	Description *string `json:"description,omitempty"`
-	Field *string `json:"field,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
 }
 
 // FieldLoadMatch is the typed request payload for Field.LoadTyped.
@@ -88,9 +64,6 @@ type FieldListMatch struct {
 
 // Level is the typed data model for the level entity.
 type Level struct {
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Level *string `json:"level,omitempty"`
 }
 
 // LevelLoadMatch is the typed request payload for Level.LoadTyped.
@@ -106,11 +79,6 @@ type LevelListMatch struct {
 
 // Skill is the typed data model for the skill entity.
 type Skill struct {
-	Description *string `json:"description,omitempty"`
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Skill *string `json:"skill,omitempty"`
-	Translation *string `json:"translation,omitempty"`
 }
 
 // SkillLoadMatch is the typed request payload for Skill.LoadTyped.
@@ -126,9 +94,6 @@ type SkillListMatch struct {
 
 // Type is the typed data model for the type entity.
 type Type struct {
-	Href *string `json:"href,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Type *string `json:"type,omitempty"`
 }
 
 // TypeLoadMatch is the typed request payload for Type.LoadTyped.

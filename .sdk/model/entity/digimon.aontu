@@ -1,0 +1,253 @@
+# Entity: digimon
+
+main: kit: entity: digimon: {
+
+  alias: field: {}
+
+  fields: {
+    attributes: {
+      h: "Attributes"
+      n: "attributes"
+      r: false
+      t: "`$ARRAY`"
+    }
+    descriptions: {
+      h: "Descriptions"
+      n: "descriptions"
+      r: false
+      t: "`$ARRAY`"
+    }
+    fields: {
+      h: "Fields"
+      n: "fields"
+      r: false
+      t: "`$ARRAY`"
+    }
+    href: {
+      fo: "uri"
+      h: "Href"
+      n: "href"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier for the Digimon"
+      t: "`$INTEGER`"
+    }
+    image: {
+      fo: "uri"
+      h: "Image"
+      n: "image"
+      r: false
+      t: "`$STRING`"
+    }
+    images: {
+      h: "Images"
+      n: "images"
+      r: false
+      t: "`$ARRAY`"
+    }
+    levels: {
+      h: "Levels"
+      n: "levels"
+      r: false
+      t: "`$ARRAY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the Digimon"
+      t: "`$STRING`"
+    }
+    nextEvolutions: {
+      h: "Next Evolutions"
+      n: "nextEvolutions"
+      r: false
+      t: "`$ARRAY`"
+    }
+    priorEvolutions: {
+      h: "Prior Evolutions"
+      n: "priorEvolutions"
+      r: false
+      t: "`$ARRAY`"
+    }
+    releaseDate: {
+      fo: "date"
+      h: "Release Date"
+      n: "releaseDate"
+      r: false
+      t: "`$STRING`"
+    }
+    skills: {
+      h: "Skills"
+      n: "skills"
+      r: false
+      t: "`$ARRAY`"
+    }
+    types: {
+      h: "Types"
+      n: "types"
+      r: false
+      t: "`$ARRAY`"
+    }
+    xAntibody: {
+      h: "X Antibody"
+      n: "xAntibody"
+      r: false
+      sh: "Indicates if the Digimon has X-Antibody"
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "digimon"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /digimon"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "attribute"
+                or: "attribute"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "exact"
+                or: "exact"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "level"
+                or: "level"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "page_size"
+                or: "page_size"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "x_antibody"
+                or: "x_antibody"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/digimon"
+          q: {
+            exist: [
+              "attribute"
+              "exact"
+              "level"
+              "name"
+              "page"
+              "page_size"
+              "x_antibody"
+            ]
+          }
+          s: [
+            {
+              lit: "digimon"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /digimon/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id_or_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/digimon/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          s: [
+            {
+              lit: "digimon"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

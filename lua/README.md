@@ -43,7 +43,7 @@ local attributes, err = client:Attribute():list()
 if err then error(err) end
 
 for _, item in ipairs(attributes) do
-  print(item["id"], item["attribute"])
+  print(item["id"])
 end
 ```
 

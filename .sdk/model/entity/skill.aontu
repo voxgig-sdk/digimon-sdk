@@ -1,0 +1,151 @@
+# Entity: skill
+
+main: kit: entity: skill: {
+
+  alias: field: {}
+
+  fields: {
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Description of the skill"
+      t: "`$STRING`"
+    }
+    href: {
+      fo: "uri"
+      h: "Href"
+      n: "href"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier for the skill"
+      t: "`$INTEGER`"
+    }
+    skill: {
+      h: "Skill"
+      n: "skill"
+      r: false
+      sh: "Name of the skill"
+      t: "`$STRING`"
+    }
+    translation: {
+      h: "Translation"
+      n: "translation"
+      r: false
+      sh: "Translation of the skill name"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "skill"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /skill"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/skill"
+          q: {
+            exist: [
+              "name"
+              "page"
+            ]
+          }
+          s: [
+            {
+              lit: "skill"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /skill/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id_or_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/skill/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          s: [
+            {
+              lit: "skill"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
