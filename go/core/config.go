@@ -144,7 +144,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.content`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -205,7 +205,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "id_or_name",
+											"orig": "idOrName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -334,7 +334,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.content`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -371,14 +371,14 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "page_size",
-											"orig": "page_size",
+											"orig": "pageSize",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 20,
 										},
 										map[string]any{
 											"name": "x_antibody",
-											"orig": "x_antibody",
+											"orig": "xAntibody",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -431,7 +431,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "id_or_name",
+											"orig": "idOrName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -510,7 +510,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.content`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -571,7 +571,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "id_or_name",
+											"orig": "idOrName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -637,7 +637,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.content`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -698,7 +698,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "id_or_name",
+											"orig": "idOrName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -776,7 +776,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.content`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -837,7 +837,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "id_or_name",
+											"orig": "idOrName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -903,7 +903,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.content`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -964,7 +964,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "id_or_name",
+											"orig": "idOrName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,

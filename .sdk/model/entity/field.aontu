@@ -93,7 +93,7 @@ main: kit: entity: field: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.content`"
           }
         }
       ]
@@ -112,7 +112,7 @@ main: kit: entity: field: {
               {
                 k: "param"
                 n: "id"
-                or: "id_or_name"
+                or: "idOrName"
                 r: true
                 t: "`$STRING`"
               }

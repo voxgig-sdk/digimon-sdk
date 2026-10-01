@@ -160,7 +160,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.content`"
                             },
                             "args": {
                                 "query": [
@@ -221,7 +221,7 @@ class Config {
                                 "params": [
                                     {
                                         "name": "id",
-                                        "orig": "id_or_name",
+                                        "orig": "idOrName",
                                         "type": "`$STRING`",
                                         "kind": "param",
                                         "reqd": true
@@ -350,7 +350,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.content`"
                             },
                             "args": {
                                 "query": [
@@ -387,14 +387,14 @@ class Config {
                                     },
                                     {
                                         "name": "page_size",
-                                        "orig": "page_size",
+                                        "orig": "pageSize",
                                         "type": "`$INTEGER`",
                                         "kind": "query",
                                         "example": 20
                                     },
                                     {
                                         "name": "x_antibody",
-                                        "orig": "x_antibody",
+                                        "orig": "xAntibody",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     }
@@ -447,7 +447,7 @@ class Config {
                                 "params": [
                                     {
                                         "name": "id",
-                                        "orig": "id_or_name",
+                                        "orig": "idOrName",
                                         "type": "`$STRING`",
                                         "kind": "param",
                                         "reqd": true
@@ -526,7 +526,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.content`"
                             },
                             "args": {
                                 "query": [
@@ -587,7 +587,7 @@ class Config {
                                 "params": [
                                     {
                                         "name": "id",
-                                        "orig": "id_or_name",
+                                        "orig": "idOrName",
                                         "type": "`$STRING`",
                                         "kind": "param",
                                         "reqd": true
@@ -653,7 +653,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.content`"
                             },
                             "args": {
                                 "query": [
@@ -714,7 +714,7 @@ class Config {
                                 "params": [
                                     {
                                         "name": "id",
-                                        "orig": "id_or_name",
+                                        "orig": "idOrName",
                                         "type": "`$STRING`",
                                         "kind": "param",
                                         "reqd": true
@@ -792,7 +792,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.content`"
                             },
                             "args": {
                                 "query": [
@@ -853,7 +853,7 @@ class Config {
                                 "params": [
                                     {
                                         "name": "id",
-                                        "orig": "id_or_name",
+                                        "orig": "idOrName",
                                         "type": "`$STRING`",
                                         "kind": "param",
                                         "reqd": true
@@ -919,7 +919,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.content`"
                             },
                             "args": {
                                 "query": [
@@ -980,7 +980,7 @@ class Config {
                                 "params": [
                                     {
                                         "name": "id",
-                                        "orig": "id_or_name",
+                                        "orig": "idOrName",
                                         "type": "`$STRING`",
                                         "kind": "param",
                                         "reqd": true

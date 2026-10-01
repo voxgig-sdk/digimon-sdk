@@ -185,7 +185,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.content`"
                   }
                 }
               ]
@@ -207,7 +207,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "id_or_name",
+                        "or": "idOrName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -429,7 +429,7 @@
                         "ex": 20,
                         "k": "query",
                         "n": "page_size",
-                        "or": "page_size",
+                        "or": "pageSize",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -437,7 +437,7 @@
                         "a": true,
                         "k": "query",
                         "n": "x_antibody",
-                        "or": "x_antibody",
+                        "or": "xAntibody",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -465,7 +465,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.content`"
                   }
                 }
               ]
@@ -487,7 +487,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "id_or_name",
+                        "or": "idOrName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -629,7 +629,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.content`"
                   }
                 }
               ]
@@ -651,7 +651,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "id_or_name",
+                        "or": "idOrName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -776,7 +776,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.content`"
                   }
                 }
               ]
@@ -798,7 +798,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "id_or_name",
+                        "or": "idOrName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -939,7 +939,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.content`"
                   }
                 }
               ]
@@ -961,7 +961,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "id_or_name",
+                        "or": "idOrName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1086,7 +1086,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.content`"
                   }
                 }
               ]
@@ -1108,7 +1108,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "id_or_name",
+                        "or": "idOrName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1886,7 +1886,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

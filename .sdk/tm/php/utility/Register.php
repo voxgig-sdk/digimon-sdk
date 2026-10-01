@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 DigimonUtility::setRegistrar(function (DigimonUtility $u): void {
     $u->clean = [DigimonClean::class, 'call'];
+    $u->clean_add = [DigimonClean::class, 'add'];
+    $u->clean_explain = [DigimonDone::class, 'clean_explain'];
     $u->done = [DigimonDone::class, 'call'];
     $u->make_error = [DigimonMakeError::class, 'call'];
     $u->feature_add = [DigimonFeatureAdd::class, 'call'];

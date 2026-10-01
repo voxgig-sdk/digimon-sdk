@@ -92,7 +92,7 @@ main: kit: entity: skill: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.content`"
           }
         }
       ]
@@ -111,7 +111,7 @@ main: kit: entity: skill: {
               {
                 k: "param"
                 n: "id"
-                or: "id_or_name"
+                or: "idOrName"
                 r: true
                 t: "`$STRING`"
               }

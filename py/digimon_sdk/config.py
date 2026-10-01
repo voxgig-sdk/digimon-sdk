@@ -169,7 +169,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.content`",
                 },
                 "args": {
                   "query": [
@@ -230,7 +230,7 @@ def make_config():
                   "params": [
                     {
                       "name": "id",
-                      "orig": "id_or_name",
+                      "orig": "idOrName",
                       "type": "`$STRING`",
                       "kind": "param",
                       "reqd": True,
@@ -359,7 +359,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.content`",
                 },
                 "args": {
                   "query": [
@@ -396,14 +396,14 @@ def make_config():
                     },
                     {
                       "name": "page_size",
-                      "orig": "page_size",
+                      "orig": "pageSize",
                       "type": "`$INTEGER`",
                       "kind": "query",
                       "example": 20,
                     },
                     {
                       "name": "x_antibody",
-                      "orig": "x_antibody",
+                      "orig": "xAntibody",
                       "type": "`$BOOLEAN`",
                       "kind": "query",
                     },
@@ -456,7 +456,7 @@ def make_config():
                   "params": [
                     {
                       "name": "id",
-                      "orig": "id_or_name",
+                      "orig": "idOrName",
                       "type": "`$STRING`",
                       "kind": "param",
                       "reqd": True,
@@ -535,7 +535,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.content`",
                 },
                 "args": {
                   "query": [
@@ -596,7 +596,7 @@ def make_config():
                   "params": [
                     {
                       "name": "id",
-                      "orig": "id_or_name",
+                      "orig": "idOrName",
                       "type": "`$STRING`",
                       "kind": "param",
                       "reqd": True,
@@ -662,7 +662,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.content`",
                 },
                 "args": {
                   "query": [
@@ -723,7 +723,7 @@ def make_config():
                   "params": [
                     {
                       "name": "id",
-                      "orig": "id_or_name",
+                      "orig": "idOrName",
                       "type": "`$STRING`",
                       "kind": "param",
                       "reqd": True,
@@ -801,7 +801,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.content`",
                 },
                 "args": {
                   "query": [
@@ -862,7 +862,7 @@ def make_config():
                   "params": [
                     {
                       "name": "id",
-                      "orig": "id_or_name",
+                      "orig": "idOrName",
                       "type": "`$STRING`",
                       "kind": "param",
                       "reqd": True,
@@ -928,7 +928,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.content`",
                 },
                 "args": {
                   "query": [
@@ -989,7 +989,7 @@ def make_config():
                   "params": [
                     {
                       "name": "id",
-                      "orig": "id_or_name",
+                      "orig": "idOrName",
                       "type": "`$STRING`",
                       "kind": "param",
                       "reqd": True,

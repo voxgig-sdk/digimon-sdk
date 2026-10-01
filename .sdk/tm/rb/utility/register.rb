@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 DigimonUtility.registrar = ->(u) {
   u.clean = DigimonUtilities::Clean
+  u.clean_add = DigimonUtilities::CleanAdd
+  u.clean_explain = DigimonUtilities::CleanExplain
   u.done = DigimonUtilities::Done
   u.make_error = DigimonUtilities::MakeError
   u.feature_add = DigimonUtilities::FeatureAdd

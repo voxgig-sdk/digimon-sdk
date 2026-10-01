@@ -78,7 +78,7 @@ main: kit: entity: level: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.content`"
           }
         }
       ]
@@ -97,7 +97,7 @@ main: kit: entity: level: {
               {
                 k: "param"
                 n: "id"
-                or: "id_or_name"
+                or: "idOrName"
                 r: true
                 t: "`$STRING`"
               }

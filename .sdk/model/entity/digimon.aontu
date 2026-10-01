@@ -161,14 +161,14 @@ main: kit: entity: digimon: {
                 ex: 20
                 k: "query"
                 n: "page_size"
-                or: "page_size"
+                or: "pageSize"
                 r: false
                 t: "`$INTEGER`"
               }
               {
                 k: "query"
                 n: "x_antibody"
-                or: "x_antibody"
+                or: "xAntibody"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -194,7 +194,7 @@ main: kit: entity: digimon: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.content`"
           }
         }
       ]
@@ -213,7 +213,7 @@ main: kit: entity: digimon: {
               {
                 k: "param"
                 n: "id"
-                or: "id_or_name"
+                or: "idOrName"
                 r: true
                 t: "`$STRING`"
               }
