@@ -12,7 +12,7 @@ It exposes the API as capitalised, semantic **Entities** — e.g. `client:Attrib
 
 ## Install
 This package is not yet published to LuaRocks. Install it from the
-GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/digimon-sdk/releases)),
+GitHub release tag (`lua/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/digimon-sdk/tags)),
 or add the source directory to your `LUA_PATH`:
 
 ```bash
@@ -33,26 +33,15 @@ local sdk = require("digimon_sdk")
 local client = sdk.new()
 ```
 
-### 2. List attribute records
-
-Entity operations return `(value, err)`. For `list`, `value` is the
-array of records itself — iterate it directly (there is no wrapper).
-
-```lua
-local attributes, err = client:Attribute():list()
-if err then error(err) end
-
-for _, item in ipairs(attributes) do
-  print(item["id"])
-end
-```
-
 ### 3. Load an attribute
+
+`load` returns the entity; `data_get()` reads its record.
 
 ```lua
 local attribute, err = client:Attribute():load({ id = "example_id" })
 if err then error(err) end
-print(attribute)
+local rec = attribute:data_get()
+print(rec["id"])
 ```
 
 
@@ -62,7 +51,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local fields, err = client:Field():list()
+local field, err = client:Field():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -120,8 +109,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Field():list()
--- result is the returned data; err is set on failure
+local result, err = client:Field():load({ id = "test01" })
+-- result is the entity; data_get() reads its mock record; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -212,8 +201,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
+| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria, and return it. |
+| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria, one per record. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -223,19 +212,19 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(value, err)`. The `value` is the operation's
-data **directly** — there is no wrapper:
+Entity operations return `(value, err)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` | the entity record (a `table`) |
-| `list` | an array (`table`) of entity records |
+| `load` | the entity, whose `data_get()` reads its record (a `table`) |
+| `list` | an array (`table`) of entities, one per record |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
     local attribute, err = client:Attribute():load({ id = "example_id" })
     if err then error(err) end
-    -- attribute is the loaded record
+    -- attribute is the loaded entity
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -248,12 +237,13 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | --- | --- |
 | `attribute` | Name of the attribute |
 | `description` | Description of the attribute |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the attribute |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/attribute`
+API path: `/attribute/{idOrName}`
 
 #### Digimon
 
@@ -285,51 +275,57 @@ API path: `/digimon`
 | --- | --- |
 | `description` | Description of the field |
 | `field` | Name of the field |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the field |
 | `image` | Image URL for the field |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/field`
+API path: `/field/{idOrName}`
 
 #### Level
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the level |
 | `level` | Name of the level |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/level`
+API path: `/level/{idOrName}`
 
 #### Skill
 
 | Field | Description |
 | --- | --- |
 | `description` | Description of the skill |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the skill |
+| `name` |  |
 | `skill` | Name of the skill |
 | `translation` | Translation of the skill name |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/skill`
+API path: `/skill/{idOrName}`
 
 #### Type
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the type |
+| `name` |  |
 | `type` | Name of the type |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/type`
+API path: `/type/{idOrName}`
 
 
 
@@ -344,7 +340,6 @@ Create an instance: `local attribute = client:Attribute(nil)`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -353,19 +348,14 @@ Create an instance: `local attribute = client:Attribute(nil)`
 | --- | --- | --- |
 | `attribute` | `string` | Name of the attribute |
 | `description` | `string` | Description of the attribute |
-| `href` | `string` |  |
+| `fields` | `table` |  |
 | `id` | `number` | Unique identifier for the attribute |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```lua
 local attribute, err = client:Attribute():load({ id = "attribute_id" })
-```
-
-#### Example: List
-
-```lua
-local attributes, err = client:Attribute():list()
 ```
 
 
@@ -421,7 +411,6 @@ Create an instance: `local field = client:Field(nil)`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -430,20 +419,15 @@ Create an instance: `local field = client:Field(nil)`
 | --- | --- | --- |
 | `description` | `string` | Description of the field |
 | `field` | `string` | Name of the field |
-| `href` | `string` |  |
+| `fields` | `table` |  |
 | `id` | `number` | Unique identifier for the field |
 | `image` | `string` | Image URL for the field |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```lua
 local field, err = client:Field():load({ id = "field_id" })
-```
-
-#### Example: List
-
-```lua
-local fields, err = client:Field():list()
 ```
 
 
@@ -455,27 +439,22 @@ Create an instance: `local level = client:Level(nil)`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `table` |  |
 | `id` | `number` | Unique identifier for the level |
 | `level` | `string` | Name of the level |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```lua
 local level, err = client:Level():load({ id = "level_id" })
-```
-
-#### Example: List
-
-```lua
-local levels, err = client:Level():list()
 ```
 
 
@@ -487,7 +466,6 @@ Create an instance: `local skill = client:Skill(nil)`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -495,8 +473,9 @@ Create an instance: `local skill = client:Skill(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | `string` | Description of the skill |
-| `href` | `string` |  |
+| `fields` | `table` |  |
 | `id` | `number` | Unique identifier for the skill |
+| `name` | `string` |  |
 | `skill` | `string` | Name of the skill |
 | `translation` | `string` | Translation of the skill name |
 
@@ -504,12 +483,6 @@ Create an instance: `local skill = client:Skill(nil)`
 
 ```lua
 local skill, err = client:Skill():load({ id = "skill_id" })
-```
-
-#### Example: List
-
-```lua
-local skills, err = client:Skill():list()
 ```
 
 
@@ -521,27 +494,22 @@ Create an instance: `local type = client:Type(nil)`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `table` |  |
 | `id` | `number` | Unique identifier for the type |
+| `name` | `string` |  |
 | `type` | `string` | Name of the type |
 
 #### Example: Load
 
 ```lua
 local type, err = client:Type():load({ id = "type_id" })
-```
-
-#### Example: List
-
-```lua
-local types, err = client:Type():list()
 ```
 
 ## Features
@@ -702,14 +670,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
 local field = client:Field()
-field:list()
+field:load({ id = "example_id" })
 
--- field:data_get() now returns the field data from the last list
+-- field:data_get() now returns the field data from the last load
 -- field:match_get() returns the last match criteria
 ```
 

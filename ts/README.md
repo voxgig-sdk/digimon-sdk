@@ -15,7 +15,7 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/digimon-sdk/releases)), or from a
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/digimon-sdk/tags)), or from a
 clone, which carries the compiled `dist/`:
 
 ```bash
@@ -37,28 +37,14 @@ import { DigimonSDK } from '@voxgig-sdk/digimon-sdk'
 const client = new DigimonSDK()
 ```
 
-### 2. List attribute records
-
-`list()` resolves to an array of Attribute ENTITIES — every operation
-resolves to entities, not raw records. Iterate them directly, and call
-`.data()` on one for the record it holds:
-
-```ts
-const attributes = await client.Attribute().list()
-
-for (const attribute of attributes) {
-  console.log(attribute)
-}
-```
-
 ### 3. Load an attribute
 
-`load()` returns the entity directly and throws on failure:
+`load()` returns the entity and throws on failure; `.data()` reads its record:
 
 ```ts
 try {
   const attribute = await client.Attribute().load({ id: 'example_id' })
-  console.log(attribute)
+  console.log(attribute.data())
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -71,15 +57,16 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const fields = await client.Field().list()
-  console.log(fields)
+  const field = await client.Field().load({ id: "example_id" })
+  console.log(field.data())
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -88,8 +75,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -107,9 +94,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -138,10 +122,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = DigimonSDK.test()
 
-const field = await client.Field().list()
-// field is the entity, populated with mock response data
-// — call field.data() for the record itself
-console.log(field)
+const field = await client.Field().load({ id: 'test01' })
+// field is the Field entity; .data() reads its mock record
+console.log(field.data())
 ```
 
 You can also use the instance method:
@@ -159,7 +142,7 @@ Entity instances remember their last match and data:
 const entity = client.Field()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -261,8 +244,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -271,8 +254,8 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `load` resolves to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
@@ -318,12 +301,13 @@ The `prepare()` method returns:
 | --- | --- |
 | `attribute` | Name of the attribute |
 | `description` | Description of the attribute |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the attribute |
+| `name` |  |
 
-Operations: list, load.
+Operations: load.
 
-API path: `/attribute`
+API path: `/attribute/{idOrName}`
 
 #### Digimon
 
@@ -355,51 +339,57 @@ API path: `/digimon`
 | --- | --- |
 | `description` | Description of the field |
 | `field` | Name of the field |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the field |
 | `image` | Image URL for the field |
+| `name` |  |
 
-Operations: list, load.
+Operations: load.
 
-API path: `/field`
+API path: `/field/{idOrName}`
 
 #### Level
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the level |
 | `level` | Name of the level |
+| `name` |  |
 
-Operations: list, load.
+Operations: load.
 
-API path: `/level`
+API path: `/level/{idOrName}`
 
 #### Skill
 
 | Field | Description |
 | --- | --- |
 | `description` | Description of the skill |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the skill |
+| `name` |  |
 | `skill` | Name of the skill |
 | `translation` | Translation of the skill name |
 
-Operations: list, load.
+Operations: load.
 
-API path: `/skill`
+API path: `/skill/{idOrName}`
 
 #### Type
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the type |
+| `name` |  |
 | `type` | Name of the type |
 
-Operations: list, load.
+Operations: load.
 
-API path: `/type`
+API path: `/type/{idOrName}`
 
 
 
@@ -414,7 +404,6 @@ Create an instance: `const attribute = client.Attribute()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -423,19 +412,14 @@ Create an instance: `const attribute = client.Attribute()`
 | --- | --- | --- |
 | `attribute` | `string` | Name of the attribute |
 | `description` | `string` | Description of the attribute |
-| `href` | `string` |  |
+| `fields` | `any[]` |  |
 | `id` | `number` | Unique identifier for the attribute |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```ts
 const attribute = await client.Attribute().load({ id: 'attribute_id' })
-```
-
-#### Example: List
-
-```ts
-const attributes = await client.Attribute().list()
 ```
 
 
@@ -491,7 +475,6 @@ Create an instance: `const field = client.Field()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -500,20 +483,15 @@ Create an instance: `const field = client.Field()`
 | --- | --- | --- |
 | `description` | `string` | Description of the field |
 | `field` | `string` | Name of the field |
-| `href` | `string` |  |
+| `fields` | `any[]` |  |
 | `id` | `number` | Unique identifier for the field |
 | `image` | `string` | Image URL for the field |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```ts
 const field = await client.Field().load({ id: 'field_id' })
-```
-
-#### Example: List
-
-```ts
-const fields = await client.Field().list()
 ```
 
 
@@ -525,27 +503,22 @@ Create an instance: `const level = client.Level()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `any[]` |  |
 | `id` | `number` | Unique identifier for the level |
 | `level` | `string` | Name of the level |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```ts
 const level = await client.Level().load({ id: 'level_id' })
-```
-
-#### Example: List
-
-```ts
-const levels = await client.Level().list()
 ```
 
 
@@ -557,7 +530,6 @@ Create an instance: `const skill = client.Skill()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -565,8 +537,9 @@ Create an instance: `const skill = client.Skill()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | `string` | Description of the skill |
-| `href` | `string` |  |
+| `fields` | `any[]` |  |
 | `id` | `number` | Unique identifier for the skill |
+| `name` | `string` |  |
 | `skill` | `string` | Name of the skill |
 | `translation` | `string` | Translation of the skill name |
 
@@ -574,12 +547,6 @@ Create an instance: `const skill = client.Skill()`
 
 ```ts
 const skill = await client.Skill().load({ id: 'skill_id' })
-```
-
-#### Example: List
-
-```ts
-const skills = await client.Skill().list()
 ```
 
 
@@ -591,27 +558,22 @@ Create an instance: `const type = client.Type()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `any[]` |  |
 | `id` | `number` | Unique identifier for the type |
+| `name` | `string` |  |
 | `type` | `string` | Name of the type |
 
 #### Example: Load
 
 ```ts
 const type = await client.Type().load({ id: 'type_id' })
-```
-
-#### Example: List
-
-```ts
-const types = await client.Type().list()
 ```
 
 ## Features
@@ -763,16 +725,16 @@ import { DigimonSDK } from '@voxgig-sdk/digimon-sdk'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const field = client.Field()
-await field.list()
+await field.load({ id: "example_id" })
 
-// field.data() now returns the field data from the last `list`
-// field.match() returns the last match criteria
+// field.data() now returns the field data from the last `load`
+// field.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -146,6 +146,14 @@ func (sdk *DigimonSDK) Prepare(fetchargs map[string]any) (map[string]any, error)
 	if method == "" {
 		method = "GET"
 	}
+	method = strings.ToUpper(method)
+
+	allowMethodVal := vs.GetPath(options, []any{"allow", "method"})
+	if !Allowed(allowMethodVal, method) {
+		allowMethod, _ := allowMethodVal.(string)
+		return nil, ctx.MakeError("spec_method_allow",
+			"Method \""+method+"\" not allowed by SDK option allow.method value: \""+allowMethod+"\"")
+	}
 
 	params := ToMapAny(vs.GetProp(fetchargs, "params"))
 	if params == nil {
@@ -205,8 +213,7 @@ func (sdk *DigimonSDK) Direct(fetchargs map[string]any) (map[string]any, error) 
 
 // Is this raw-access op permitted by the SDK's allow.op option?
 func (sdk *DigimonSDK) opAllowed(op string) bool {
-	allowOp, _ := vs.GetPath(sdk.options, []any{"allow", "op"}).(string)
-	return strings.Contains(allowOp, op)
+	return Allowed(vs.GetPath(sdk.options, []any{"allow", "op"}), op)
 }
 
 func (sdk *DigimonSDK) opDenied(op string) map[string]any {
@@ -278,20 +285,34 @@ func (sdk *DigimonSDK) rawRequest(fetchargs map[string]any) (map[string]any, err
 		noBody := status == 204 || status == 304 || contentLength == "0"
 
 		var jsonData any
+		var bodyErr error
 		if !noBody {
 			if jf := vs.GetProp(fm, "json"); jf != nil {
 				if f, ok := jf.(func() any); ok {
 					jsonData = f()
 				}
 			}
+			if unreadable, _ := vs.GetProp(fm, "unreadable").(bool); unreadable {
+				var failed error
+				if status < 200 || status >= 300 {
+					failed = ctx.MakeError("request_status",
+						fmt.Sprintf("request: %d: %v", status, vs.GetProp(fm, "statusText")))
+				}
+				bodyErr = UnreadableBody(ctx, status, headers, vs.GetProp(fm, "body"),
+					fetchdef["headers"], failed)
+			}
 		}
 
-		return map[string]any{
-			"ok":      status >= 200 && status < 300,
+		out := map[string]any{
+			"ok":      bodyErr == nil && status >= 200 && status < 300,
 			"status":  status,
 			"headers": headers,
 			"data":    jsonData,
-		}, nil
+		}
+		if bodyErr != nil {
+			out["err"] = sdk.cleanErr(ctx, bodyErr)
+		}
+		return out, nil
 	}
 
 	return map[string]any{"ok": false, "err": ctx.MakeError("direct_invalid", "invalid response type")}, nil
@@ -354,7 +375,7 @@ func (sdk *DigimonSDK) Graphql(
 // Attribute returns a Attribute entity bound to this client.
 // Idiomatic usage: client.Attribute(nil).List(nil, nil) or
 // client.Attribute(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *DigimonSDK) Attribute(data map[string]any) DigimonEntity {
+func (sdk *DigimonSDK) Attribute(data map[string]any) DigimonEntityBase {
 	return NewAttributeEntityFunc(sdk, data)
 }
 
@@ -362,7 +383,7 @@ func (sdk *DigimonSDK) Attribute(data map[string]any) DigimonEntity {
 // Digimon returns a Digimon entity bound to this client.
 // Idiomatic usage: client.Digimon(nil).List(nil, nil) or
 // client.Digimon(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *DigimonSDK) Digimon(data map[string]any) DigimonEntity {
+func (sdk *DigimonSDK) Digimon(data map[string]any) DigimonEntityBase {
 	return NewDigimonEntityFunc(sdk, data)
 }
 
@@ -370,7 +391,7 @@ func (sdk *DigimonSDK) Digimon(data map[string]any) DigimonEntity {
 // Field returns a Field entity bound to this client.
 // Idiomatic usage: client.Field(nil).List(nil, nil) or
 // client.Field(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *DigimonSDK) Field(data map[string]any) DigimonEntity {
+func (sdk *DigimonSDK) Field(data map[string]any) DigimonEntityBase {
 	return NewFieldEntityFunc(sdk, data)
 }
 
@@ -378,7 +399,7 @@ func (sdk *DigimonSDK) Field(data map[string]any) DigimonEntity {
 // Level returns a Level entity bound to this client.
 // Idiomatic usage: client.Level(nil).List(nil, nil) or
 // client.Level(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *DigimonSDK) Level(data map[string]any) DigimonEntity {
+func (sdk *DigimonSDK) Level(data map[string]any) DigimonEntityBase {
 	return NewLevelEntityFunc(sdk, data)
 }
 
@@ -386,7 +407,7 @@ func (sdk *DigimonSDK) Level(data map[string]any) DigimonEntity {
 // Skill returns a Skill entity bound to this client.
 // Idiomatic usage: client.Skill(nil).List(nil, nil) or
 // client.Skill(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *DigimonSDK) Skill(data map[string]any) DigimonEntity {
+func (sdk *DigimonSDK) Skill(data map[string]any) DigimonEntityBase {
 	return NewSkillEntityFunc(sdk, data)
 }
 
@@ -394,7 +415,7 @@ func (sdk *DigimonSDK) Skill(data map[string]any) DigimonEntity {
 // Type returns a Type entity bound to this client.
 // Idiomatic usage: client.Type(nil).List(nil, nil) or
 // client.Type(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *DigimonSDK) Type(data map[string]any) DigimonEntity {
+func (sdk *DigimonSDK) Type(data map[string]any) DigimonEntityBase {
 	return NewTypeEntityFunc(sdk, data)
 }
 

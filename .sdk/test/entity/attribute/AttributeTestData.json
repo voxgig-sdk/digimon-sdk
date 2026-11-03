@@ -2,41 +2,45 @@
   "existing": {
     "attribute": {
       "ATTRIBUTE00": {
-        "attribute": "s28",
-        "description": "s29",
-        "href": "s2a",
-        "id": "ATTRIBUTE00"
+        "attribute": "s32",
+        "description": "s33",
+        "fields": [],
+        "id": "ATTRIBUTE00",
+        "name": "s36"
       },
       "ATTRIBUTE01": {
-        "attribute": "s50",
-        "description": "s51",
-        "href": "s52",
-        "id": "ATTRIBUTE01"
+        "attribute": "s64",
+        "description": "s65",
+        "fields": [],
+        "id": "ATTRIBUTE01",
+        "name": "s68"
       },
       "ATTRIBUTE02": {
-        "attribute": "s78",
-        "description": "s79",
-        "href": "s7a",
-        "id": "ATTRIBUTE02"
+        "attribute": "s96",
+        "description": "s97",
+        "fields": [],
+        "id": "ATTRIBUTE02",
+        "name": "s9a"
       }
     }
   },
   "new": {
     "attribute": {
       "attribute_ref01": {
-        "attribute": "sa0",
-        "description": "sa1",
-        "href": "sa2"
+        "attribute": "sc8",
+        "description": "sc9",
+        "fields": [],
+        "name": "scc"
       }
     }
   },
   "requests": {
-    "GET /attribute": {
+    "GET /attribute/{idOrName}": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
-    "GET /attribute/{idOrName}": {
+    "GET /attribute": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

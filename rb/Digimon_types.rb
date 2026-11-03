@@ -16,16 +16,20 @@
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] href
-#   @return [String, nil]
+# @!attribute [rw] fields
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
 Attribute = Struct.new(
   :attribute,
   :description,
-  :href,
+  :fields,
   :id,
+  :name,
   keyword_init: true
 )
 
@@ -35,19 +39,6 @@ Attribute = Struct.new(
 #   @return [String]
 AttributeLoadMatch = Struct.new(
   :id,
-  keyword_init: true
-)
-
-# Request payload for Attribute#list.
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] page
-#   @return [Integer, nil]
-AttributeListMatch = Struct.new(
-  :name,
-  :page,
   keyword_init: true
 )
 
@@ -166,20 +157,24 @@ DigimonListMatch = Struct.new(
 # @!attribute [rw] field
 #   @return [String, nil]
 #
-# @!attribute [rw] href
-#   @return [String, nil]
+# @!attribute [rw] fields
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]
 #
 # @!attribute [rw] image
 #   @return [String, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
 Field = Struct.new(
   :description,
   :field,
-  :href,
+  :fields,
   :id,
   :image,
+  :name,
   keyword_init: true
 )
 
@@ -192,33 +187,28 @@ FieldLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Request payload for Field#list.
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] page
-#   @return [Integer, nil]
-FieldListMatch = Struct.new(
-  :name,
-  :page,
-  keyword_init: true
-)
-
 # Level entity data model.
 #
-# @!attribute [rw] href
+# @!attribute [rw] description
 #   @return [String, nil]
+#
+# @!attribute [rw] fields
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]
 #
 # @!attribute [rw] level
 #   @return [String, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
 Level = Struct.new(
-  :href,
+  :description,
+  :fields,
   :id,
   :level,
+  :name,
   keyword_init: true
 )
 
@@ -231,29 +221,19 @@ LevelLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Request payload for Level#list.
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] page
-#   @return [Integer, nil]
-LevelListMatch = Struct.new(
-  :name,
-  :page,
-  keyword_init: true
-)
-
 # Skill entity data model.
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] href
-#   @return [String, nil]
+# @!attribute [rw] fields
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
 #
 # @!attribute [rw] skill
 #   @return [String, nil]
@@ -262,8 +242,9 @@ LevelListMatch = Struct.new(
 #   @return [String, nil]
 Skill = Struct.new(
   :description,
-  :href,
+  :fields,
   :id,
+  :name,
   :skill,
   :translation,
   keyword_init: true
@@ -278,32 +259,27 @@ SkillLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Request payload for Skill#list.
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] page
-#   @return [Integer, nil]
-SkillListMatch = Struct.new(
-  :name,
-  :page,
-  keyword_init: true
-)
-
 # Type entity data model.
 #
-# @!attribute [rw] href
+# @!attribute [rw] description
 #   @return [String, nil]
+#
+# @!attribute [rw] fields
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]
 #
+# @!attribute [rw] name
+#   @return [String, nil]
+#
 # @!attribute [rw] type
 #   @return [String, nil]
 Type = Struct.new(
-  :href,
+  :description,
+  :fields,
   :id,
+  :name,
   :type,
   keyword_init: true
 )
@@ -314,19 +290,6 @@ Type = Struct.new(
 #   @return [String]
 TypeLoadMatch = Struct.new(
   :id,
-  keyword_init: true
-)
-
-# Request payload for Type#list.
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] page
-#   @return [Integer, nil]
-TypeListMatch = Struct.new(
-  :name,
-  :page,
   keyword_init: true
 )
 

@@ -3,5 +3,30 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Description of the attribute",
+      "Description of the field",
+      "Description of the skill",
+      "Free Digimon API using data from official and fan-based sources like Wikimon.net. Not affiliated with Bandai.",
+      "Image URL for the field",
+      "Indicates if the Digimon has X-Antibody",
+      "Name of the Digimon",
+      "Name of the attribute",
+      "Name of the field",
+      "Name of the level",
+      "Name of the skill",
+      "Name of the type",
+      "Production server",
+      "Successful response",
+      "Translation of the skill name",
+      "Unique identifier for the Digimon",
+      "Unique identifier for the attribute",
+      "Unique identifier for the field",
+      "Unique identifier for the level",
+      "Unique identifier for the skill",
+      "Unique identifier for the type"
+    ]
+  }
 }

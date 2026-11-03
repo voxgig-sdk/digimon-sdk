@@ -115,22 +115,15 @@ attribute = client.Attribute
 | --- | --- | --- | --- |
 | `attribute` | `String` | No | Name of the attribute |
 | `description` | `String` | No | Description of the attribute |
-| `href` | `String` | No |  |
+| `fields` | `Array` | No |  |
 | `id` | `Integer` | No | Unique identifier for the attribute |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.Attribute.list
-```
-
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Attribute.load({ "id" => "attribute_id" })
@@ -196,15 +189,16 @@ digimon = client.Digimon
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
 results = client.Digimon.list
+results.each { |item| puts item.data_get }
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Digimon.load({ "id" => "digimon_id" })
@@ -252,23 +246,16 @@ field = client.Field
 | --- | --- | --- | --- |
 | `description` | `String` | No | Description of the field |
 | `field` | `String` | No | Name of the field |
-| `href` | `String` | No |  |
+| `fields` | `Array` | No |  |
 | `id` | `Integer` | No | Unique identifier for the field |
 | `image` | `String` | No | Image URL for the field |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.Field.list
-```
-
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Field.load({ "id" => "field_id" })
@@ -314,23 +301,17 @@ level = client.Level
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `String` | No |  |
+| `description` | `String` | No |  |
+| `fields` | `Array` | No |  |
 | `id` | `Integer` | No | Unique identifier for the level |
 | `level` | `String` | No | Name of the level |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.Level.list
-```
-
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Level.load({ "id" => "level_id" })
@@ -377,24 +358,17 @@ skill = client.Skill
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `description` | `String` | No | Description of the skill |
-| `href` | `String` | No |  |
+| `fields` | `Array` | No |  |
 | `id` | `Integer` | No | Unique identifier for the skill |
+| `name` | `String` | No |  |
 | `skill` | `String` | No | Name of the skill |
 | `translation` | `String` | No | Translation of the skill name |
 
 ### Operations
 
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.Skill.list
-```
-
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Skill.load({ "id" => "skill_id" })
@@ -440,23 +414,17 @@ type = client.Type
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `String` | No |  |
+| `description` | `String` | No |  |
+| `fields` | `Array` | No |  |
 | `id` | `Integer` | No | Unique identifier for the type |
+| `name` | `String` | No |  |
 | `type` | `String` | No | Name of the type |
 
 ### Operations
 
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.Type.list
-```
-
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Type.load({ "id" => "type_id" })
@@ -649,6 +617,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

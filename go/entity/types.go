@@ -21,12 +21,6 @@ type AttributeLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// AttributeListMatch is the typed request payload for Attribute.ListTyped.
-type AttributeListMatch struct {
-	Name *string `json:"name,omitempty"`
-	Page *int `json:"page,omitempty"`
-}
-
 // Digimon is the typed data model for the digimon entity.
 type Digimon struct {
 }
@@ -56,12 +50,6 @@ type FieldLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// FieldListMatch is the typed request payload for Field.ListTyped.
-type FieldListMatch struct {
-	Name *string `json:"name,omitempty"`
-	Page *int `json:"page,omitempty"`
-}
-
 // Level is the typed data model for the level entity.
 type Level struct {
 }
@@ -69,12 +57,6 @@ type Level struct {
 // LevelLoadMatch is the typed request payload for Level.LoadTyped.
 type LevelLoadMatch struct {
 	Id string `json:"id"`
-}
-
-// LevelListMatch is the typed request payload for Level.ListTyped.
-type LevelListMatch struct {
-	Name *string `json:"name,omitempty"`
-	Page *int `json:"page,omitempty"`
 }
 
 // Skill is the typed data model for the skill entity.
@@ -86,12 +68,6 @@ type SkillLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// SkillListMatch is the typed request payload for Skill.ListTyped.
-type SkillListMatch struct {
-	Name *string `json:"name,omitempty"`
-	Page *int `json:"page,omitempty"`
-}
-
 // Type is the typed data model for the type entity.
 type Type struct {
 }
@@ -99,12 +75,6 @@ type Type struct {
 // TypeLoadMatch is the typed request payload for Type.LoadTyped.
 type TypeLoadMatch struct {
 	Id string `json:"id"`
-}
-
-// TypeListMatch is the typed request payload for Type.ListTyped.
-type TypeListMatch struct {
-	Name *string `json:"name,omitempty"`
-	Page *int `json:"page,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

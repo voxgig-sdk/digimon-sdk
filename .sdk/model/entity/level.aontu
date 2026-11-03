@@ -5,12 +5,17 @@ main: kit: entity: level: {
   alias: field: {}
 
   fields: {
-    href: {
-      fo: "uri"
-      h: "Href"
-      n: "href"
+    description: {
+      h: "Description"
+      n: "description"
       r: false
       t: "`$STRING`"
+    }
+    fields: {
+      h: "Fields"
+      n: "fields"
+      r: false
+      t: "`$ARRAY`"
     }
     id: {
       h: "Id"
@@ -26,6 +31,12 @@ main: kit: entity: level: {
       sh: "Name of the level"
       t: "`$STRING`"
     }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
   }
 
   id: {
@@ -35,9 +46,56 @@ main: kit: entity: level: {
 
   name: "level"
   op: {
-    list: {
-      name: "list"
+    load: {
+      name: "load"
       points: [
+        {
+          co: {
+            id: "GET /level/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 1
+                k: "param"
+                n: "id"
+                or: "idOrName"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/level/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "level"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
         {
           co: {
             id: "GET /level"
@@ -65,11 +123,9 @@ main: kit: entity: level: {
           }
           m: "GET"
           o: "/level"
-          q: {
-            exist: [
-              "name"
-              "page"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -79,53 +135,6 @@ main: kit: entity: level: {
           t: {
             req: "`reqdata`"
             res: "`body.content`"
-          }
-        }
-      ]
-    }
-    load: {
-      name: "load"
-      points: [
-        {
-          co: {
-            id: "GET /level/{idOrName}"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "id"
-                or: "idOrName"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/level/{idOrName}"
-          q: {
-            exist: [
-              "id"
-            ]
-          }
-          r: {
-            param: {
-              idOrName: "id"
-            }
-          }
-          s: [
-            {
-              lit: "level"
-            }
-            {
-              var: "id"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
           }
         }
       ]

@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/digimon-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/digimon-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -36,21 +36,6 @@ require_once 'digimon_sdk.php';
 $client = new DigimonSDK();
 ```
 
-### 2. List attribute records
-
-```php
-try {
-    // list() returns entity instances; data_get() reads each record.
-    $attributes = $client->Attribute()->list();
-    foreach ($attributes as $record) {
-        $item = $record->data_get();
-        echo $item["id"] . " " . $item["attribute"] . "\n";
-    }
-} catch (\Throwable $err) {
-    echo "Error: " . $err->getMessage();
-}
-```
-
 ### 3. Load an attribute
 
 ```php
@@ -71,7 +56,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $fields = $client->Field()->list();
+    $field = $client->Field()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -146,10 +131,10 @@ $client = DigimonSDK::test([
     "entity" => ["field" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// list() returns entity instances (throws on error);
+// Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$field = $client->Field()->list();
-print_r(array_map(fn($item) => $item->data_get(), $field));
+$field = $client->Field()->load(["id" => "test01"]);
+print_r($field->data_get());
 ```
 
 ### Use a custom fetch function
@@ -241,8 +226,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -252,9 +237,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -276,12 +261,13 @@ On error, `ok` is `false` and `$err` contains the error value.
 | --- | --- |
 | `attribute` | Name of the attribute |
 | `description` | Description of the attribute |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the attribute |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/attribute`
+API path: `/attribute/{idOrName}`
 
 #### Digimon
 
@@ -313,51 +299,57 @@ API path: `/digimon`
 | --- | --- |
 | `description` | Description of the field |
 | `field` | Name of the field |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the field |
 | `image` | Image URL for the field |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/field`
+API path: `/field/{idOrName}`
 
 #### Level
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the level |
 | `level` | Name of the level |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/level`
+API path: `/level/{idOrName}`
 
 #### Skill
 
 | Field | Description |
 | --- | --- |
 | `description` | Description of the skill |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the skill |
+| `name` |  |
 | `skill` | Name of the skill |
 | `translation` | Translation of the skill name |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/skill`
+API path: `/skill/{idOrName}`
 
 #### Type
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the type |
+| `name` |  |
 | `type` | Name of the type |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/type`
+API path: `/type/{idOrName}`
 
 
 
@@ -372,7 +364,6 @@ Create an instance: `$attribute = $client->Attribute();`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -381,21 +372,15 @@ Create an instance: `$attribute = $client->Attribute();`
 | --- | --- | --- |
 | `attribute` | `string` | Name of the attribute |
 | `description` | `string` | Description of the attribute |
-| `href` | `string` |  |
+| `fields` | `array` |  |
 | `id` | `int` | Unique identifier for the attribute |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the ENTITY — call data_get() for the Attribute record (throws on error).
 $attribute = $client->Attribute()->load(["id" => "attribute_id"]);
-```
-
-#### Example: List
-
-```php
-// list() returns an array of Attribute records (throws on error).
-$attributes = $client->Attribute()->list();
 ```
 
 
@@ -440,7 +425,7 @@ $digimon = $client->Digimon()->load(["id" => "digimon_id"]);
 #### Example: List
 
 ```php
-// list() returns an array of Digimon records (throws on error).
+// list() returns an array of Digimon entities, one per record (throws on error).
 $digimons = $client->Digimon()->list();
 ```
 
@@ -453,7 +438,6 @@ Create an instance: `$field = $client->Field();`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -462,22 +446,16 @@ Create an instance: `$field = $client->Field();`
 | --- | --- | --- |
 | `description` | `string` | Description of the field |
 | `field` | `string` | Name of the field |
-| `href` | `string` |  |
+| `fields` | `array` |  |
 | `id` | `int` | Unique identifier for the field |
 | `image` | `string` | Image URL for the field |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the ENTITY — call data_get() for the Field record (throws on error).
 $field = $client->Field()->load(["id" => "field_id"]);
-```
-
-#### Example: List
-
-```php
-// list() returns an array of Field records (throws on error).
-$fields = $client->Field()->list();
 ```
 
 
@@ -489,29 +467,23 @@ Create an instance: `$level = $client->Level();`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `array` |  |
 | `id` | `int` | Unique identifier for the level |
 | `level` | `string` | Name of the level |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the ENTITY — call data_get() for the Level record (throws on error).
 $level = $client->Level()->load(["id" => "level_id"]);
-```
-
-#### Example: List
-
-```php
-// list() returns an array of Level records (throws on error).
-$levels = $client->Level()->list();
 ```
 
 
@@ -523,7 +495,6 @@ Create an instance: `$skill = $client->Skill();`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -531,8 +502,9 @@ Create an instance: `$skill = $client->Skill();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | `string` | Description of the skill |
-| `href` | `string` |  |
+| `fields` | `array` |  |
 | `id` | `int` | Unique identifier for the skill |
+| `name` | `string` |  |
 | `skill` | `string` | Name of the skill |
 | `translation` | `string` | Translation of the skill name |
 
@@ -541,13 +513,6 @@ Create an instance: `$skill = $client->Skill();`
 ```php
 // load() returns the ENTITY — call data_get() for the Skill record (throws on error).
 $skill = $client->Skill()->load(["id" => "skill_id"]);
-```
-
-#### Example: List
-
-```php
-// list() returns an array of Skill records (throws on error).
-$skills = $client->Skill()->list();
 ```
 
 
@@ -559,15 +524,16 @@ Create an instance: `$type = $client->Type();`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `array` |  |
 | `id` | `int` | Unique identifier for the type |
+| `name` | `string` |  |
 | `type` | `string` | Name of the type |
 
 #### Example: Load
@@ -575,13 +541,6 @@ Create an instance: `$type = $client->Type();`
 ```php
 // load() returns the ENTITY — call data_get() for the Type record (throws on error).
 $type = $client->Type()->load(["id" => "type_id"]);
-```
-
-#### Example: List
-
-```php
-// list() returns an array of Type records (throws on error).
-$types = $client->Type()->list();
 ```
 
 ## Features
@@ -742,14 +701,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $field = $client->Field();
-$field->list();
+$field->load(["id" => "example_id"]);
 
-// $field->data_get() now returns the field data from the last list
+// $field->data_get() now returns the field data from the last load
 // $field->match_get() returns the last match criteria
 ```
 

@@ -12,6 +12,8 @@ type DigimonError struct {
 	Ctx    *Context `json:"-"`
 	Result any
 	Spec   any
+	// The HTTP status, -1 when there was no response.
+	Status int
 }
 
 func NewDigimonError(code string, msg string, ctx *Context) *DigimonError {
@@ -21,7 +23,12 @@ func NewDigimonError(code string, msg string, ctx *Context) *DigimonError {
 		Code:               code,
 		Msg:                msg,
 		Ctx:                ctx,
+		Status:             -1,
 	}
+}
+
+func (e *DigimonError) NotFound() bool {
+	return 404 == e.Status
 }
 
 func (e *DigimonError) Error() string {
@@ -35,6 +42,7 @@ func (e *DigimonError) Record() map[string]any {
 		"sdk":     e.Sdk,
 		"code":    e.Code,
 		"message": e.Msg,
+		"status":  e.Status,
 		"result":  e.Result,
 		"spec":    e.Spec,
 	}

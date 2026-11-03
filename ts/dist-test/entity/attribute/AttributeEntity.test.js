@@ -54,32 +54,42 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Attribute();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.DigimonSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Attribute().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.DIGIMON_TEST_LIVE;
-        for (const op of ['list', 'load']) {
+        for (const op of ['load']) {
             if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'attribute.' + op, live))
                 return;
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "attribute": { "a": true, "h": "Attribute", "n": "attribute", "r": false, "sh": "Name of the attribute", "t": "`$STRING`", "key$": "attribute", "index$": 0 }, "description": { "a": true, "h": "Description", "n": "description", "r": false, "sh": "Description of the attribute", "t": "`$STRING`", "key$": "description", "index$": 1 }, "href": { "a": true, "fo": "uri", "h": "Href", "n": "href", "r": false, "t": "`$STRING`", "key$": "href", "index$": 2 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the attribute", "t": "`$INTEGER`", "key$": "id", "index$": 3 } }, "id": { "field": "id", "name": "id" }, "name": "attribute", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /attribute", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "name", "or": "name", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "page", "or": "page", "r": false, "t": "`$INTEGER`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/attribute", "q": { "exist": ["name", "page"] }, "r": {}, "s": [{ "lit": "attribute" }], "t": { "req": "`reqdata`", "res": "`body.content`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /attribute/{idOrName}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "idOrName", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/attribute/{idOrName}", "q": { "exist": ["id"] }, "r": { "param": { "idOrName": "id" } }, "s": [{ "lit": "attribute" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "attribute", "name__orig": "attribute", "Name": "Attribute", "name_": "attribute", "name-": "attribute", "NAME": "ATTRIBUTE", "index$": 0 }, { "active": true, "entity": "attribute", "key$": "BasicAttributeFlow", "kind": "basic", "name": "BasicAttributeFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "attribute_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "attribute_ref01", "srcdatavar": "attribute_ref01_data", "suffix": "_dt0" }, "m": { "id": "attribute01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-attribute_ref01" } }], "index$": 1 }] }, 'Attribute', { "GET /attribute": { "protocol": "http", "parameters": [{ "name": "page", "in": "query", "description": "Used to navigate to a specific page", "schema": { "type": "integer", "default": 0 }, "index$": 0 }, { "name": "name", "in": "query", "description": "Returns a list of attributes that have a similar name to the value", "schema": { "type": "string" }, "index$": 1 }] }, "GET /attribute/{idOrName}": { "protocol": "http", "parameters": [{ "name": "idOrName", "in": "path", "required": true, "description": "Attribute unique ID or name", "schema": { "oneOf": [{ "type": "integer" }, { "type": "string" }] }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "attribute": { "a": true, "h": "Attribute", "n": "attribute", "r": false, "sh": "Name of the attribute", "t": "`$STRING`", "key$": "attribute", "index$": 0 }, "description": { "a": true, "h": "Description", "n": "description", "r": false, "sh": "Description of the attribute", "t": "`$STRING`", "key$": "description", "index$": 1 }, "fields": { "a": true, "h": "Fields", "n": "fields", "r": false, "t": "`$ARRAY`", "key$": "fields", "index$": 2 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the attribute", "t": "`$INTEGER`", "key$": "id", "index$": 3 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "t": "`$STRING`", "key$": "name", "index$": 4 } }, "id": { "field": "id", "name": "id" }, "name": "attribute", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /attribute/{idOrName}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": 1, "k": "param", "n": "id", "or": "idOrName", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/attribute/{idOrName}", "q": { "exist": ["id"] }, "r": { "param": { "idOrName": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "attribute" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }, { "a": true, "co": { "id": "GET /attribute", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "name", "or": "name", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "page", "or": "page", "r": false, "t": "`$INTEGER`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/attribute", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "attribute" }], "t": { "req": "`reqdata`", "res": "`body.content`" }, "index$": 1 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "attribute", "name__orig": "attribute", "Name": "Attribute", "name_": "attribute", "name-": "attribute", "NAME": "ATTRIBUTE", "index$": 0 }, { "active": true, "entity": "attribute", "key$": "BasicAttributeFlow", "kind": "basic", "name": "BasicAttributeFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "attribute_ref01", "srcdatavar": "attribute_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-attribute_ref01" } }], "index$": 0, "route": "GET /attribute/{idOrName}", "record": {} }] }, 'Attribute', { "GET /attribute/{idOrName}": { "protocol": "http", "parameters": [{ "name": "idOrName", "in": "path", "required": true, "description": "Attribute unique ID or name", "schema": { "oneOf": [{ "type": "integer" }, { "type": "string" }] }, "example": 1, "index$": 0 }] }, "GET /attribute": { "protocol": "http", "parameters": [{ "name": "page", "in": "query", "description": "Used to navigate to a specific page", "schema": { "type": "integer", "default": 0 }, "index$": 0 }, { "name": "name", "in": "query", "description": "Returns a list of attributes that have a similar name to the value", "schema": { "type": "string" }, "index$": 1 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
         const isempty = struct.isempty;
         const select = struct.select;
         let attribute_ref01_data = Object.values(setup.data.existing.attribute)[0];
-        // LIST
-        const attribute_ref01_ent = client.Attribute();
-        const attribute_ref01_match = {};
-        const attribute_ref01_list = (await attribute_ref01_ent.list(attribute_ref01_match)).map((e) => e.data());
         // LOAD
+        const attribute_ref01_ent = client.Attribute();
         const attribute_ref01_match_dt0 = {};
         attribute_ref01_match_dt0.id = attribute_ref01_data.id;
         const attribute_ref01_data_dt0 = (await attribute_ref01_ent.load(attribute_ref01_match_dt0)).data();
         (0, node_assert_1.default)(attribute_ref01_data_dt0.id === attribute_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

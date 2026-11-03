@@ -19,12 +19,11 @@ main: kit: entity: attribute: {
       sh: "Description of the attribute"
       t: "`$STRING`"
     }
-    href: {
-      fo: "uri"
-      h: "Href"
-      n: "href"
+    fields: {
+      h: "Fields"
+      n: "fields"
       r: false
-      t: "`$STRING`"
+      t: "`$ARRAY`"
     }
     id: {
       h: "Id"
@@ -32,6 +31,12 @@ main: kit: entity: attribute: {
       r: false
       sh: "Unique identifier for the attribute"
       t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
     }
   }
 
@@ -42,9 +47,56 @@ main: kit: entity: attribute: {
 
   name: "attribute"
   op: {
-    list: {
-      name: "list"
+    load: {
+      name: "load"
       points: [
+        {
+          co: {
+            id: "GET /attribute/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 1
+                k: "param"
+                n: "id"
+                or: "idOrName"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/attribute/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "attribute"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
         {
           co: {
             id: "GET /attribute"
@@ -72,11 +124,9 @@ main: kit: entity: attribute: {
           }
           m: "GET"
           o: "/attribute"
-          q: {
-            exist: [
-              "name"
-              "page"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -86,53 +136,6 @@ main: kit: entity: attribute: {
           t: {
             req: "`reqdata`"
             res: "`body.content`"
-          }
-        }
-      ]
-    }
-    load: {
-      name: "load"
-      points: [
-        {
-          co: {
-            id: "GET /attribute/{idOrName}"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "id"
-                or: "idOrName"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/attribute/{idOrName}"
-          q: {
-            exist: [
-              "id"
-            ]
-          }
-          r: {
-            param: {
-              idOrName: "id"
-            }
-          }
-          s: [
-            {
-              lit: "attribute"
-            }
-            {
-              var: "id"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
           }
         }
       ]

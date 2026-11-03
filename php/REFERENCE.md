@@ -114,22 +114,15 @@ $attribute = $client->Attribute();
 | --- | --- | --- | --- |
 | `attribute` | `string` | No | Name of the attribute |
 | `description` | `string` | No | Description of the attribute |
-| `href` | `string` | No |  |
+| `fields` | `array` | No |  |
 | `id` | `int` | No | Unique identifier for the attribute |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->Attribute()->list();
-```
-
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Attribute()->load(["id" => "attribute_id"]);
@@ -195,7 +188,7 @@ $digimon = $client->Digimon();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
 $results = $client->Digimon()->list();
@@ -203,7 +196,7 @@ $results = $client->Digimon()->list();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Digimon()->load(["id" => "digimon_id"]);
@@ -251,23 +244,16 @@ $field = $client->Field();
 | --- | --- | --- | --- |
 | `description` | `string` | No | Description of the field |
 | `field` | `string` | No | Name of the field |
-| `href` | `string` | No |  |
+| `fields` | `array` | No |  |
 | `id` | `int` | No | Unique identifier for the field |
 | `image` | `string` | No | Image URL for the field |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->Field()->list();
-```
-
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Field()->load(["id" => "field_id"]);
@@ -313,23 +299,17 @@ $level = $client->Level();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `string` | No |  |
+| `description` | `string` | No |  |
+| `fields` | `array` | No |  |
 | `id` | `int` | No | Unique identifier for the level |
 | `level` | `string` | No | Name of the level |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->Level()->list();
-```
-
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Level()->load(["id" => "level_id"]);
@@ -376,24 +356,17 @@ $skill = $client->Skill();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `description` | `string` | No | Description of the skill |
-| `href` | `string` | No |  |
+| `fields` | `array` | No |  |
 | `id` | `int` | No | Unique identifier for the skill |
+| `name` | `string` | No |  |
 | `skill` | `string` | No | Name of the skill |
 | `translation` | `string` | No | Translation of the skill name |
 
 ### Operations
 
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->Skill()->list();
-```
-
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Skill()->load(["id" => "skill_id"]);
@@ -439,23 +412,17 @@ $type = $client->Type();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `string` | No |  |
+| `description` | `string` | No |  |
+| `fields` | `array` | No |  |
 | `id` | `int` | No | Unique identifier for the type |
+| `name` | `string` | No |  |
 | `type` | `string` | No | Name of the type |
 
 ### Operations
 
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->Type()->list();
-```
-
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Type()->load(["id" => "type_id"]);
@@ -648,6 +615,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -103,16 +104,20 @@ local function make_config()
             ["short"] = "Description of the attribute",
           },
           {
-            ["name"] = "href",
-            ["title"] = "Href",
-            ["type"] = "`$STRING`",
-            ["format"] = "uri",
+            ["name"] = "fields",
+            ["title"] = "Fields",
+            ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "id",
             ["title"] = "Id",
             ["type"] = "`$INTEGER`",
             ["short"] = "Unique identifier for the attribute",
+          },
+          {
+            ["name"] = "name",
+            ["title"] = "Name",
+            ["type"] = "`$STRING`",
           },
         },
         ["id"] = {
@@ -121,53 +126,6 @@ local function make_config()
         },
         ["name"] = "attribute",
         ["op"] = {
-          ["list"] = {
-            ["input"] = "data",
-            ["name"] = "list",
-            ["points"] = {
-              {
-                ["kind"] = "http",
-                ["method"] = "GET",
-                ["orig"] = "/attribute",
-                ["segments"] = {
-                  {
-                    ["lit"] = "attribute",
-                  },
-                },
-                ["parts"] = {
-                  "attribute",
-                },
-                ["rename"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.content`",
-                },
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["name"] = "name",
-                      ["orig"] = "name",
-                      ["type"] = "`$STRING`",
-                      ["kind"] = "query",
-                    },
-                    {
-                      ["name"] = "page",
-                      ["orig"] = "page",
-                      ["type"] = "`$INTEGER`",
-                      ["kind"] = "query",
-                      ["example"] = 0,
-                    },
-                  },
-                },
-                ["select"] = {
-                  ["exist"] = {
-                    "name",
-                    "page",
-                  },
-                },
-              },
-            },
-          },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
@@ -205,6 +163,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
+                      ["example"] = 1,
                     },
                   },
                 },
@@ -212,6 +171,51 @@ local function make_config()
                   ["exist"] = {
                     "id",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
+              },
+              {
+                ["kind"] = "http",
+                ["method"] = "GET",
+                ["orig"] = "/attribute",
+                ["segments"] = {
+                  {
+                    ["lit"] = "attribute",
+                  },
+                },
+                ["parts"] = {
+                  "attribute",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.content`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "name",
+                      ["orig"] = "name",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["field"] = true,
+                    },
+                    {
+                      ["name"] = "page",
+                      ["orig"] = "page",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 0,
+                    },
+                  },
+                },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -357,6 +361,7 @@ local function make_config()
                       ["orig"] = "name",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "page",
@@ -380,16 +385,10 @@ local function make_config()
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "attribute",
-                    "exact",
-                    "level",
-                    "name",
-                    "page",
-                    "page_size",
-                    "x_antibody",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -431,6 +430,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
+                      ["example"] = 1,
                     },
                   },
                 },
@@ -438,6 +438,10 @@ local function make_config()
                   ["exist"] = {
                     "id",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -462,10 +466,9 @@ local function make_config()
             ["short"] = "Name of the field",
           },
           {
-            ["name"] = "href",
-            ["title"] = "Href",
-            ["type"] = "`$STRING`",
-            ["format"] = "uri",
+            ["name"] = "fields",
+            ["title"] = "Fields",
+            ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "id",
@@ -480,6 +483,11 @@ local function make_config()
             ["short"] = "Image URL for the field",
             ["format"] = "uri",
           },
+          {
+            ["name"] = "name",
+            ["title"] = "Name",
+            ["type"] = "`$STRING`",
+          },
         },
         ["id"] = {
           ["field"] = "id",
@@ -487,53 +495,6 @@ local function make_config()
         },
         ["name"] = "field",
         ["op"] = {
-          ["list"] = {
-            ["input"] = "data",
-            ["name"] = "list",
-            ["points"] = {
-              {
-                ["kind"] = "http",
-                ["method"] = "GET",
-                ["orig"] = "/field",
-                ["segments"] = {
-                  {
-                    ["lit"] = "field",
-                  },
-                },
-                ["parts"] = {
-                  "field",
-                },
-                ["rename"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.content`",
-                },
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["name"] = "name",
-                      ["orig"] = "name",
-                      ["type"] = "`$STRING`",
-                      ["kind"] = "query",
-                    },
-                    {
-                      ["name"] = "page",
-                      ["orig"] = "page",
-                      ["type"] = "`$INTEGER`",
-                      ["kind"] = "query",
-                      ["example"] = 0,
-                    },
-                  },
-                },
-                ["select"] = {
-                  ["exist"] = {
-                    "name",
-                    "page",
-                  },
-                },
-              },
-            },
-          },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
@@ -571,6 +532,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
+                      ["example"] = 1,
                     },
                   },
                 },
@@ -579,56 +541,22 @@ local function make_config()
                     "id",
                   },
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
-            },
-          },
-        },
-        ["relations"] = {
-          ["ancestors"] = {},
-        },
-      },
-      ["level"] = {
-        ["fields"] = {
-          {
-            ["name"] = "href",
-            ["title"] = "Href",
-            ["type"] = "`$STRING`",
-            ["format"] = "uri",
-          },
-          {
-            ["name"] = "id",
-            ["title"] = "Id",
-            ["type"] = "`$INTEGER`",
-            ["short"] = "Unique identifier for the level",
-          },
-          {
-            ["name"] = "level",
-            ["title"] = "Level",
-            ["type"] = "`$STRING`",
-            ["short"] = "Name of the level",
-          },
-        },
-        ["id"] = {
-          ["field"] = "id",
-          ["name"] = "id",
-        },
-        ["name"] = "level",
-        ["op"] = {
-          ["list"] = {
-            ["input"] = "data",
-            ["name"] = "list",
-            ["points"] = {
               {
                 ["kind"] = "http",
                 ["method"] = "GET",
-                ["orig"] = "/level",
+                ["orig"] = "/field",
                 ["segments"] = {
                   {
-                    ["lit"] = "level",
+                    ["lit"] = "field",
                   },
                 },
                 ["parts"] = {
-                  "level",
+                  "field",
                 },
                 ["rename"] = {},
                 ["transform"] = {
@@ -642,6 +570,7 @@ local function make_config()
                       ["orig"] = "name",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "page",
@@ -652,15 +581,55 @@ local function make_config()
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "name",
-                    "page",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
           },
+        },
+        ["relations"] = {
+          ["ancestors"] = {},
+        },
+      },
+      ["level"] = {
+        ["fields"] = {
+          {
+            ["name"] = "description",
+            ["title"] = "Description",
+            ["type"] = "`$STRING`",
+          },
+          {
+            ["name"] = "fields",
+            ["title"] = "Fields",
+            ["type"] = "`$ARRAY`",
+          },
+          {
+            ["name"] = "id",
+            ["title"] = "Id",
+            ["type"] = "`$INTEGER`",
+            ["short"] = "Unique identifier for the level",
+          },
+          {
+            ["name"] = "level",
+            ["title"] = "Level",
+            ["type"] = "`$STRING`",
+            ["short"] = "Name of the level",
+          },
+          {
+            ["name"] = "name",
+            ["title"] = "Name",
+            ["type"] = "`$STRING`",
+          },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
+        ["name"] = "level",
+        ["op"] = {
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
@@ -698,6 +667,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
+                      ["example"] = 1,
                     },
                   },
                 },
@@ -705,6 +675,51 @@ local function make_config()
                   ["exist"] = {
                     "id",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
+              },
+              {
+                ["kind"] = "http",
+                ["method"] = "GET",
+                ["orig"] = "/level",
+                ["segments"] = {
+                  {
+                    ["lit"] = "level",
+                  },
+                },
+                ["parts"] = {
+                  "level",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.content`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "name",
+                      ["orig"] = "name",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["field"] = true,
+                    },
+                    {
+                      ["name"] = "page",
+                      ["orig"] = "page",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 0,
+                    },
+                  },
+                },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -723,16 +738,20 @@ local function make_config()
             ["short"] = "Description of the skill",
           },
           {
-            ["name"] = "href",
-            ["title"] = "Href",
-            ["type"] = "`$STRING`",
-            ["format"] = "uri",
+            ["name"] = "fields",
+            ["title"] = "Fields",
+            ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "id",
             ["title"] = "Id",
             ["type"] = "`$INTEGER`",
             ["short"] = "Unique identifier for the skill",
+          },
+          {
+            ["name"] = "name",
+            ["title"] = "Name",
+            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "skill",
@@ -753,53 +772,6 @@ local function make_config()
         },
         ["name"] = "skill",
         ["op"] = {
-          ["list"] = {
-            ["input"] = "data",
-            ["name"] = "list",
-            ["points"] = {
-              {
-                ["kind"] = "http",
-                ["method"] = "GET",
-                ["orig"] = "/skill",
-                ["segments"] = {
-                  {
-                    ["lit"] = "skill",
-                  },
-                },
-                ["parts"] = {
-                  "skill",
-                },
-                ["rename"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.content`",
-                },
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["name"] = "name",
-                      ["orig"] = "name",
-                      ["type"] = "`$STRING`",
-                      ["kind"] = "query",
-                    },
-                    {
-                      ["name"] = "page",
-                      ["orig"] = "page",
-                      ["type"] = "`$INTEGER`",
-                      ["kind"] = "query",
-                      ["example"] = 0,
-                    },
-                  },
-                },
-                ["select"] = {
-                  ["exist"] = {
-                    "name",
-                    "page",
-                  },
-                },
-              },
-            },
-          },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
@@ -837,6 +809,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
+                      ["example"] = 1,
                     },
                   },
                 },
@@ -844,6 +817,51 @@ local function make_config()
                   ["exist"] = {
                     "id",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
+              },
+              {
+                ["kind"] = "http",
+                ["method"] = "GET",
+                ["orig"] = "/skill",
+                ["segments"] = {
+                  {
+                    ["lit"] = "skill",
+                  },
+                },
+                ["parts"] = {
+                  "skill",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.content`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "name",
+                      ["orig"] = "name",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["field"] = true,
+                    },
+                    {
+                      ["name"] = "page",
+                      ["orig"] = "page",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 0,
+                    },
+                  },
+                },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -856,16 +874,25 @@ local function make_config()
       ["type"] = {
         ["fields"] = {
           {
-            ["name"] = "href",
-            ["title"] = "Href",
+            ["name"] = "description",
+            ["title"] = "Description",
             ["type"] = "`$STRING`",
-            ["format"] = "uri",
+          },
+          {
+            ["name"] = "fields",
+            ["title"] = "Fields",
+            ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "id",
             ["title"] = "Id",
             ["type"] = "`$INTEGER`",
             ["short"] = "Unique identifier for the type",
+          },
+          {
+            ["name"] = "name",
+            ["title"] = "Name",
+            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "type",
@@ -880,53 +907,6 @@ local function make_config()
         },
         ["name"] = "type",
         ["op"] = {
-          ["list"] = {
-            ["input"] = "data",
-            ["name"] = "list",
-            ["points"] = {
-              {
-                ["kind"] = "http",
-                ["method"] = "GET",
-                ["orig"] = "/type",
-                ["segments"] = {
-                  {
-                    ["lit"] = "type",
-                  },
-                },
-                ["parts"] = {
-                  "type",
-                },
-                ["rename"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.content`",
-                },
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["name"] = "name",
-                      ["orig"] = "name",
-                      ["type"] = "`$STRING`",
-                      ["kind"] = "query",
-                    },
-                    {
-                      ["name"] = "page",
-                      ["orig"] = "page",
-                      ["type"] = "`$INTEGER`",
-                      ["kind"] = "query",
-                      ["example"] = 0,
-                    },
-                  },
-                },
-                ["select"] = {
-                  ["exist"] = {
-                    "name",
-                    "page",
-                  },
-                },
-              },
-            },
-          },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
@@ -964,6 +944,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
+                      ["example"] = 1,
                     },
                   },
                 },
@@ -971,6 +952,51 @@ local function make_config()
                   ["exist"] = {
                     "id",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
+              },
+              {
+                ["kind"] = "http",
+                ["method"] = "GET",
+                ["orig"] = "/type",
+                ["segments"] = {
+                  {
+                    ["lit"] = "type",
+                  },
+                },
+                ["parts"] = {
+                  "type",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.content`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "name",
+                      ["orig"] = "name",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["field"] = true,
+                    },
+                    {
+                      ["name"] = "page",
+                      ["orig"] = "page",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 0,
+                    },
+                  },
+                },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

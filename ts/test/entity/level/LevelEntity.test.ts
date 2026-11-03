@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { DigimonSDK, BaseFeature, stdutil } from '../../..'
+import { DigimonSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,17 +41,29 @@ describe('LevelEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = DigimonSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Level().load({"id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.DIGIMON_TEST_LIVE
-    for (const op of ['list', 'load']) {
+    for (const op of ['load']) {
       if (!live && maybeSkipControl(t, 'entityOp', 'level.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"href":{"a":true,"fo":"uri","h":"Href","n":"href","r":false,"t":"`$STRING`","key$":"href","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"Unique identifier for the level","t":"`$INTEGER`","key$":"id","index$":1},"level":{"a":true,"h":"Level","n":"level","r":false,"sh":"Name of the level","t":"`$STRING`","key$":"level","index$":2}},"id":{"field":"id","name":"id"},"name":"level","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /level","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"name","or":"name","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":0,"k":"query","n":"page","or":"page","r":false,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/level","q":{"exist":["name","page"]},"r":{},"s":[{"lit":"level"}],"t":{"req":"`reqdata`","res":"`body.content`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /level/{idOrName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"idOrName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/level/{idOrName}","q":{"exist":["id"]},"r":{"param":{"idOrName":"id"}},"s":[{"lit":"level"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"level","name__orig":"level","Name":"Level","name_":"level","name-":"level","NAME":"LEVEL","index$":3}, {"active":true,"entity":"level","key$":"BasicLevelFlow","kind":"basic","name":"BasicLevelFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"level_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"level_ref01","srcdatavar":"level_ref01_data","suffix":"_dt0"},"m":{"id":"level01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-level_ref01"}}],"index$":1}]}, 'Level', {"GET /level":{"protocol":"http","parameters":[{"name":"page","in":"query","description":"Used to navigate to a specific page","schema":{"type":"integer","default":0},"index$":0},{"name":"name","in":"query","description":"Returns a list of levels that have a similar name to the value","schema":{"type":"string"},"index$":1}]},"GET /level/{idOrName}":{"protocol":"http","parameters":[{"name":"idOrName","in":"path","required":true,"description":"Level unique ID or name","schema":{"oneOf":[{"type":"integer"},{"type":"string"}]},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"description":{"a":true,"h":"Description","n":"description","r":false,"t":"`$STRING`","key$":"description","index$":0},"fields":{"a":true,"h":"Fields","n":"fields","r":false,"t":"`$ARRAY`","key$":"fields","index$":1},"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"Unique identifier for the level","t":"`$INTEGER`","key$":"id","index$":2},"level":{"a":true,"h":"Level","n":"level","r":false,"sh":"Name of the level","t":"`$STRING`","key$":"level","index$":3},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":4}},"id":{"field":"id","name":"id"},"name":"level","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /level/{idOrName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":1,"k":"param","n":"id","or":"idOrName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/level/{idOrName}","q":{"exist":["id"]},"r":{"param":{"idOrName":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"level"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /level","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"name","or":"name","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":0,"k":"query","n":"page","or":"page","r":false,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/level","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"level"}],"t":{"req":"`reqdata`","res":"`body.content`"},"index$":1}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"level","name__orig":"level","Name":"Level","name_":"level","name-":"level","NAME":"LEVEL","index$":3}, {"active":true,"entity":"level","key$":"BasicLevelFlow","kind":"basic","name":"BasicLevelFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"level_ref01","srcdatavar":"level_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-level_ref01"}}],"index$":0,"route":"GET /level/{idOrName}","record":{}}]}, 'Level', {"GET /level/{idOrName}":{"protocol":"http","parameters":[{"name":"idOrName","in":"path","required":true,"description":"Level unique ID or name","schema":{"oneOf":[{"type":"integer"},{"type":"string"}]},"example":1,"index$":0}]},"GET /level":{"protocol":"http","parameters":[{"name":"page","in":"query","description":"Used to navigate to a specific page","schema":{"type":"integer","default":0},"index$":0},{"name":"name","in":"query","description":"Returns a list of levels that have a similar name to the value","schema":{"type":"string"},"index$":1}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -61,14 +73,8 @@ describe('LevelEntity', async () => {
 
     let level_ref01_data = Object.values(setup.data.existing.level)[0] as any
 
-    // LIST
-    const level_ref01_ent = client.Level()
-    const level_ref01_match: any = {}
-
-    const level_ref01_list = (await level_ref01_ent.list(level_ref01_match)).map((e: any) => e.data())
-
-
     // LOAD
+    const level_ref01_ent = client.Level()
     const level_ref01_match_dt0: any = {}
     level_ref01_match_dt0.id = level_ref01_data.id
     const level_ref01_data_dt0 = (await level_ref01_ent.load(level_ref01_match_dt0)).data()
@@ -79,6 +85,12 @@ describe('LevelEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

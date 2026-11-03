@@ -7,26 +7,10 @@ main: kit: flow: BasicTypeFlow:
   name: "BasicTypeFlow",
   step: [
     {
-      o: "list",
-      v: [
-        {
-          apply: "ItemExists",
-          def: {
-            ref: "type_ref01"
-          }
-        }
-      ]
-    }
-
-    {
       i: {
         ref: "type_ref01",
         srcdatavar: "type_ref01_data",
         suffix: "_dt0"
-      }
-
-      m: {
-        id: "type01"
       }
 
       o: "load",

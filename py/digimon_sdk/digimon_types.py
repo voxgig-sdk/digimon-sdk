@@ -19,17 +19,13 @@ from typing import TypedDict, Any
 class Attribute(TypedDict, total=False):
     attribute: str
     description: str
-    href: str
+    fields: list
     id: int
+    name: str
 
 
 class AttributeLoadMatch(TypedDict):
     id: str
-
-
-class AttributeListMatch(TypedDict, total=False):
-    name: str
-    page: int
 
 
 class Digimon(TypedDict, total=False):
@@ -67,39 +63,33 @@ class DigimonListMatch(TypedDict, total=False):
 class Field(TypedDict, total=False):
     description: str
     field: str
-    href: str
+    fields: list
     id: int
     image: str
+    name: str
 
 
 class FieldLoadMatch(TypedDict):
     id: str
 
 
-class FieldListMatch(TypedDict, total=False):
-    name: str
-    page: int
-
-
 class Level(TypedDict, total=False):
-    href: str
+    description: str
+    fields: list
     id: int
     level: str
+    name: str
 
 
 class LevelLoadMatch(TypedDict):
     id: str
 
 
-class LevelListMatch(TypedDict, total=False):
-    name: str
-    page: int
-
-
 class Skill(TypedDict, total=False):
     description: str
-    href: str
+    fields: list
     id: int
+    name: str
     skill: str
     translation: str
 
@@ -108,21 +98,13 @@ class SkillLoadMatch(TypedDict):
     id: str
 
 
-class SkillListMatch(TypedDict, total=False):
-    name: str
-    page: int
-
-
 class Type(TypedDict, total=False):
-    href: str
+    description: str
+    fields: list
     id: int
+    name: str
     type: str
 
 
 class TypeLoadMatch(TypedDict):
     id: str
-
-
-class TypeListMatch(TypedDict, total=False):
-    name: str
-    page: int

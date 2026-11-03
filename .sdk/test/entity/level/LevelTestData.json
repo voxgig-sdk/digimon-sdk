@@ -2,37 +2,45 @@
   "existing": {
     "level": {
       "LEVEL00": {
-        "href": "s1e",
+        "description": "s32",
+        "fields": [],
         "id": "LEVEL00",
-        "level": "s20"
+        "level": "s35",
+        "name": "s36"
       },
       "LEVEL01": {
-        "href": "s3c",
+        "description": "s64",
+        "fields": [],
         "id": "LEVEL01",
-        "level": "s3e"
+        "level": "s67",
+        "name": "s68"
       },
       "LEVEL02": {
-        "href": "s5a",
+        "description": "s96",
+        "fields": [],
         "id": "LEVEL02",
-        "level": "s5c"
+        "level": "s99",
+        "name": "s9a"
       }
     }
   },
   "new": {
     "level": {
       "level_ref01": {
-        "href": "s78",
-        "level": "s7a"
+        "description": "sc8",
+        "fields": [],
+        "level": "scb",
+        "name": "scc"
       }
     }
   },
   "requests": {
-    "GET /level": {
+    "GET /level/{idOrName}": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
-    "GET /level/{idOrName}": {
+    "GET /level": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

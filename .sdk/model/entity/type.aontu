@@ -5,12 +5,17 @@ main: kit: entity: type: {
   alias: field: {}
 
   fields: {
-    href: {
-      fo: "uri"
-      h: "Href"
-      n: "href"
+    description: {
+      h: "Description"
+      n: "description"
       r: false
       t: "`$STRING`"
+    }
+    fields: {
+      h: "Fields"
+      n: "fields"
+      r: false
+      t: "`$ARRAY`"
     }
     id: {
       h: "Id"
@@ -18,6 +23,12 @@ main: kit: entity: type: {
       r: false
       sh: "Unique identifier for the type"
       t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
     }
     type: {
       h: "Type"
@@ -35,9 +46,56 @@ main: kit: entity: type: {
 
   name: "type"
   op: {
-    list: {
-      name: "list"
+    load: {
+      name: "load"
       points: [
+        {
+          co: {
+            id: "GET /type/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 1
+                k: "param"
+                n: "id"
+                or: "idOrName"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/type/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "type"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
         {
           co: {
             id: "GET /type"
@@ -65,11 +123,9 @@ main: kit: entity: type: {
           }
           m: "GET"
           o: "/type"
-          q: {
-            exist: [
-              "name"
-              "page"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -79,53 +135,6 @@ main: kit: entity: type: {
           t: {
             req: "`reqdata`"
             res: "`body.content`"
-          }
-        }
-      ]
-    }
-    load: {
-      name: "load"
-      points: [
-        {
-          co: {
-            id: "GET /type/{idOrName}"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "id"
-                or: "idOrName"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/type/{idOrName}"
-          q: {
-            exist: [
-              "id"
-            ]
-          }
-          r: {
-            param: {
-              idOrName: "id"
-            }
-          }
-          s: [
-            {
-              lit: "type"
-            }
-            {
-              var: "id"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
           }
         }
       ]

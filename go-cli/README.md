@@ -19,17 +19,16 @@ make build
 export DIGIMON_APIKEY=sk_live_xxx
 
 # 4. Each command line is ONE boru expression, run against the API:
-./digimon-cli list attribute
 ./digimon-cli load 1 attribute            # {id:1} shorthand
 ./digimon-cli load '{id:1}' attribute       # explicit match map
 ./digimon-cli list digimon
 
 # 5. Override the API base URL for a single call
-DIGIMON_BASE=https://api.example.com ./digimon-cli list attribute
+DIGIMON_BASE=https://api.example.com ./digimon-cli load 1 attribute
 
 # 6. No arguments -> interactive REPL
 ./digimon-cli
-digimon> list attribute
+digimon> load 1 attribute
 digimon> /quit
 ```
 
@@ -55,7 +54,7 @@ digimon> /quit
    arguments to open the REPL):
 
    ```sh
-   ./dist/*/digimon-cli list attribute
+   ./dist/*/digimon-cli load 1 attribute
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
@@ -64,15 +63,6 @@ digimon> /quit
 That is the whole loop: *build → set key → evaluate boru expressions*.
 
 ## How-to guides
-
-### List the records of an entity
-
-```sh
-./digimon-cli list attribute
-```
-
-`list <entity>` returns the first page of records. `<entity>` is a bareword —
-it is auto-quoted as an boru atom, so no quotes are needed.
 
 ### Load a single record
 
@@ -91,7 +81,7 @@ Configuration is read from the environment — nothing is written to disk:
 ```sh
 export DIGIMON_APIKEY=sk_live_xxx            # API key
 export DIGIMON_BASE=https://api.example.com  # optional: override the API base URL
-./digimon-cli list attribute
+./digimon-cli load 1 attribute
 ```
 
 Both are injectable by a secrets vault, so the key never has to be typed inline.
@@ -103,7 +93,7 @@ evaluated as its own boru expression:
 
 ```text
 $ ./digimon-cli
-digimon> list attribute
+digimon> load 1 attribute
 digimon> /help
 digimon> /quit
 ```

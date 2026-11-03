@@ -10,8 +10,8 @@ guide: {
 
   entity: attribute: {
     path: "/attribute": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.content`")|top
+      op: load: method: *GET
+      op: load: transform: res: *("`body.content`")|top
     }
     path: "/attribute/{idOrName}": {
       rename: param: "idOrName": *"id"
@@ -32,8 +32,8 @@ guide: {
 
   entity: field: {
     path: "/field": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.content`")|top
+      op: load: method: *GET
+      op: load: transform: res: *("`body.content`")|top
     }
     path: "/field/{idOrName}": {
       rename: param: "idOrName": *"id"
@@ -43,8 +43,8 @@ guide: {
 
   entity: level: {
     path: "/level": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.content`")|top
+      op: load: method: *GET
+      op: load: transform: res: *("`body.content`")|top
     }
     path: "/level/{idOrName}": {
       rename: param: "idOrName": *"id"
@@ -54,8 +54,8 @@ guide: {
 
   entity: skill: {
     path: "/skill": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.content`")|top
+      op: load: method: *GET
+      op: load: transform: res: *("`body.content`")|top
     }
     path: "/skill/{idOrName}": {
       rename: param: "idOrName": *"id"
@@ -65,8 +65,8 @@ guide: {
 
   entity: type: {
     path: "/type": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.content`")|top
+      op: load: method: *GET
+      op: load: transform: res: *("`body.content`")|top
     }
     path: "/type/{idOrName}": {
       rename: param: "idOrName": *"id"

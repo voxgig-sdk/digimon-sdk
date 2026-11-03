@@ -19,12 +19,11 @@ main: kit: entity: field: {
       sh: "Name of the field"
       t: "`$STRING`"
     }
-    href: {
-      fo: "uri"
-      h: "Href"
-      n: "href"
+    fields: {
+      h: "Fields"
+      n: "fields"
       r: false
-      t: "`$STRING`"
+      t: "`$ARRAY`"
     }
     id: {
       h: "Id"
@@ -41,6 +40,12 @@ main: kit: entity: field: {
       sh: "Image URL for the field"
       t: "`$STRING`"
     }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
   }
 
   id: {
@@ -50,9 +55,56 @@ main: kit: entity: field: {
 
   name: "field"
   op: {
-    list: {
-      name: "list"
+    load: {
+      name: "load"
       points: [
+        {
+          co: {
+            id: "GET /field/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 1
+                k: "param"
+                n: "id"
+                or: "idOrName"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/field/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "field"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
         {
           co: {
             id: "GET /field"
@@ -80,11 +132,9 @@ main: kit: entity: field: {
           }
           m: "GET"
           o: "/field"
-          q: {
-            exist: [
-              "name"
-              "page"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -94,53 +144,6 @@ main: kit: entity: field: {
           t: {
             req: "`reqdata`"
             res: "`body.content`"
-          }
-        }
-      ]
-    }
-    load: {
-      name: "load"
-      points: [
-        {
-          co: {
-            id: "GET /field/{idOrName}"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "id"
-                or: "idOrName"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/field/{idOrName}"
-          q: {
-            exist: [
-              "id"
-            ]
-          }
-          r: {
-            param: {
-              idOrName: "id"
-            }
-          }
-          s: [
-            {
-              lit: "field"
-            }
-            {
-              var: "id"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
           }
         }
       ]

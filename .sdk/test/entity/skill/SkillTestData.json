@@ -2,45 +2,49 @@
   "existing": {
     "skill": {
       "SKILL00": {
-        "description": "s32",
-        "href": "s33",
+        "description": "s3c",
+        "fields": [],
         "id": "SKILL00",
-        "skill": "s35",
-        "translation": "s36"
+        "name": "s3f",
+        "skill": "s40",
+        "translation": "s41"
       },
       "SKILL01": {
-        "description": "s64",
-        "href": "s65",
+        "description": "s78",
+        "fields": [],
         "id": "SKILL01",
-        "skill": "s67",
-        "translation": "s68"
+        "name": "s7b",
+        "skill": "s7c",
+        "translation": "s7d"
       },
       "SKILL02": {
-        "description": "s96",
-        "href": "s97",
+        "description": "sb4",
+        "fields": [],
         "id": "SKILL02",
-        "skill": "s99",
-        "translation": "s9a"
+        "name": "sb7",
+        "skill": "sb8",
+        "translation": "sb9"
       }
     }
   },
   "new": {
     "skill": {
       "skill_ref01": {
-        "description": "sc8",
-        "href": "sc9",
-        "skill": "scb",
-        "translation": "scc"
+        "description": "sf0",
+        "fields": [],
+        "name": "sf3",
+        "skill": "sf4",
+        "translation": "sf5"
       }
     }
   },
   "requests": {
-    "GET /skill": {
+    "GET /skill/{idOrName}": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
-    "GET /skill/{idOrName}": {
+    "GET /skill": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

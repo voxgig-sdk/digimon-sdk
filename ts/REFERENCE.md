@@ -147,8 +147,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -162,6 +164,15 @@ same parameters as `direct()`.
 Alias for `DigimonSDK.test()`.
 
 **Returns:** `DigimonSDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -178,22 +189,15 @@ const attribute = client.Attribute()
 | --- | --- | --- | --- |
 | `attribute` | `string` | No | Name of the attribute |
 | `description` | `string` | No | Description of the attribute |
-| `href` | `string` | No |  |
+| `fields` | `any[]` | No |  |
 | `id` | `number` | No | Unique identifier for the attribute |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.Attribute().list()
-```
-
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Attribute().load({ id: 'attribute_id' })
@@ -257,7 +261,7 @@ const digimon = client.Digimon()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Digimon().list()
@@ -265,7 +269,7 @@ const results = await client.Digimon().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Digimon().load({ id: 'digimon_id' })
@@ -311,23 +315,16 @@ const field = client.Field()
 | --- | --- | --- | --- |
 | `description` | `string` | No | Description of the field |
 | `field` | `string` | No | Name of the field |
-| `href` | `string` | No |  |
+| `fields` | `any[]` | No |  |
 | `id` | `number` | No | Unique identifier for the field |
 | `image` | `string` | No | Image URL for the field |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.Field().list()
-```
-
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Field().load({ id: 'field_id' })
@@ -371,23 +368,17 @@ const level = client.Level()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `string` | No |  |
+| `description` | `string` | No |  |
+| `fields` | `any[]` | No |  |
 | `id` | `number` | No | Unique identifier for the level |
 | `level` | `string` | No | Name of the level |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.Level().list()
-```
-
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Level().load({ id: 'level_id' })
@@ -432,24 +423,17 @@ const skill = client.Skill()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `description` | `string` | No | Description of the skill |
-| `href` | `string` | No |  |
+| `fields` | `any[]` | No |  |
 | `id` | `number` | No | Unique identifier for the skill |
+| `name` | `string` | No |  |
 | `skill` | `string` | No | Name of the skill |
 | `translation` | `string` | No | Translation of the skill name |
 
 ### Operations
 
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.Skill().list()
-```
-
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Skill().load({ id: 'skill_id' })
@@ -493,23 +477,17 @@ const type = client.Type()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `string` | No |  |
+| `description` | `string` | No |  |
+| `fields` | `any[]` | No |  |
 | `id` | `number` | No | Unique identifier for the type |
+| `name` | `string` | No |  |
 | `type` | `string` | No | Name of the type |
 
 ### Operations
 
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.Type().list()
-```
-
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Type().load({ id: 'type_id' })
@@ -700,6 +678,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

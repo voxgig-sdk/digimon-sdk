@@ -113,13 +113,12 @@
               "sh": "Description of the attribute",
               "t": "`$STRING`"
             },
-            "href": {
+            "fields": {
               "a": true,
-              "fo": "uri",
-              "h": "Href",
-              "n": "href",
+              "h": "Fields",
+              "n": "fields",
               "r": false,
-              "t": "`$STRING`"
+              "t": "`$ARRAY`"
             },
             "id": {
               "a": true,
@@ -128,6 +127,13 @@
               "r": false,
               "sh": "Unique identifier for the attribute",
               "t": "`$INTEGER`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             }
           },
           "id": {
@@ -136,10 +142,60 @@
           },
           "name": "attribute",
           "op": {
-            "list": {
+            "load": {
               "input": "data",
-              "name": "list",
+              "name": "load",
               "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /attribute/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": 1,
+                        "k": "param",
+                        "n": "id",
+                        "or": "idOrName",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/attribute/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "idOrName": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "attribute"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
                 {
                   "a": true,
                   "co": {
@@ -171,13 +227,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/attribute",
-                  "q": {
-                    "exist": [
-                      "name",
-                      "page"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "attribute"
@@ -186,57 +241,6 @@
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body.content`"
-                  }
-                }
-              ]
-            },
-            "load": {
-              "input": "data",
-              "name": "load",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /attribute/{idOrName}",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "idOrName",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/attribute/{idOrName}",
-                  "q": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "idOrName": "id"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "attribute"
-                    },
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
                   }
                 }
               ]
@@ -446,18 +450,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/digimon",
-                  "q": {
-                    "exist": [
-                      "attribute",
-                      "exact",
-                      "level",
-                      "name",
-                      "page",
-                      "page_size",
-                      "x_antibody"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "digimon"
@@ -485,6 +483,7 @@
                     "params": [
                       {
                         "a": true,
+                        "ex": 1,
                         "k": "param",
                         "n": "id",
                         "or": "idOrName",
@@ -505,6 +504,10 @@
                     "param": {
                       "idOrName": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -548,13 +551,12 @@
               "sh": "Name of the field",
               "t": "`$STRING`"
             },
-            "href": {
+            "fields": {
               "a": true,
-              "fo": "uri",
-              "h": "Href",
-              "n": "href",
+              "h": "Fields",
+              "n": "fields",
               "r": false,
-              "t": "`$STRING`"
+              "t": "`$ARRAY`"
             },
             "id": {
               "a": true,
@@ -572,6 +574,13 @@
               "r": false,
               "sh": "Image URL for the field",
               "t": "`$STRING`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             }
           },
           "id": {
@@ -580,10 +589,60 @@
           },
           "name": "field",
           "op": {
-            "list": {
+            "load": {
               "input": "data",
-              "name": "list",
+              "name": "load",
               "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /field/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": 1,
+                        "k": "param",
+                        "n": "id",
+                        "or": "idOrName",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/field/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "idOrName": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "field"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
                 {
                   "a": true,
                   "co": {
@@ -615,13 +674,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/field",
-                  "q": {
-                    "exist": [
-                      "name",
-                      "page"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "field"
@@ -630,57 +688,6 @@
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body.content`"
-                  }
-                }
-              ]
-            },
-            "load": {
-              "input": "data",
-              "name": "load",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /field/{idOrName}",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "idOrName",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/field/{idOrName}",
-                  "q": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "idOrName": "id"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "field"
-                    },
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
                   }
                 }
               ]
@@ -696,13 +703,19 @@
             "field": {}
           },
           "fields": {
-            "href": {
+            "description": {
               "a": true,
-              "fo": "uri",
-              "h": "Href",
-              "n": "href",
+              "h": "Description",
+              "n": "description",
               "r": false,
               "t": "`$STRING`"
+            },
+            "fields": {
+              "a": true,
+              "h": "Fields",
+              "n": "fields",
+              "r": false,
+              "t": "`$ARRAY`"
             },
             "id": {
               "a": true,
@@ -719,6 +732,13 @@
               "r": false,
               "sh": "Name of the level",
               "t": "`$STRING`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             }
           },
           "id": {
@@ -727,10 +747,60 @@
           },
           "name": "level",
           "op": {
-            "list": {
+            "load": {
               "input": "data",
-              "name": "list",
+              "name": "load",
               "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /level/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": 1,
+                        "k": "param",
+                        "n": "id",
+                        "or": "idOrName",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/level/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "idOrName": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "level"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
                 {
                   "a": true,
                   "co": {
@@ -762,13 +832,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/level",
-                  "q": {
-                    "exist": [
-                      "name",
-                      "page"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "level"
@@ -777,57 +846,6 @@
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body.content`"
-                  }
-                }
-              ]
-            },
-            "load": {
-              "input": "data",
-              "name": "load",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /level/{idOrName}",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "idOrName",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/level/{idOrName}",
-                  "q": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "idOrName": "id"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "level"
-                    },
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
                   }
                 }
               ]
@@ -851,13 +869,12 @@
               "sh": "Description of the skill",
               "t": "`$STRING`"
             },
-            "href": {
+            "fields": {
               "a": true,
-              "fo": "uri",
-              "h": "Href",
-              "n": "href",
+              "h": "Fields",
+              "n": "fields",
               "r": false,
-              "t": "`$STRING`"
+              "t": "`$ARRAY`"
             },
             "id": {
               "a": true,
@@ -866,6 +883,13 @@
               "r": false,
               "sh": "Unique identifier for the skill",
               "t": "`$INTEGER`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             },
             "skill": {
               "a": true,
@@ -890,10 +914,60 @@
           },
           "name": "skill",
           "op": {
-            "list": {
+            "load": {
               "input": "data",
-              "name": "list",
+              "name": "load",
               "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /skill/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": 1,
+                        "k": "param",
+                        "n": "id",
+                        "or": "idOrName",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/skill/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "idOrName": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "skill"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
                 {
                   "a": true,
                   "co": {
@@ -925,13 +999,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/skill",
-                  "q": {
-                    "exist": [
-                      "name",
-                      "page"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "skill"
@@ -940,57 +1013,6 @@
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body.content`"
-                  }
-                }
-              ]
-            },
-            "load": {
-              "input": "data",
-              "name": "load",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /skill/{idOrName}",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "idOrName",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/skill/{idOrName}",
-                  "q": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "idOrName": "id"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "skill"
-                    },
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
                   }
                 }
               ]
@@ -1006,13 +1028,19 @@
             "field": {}
           },
           "fields": {
-            "href": {
+            "description": {
               "a": true,
-              "fo": "uri",
-              "h": "Href",
-              "n": "href",
+              "h": "Description",
+              "n": "description",
               "r": false,
               "t": "`$STRING`"
+            },
+            "fields": {
+              "a": true,
+              "h": "Fields",
+              "n": "fields",
+              "r": false,
+              "t": "`$ARRAY`"
             },
             "id": {
               "a": true,
@@ -1021,6 +1049,13 @@
               "r": false,
               "sh": "Unique identifier for the type",
               "t": "`$INTEGER`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             },
             "type": {
               "a": true,
@@ -1037,10 +1072,60 @@
           },
           "name": "type",
           "op": {
-            "list": {
+            "load": {
               "input": "data",
-              "name": "list",
+              "name": "load",
               "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /type/{idOrName}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": 1,
+                        "k": "param",
+                        "n": "id",
+                        "or": "idOrName",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/type/{idOrName}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "idOrName": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "type"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
                 {
                   "a": true,
                   "co": {
@@ -1072,13 +1157,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/type",
-                  "q": {
-                    "exist": [
-                      "name",
-                      "page"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "type"
@@ -1087,57 +1171,6 @@
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body.content`"
-                  }
-                }
-              ]
-            },
-            "load": {
-              "input": "data",
-              "name": "load",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /type/{idOrName}",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "idOrName",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/type/{idOrName}",
-                  "q": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "idOrName": "id"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "type"
-                    },
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
                   }
                 }
               ]
@@ -1470,6 +1503,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -1570,30 +1604,12 @@
             {
               "a": true,
               "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "attribute_ref01"
-                  }
-                }
-              ]
-            },
-            {
-              "a": true,
-              "d": {},
               "i": {
                 "ref": "attribute_ref01",
                 "srcdatavar": "attribute_ref01_data",
                 "suffix": "_dt0"
               },
-              "m": {
-                "id": "attribute01"
-              },
+              "m": {},
               "o": "load",
               "s": [],
               "v": [
@@ -1666,30 +1682,12 @@
             {
               "a": true,
               "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "field_ref01"
-                  }
-                }
-              ]
-            },
-            {
-              "a": true,
-              "d": {},
               "i": {
                 "ref": "field_ref01",
                 "srcdatavar": "field_ref01_data",
                 "suffix": "_dt0"
               },
-              "m": {
-                "id": "field01"
-              },
+              "m": {},
               "o": "load",
               "s": [],
               "v": [
@@ -1714,30 +1712,12 @@
             {
               "a": true,
               "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "level_ref01"
-                  }
-                }
-              ]
-            },
-            {
-              "a": true,
-              "d": {},
               "i": {
                 "ref": "level_ref01",
                 "srcdatavar": "level_ref01_data",
                 "suffix": "_dt0"
               },
-              "m": {
-                "id": "level01"
-              },
+              "m": {},
               "o": "load",
               "s": [],
               "v": [
@@ -1762,30 +1742,12 @@
             {
               "a": true,
               "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "skill_ref01"
-                  }
-                }
-              ]
-            },
-            {
-              "a": true,
-              "d": {},
               "i": {
                 "ref": "skill_ref01",
                 "srcdatavar": "skill_ref01_data",
                 "suffix": "_dt0"
               },
-              "m": {
-                "id": "skill01"
-              },
+              "m": {},
               "o": "load",
               "s": [],
               "v": [
@@ -1810,30 +1772,12 @@
             {
               "a": true,
               "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "type_ref01"
-                  }
-                }
-              ]
-            },
-            {
-              "a": true,
-              "d": {},
               "i": {
                 "ref": "type_ref01",
                 "srcdatavar": "type_ref01_data",
                 "suffix": "_dt0"
               },
-              "m": {
-                "id": "type01"
-              },
+              "m": {},
               "o": "load",
               "s": [],
               "v": [
@@ -1875,7 +1819,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -1928,6 +1872,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -2158,7 +2107,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -2535,6 +2487,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

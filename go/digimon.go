@@ -13,7 +13,12 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type DigimonEntity = core.DigimonEntity
+type DigimonEntityBase = core.DigimonEntityBase
+
+// Deprecated: use DigimonEntityBase.
+type DigimonEntity = core.DigimonEntityBase
+
+type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
 type Result = core.Result
@@ -41,22 +46,22 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewAttributeEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntity {
+	core.NewAttributeEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntityBase {
 		return entity.NewAttributeEntity(client, entopts)
 	}
-	core.NewDigimonEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntity {
+	core.NewDigimonEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntityBase {
 		return entity.NewDigimonEntity(client, entopts)
 	}
-	core.NewFieldEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntity {
+	core.NewFieldEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntityBase {
 		return entity.NewFieldEntity(client, entopts)
 	}
-	core.NewLevelEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntity {
+	core.NewLevelEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntityBase {
 		return entity.NewLevelEntity(client, entopts)
 	}
-	core.NewSkillEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntity {
+	core.NewSkillEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntityBase {
 		return entity.NewSkillEntity(client, entopts)
 	}
-	core.NewTypeEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntity {
+	core.NewTypeEntityFunc = func(client *core.DigimonSDK, entopts map[string]any) core.DigimonEntityBase {
 		return entity.NewTypeEntity(client, entopts)
 	}
 }

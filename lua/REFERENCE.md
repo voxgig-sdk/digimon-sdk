@@ -112,22 +112,15 @@ local attribute = client:Attribute(nil)
 | --- | --- | --- | --- |
 | `attribute` | `string` | No | Name of the attribute |
 | `description` | `string` | No | Description of the attribute |
-| `href` | `string` | No |  |
+| `fields` | `table` | No |  |
 | `id` | `number` | No | Unique identifier for the attribute |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Attribute():list()
-```
-
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Attribute():load({ id = "attribute_id" })
@@ -193,7 +186,7 @@ local digimon = client:Digimon(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
 local results, err = client:Digimon():list()
@@ -201,7 +194,7 @@ local results, err = client:Digimon():list()
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Digimon():load({ id = "digimon_id" })
@@ -249,23 +242,16 @@ local field = client:Field(nil)
 | --- | --- | --- | --- |
 | `description` | `string` | No | Description of the field |
 | `field` | `string` | No | Name of the field |
-| `href` | `string` | No |  |
+| `fields` | `table` | No |  |
 | `id` | `number` | No | Unique identifier for the field |
 | `image` | `string` | No | Image URL for the field |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Field():list()
-```
-
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Field():load({ id = "field_id" })
@@ -311,23 +297,17 @@ local level = client:Level(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `string` | No |  |
+| `description` | `string` | No |  |
+| `fields` | `table` | No |  |
 | `id` | `number` | No | Unique identifier for the level |
 | `level` | `string` | No | Name of the level |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Level():list()
-```
-
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Level():load({ id = "level_id" })
@@ -374,24 +354,17 @@ local skill = client:Skill(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `description` | `string` | No | Description of the skill |
-| `href` | `string` | No |  |
+| `fields` | `table` | No |  |
 | `id` | `number` | No | Unique identifier for the skill |
+| `name` | `string` | No |  |
 | `skill` | `string` | No | Name of the skill |
 | `translation` | `string` | No | Translation of the skill name |
 
 ### Operations
 
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Skill():list()
-```
-
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Skill():load({ id = "skill_id" })
@@ -437,23 +410,17 @@ local type = client:Type(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `string` | No |  |
+| `description` | `string` | No |  |
+| `fields` | `table` | No |  |
 | `id` | `number` | No | Unique identifier for the type |
+| `name` | `string` | No |  |
 | `type` | `string` | No | Name of the type |
 
 ### Operations
 
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Type():list()
-```
-
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Type():load({ id = "type_id" })
@@ -646,6 +613,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

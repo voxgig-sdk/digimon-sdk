@@ -11,37 +11,30 @@ const PLAN = [
     {
         "entity": "attribute",
         "accessor": "Attribute",
-        "op": "list",
+        "op": "load",
         "method": "GET",
-        "path": "/attribute",
-        "args": [],
-        "select": {
-            "name": "v1",
-            "page": "v1"
-        },
-        "headers": [],
-        "query": [
-            "page",
-            "name"
+        "path": "/attribute/{idOrName}",
+        "args": [
+            {
+                "name": "id",
+                "wire": "idOrName",
+                "value": 1
+            }
         ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
-            "content": [
-                {
-                    "attribute": "x",
-                    "href": "x",
-                    "id": 1
-                }
-            ],
-            "pageable": {
-                "currentPage": 1,
-                "elementsOnPage": 1,
-                "nextPage": "x",
-                "previousPage": "x",
-                "totalElements": 1,
-                "totalPages": 1
-            }
+            "id": 1,
+            "attribute": "x",
+            "description": "x"
         },
         "idField": "id"
     },
@@ -50,23 +43,45 @@ const PLAN = [
         "accessor": "Attribute",
         "op": "load",
         "method": "GET",
-        "path": "/attribute/{idOrName}",
-        "args": [
+        "path": "/attribute",
+        "args": [],
+        "select": {
+            "name": "v1",
+            "page": 0
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "page",
+            "name"
+        ],
+        "queryArgs": [
             {
-                "name": "id",
-                "wire": "idOrName",
-                "value": "p1"
+                "name": "name",
+                "wire": "name"
+            },
+            {
+                "name": "page",
+                "wire": "page"
             }
         ],
-        "select": {},
-        "headers": [],
-        "query": [],
         "auth": null,
         "status": 200,
         "sample": {
-            "id": 1,
-            "attribute": "x",
-            "description": "x"
+            "content": {
+                "name": "x",
+                "description": "x",
+                "fields": [
+                    {
+                        "id": 1,
+                        "name": "x",
+                        "href": "x"
+                    }
+                ]
+            }
         },
         "idField": "id"
     },
@@ -82,11 +97,15 @@ const PLAN = [
             "exact": "v1",
             "level": "v1",
             "name": "v1",
-            "page": "v1",
-            "page_size": "v1",
+            "page": 0,
+            "page_size": 20,
             "x_antibody": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "name",
             "exact",
@@ -96,24 +115,54 @@ const PLAN = [
             "page",
             "pageSize"
         ],
+        "queryArgs": [
+            {
+                "name": "attribute",
+                "wire": "attribute"
+            },
+            {
+                "name": "exact",
+                "wire": "exact"
+            },
+            {
+                "name": "level",
+                "wire": "level"
+            },
+            {
+                "name": "name",
+                "wire": "name"
+            },
+            {
+                "name": "page",
+                "wire": "page"
+            },
+            {
+                "name": "page_size",
+                "wire": "pageSize"
+            },
+            {
+                "name": "x_antibody",
+                "wire": "xAntibody"
+            }
+        ],
         "auth": null,
         "status": 200,
         "sample": {
             "content": [
                 {
-                    "href": "x",
                     "id": 1,
-                    "image": "x",
-                    "name": "x"
+                    "name": "x",
+                    "href": "x",
+                    "image": "x"
                 }
             ],
             "pageable": {
                 "currentPage": 1,
                 "elementsOnPage": 1,
-                "nextPage": "x",
-                "previousPage": "x",
                 "totalElements": 1,
-                "totalPages": 1
+                "totalPages": 1,
+                "previousPage": "x",
+                "nextPage": "x"
             }
         },
         "idField": "id"
@@ -128,12 +177,17 @@ const PLAN = [
             {
                 "name": "id",
                 "wire": "idOrName",
-                "value": "p1"
+                "value": 1
             }
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
@@ -216,44 +270,6 @@ const PLAN = [
     {
         "entity": "field",
         "accessor": "Field",
-        "op": "list",
-        "method": "GET",
-        "path": "/field",
-        "args": [],
-        "select": {
-            "name": "v1",
-            "page": "v1"
-        },
-        "headers": [],
-        "query": [
-            "page",
-            "name"
-        ],
-        "auth": null,
-        "status": 200,
-        "sample": {
-            "content": [
-                {
-                    "field": "x",
-                    "href": "x",
-                    "id": 1,
-                    "image": "x"
-                }
-            ],
-            "pageable": {
-                "currentPage": 1,
-                "elementsOnPage": 1,
-                "nextPage": "x",
-                "previousPage": "x",
-                "totalElements": 1,
-                "totalPages": 1
-            }
-        },
-        "idField": "id"
-    },
-    {
-        "entity": "field",
-        "accessor": "Field",
         "op": "load",
         "method": "GET",
         "path": "/field/{idOrName}",
@@ -261,12 +277,17 @@ const PLAN = [
             {
                 "name": "id",
                 "wire": "idOrName",
-                "value": "p1"
+                "value": 1
             }
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
@@ -278,38 +299,48 @@ const PLAN = [
         "idField": "id"
     },
     {
-        "entity": "level",
-        "accessor": "Level",
-        "op": "list",
+        "entity": "field",
+        "accessor": "Field",
+        "op": "load",
         "method": "GET",
-        "path": "/level",
+        "path": "/field",
         "args": [],
         "select": {
             "name": "v1",
-            "page": "v1"
+            "page": 0
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "page",
             "name"
         ],
+        "queryArgs": [
+            {
+                "name": "name",
+                "wire": "name"
+            },
+            {
+                "name": "page",
+                "wire": "page"
+            }
+        ],
         "auth": null,
         "status": 200,
         "sample": {
-            "content": [
-                {
-                    "href": "x",
-                    "id": 1,
-                    "level": "x"
-                }
-            ],
-            "pageable": {
-                "currentPage": 1,
-                "elementsOnPage": 1,
-                "nextPage": "x",
-                "previousPage": "x",
-                "totalElements": 1,
-                "totalPages": 1
+            "content": {
+                "name": "x",
+                "description": "x",
+                "fields": [
+                    {
+                        "id": 1,
+                        "name": "x",
+                        "href": "x"
+                    }
+                ]
             }
         },
         "idField": "id"
@@ -324,12 +355,17 @@ const PLAN = [
             {
                 "name": "id",
                 "wire": "idOrName",
-                "value": "p1"
+                "value": 1
             }
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
@@ -339,40 +375,48 @@ const PLAN = [
         "idField": "id"
     },
     {
-        "entity": "skill",
-        "accessor": "Skill",
-        "op": "list",
+        "entity": "level",
+        "accessor": "Level",
+        "op": "load",
         "method": "GET",
-        "path": "/skill",
+        "path": "/level",
         "args": [],
         "select": {
             "name": "v1",
-            "page": "v1"
+            "page": 0
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "page",
             "name"
         ],
+        "queryArgs": [
+            {
+                "name": "name",
+                "wire": "name"
+            },
+            {
+                "name": "page",
+                "wire": "page"
+            }
+        ],
         "auth": null,
         "status": 200,
         "sample": {
-            "content": [
-                {
-                    "description": "x",
-                    "href": "x",
-                    "id": 1,
-                    "skill": "x",
-                    "translation": "x"
-                }
-            ],
-            "pageable": {
-                "currentPage": 1,
-                "elementsOnPage": 1,
-                "nextPage": "x",
-                "previousPage": "x",
-                "totalElements": 1,
-                "totalPages": 1
+            "content": {
+                "name": "x",
+                "description": "x",
+                "fields": [
+                    {
+                        "id": 1,
+                        "name": "x",
+                        "href": "x"
+                    }
+                ]
             }
         },
         "idField": "id"
@@ -387,12 +431,17 @@ const PLAN = [
             {
                 "name": "id",
                 "wire": "idOrName",
-                "value": "p1"
+                "value": 1
             }
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
@@ -404,38 +453,48 @@ const PLAN = [
         "idField": "id"
     },
     {
-        "entity": "type",
-        "accessor": "Type",
-        "op": "list",
+        "entity": "skill",
+        "accessor": "Skill",
+        "op": "load",
         "method": "GET",
-        "path": "/type",
+        "path": "/skill",
         "args": [],
         "select": {
             "name": "v1",
-            "page": "v1"
+            "page": 0
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "page",
             "name"
         ],
+        "queryArgs": [
+            {
+                "name": "name",
+                "wire": "name"
+            },
+            {
+                "name": "page",
+                "wire": "page"
+            }
+        ],
         "auth": null,
         "status": 200,
         "sample": {
-            "content": [
-                {
-                    "href": "x",
-                    "id": 1,
-                    "type": "x"
-                }
-            ],
-            "pageable": {
-                "currentPage": 1,
-                "elementsOnPage": 1,
-                "nextPage": "x",
-                "previousPage": "x",
-                "totalElements": 1,
-                "totalPages": 1
+            "content": {
+                "name": "x",
+                "description": "x",
+                "fields": [
+                    {
+                        "id": 1,
+                        "name": "x",
+                        "href": "x"
+                    }
+                ]
             }
         },
         "idField": "id"
@@ -450,17 +509,69 @@ const PLAN = [
             {
                 "name": "id",
                 "wire": "idOrName",
-                "value": "p1"
+                "value": 1
             }
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
             "id": 1,
             "type": "x"
+        },
+        "idField": "id"
+    },
+    {
+        "entity": "type",
+        "accessor": "Type",
+        "op": "load",
+        "method": "GET",
+        "path": "/type",
+        "args": [],
+        "select": {
+            "name": "v1",
+            "page": 0
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "page",
+            "name"
+        ],
+        "queryArgs": [
+            {
+                "name": "name",
+                "wire": "name"
+            },
+            {
+                "name": "page",
+                "wire": "page"
+            }
+        ],
+        "auth": null,
+        "status": 200,
+        "sample": {
+            "content": {
+                "name": "x",
+                "description": "x",
+                "fields": [
+                    {
+                        "id": 1,
+                        "name": "x",
+                        "href": "x"
+                    }
+                ]
+            }
         },
         "idField": "id"
     }

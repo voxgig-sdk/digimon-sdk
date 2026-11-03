@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/digimon-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/digimon-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/digimon-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -50,21 +51,12 @@ import (
 func main() {
     client := sdk.New()
 
-    // List attribute records — the value is the array of records itself.
-    attributes, err := client.Attribute(nil).List(nil, nil)
-    if err != nil {
-        panic(err)
-    }
-    for _, item := range attributes.([]any) {
-        fmt.Println(item)
-    }
-
-    // Load a single attribute — the value is the loaded record.
+    // Load a single attribute — the value is the entity; Data() reads its record.
     attribute, err := client.Attribute(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(attribute)
+    fmt.Println(attribute.(sdk.Entity).Data())
 }
 ```
 
@@ -75,12 +67,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-fields, err := client.Field(nil).List(nil, nil)
+field, err := client.Field(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = fields
+_ = field
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -144,13 +136,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-field, err := client.Field(nil).List(
-    nil, nil,
+field, err := client.Field(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(field) // the returned mock data
+fmt.Println(field.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -227,21 +219,21 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Attribute` | `(data map[string]any) DigimonEntity` | Create an Attribute entity instance. |
-| `Digimon` | `(data map[string]any) DigimonEntity` | Create a Digimon entity instance. |
-| `Field` | `(data map[string]any) DigimonEntity` | Create a Field entity instance. |
-| `Level` | `(data map[string]any) DigimonEntity` | Create a Level entity instance. |
-| `Skill` | `(data map[string]any) DigimonEntity` | Create a Skill entity instance. |
-| `Type` | `(data map[string]any) DigimonEntity` | Create a Type entity instance. |
+| `Attribute` | `(data map[string]any) DigimonEntityBase` | Create an Attribute entity instance. |
+| `Digimon` | `(data map[string]any) DigimonEntityBase` | Create a Digimon entity instance. |
+| `Field` | `(data map[string]any) DigimonEntityBase` | Create a Field entity instance. |
+| `Level` | `(data map[string]any) DigimonEntityBase` | Create a Level entity instance. |
+| `Skill` | `(data map[string]any) DigimonEntityBase` | Create a Skill entity instance. |
+| `Type` | `(data map[string]any) DigimonEntityBase` | Create a Type entity instance. |
 
-### Entity interface (DigimonEntity)
+### Entity interface (DigimonEntityBase)
 
-All entities implement the `DigimonEntity` interface.
+All entities implement the `DigimonEntityBase` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -249,21 +241,21 @@ All entities implement the `DigimonEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    attribute, err := client.Attribute(nil).List(map[string]any{/* fields */}, nil)
+    attribute, err := client.Attribute(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil { /* handle */ }
-    // attribute is the returned record
+    // attribute is the entity; attribute.(sdk.Entity).Data() reads its record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -276,12 +268,13 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | --- | --- |
 | `"attribute"` | Name of the attribute |
 | `"description"` | Description of the attribute |
-| `"href"` |  |
+| `"fields"` |  |
 | `"id"` | Unique identifier for the attribute |
+| `"name"` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/attribute`
+API path: `/attribute/{idOrName}`
 
 #### Digimon
 
@@ -313,51 +306,57 @@ API path: `/digimon`
 | --- | --- |
 | `"description"` | Description of the field |
 | `"field"` | Name of the field |
-| `"href"` |  |
+| `"fields"` |  |
 | `"id"` | Unique identifier for the field |
 | `"image"` | Image URL for the field |
+| `"name"` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/field`
+API path: `/field/{idOrName}`
 
 #### Level
 
 | Field | Description |
 | --- | --- |
-| `"href"` |  |
+| `"description"` |  |
+| `"fields"` |  |
 | `"id"` | Unique identifier for the level |
 | `"level"` | Name of the level |
+| `"name"` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/level`
+API path: `/level/{idOrName}`
 
 #### Skill
 
 | Field | Description |
 | --- | --- |
 | `"description"` | Description of the skill |
-| `"href"` |  |
+| `"fields"` |  |
 | `"id"` | Unique identifier for the skill |
+| `"name"` |  |
 | `"skill"` | Name of the skill |
 | `"translation"` | Translation of the skill name |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/skill`
+API path: `/skill/{idOrName}`
 
 #### Type
 
 | Field | Description |
 | --- | --- |
-| `"href"` |  |
+| `"description"` |  |
+| `"fields"` |  |
 | `"id"` | Unique identifier for the type |
+| `"name"` |  |
 | `"type"` | Name of the type |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/type`
+API path: `/type/{idOrName}`
 
 
 
@@ -372,7 +371,6 @@ Create an instance: `attribute := client.Attribute(nil)`
 
 | Method | Description |
 | --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -381,8 +379,9 @@ Create an instance: `attribute := client.Attribute(nil)`
 | --- | --- | --- |
 | `attribute` | `string` | Name of the attribute |
 | `description` | `string` | Description of the attribute |
-| `href` | `string` |  |
+| `fields` | `[]any` |  |
 | `id` | `int` | Unique identifier for the attribute |
+| `name` | `string` |  |
 
 #### Example: Load
 
@@ -391,17 +390,7 @@ attribute, err := client.Attribute(nil).Load(map[string]any{"id": "attribute_id"
 if err != nil {
     panic(err)
 }
-fmt.Println(attribute) // the loaded record
-```
-
-#### Example: List
-
-```go
-attributes, err := client.Attribute(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(attributes) // the array of records
+fmt.Println(attribute.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -443,7 +432,7 @@ digimon, err := client.Digimon(nil).Load(map[string]any{"id": "digimon_id"}, nil
 if err != nil {
     panic(err)
 }
-fmt.Println(digimon) // the loaded record
+fmt.Println(digimon.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -453,7 +442,10 @@ digimons, err := client.Digimon(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(digimons) // the array of records
+// A []any of entities, one per record.
+for _, item := range digimons.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -465,7 +457,6 @@ Create an instance: `field := client.Field(nil)`
 
 | Method | Description |
 | --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -474,9 +465,10 @@ Create an instance: `field := client.Field(nil)`
 | --- | --- | --- |
 | `description` | `string` | Description of the field |
 | `field` | `string` | Name of the field |
-| `href` | `string` |  |
+| `fields` | `[]any` |  |
 | `id` | `int` | Unique identifier for the field |
 | `image` | `string` | Image URL for the field |
+| `name` | `string` |  |
 
 #### Example: Load
 
@@ -485,17 +477,7 @@ field, err := client.Field(nil).Load(map[string]any{"id": "field_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(field) // the loaded record
-```
-
-#### Example: List
-
-```go
-fields, err := client.Field(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(fields) // the array of records
+fmt.Println(field.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -507,16 +489,17 @@ Create an instance: `level := client.Level(nil)`
 
 | Method | Description |
 | --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `[]any` |  |
 | `id` | `int` | Unique identifier for the level |
 | `level` | `string` | Name of the level |
+| `name` | `string` |  |
 
 #### Example: Load
 
@@ -525,17 +508,7 @@ level, err := client.Level(nil).Load(map[string]any{"id": "level_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(level) // the loaded record
-```
-
-#### Example: List
-
-```go
-levels, err := client.Level(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(levels) // the array of records
+fmt.Println(level.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -547,7 +520,6 @@ Create an instance: `skill := client.Skill(nil)`
 
 | Method | Description |
 | --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -555,8 +527,9 @@ Create an instance: `skill := client.Skill(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | `string` | Description of the skill |
-| `href` | `string` |  |
+| `fields` | `[]any` |  |
 | `id` | `int` | Unique identifier for the skill |
+| `name` | `string` |  |
 | `skill` | `string` | Name of the skill |
 | `translation` | `string` | Translation of the skill name |
 
@@ -567,17 +540,7 @@ skill, err := client.Skill(nil).Load(map[string]any{"id": "skill_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(skill) // the loaded record
-```
-
-#### Example: List
-
-```go
-skills, err := client.Skill(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(skills) // the array of records
+fmt.Println(skill.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -589,15 +552,16 @@ Create an instance: `type_ := client.Type(nil)`
 
 | Method | Description |
 | --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `string` |  |
+| `description` | `string` |  |
+| `fields` | `[]any` |  |
 | `id` | `int` | Unique identifier for the type |
+| `name` | `string` |  |
 | `type` | `string` | Name of the type |
 
 #### Example: Load
@@ -607,17 +571,7 @@ type_, err := client.Type(nil).Load(map[string]any{"id": "type_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(type_) // the loaded record
-```
-
-#### Example: List
-
-```go
-type_s, err := client.Type(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(type_s) // the array of records
+fmt.Println(type_.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 ## Features
@@ -754,7 +708,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 
@@ -774,14 +730,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `List`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 field := client.Field(nil)
-field.List(nil, nil)
+field.Load(map[string]any{"id": "example_id"}, nil)
 
-// field.Data() now returns the field data from the last list
+// field.Data() now returns the field data from the last load
 // field.Match() returns the last match criteria
 ```
 

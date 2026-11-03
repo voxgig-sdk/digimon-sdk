@@ -1,15 +1,12 @@
 export interface Attribute {
     attribute?: string;
     description?: string;
-    href?: string;
+    fields?: any[];
     id?: number;
+    name?: string;
 }
 export interface AttributeLoadMatch {
     id: string;
-}
-export interface AttributeListMatch {
-    name?: string;
-    page?: number;
 }
 export interface Digimon {
     attributes?: any[];
@@ -43,52 +40,42 @@ export interface DigimonListMatch {
 export interface Field {
     description?: string;
     field?: string;
-    href?: string;
+    fields?: any[];
     id?: number;
     image?: string;
+    name?: string;
 }
 export interface FieldLoadMatch {
     id: string;
 }
-export interface FieldListMatch {
-    name?: string;
-    page?: number;
-}
 export interface Level {
-    href?: string;
+    description?: string;
+    fields?: any[];
     id?: number;
     level?: string;
+    name?: string;
 }
 export interface LevelLoadMatch {
     id: string;
 }
-export interface LevelListMatch {
-    name?: string;
-    page?: number;
-}
 export interface Skill {
     description?: string;
-    href?: string;
+    fields?: any[];
     id?: number;
+    name?: string;
     skill?: string;
     translation?: string;
 }
 export interface SkillLoadMatch {
     id: string;
 }
-export interface SkillListMatch {
-    name?: string;
-    page?: number;
-}
 export interface Type {
-    href?: string;
+    description?: string;
+    fields?: any[];
     id?: number;
+    name?: string;
     type?: string;
 }
 export interface TypeLoadMatch {
     id: string;
-}
-export interface TypeListMatch {
-    name?: string;
-    page?: number;
 }

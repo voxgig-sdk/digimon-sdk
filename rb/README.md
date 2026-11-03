@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/digimon-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/digimon-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -39,27 +39,13 @@ require_relative "Digimon_sdk"
 client = DigimonSDK.new
 ```
 
-### 2. List attribute records
-
-```ruby
-begin
-  # list returns an Array of Attribute records — iterate directly.
-  attributes = client.Attribute.list
-  attributes.each do |item|
-    puts "#{item["id"]} #{item["attribute"]}"
-  end
-rescue => err
-  warn "list failed: #{err}"
-end
-```
-
 ### 3. Load an attribute
 
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the Attribute record (raises on error).
   attribute = client.Attribute.load({ "id" => "example_id" })
-  puts attribute
+  puts attribute.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -72,9 +58,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  fields = client.Field.list()
+  field = client.Field.load({ "id" => "example_id" })
 rescue => err
-  warn "list failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -144,9 +130,9 @@ client = DigimonSDK.test({
 })
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-field = client.Field.list()
-puts field
+# data_get reads its mock record.
+field = client.Field.load({ "id" => "test01" })
+puts field.data_get
 ```
 
 ### Use a custom fetch function
@@ -235,8 +221,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -246,9 +232,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `DigimonError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`DigimonError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -269,12 +256,13 @@ returns a result `Hash` with these keys:
 | --- | --- |
 | `attribute` | Name of the attribute |
 | `description` | Description of the attribute |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the attribute |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/attribute`
+API path: `/attribute/{idOrName}`
 
 #### Digimon
 
@@ -306,51 +294,57 @@ API path: `/digimon`
 | --- | --- |
 | `description` | Description of the field |
 | `field` | Name of the field |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the field |
 | `image` | Image URL for the field |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/field`
+API path: `/field/{idOrName}`
 
 #### Level
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the level |
 | `level` | Name of the level |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/level`
+API path: `/level/{idOrName}`
 
 #### Skill
 
 | Field | Description |
 | --- | --- |
 | `description` | Description of the skill |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the skill |
+| `name` |  |
 | `skill` | Name of the skill |
 | `translation` | Translation of the skill name |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/skill`
+API path: `/skill/{idOrName}`
 
 #### Type
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the type |
+| `name` |  |
 | `type` | Name of the type |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/type`
+API path: `/type/{idOrName}`
 
 
 
@@ -365,7 +359,6 @@ Create an instance: `attribute = client.Attribute`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -374,21 +367,15 @@ Create an instance: `attribute = client.Attribute`
 | --- | --- | --- |
 | `attribute` | `String` | Name of the attribute |
 | `description` | `String` | Description of the attribute |
-| `href` | `String` |  |
+| `fields` | `Array` |  |
 | `id` | `Integer` | Unique identifier for the attribute |
+| `name` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the ENTITY — call data_get for the Attribute record (raises on error).
 attribute = client.Attribute.load({ "id" => "attribute_id" })
-```
-
-#### Example: List
-
-```ruby
-# list returns an Array of Attribute records (raises on error).
-attributes = client.Attribute.list
 ```
 
 
@@ -433,8 +420,9 @@ digimon = client.Digimon.load({ "id" => "digimon_id" })
 #### Example: List
 
 ```ruby
-# list returns an Array of Digimon records (raises on error).
+# list returns an Array of Digimon entities, one per record (raises on error).
 digimons = client.Digimon.list
+digimons.each { |item| puts item.data_get }
 ```
 
 
@@ -446,7 +434,6 @@ Create an instance: `field = client.Field`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -455,22 +442,16 @@ Create an instance: `field = client.Field`
 | --- | --- | --- |
 | `description` | `String` | Description of the field |
 | `field` | `String` | Name of the field |
-| `href` | `String` |  |
+| `fields` | `Array` |  |
 | `id` | `Integer` | Unique identifier for the field |
 | `image` | `String` | Image URL for the field |
+| `name` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the ENTITY — call data_get for the Field record (raises on error).
 field = client.Field.load({ "id" => "field_id" })
-```
-
-#### Example: List
-
-```ruby
-# list returns an Array of Field records (raises on error).
-fields = client.Field.list
 ```
 
 
@@ -482,29 +463,23 @@ Create an instance: `level = client.Level`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `String` |  |
+| `description` | `String` |  |
+| `fields` | `Array` |  |
 | `id` | `Integer` | Unique identifier for the level |
 | `level` | `String` | Name of the level |
+| `name` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the ENTITY — call data_get for the Level record (raises on error).
 level = client.Level.load({ "id" => "level_id" })
-```
-
-#### Example: List
-
-```ruby
-# list returns an Array of Level records (raises on error).
-levels = client.Level.list
 ```
 
 
@@ -516,7 +491,6 @@ Create an instance: `skill = client.Skill`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -524,8 +498,9 @@ Create an instance: `skill = client.Skill`
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | `String` | Description of the skill |
-| `href` | `String` |  |
+| `fields` | `Array` |  |
 | `id` | `Integer` | Unique identifier for the skill |
+| `name` | `String` |  |
 | `skill` | `String` | Name of the skill |
 | `translation` | `String` | Translation of the skill name |
 
@@ -534,13 +509,6 @@ Create an instance: `skill = client.Skill`
 ```ruby
 # load returns the ENTITY — call data_get for the Skill record (raises on error).
 skill = client.Skill.load({ "id" => "skill_id" })
-```
-
-#### Example: List
-
-```ruby
-# list returns an Array of Skill records (raises on error).
-skills = client.Skill.list
 ```
 
 
@@ -552,15 +520,16 @@ Create an instance: `type = client.Type`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `String` |  |
+| `description` | `String` |  |
+| `fields` | `Array` |  |
 | `id` | `Integer` | Unique identifier for the type |
+| `name` | `String` |  |
 | `type` | `String` | Name of the type |
 
 #### Example: Load
@@ -568,13 +537,6 @@ Create an instance: `type = client.Type`
 ```ruby
 # load returns the ENTITY — call data_get for the Type record (raises on error).
 type = client.Type.load({ "id" => "type_id" })
-```
-
-#### Example: List
-
-```ruby
-# list returns an Array of Type records (raises on error).
-types = client.Type.list
 ```
 
 ## Features
@@ -735,14 +697,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 field = client.Field
-field.list()
+field.load({ "id" => "example_id" })
 
-# field.data_get now returns the field data from the last list
+# field.data_get now returns the field data from the last load
 # field.match_get returns the last match criteria
 ```
 

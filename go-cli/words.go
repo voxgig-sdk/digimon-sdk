@@ -75,7 +75,7 @@ func runOp(client *sdk.DigimonSDK, op string, query *eng.Value, entityAtom eng.V
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.DigimonSDK, name string) (sdk.DigimonEntity, error) {
+func entityFor(client *sdk.DigimonSDK, name string) (sdk.DigimonEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "attribute":
 		return client.Attribute(nil), nil

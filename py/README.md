@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to PyPI. Install it from the GitHub
-release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/digimon-sdk/releases)) or
+release tag (`py/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/digimon-sdk/tags)) or
 from a source checkout:
 
 ```bash
@@ -36,20 +36,6 @@ from digimon_sdk import DigimonSDK
 client = DigimonSDK()
 ```
 
-### 2. List attribute records
-
-`list()` returns a `list` of records (each a `dict`) and raises on
-error — iterate it directly.
-
-```python
-try:
-    attributes = client.Attribute().list()
-    for attribute in attributes:
-        print(attribute)
-except Exception as err:
-    print(f"list failed: {err}")
-```
-
 ### 3. Load an attribute
 
 `load()` returns the ENTITY — call data_get() for the record — and raises on error.
@@ -57,7 +43,7 @@ except Exception as err:
 ```python
 try:
     attribute = client.Attribute().load({"id": "example_id"})
-    print(attribute)
+    print(attribute.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -69,10 +55,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    fields = client.Field().list()
-    print(fields)
+    field = client.Field().load({"id": "example_id"})
+    print(field.data_get())
 except Exception as err:
-    print(f"list failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -136,10 +122,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = DigimonSDK.test()
 
-# Entity ops return the ENTITY and raises on error;
-# call data_get() for the record.
-field = client.Field().list()
-# field contains the mock response record
+# Entity ops return the entity, and list one per record; they raise on error.
+field = client.Field().load({"id": "test01"})
+# data_get() on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -228,8 +213,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria, one per record. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -239,9 +224,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
-ops, a `list` for `list`) and raise on error. Wrap calls in
-`try`/`except` to handle failures.
+Entity operations return the entity, and `list` a `list` of entities, one
+per record; an entity's `data_get()` reads its record (a `dict`). They raise
+on error, so wrap calls in `try`/`except` to handle failures.
 
 The `direct()` escape hatch never raises — it returns a result `dict`
 you branch on via `result["ok"]`:
@@ -263,12 +248,13 @@ On error, `ok` is `False` and `err` contains the error value.
 | --- | --- |
 | `attribute` | Name of the attribute |
 | `description` | Description of the attribute |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the attribute |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/attribute`
+API path: `/attribute/{idOrName}`
 
 #### Digimon
 
@@ -300,51 +286,57 @@ API path: `/digimon`
 | --- | --- |
 | `description` | Description of the field |
 | `field` | Name of the field |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the field |
 | `image` | Image URL for the field |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/field`
+API path: `/field/{idOrName}`
 
 #### Level
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the level |
 | `level` | Name of the level |
+| `name` |  |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/level`
+API path: `/level/{idOrName}`
 
 #### Skill
 
 | Field | Description |
 | --- | --- |
 | `description` | Description of the skill |
-| `href` |  |
+| `fields` |  |
 | `id` | Unique identifier for the skill |
+| `name` |  |
 | `skill` | Name of the skill |
 | `translation` | Translation of the skill name |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/skill`
+API path: `/skill/{idOrName}`
 
 #### Type
 
 | Field | Description |
 | --- | --- |
-| `href` |  |
+| `description` |  |
+| `fields` |  |
 | `id` | Unique identifier for the type |
+| `name` |  |
 | `type` | Name of the type |
 
-Operations: List, Load.
+Operations: Load.
 
-API path: `/type`
+API path: `/type/{idOrName}`
 
 
 
@@ -359,7 +351,6 @@ Create an instance: `attribute = client.Attribute()`
 
 | Method | Description |
 | --- | --- |
-| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -368,19 +359,14 @@ Create an instance: `attribute = client.Attribute()`
 | --- | --- | --- |
 | `attribute` | `str` | Name of the attribute |
 | `description` | `str` | Description of the attribute |
-| `href` | `str` |  |
+| `fields` | `list` |  |
 | `id` | `int` | Unique identifier for the attribute |
+| `name` | `str` |  |
 
 #### Example: Load
 
 ```python
 attribute = client.Attribute().load({"id": "attribute_id"})
-```
-
-#### Example: List
-
-```python
-attributes = client.Attribute().list()
 ```
 
 
@@ -436,7 +422,6 @@ Create an instance: `field = client.Field()`
 
 | Method | Description |
 | --- | --- |
-| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -445,20 +430,15 @@ Create an instance: `field = client.Field()`
 | --- | --- | --- |
 | `description` | `str` | Description of the field |
 | `field` | `str` | Name of the field |
-| `href` | `str` |  |
+| `fields` | `list` |  |
 | `id` | `int` | Unique identifier for the field |
 | `image` | `str` | Image URL for the field |
+| `name` | `str` |  |
 
 #### Example: Load
 
 ```python
 field = client.Field().load({"id": "field_id"})
-```
-
-#### Example: List
-
-```python
-fields = client.Field().list()
 ```
 
 
@@ -470,27 +450,22 @@ Create an instance: `level = client.Level()`
 
 | Method | Description |
 | --- | --- |
-| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `str` |  |
+| `description` | `str` |  |
+| `fields` | `list` |  |
 | `id` | `int` | Unique identifier for the level |
 | `level` | `str` | Name of the level |
+| `name` | `str` |  |
 
 #### Example: Load
 
 ```python
 level = client.Level().load({"id": "level_id"})
-```
-
-#### Example: List
-
-```python
-levels = client.Level().list()
 ```
 
 
@@ -502,7 +477,6 @@ Create an instance: `skill = client.Skill()`
 
 | Method | Description |
 | --- | --- |
-| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -510,8 +484,9 @@ Create an instance: `skill = client.Skill()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | `str` | Description of the skill |
-| `href` | `str` |  |
+| `fields` | `list` |  |
 | `id` | `int` | Unique identifier for the skill |
+| `name` | `str` |  |
 | `skill` | `str` | Name of the skill |
 | `translation` | `str` | Translation of the skill name |
 
@@ -519,12 +494,6 @@ Create an instance: `skill = client.Skill()`
 
 ```python
 skill = client.Skill().load({"id": "skill_id"})
-```
-
-#### Example: List
-
-```python
-skills = client.Skill().list()
 ```
 
 
@@ -536,27 +505,22 @@ Create an instance: `type = client.Type()`
 
 | Method | Description |
 | --- | --- |
-| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `href` | `str` |  |
+| `description` | `str` |  |
+| `fields` | `list` |  |
 | `id` | `int` | Unique identifier for the type |
+| `name` | `str` |  |
 | `type` | `str` | Name of the type |
 
 #### Example: Load
 
 ```python
 type = client.Type().load({"id": "type_id"})
-```
-
-#### Example: List
-
-```python
-types = client.Type().list()
 ```
 
 ## Features
@@ -716,14 +680,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 field = client.Field()
-field.list()
+field.load({"id": "example_id"})
 
-# field.data_get() now returns the field data from the last list
+# field.data_get() now returns the field data from the last load
 # field.match_get() returns the last match criteria
 ```
 

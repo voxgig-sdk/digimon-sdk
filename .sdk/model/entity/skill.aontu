@@ -12,12 +12,11 @@ main: kit: entity: skill: {
       sh: "Description of the skill"
       t: "`$STRING`"
     }
-    href: {
-      fo: "uri"
-      h: "Href"
-      n: "href"
+    fields: {
+      h: "Fields"
+      n: "fields"
       r: false
-      t: "`$STRING`"
+      t: "`$ARRAY`"
     }
     id: {
       h: "Id"
@@ -25,6 +24,12 @@ main: kit: entity: skill: {
       r: false
       sh: "Unique identifier for the skill"
       t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
     }
     skill: {
       h: "Skill"
@@ -49,9 +54,56 @@ main: kit: entity: skill: {
 
   name: "skill"
   op: {
-    list: {
-      name: "list"
+    load: {
+      name: "load"
       points: [
+        {
+          co: {
+            id: "GET /skill/{idOrName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 1
+                k: "param"
+                n: "id"
+                or: "idOrName"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/skill/{idOrName}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              idOrName: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "skill"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
         {
           co: {
             id: "GET /skill"
@@ -79,11 +131,9 @@ main: kit: entity: skill: {
           }
           m: "GET"
           o: "/skill"
-          q: {
-            exist: [
-              "name"
-              "page"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -93,53 +143,6 @@ main: kit: entity: skill: {
           t: {
             req: "`reqdata`"
             res: "`body.content`"
-          }
-        }
-      ]
-    }
-    load: {
-      name: "load"
-      points: [
-        {
-          co: {
-            id: "GET /skill/{idOrName}"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "id"
-                or: "idOrName"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/skill/{idOrName}"
-          q: {
-            exist: [
-              "id"
-            ]
-          }
-          r: {
-            param: {
-              idOrName: "id"
-            }
-          }
-          s: [
-            {
-              lit: "skill"
-            }
-            {
-              var: "id"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
           }
         }
       ]

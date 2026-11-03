@@ -176,16 +176,9 @@ main: kit: entity: digimon: {
           }
           m: "GET"
           o: "/digimon"
-          q: {
-            exist: [
-              "attribute"
-              "exact"
-              "level"
-              "name"
-              "page"
-              "page_size"
-              "x_antibody"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -211,6 +204,7 @@ main: kit: entity: digimon: {
           g: {
             params: [
               {
+                ex: 1
                 k: "param"
                 n: "id"
                 or: "idOrName"
@@ -230,6 +224,10 @@ main: kit: entity: digimon: {
             param: {
               idOrName: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

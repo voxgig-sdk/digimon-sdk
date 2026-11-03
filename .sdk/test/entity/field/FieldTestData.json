@@ -2,45 +2,49 @@
   "existing": {
     "field": {
       "FIELD00": {
-        "description": "s32",
-        "field": "s33",
-        "href": "s34",
+        "description": "s3c",
+        "field": "s3d",
+        "fields": [],
         "id": "FIELD00",
-        "image": "s36"
+        "image": "s40",
+        "name": "s41"
       },
       "FIELD01": {
-        "description": "s64",
-        "field": "s65",
-        "href": "s66",
+        "description": "s78",
+        "field": "s79",
+        "fields": [],
         "id": "FIELD01",
-        "image": "s68"
+        "image": "s7c",
+        "name": "s7d"
       },
       "FIELD02": {
-        "description": "s96",
-        "field": "s97",
-        "href": "s98",
+        "description": "sb4",
+        "field": "sb5",
+        "fields": [],
         "id": "FIELD02",
-        "image": "s9a"
+        "image": "sb8",
+        "name": "sb9"
       }
     }
   },
   "new": {
     "field": {
       "field_ref01": {
-        "description": "sc8",
-        "field": "sc9",
-        "href": "sca",
-        "image": "scc"
+        "description": "sf0",
+        "field": "sf1",
+        "fields": [],
+        "image": "sf4",
+        "name": "sf5"
       }
     }
   },
   "requests": {
-    "GET /field": {
+    "GET /field/{idOrName}": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
-    "GET /field/{idOrName}": {
+    "GET /field": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

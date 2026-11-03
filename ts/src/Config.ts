@@ -102,6 +102,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -158,16 +159,20 @@ class Config {
           "short": "Description of the attribute"
         },
         {
-          "name": "href",
-          "title": "Href",
-          "type": "`$STRING`",
-          "format": "uri"
+          "name": "fields",
+          "title": "Fields",
+          "type": "`$ARRAY`"
         },
         {
           "name": "id",
           "title": "Id",
           "type": "`$INTEGER`",
           "short": "Unique identifier for the attribute"
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "`$STRING`"
         }
       ],
       "id": {
@@ -176,53 +181,6 @@ class Config {
       },
       "name": "attribute",
       "op": {
-        "list": {
-          "input": "data",
-          "name": "list",
-          "points": [
-            {
-              "kind": "http",
-              "method": "GET",
-              "orig": "/attribute",
-              "segments": [
-                {
-                  "lit": "attribute"
-                }
-              ],
-              "parts": [
-                "attribute"
-              ],
-              "rename": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.content`"
-              },
-              "args": {
-                "query": [
-                  {
-                    "name": "name",
-                    "orig": "name",
-                    "type": "`$STRING`",
-                    "kind": "query"
-                  },
-                  {
-                    "name": "page",
-                    "orig": "page",
-                    "type": "`$INTEGER`",
-                    "kind": "query",
-                    "example": 0
-                  }
-                ]
-              },
-              "select": {
-                "exist": [
-                  "name",
-                  "page"
-                ]
-              }
-            }
-          ]
-        },
         "load": {
           "input": "data",
           "name": "load",
@@ -259,7 +217,8 @@ class Config {
                     "orig": "idOrName",
                     "type": "`$STRING`",
                     "kind": "param",
-                    "reqd": true
+                    "reqd": true,
+                    "example": 1
                   }
                 ]
               },
@@ -267,6 +226,51 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/attribute",
+              "segments": [
+                {
+                  "lit": "attribute"
+                }
+              ],
+              "parts": [
+                "attribute"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.content`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "name",
+                    "orig": "name",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "field": true
+                  },
+                  {
+                    "name": "page",
+                    "orig": "page",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  }
+                ]
+              },
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -411,7 +415,8 @@ class Config {
                     "name": "name",
                     "orig": "name",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "page",
@@ -435,16 +440,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "attribute",
-                  "exact",
-                  "level",
-                  "name",
-                  "page",
-                  "page_size",
-                  "x_antibody"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -485,7 +484,8 @@ class Config {
                     "orig": "idOrName",
                     "type": "`$STRING`",
                     "kind": "param",
-                    "reqd": true
+                    "reqd": true,
+                    "example": 1
                   }
                 ]
               },
@@ -493,6 +493,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -517,10 +521,9 @@ class Config {
           "short": "Name of the field"
         },
         {
-          "name": "href",
-          "title": "Href",
-          "type": "`$STRING`",
-          "format": "uri"
+          "name": "fields",
+          "title": "Fields",
+          "type": "`$ARRAY`"
         },
         {
           "name": "id",
@@ -534,6 +537,11 @@ class Config {
           "type": "`$STRING`",
           "short": "Image URL for the field",
           "format": "uri"
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "`$STRING`"
         }
       ],
       "id": {
@@ -542,53 +550,6 @@ class Config {
       },
       "name": "field",
       "op": {
-        "list": {
-          "input": "data",
-          "name": "list",
-          "points": [
-            {
-              "kind": "http",
-              "method": "GET",
-              "orig": "/field",
-              "segments": [
-                {
-                  "lit": "field"
-                }
-              ],
-              "parts": [
-                "field"
-              ],
-              "rename": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.content`"
-              },
-              "args": {
-                "query": [
-                  {
-                    "name": "name",
-                    "orig": "name",
-                    "type": "`$STRING`",
-                    "kind": "query"
-                  },
-                  {
-                    "name": "page",
-                    "orig": "page",
-                    "type": "`$INTEGER`",
-                    "kind": "query",
-                    "example": 0
-                  }
-                ]
-              },
-              "select": {
-                "exist": [
-                  "name",
-                  "page"
-                ]
-              }
-            }
-          ]
-        },
         "load": {
           "input": "data",
           "name": "load",
@@ -625,7 +586,8 @@ class Config {
                     "orig": "idOrName",
                     "type": "`$STRING`",
                     "kind": "param",
-                    "reqd": true
+                    "reqd": true,
+                    "example": 1
                   }
                 ]
               },
@@ -633,57 +595,23 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
-            }
-          ]
-        }
-      },
-      "relations": {
-        "ancestors": []
-      }
-    },
-    "level": {
-      "fields": [
-        {
-          "name": "href",
-          "title": "Href",
-          "type": "`$STRING`",
-          "format": "uri"
-        },
-        {
-          "name": "id",
-          "title": "Id",
-          "type": "`$INTEGER`",
-          "short": "Unique identifier for the level"
-        },
-        {
-          "name": "level",
-          "title": "Level",
-          "type": "`$STRING`",
-          "short": "Name of the level"
-        }
-      ],
-      "id": {
-        "field": "id",
-        "name": "id"
-      },
-      "name": "level",
-      "op": {
-        "list": {
-          "input": "data",
-          "name": "list",
-          "points": [
+            },
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/level",
+              "orig": "/field",
               "segments": [
                 {
-                  "lit": "level"
+                  "lit": "field"
                 }
               ],
               "parts": [
-                "level"
+                "field"
               ],
               "rename": {},
               "transform": {
@@ -696,7 +624,8 @@ class Config {
                     "name": "name",
                     "orig": "name",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "page",
@@ -707,15 +636,55 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "name",
-                  "page"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
+        }
+      },
+      "relations": {
+        "ancestors": []
+      }
+    },
+    "level": {
+      "fields": [
+        {
+          "name": "description",
+          "title": "Description",
+          "type": "`$STRING`"
         },
+        {
+          "name": "fields",
+          "title": "Fields",
+          "type": "`$ARRAY`"
+        },
+        {
+          "name": "id",
+          "title": "Id",
+          "type": "`$INTEGER`",
+          "short": "Unique identifier for the level"
+        },
+        {
+          "name": "level",
+          "title": "Level",
+          "type": "`$STRING`",
+          "short": "Name of the level"
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "`$STRING`"
+        }
+      ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
+      "name": "level",
+      "op": {
         "load": {
           "input": "data",
           "name": "load",
@@ -752,7 +721,8 @@ class Config {
                     "orig": "idOrName",
                     "type": "`$STRING`",
                     "kind": "param",
-                    "reqd": true
+                    "reqd": true,
+                    "example": 1
                   }
                 ]
               },
@@ -760,6 +730,51 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/level",
+              "segments": [
+                {
+                  "lit": "level"
+                }
+              ],
+              "parts": [
+                "level"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.content`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "name",
+                    "orig": "name",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "field": true
+                  },
+                  {
+                    "name": "page",
+                    "orig": "page",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  }
+                ]
+              },
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -778,16 +793,20 @@ class Config {
           "short": "Description of the skill"
         },
         {
-          "name": "href",
-          "title": "Href",
-          "type": "`$STRING`",
-          "format": "uri"
+          "name": "fields",
+          "title": "Fields",
+          "type": "`$ARRAY`"
         },
         {
           "name": "id",
           "title": "Id",
           "type": "`$INTEGER`",
           "short": "Unique identifier for the skill"
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "`$STRING`"
         },
         {
           "name": "skill",
@@ -808,53 +827,6 @@ class Config {
       },
       "name": "skill",
       "op": {
-        "list": {
-          "input": "data",
-          "name": "list",
-          "points": [
-            {
-              "kind": "http",
-              "method": "GET",
-              "orig": "/skill",
-              "segments": [
-                {
-                  "lit": "skill"
-                }
-              ],
-              "parts": [
-                "skill"
-              ],
-              "rename": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.content`"
-              },
-              "args": {
-                "query": [
-                  {
-                    "name": "name",
-                    "orig": "name",
-                    "type": "`$STRING`",
-                    "kind": "query"
-                  },
-                  {
-                    "name": "page",
-                    "orig": "page",
-                    "type": "`$INTEGER`",
-                    "kind": "query",
-                    "example": 0
-                  }
-                ]
-              },
-              "select": {
-                "exist": [
-                  "name",
-                  "page"
-                ]
-              }
-            }
-          ]
-        },
         "load": {
           "input": "data",
           "name": "load",
@@ -891,7 +863,8 @@ class Config {
                     "orig": "idOrName",
                     "type": "`$STRING`",
                     "kind": "param",
-                    "reqd": true
+                    "reqd": true,
+                    "example": 1
                   }
                 ]
               },
@@ -899,6 +872,51 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/skill",
+              "segments": [
+                {
+                  "lit": "skill"
+                }
+              ],
+              "parts": [
+                "skill"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.content`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "name",
+                    "orig": "name",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "field": true
+                  },
+                  {
+                    "name": "page",
+                    "orig": "page",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  }
+                ]
+              },
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -911,16 +929,25 @@ class Config {
     "type": {
       "fields": [
         {
-          "name": "href",
-          "title": "Href",
-          "type": "`$STRING`",
-          "format": "uri"
+          "name": "description",
+          "title": "Description",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "fields",
+          "title": "Fields",
+          "type": "`$ARRAY`"
         },
         {
           "name": "id",
           "title": "Id",
           "type": "`$INTEGER`",
           "short": "Unique identifier for the type"
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "`$STRING`"
         },
         {
           "name": "type",
@@ -935,53 +962,6 @@ class Config {
       },
       "name": "type",
       "op": {
-        "list": {
-          "input": "data",
-          "name": "list",
-          "points": [
-            {
-              "kind": "http",
-              "method": "GET",
-              "orig": "/type",
-              "segments": [
-                {
-                  "lit": "type"
-                }
-              ],
-              "parts": [
-                "type"
-              ],
-              "rename": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.content`"
-              },
-              "args": {
-                "query": [
-                  {
-                    "name": "name",
-                    "orig": "name",
-                    "type": "`$STRING`",
-                    "kind": "query"
-                  },
-                  {
-                    "name": "page",
-                    "orig": "page",
-                    "type": "`$INTEGER`",
-                    "kind": "query",
-                    "example": 0
-                  }
-                ]
-              },
-              "select": {
-                "exist": [
-                  "name",
-                  "page"
-                ]
-              }
-            }
-          ]
-        },
         "load": {
           "input": "data",
           "name": "load",
@@ -1018,7 +998,8 @@ class Config {
                     "orig": "idOrName",
                     "type": "`$STRING`",
                     "kind": "param",
-                    "reqd": true
+                    "reqd": true,
+                    "example": 1
                   }
                 ]
               },
@@ -1026,6 +1007,51 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/type",
+              "segments": [
+                {
+                  "lit": "type"
+                }
+              ],
+              "parts": [
+                "type"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.content`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "name",
+                    "orig": "name",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "field": true
+                  },
+                  {
+                    "name": "page",
+                    "orig": "page",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  }
+                ]
+              },
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]

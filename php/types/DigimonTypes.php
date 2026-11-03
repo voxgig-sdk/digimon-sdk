@@ -17,21 +17,15 @@ class Attribute
 {
     public ?string $attribute = null;
     public ?string $description = null;
-    public ?string $href = null;
+    public ?array $fields = null;
     public ?int $id = null;
+    public ?string $name = null;
 }
 
 /** Request payload for Attribute#load. */
 class AttributeLoadMatch
 {
     public string $id;
-}
-
-/** Request payload for Attribute#list. */
-class AttributeListMatch
-{
-    public ?string $name = null;
-    public ?int $page = null;
 }
 
 /** Digimon entity data model. */
@@ -77,9 +71,10 @@ class Field
 {
     public ?string $description = null;
     public ?string $field = null;
-    public ?string $href = null;
+    public ?array $fields = null;
     public ?int $id = null;
     public ?string $image = null;
+    public ?string $name = null;
 }
 
 /** Request payload for Field#load. */
@@ -88,19 +83,14 @@ class FieldLoadMatch
     public string $id;
 }
 
-/** Request payload for Field#list. */
-class FieldListMatch
-{
-    public ?string $name = null;
-    public ?int $page = null;
-}
-
 /** Level entity data model. */
 class Level
 {
-    public ?string $href = null;
+    public ?string $description = null;
+    public ?array $fields = null;
     public ?int $id = null;
     public ?string $level = null;
+    public ?string $name = null;
 }
 
 /** Request payload for Level#load. */
@@ -109,19 +99,13 @@ class LevelLoadMatch
     public string $id;
 }
 
-/** Request payload for Level#list. */
-class LevelListMatch
-{
-    public ?string $name = null;
-    public ?int $page = null;
-}
-
 /** Skill entity data model. */
 class Skill
 {
     public ?string $description = null;
-    public ?string $href = null;
+    public ?array $fields = null;
     public ?int $id = null;
+    public ?string $name = null;
     public ?string $skill = null;
     public ?string $translation = null;
 }
@@ -132,18 +116,13 @@ class SkillLoadMatch
     public string $id;
 }
 
-/** Request payload for Skill#list. */
-class SkillListMatch
-{
-    public ?string $name = null;
-    public ?int $page = null;
-}
-
 /** Type entity data model. */
 class Type
 {
-    public ?string $href = null;
+    public ?string $description = null;
+    public ?array $fields = null;
     public ?int $id = null;
+    public ?string $name = null;
     public ?string $type = null;
 }
 
@@ -151,12 +130,5 @@ class Type
 class TypeLoadMatch
 {
     public string $id;
-}
-
-/** Request payload for Type#list. */
-class TypeListMatch
-{
-    public ?string $name = null;
-    public ?int $page = null;
 }
 

@@ -43,7 +43,8 @@
                   "type": "string"
                 }
               ]
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -168,7 +169,8 @@
                   "type": "string"
                 }
               ]
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -221,7 +223,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AttributeList"
+                  "$ref": "#/components/schemas/AttributeList",
+                  "properties": {
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -252,7 +284,8 @@
                   "type": "string"
                 }
               ]
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -305,7 +338,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FieldList"
+                  "$ref": "#/components/schemas/FieldList",
+                  "properties": {
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -336,7 +399,8 @@
                   "type": "string"
                 }
               ]
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -389,7 +453,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LevelList"
+                  "$ref": "#/components/schemas/LevelList",
+                  "properties": {
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -420,7 +514,8 @@
                   "type": "string"
                 }
               ]
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -473,7 +568,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TypeList"
+                  "$ref": "#/components/schemas/TypeList",
+                  "properties": {
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -504,7 +629,8 @@
                   "type": "string"
                 }
               ]
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -557,7 +683,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SkillList"
+                  "$ref": "#/components/schemas/SkillList",
+                  "properties": {
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

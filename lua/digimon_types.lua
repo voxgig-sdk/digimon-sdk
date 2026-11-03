@@ -9,15 +9,12 @@
 ---@class Attribute
 ---@field attribute? string
 ---@field description? string
----@field href? string
+---@field fields? table
 ---@field id? number
+---@field name? string
 
 ---@class AttributeLoadMatch
 ---@field id string
-
----@class AttributeListMatch
----@field name? string
----@field page? number
 
 ---@class Digimon
 ---@field attributes? table
@@ -51,54 +48,44 @@
 ---@class Field
 ---@field description? string
 ---@field field? string
----@field href? string
+---@field fields? table
 ---@field id? number
 ---@field image? string
+---@field name? string
 
 ---@class FieldLoadMatch
 ---@field id string
 
----@class FieldListMatch
----@field name? string
----@field page? number
-
 ---@class Level
----@field href? string
+---@field description? string
+---@field fields? table
 ---@field id? number
 ---@field level? string
+---@field name? string
 
 ---@class LevelLoadMatch
 ---@field id string
 
----@class LevelListMatch
----@field name? string
----@field page? number
-
 ---@class Skill
 ---@field description? string
----@field href? string
+---@field fields? table
 ---@field id? number
+---@field name? string
 ---@field skill? string
 ---@field translation? string
 
 ---@class SkillLoadMatch
 ---@field id string
 
----@class SkillListMatch
----@field name? string
----@field page? number
-
 ---@class Type
----@field href? string
+---@field description? string
+---@field fields? table
 ---@field id? number
+---@field name? string
 ---@field type? string
 
 ---@class TypeLoadMatch
 ---@field id string
-
----@class TypeListMatch
----@field name? string
----@field page? number
 
 local M = {}
 

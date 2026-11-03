@@ -54,32 +54,42 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Skill();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.DigimonSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Skill().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.DIGIMON_TEST_LIVE;
-        for (const op of ['list', 'load']) {
+        for (const op of ['load']) {
             if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'skill.' + op, live))
                 return;
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "description": { "a": true, "h": "Description", "n": "description", "r": false, "sh": "Description of the skill", "t": "`$STRING`", "key$": "description", "index$": 0 }, "href": { "a": true, "fo": "uri", "h": "Href", "n": "href", "r": false, "t": "`$STRING`", "key$": "href", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the skill", "t": "`$INTEGER`", "key$": "id", "index$": 2 }, "skill": { "a": true, "h": "Skill", "n": "skill", "r": false, "sh": "Name of the skill", "t": "`$STRING`", "key$": "skill", "index$": 3 }, "translation": { "a": true, "h": "Translation", "n": "translation", "r": false, "sh": "Translation of the skill name", "t": "`$STRING`", "key$": "translation", "index$": 4 } }, "id": { "field": "id", "name": "id" }, "name": "skill", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /skill", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "name", "or": "name", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "page", "or": "page", "r": false, "t": "`$INTEGER`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/skill", "q": { "exist": ["name", "page"] }, "r": {}, "s": [{ "lit": "skill" }], "t": { "req": "`reqdata`", "res": "`body.content`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /skill/{idOrName}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "idOrName", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/skill/{idOrName}", "q": { "exist": ["id"] }, "r": { "param": { "idOrName": "id" } }, "s": [{ "lit": "skill" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "skill", "name__orig": "skill", "Name": "Skill", "name_": "skill", "name-": "skill", "NAME": "SKILL", "index$": 4 }, { "active": true, "entity": "skill", "key$": "BasicSkillFlow", "kind": "basic", "name": "BasicSkillFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "skill_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "skill_ref01", "srcdatavar": "skill_ref01_data", "suffix": "_dt0" }, "m": { "id": "skill01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-skill_ref01" } }], "index$": 1 }] }, 'Skill', { "GET /skill": { "protocol": "http", "parameters": [{ "name": "page", "in": "query", "description": "Used to navigate to a specific page", "schema": { "type": "integer", "default": 0 }, "index$": 0 }, { "name": "name", "in": "query", "description": "Returns a list of skills that have a similar name to the value", "schema": { "type": "string" }, "index$": 1 }] }, "GET /skill/{idOrName}": { "protocol": "http", "parameters": [{ "name": "idOrName", "in": "path", "required": true, "description": "Skill unique ID or name", "schema": { "oneOf": [{ "type": "integer" }, { "type": "string" }] }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "description": { "a": true, "h": "Description", "n": "description", "r": false, "sh": "Description of the skill", "t": "`$STRING`", "key$": "description", "index$": 0 }, "fields": { "a": true, "h": "Fields", "n": "fields", "r": false, "t": "`$ARRAY`", "key$": "fields", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the skill", "t": "`$INTEGER`", "key$": "id", "index$": 2 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "t": "`$STRING`", "key$": "name", "index$": 3 }, "skill": { "a": true, "h": "Skill", "n": "skill", "r": false, "sh": "Name of the skill", "t": "`$STRING`", "key$": "skill", "index$": 4 }, "translation": { "a": true, "h": "Translation", "n": "translation", "r": false, "sh": "Translation of the skill name", "t": "`$STRING`", "key$": "translation", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "skill", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /skill/{idOrName}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": 1, "k": "param", "n": "id", "or": "idOrName", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/skill/{idOrName}", "q": { "exist": ["id"] }, "r": { "param": { "idOrName": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "skill" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }, { "a": true, "co": { "id": "GET /skill", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "name", "or": "name", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "page", "or": "page", "r": false, "t": "`$INTEGER`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/skill", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "skill" }], "t": { "req": "`reqdata`", "res": "`body.content`" }, "index$": 1 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "skill", "name__orig": "skill", "Name": "Skill", "name_": "skill", "name-": "skill", "NAME": "SKILL", "index$": 4 }, { "active": true, "entity": "skill", "key$": "BasicSkillFlow", "kind": "basic", "name": "BasicSkillFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "skill_ref01", "srcdatavar": "skill_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-skill_ref01" } }], "index$": 0, "route": "GET /skill/{idOrName}", "record": {} }] }, 'Skill', { "GET /skill/{idOrName}": { "protocol": "http", "parameters": [{ "name": "idOrName", "in": "path", "required": true, "description": "Skill unique ID or name", "schema": { "oneOf": [{ "type": "integer" }, { "type": "string" }] }, "example": 1, "index$": 0 }] }, "GET /skill": { "protocol": "http", "parameters": [{ "name": "page", "in": "query", "description": "Used to navigate to a specific page", "schema": { "type": "integer", "default": 0 }, "index$": 0 }, { "name": "name", "in": "query", "description": "Returns a list of skills that have a similar name to the value", "schema": { "type": "string" }, "index$": 1 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
         const isempty = struct.isempty;
         const select = struct.select;
         let skill_ref01_data = Object.values(setup.data.existing.skill)[0];
-        // LIST
-        const skill_ref01_ent = client.Skill();
-        const skill_ref01_match = {};
-        const skill_ref01_list = (await skill_ref01_ent.list(skill_ref01_match)).map((e) => e.data());
         // LOAD
+        const skill_ref01_ent = client.Skill();
         const skill_ref01_match_dt0 = {};
         skill_ref01_match_dt0.id = skill_ref01_data.id;
         const skill_ref01_data_dt0 = (await skill_ref01_ent.load(skill_ref01_match_dt0)).data();
         (0, node_assert_1.default)(skill_ref01_data_dt0.id === skill_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

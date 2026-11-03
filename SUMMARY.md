@@ -16,7 +16,7 @@ An entity groups related API operations. An operation can have several routes wi
 
 Results: Successful response.
 
-SDK operations: `list`, `load`.
+SDK operations: `load`.
 
 Key fields to recognise:
 
@@ -40,7 +40,7 @@ Key fields to recognise:
 
 Results: Successful response.
 
-SDK operations: `list`, `load`.
+SDK operations: `load`.
 
 Key fields to recognise:
 
@@ -53,7 +53,7 @@ Key fields to recognise:
 
 Results: Successful response.
 
-SDK operations: `list`, `load`.
+SDK operations: `load`.
 
 Key fields to recognise:
 
@@ -64,7 +64,7 @@ Key fields to recognise:
 
 Results: Successful response.
 
-SDK operations: `list`, `load`.
+SDK operations: `load`.
 
 Key fields to recognise:
 
@@ -77,7 +77,7 @@ Key fields to recognise:
 
 Results: Successful response.
 
-SDK operations: `list`, `load`.
+SDK operations: `load`.
 
 Key fields to recognise:
 
@@ -90,18 +90,18 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| Attribute | `list` | `GET /attribute` | See reference |
 | Attribute | `load` | `GET /attribute/{idOrName}` | See reference |
+| Attribute | `load` | `GET /attribute` | See reference |
 | Digimon | `list` | `GET /digimon` | See reference |
 | Digimon | `load` | `GET /digimon/{idOrName}` | See reference |
-| Field | `list` | `GET /field` | See reference |
 | Field | `load` | `GET /field/{idOrName}` | See reference |
-| Level | `list` | `GET /level` | See reference |
+| Field | `load` | `GET /field` | See reference |
 | Level | `load` | `GET /level/{idOrName}` | See reference |
-| Skill | `list` | `GET /skill` | See reference |
+| Level | `load` | `GET /level` | See reference |
 | Skill | `load` | `GET /skill/{idOrName}` | See reference |
-| Type | `list` | `GET /type` | See reference |
+| Skill | `load` | `GET /skill` | See reference |
 | Type | `load` | `GET /type/{idOrName}` | See reference |
+| Type | `load` | `GET /type` | See reference |
 
 ## Connect to the API
 
@@ -149,7 +149,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `digimon_list`: List records for an entity. Supported entities: `attribute`, `digimon`, `field`, `level`, `skill`, `type`.
+- `digimon_list`: List records for an entity. Supported entities: `digimon`.
 - `digimon_load`: Load one record for an entity. Supported entities: `attribute`, `digimon`, `field`, `level`, `skill`, `type`.
 
 ## Operational features

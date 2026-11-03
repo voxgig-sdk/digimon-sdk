@@ -109,24 +109,15 @@ attribute = client.Attribute()
 | --- | --- | --- | --- |
 | `attribute` | `str` | No | Name of the attribute |
 | `description` | `str` | No | Description of the attribute |
-| `href` | `str` | No |  |
+| `fields` | `list` | No |  |
 | `id` | `int` | No | Unique identifier for the attribute |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `load(reqmatch, ctrl=None) -> AttributeEntity`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.Attribute().list()
-for attribute in results:
-    print(attribute)
-```
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Attribute().load({"id": "attribute_id"})
@@ -189,19 +180,19 @@ digimon = client.Digimon()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[DigimonEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Digimon().list()
 for digimon in results:
-    print(digimon)
+    print(digimon.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> DigimonEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Digimon().load({"id": "digimon_id"})
@@ -248,25 +239,16 @@ field = client.Field()
 | --- | --- | --- | --- |
 | `description` | `str` | No | Description of the field |
 | `field` | `str` | No | Name of the field |
-| `href` | `str` | No |  |
+| `fields` | `list` | No |  |
 | `id` | `int` | No | Unique identifier for the field |
 | `image` | `str` | No | Image URL for the field |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `load(reqmatch, ctrl=None) -> FieldEntity`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.Field().list()
-for field in results:
-    print(field)
-```
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Field().load({"id": "field_id"})
@@ -311,25 +293,17 @@ level = client.Level()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `str` | No |  |
+| `description` | `str` | No |  |
+| `fields` | `list` | No |  |
 | `id` | `int` | No | Unique identifier for the level |
 | `level` | `str` | No | Name of the level |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `load(reqmatch, ctrl=None) -> LevelEntity`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.Level().list()
-for level in results:
-    print(level)
-```
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Level().load({"id": "level_id"})
@@ -375,26 +349,17 @@ skill = client.Skill()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `description` | `str` | No | Description of the skill |
-| `href` | `str` | No |  |
+| `fields` | `list` | No |  |
 | `id` | `int` | No | Unique identifier for the skill |
+| `name` | `str` | No |  |
 | `skill` | `str` | No | Name of the skill |
 | `translation` | `str` | No | Translation of the skill name |
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `load(reqmatch, ctrl=None) -> SkillEntity`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.Skill().list()
-for skill in results:
-    print(skill)
-```
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Skill().load({"id": "skill_id"})
@@ -439,25 +404,17 @@ type = client.Type()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `href` | `str` | No |  |
+| `description` | `str` | No |  |
+| `fields` | `list` | No |  |
 | `id` | `int` | No | Unique identifier for the type |
+| `name` | `str` | No |  |
 | `type` | `str` | No | Name of the type |
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `load(reqmatch, ctrl=None) -> TypeEntity`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.Type().list()
-for type in results:
-    print(type)
-```
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Type().load({"id": "type_id"})
@@ -649,6 +606,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and
